@@ -1,0 +1,255 @@
+<div class="main">
+    <div class="title">
+        <div>
+          <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}} </h4>
+            <button
+                routerLink="/home"
+                class="logout"
+                color="primary"
+                [disabled]="checked===true"
+                mat-button ><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+    <p class="space"> </p>
+
+        <form [formGroup]="formularioProjetoWave" class="example-form">
+          <div class="pesquisar">
+            <div class="search">
+
+                <mat-form-field appearance="fill" class="mopMatricula"  color="primary">
+                    <mat-label>Selecione o Item de Pesquisa</mat-label>
+                    <mat-select disableRipple ngDefaultControl formControlName="selecionado" [ngModel]="selecionado"
+                    (valueChange)="onSelectId($event)"
+                    >
+                      <mat-option *ngFor="let id of identificadores" [value]="id">
+                        {{id}}</mat-option>
+                    </mat-select>
+                    <mat-icon matPrefix>search</mat-icon>
+                    <mat-hint>Selecione uma opção</mat-hint>
+                  </mat-form-field>              
+
+                <mat-form-field *ngIf="selecionado=='Código Natura'" class="mopMatricula" appearance="fill" color="primary">
+                    <mat-label>Código Natura</mat-label>
+                    <input
+                    matInput
+                    [readonly]="checked===true"
+                    [disabled]="selecionado!=='Código Natura'"
+                    placeholder="Digite ou cole aqui o Código da Consultora Natura..."
+                    ngDefaultControl
+                    formControlName="codigo_natura"
+                    [(ngModel)]="codigo_natura"
+                    >
+                    <mat-icon matSuffix>fingerprint</mat-icon>
+                    <mat-hint>Código da Consultora Natura</mat-hint>
+                  </mat-form-field>
+    
+                  <mat-form-field *ngIf="selecionado=='Código Avon'" class="mopMatricula" appearance="fill" color="primary">
+                    <mat-label>Código Avon</mat-label>
+                    <input
+                    matInput
+                    [readonly]="checked===true"
+                    placeholder="Digite ou cole aqui o Representante Avon..."
+                    ngDefaultControl
+                    formControlName="codigo_avon"
+                    [(ngModel)]="codigo_avon"
+                    >
+                    <mat-icon matSuffix>fingerprint</mat-icon>
+                    <mat-hint>Código da Representante Avon</mat-hint>
+                  </mat-form-field>
+    
+                  <mat-form-field *ngIf="selecionado=='CPF'" class="mopMatricula" appearance="fill" color="primary">
+                    <mat-label>CPF</mat-label>
+                    <input
+                    matInput
+                    [readonly]="checked===true"
+                    placeholder="Digite ou cole aqui o CPF..."
+                    ngDefaultControl
+                    formControlName="cpf_cn_rep"
+                    [(ngModel)]="cpf_cn_rep"
+                    mask="000.000.000-00"
+                    >
+                    <mat-icon matSuffix>fingerprint</mat-icon>
+                    <mat-hint>CPF de 11 dígitos (somente números) </mat-hint>
+                  </mat-form-field>
+            </div>
+              
+
+                <div class="botoes">
+
+                  <button
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="(cpf_cn_rep === null || cpf_cn_rep === undefined || cpf_cn_rep === '') && (codigo_avon === null || codigo_avon === undefined || codigo_avon === '')&& (codigo_natura === null || codigo_natura === undefined || codigo_natura === '')"
+                  (click)="limpar()"
+                  color="warn"
+                  aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                  </button>
+
+                  <button
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="(cpf_cn_rep === null || cpf_cn_rep === undefined || cpf_cn_rep === '') && (codigo_avon === null || codigo_avon === undefined || codigo_avon === '')&& (codigo_natura === null || codigo_natura === undefined || codigo_natura === '')"
+                  (click)="pesquisar()"
+                  color="primary"
+                  aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                  </button>
+                </div>
+
+          </div>
+
+          <p class="start">
+
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+              <mat-label>Código da CN (Natura)</mat-label>
+              <input matInput
+              readonly="true"
+              ngDefaultControl
+              formControlName="cod_natura_mailing"
+              [(ngModel)]="cod_natura_mailing"
+              >
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-hint>Código da CN (Natura)</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+              <mat-label>Código da Representante (Avon)</mat-label>
+              <input matInput
+              readonly="true"
+              ngDefaultControl
+              formControlName="cod_avon_mailing"
+              [(ngModel)]="cod_avon_mailing"
+              >
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-hint>Código da Representante (Avon)</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+              <mat-label>CPF Consultora/Representante</mat-label>
+              <input matInput
+              readonly="true"
+              ngDefaultControl
+              formControlName="cpf_mailing"
+              [(ngModel)]="cpf_mailing"
+              mask="000.000.000-00"
+              >
+              <mat-icon matSuffix>assignment_ind</mat-icon>
+              <mat-hint>CPF Consultora/Representante</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+                <mat-label>CEP</mat-label>
+                <input
+                matInput
+                readonly="true"
+                ngDefaultControl
+                formControlName="cep_mailing"
+                [(ngModel)]="cep_mailing"
+                mask="00000-000"
+                >
+                <mat-icon matSuffix>place</mat-icon>
+                <mat-hint>CEP</mat-hint>
+              </mat-form-field>
+            
+        </p>
+
+        <p class="start">
+
+            <mat-form-field class="waveLarge" appearance="fill" color="primary">
+                <mat-label>Nome</mat-label>
+                <input
+                matInput
+                readonly="true"
+                ngDefaultControl
+                formControlName="nome_mailing"
+                [(ngModel)]="nome_mailing"
+                >
+                <mat-icon matSuffix>person_pin</mat-icon>
+                <mat-hint>Nome da Consultora/Representante</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="waveLarge" appearance="fill" color="primary">
+                <mat-label>E-mail</mat-label>
+                <input
+                matInput
+                readonly="true"
+                ngDefaultControl
+                formControlName="email_mailing"
+                [(ngModel)]="email_mailing"
+                >
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-hint>E-mail</mat-hint>
+              </mat-form-field>
+
+
+
+            
+        </p>
+
+        <p class="start">
+
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+                <mat-label>Data Cadastro Wave Natura</mat-label>
+                <input
+                matInput
+                readonly="true"
+                ngDefaultControl
+                formControlName="data_cadastro_wave2_natura_mailing"
+                [(ngModel)]="data_cadastro_wave2_natura_mailing"
+                >
+                <mat-icon matSuffix>event</mat-icon>
+                <mat-hint>Data Cadastro Wave Natura</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+                <mat-label>Data Cadastro Wave Avon</mat-label>
+                <input
+                matInput
+                readonly="true"
+                ngDefaultControl
+                formControlName="data_cadastro_wave2_avon_mailing"
+                [(ngModel)]="data_cadastro_wave2_avon_mailing"
+                >
+                <mat-icon matSuffix>event</mat-icon>
+                <mat-hint>Data Cadastro Wave Avon</mat-hint>
+            </mat-form-field>
+
+
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+                <mat-label>Nível</mat-label>
+                <input
+                matInput
+                readonly="true"
+                ngDefaultControl
+                formControlName="nivel_mailing"
+                [(ngModel)]="nivel_mailing"
+                >
+                <mat-icon matSuffix>network_cell</mat-icon>
+                <mat-hint>Nível</mat-hint>
+            </mat-form-field>
+
+              
+  
+            <mat-form-field class="mopMatricula" appearance="fill" color="primary">
+                <mat-label>Estrutura Comercial</mat-label>
+                <input
+                matInput
+                readonly="true"
+                ngDefaultControl
+                formControlName="estrutura_comercial_mailing"
+                [(ngModel)]="estrutura_comercial_mailing"
+                >
+                <mat-icon matSuffix>business</mat-icon>
+                <mat-hint>Estrutura Comercial</mat-hint>
+            </mat-form-field>
+                  
+        </p>
+
+    </form>
+
+</div>

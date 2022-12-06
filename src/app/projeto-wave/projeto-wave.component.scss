@@ -1,0 +1,206 @@
+.tab {
+    width: 90em;
+  }
+  
+  .pesquisar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border: #3F51B5 0.2em solid;
+    border-radius: 0.8em;
+    margin-bottom: 2em;
+  }
+  
+  .search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-radius: 0.8em;
+    margin-bottom: 1em;
+    max-width: 68em;
+    width: 100%;
+  }
+
+  .options {
+    margin-right: 2em;
+  }
+  
+  
+  
+  
+  .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+  
+  .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #3F51B5;
+      max-width: 90em;
+      width: 100%;
+  
+  }
+  
+  #logoavon {
+      width: 6em;
+      height: 6em;
+      background-size: cover;
+      display: flex;
+      background-image: url('../../assets/img/nat.png');
+    }
+  
+  .inputSearch {
+      margin-left: 10em;
+      margin-right: 3em;
+      margin-bottom: 2em;
+  }
+  h1 {
+      
+      color: #fff;
+      margin: 1em;
+  }
+  
+  h4 {
+      
+      color: #fff;
+      display: flex;
+      padding: 0.5em;
+      margin-left: 0.2em;
+  }
+  
+  .space {
+      margin: 1em;
+  
+  }
+  
+  .example-full-width {
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+    .example-form {
+      min-width: 30em;
+      max-width: 90em;
+      width: 100%;
+    }
+  
+    .mop {
+      max-width: 38em;
+      width: 100%;
+    }
+
+    .inputPesquisa {
+      max-width: 20em;
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+    .mopMatricula {
+      max-width: 20em;
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+    .Rodape {
+      max-width: 20em;
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+    .matricula {
+      max-width: 20em;
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+    .waveLarge {
+      max-width: 43em;
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+    .waveNome {
+      max-width: 30em;
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+  
+    .pesquisa {
+      max-width: 10em;
+      width: 100%;
+    }
+    .start {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .ocorrencia {
+      max-width: 60em;
+      width: 100%;
+    }
+  
+    .select {
+      max-width: 28em;
+      width: 100%;
+      color:#3F51B5;
+    }
+  
+    .confirmar {
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+    }
+    .botoes {
+      max-width: 28em;
+      width: 100%;
+      max-height: 3em;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+    }
+
+    .example-radio-group {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+      align-items: flex-start;
+    }
+    
+    .example-radio-button {
+      margin: 5px;
+    }
+  
+    .validar {
+      margin: 1em;
+      max-height: 3em;
+      height: 100%;
+      color: #fff;
+    }
+    
+    .color {
+      color: #fff;
+      vertical-align: middle;
+      margin-right: 0.3em;
+    }
+  
+    .menu {
+      vertical-align: middle;
+    }
+  
+    .logout {
+      color: #fff;
+    }
+  
+    
+  
+  

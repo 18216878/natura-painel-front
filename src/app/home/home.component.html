@@ -1,0 +1,88 @@
+<body>
+    <div class="main">
+        <header class="title">
+            <div id="logonatura"></div>
+            <h1>Painel Natura - Home</h1>
+            <div class="menu">
+                <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}} </h4>
+                <button class="logout" color="accent" mat-button (click)="openDialog()"><mat-icon>power_settings_new</mat-icon>Logout</button>
+            </div>
+        </header>
+        <p class="space"> </p>
+        <div class="home">
+            <mat-card routerLink="/projeto-wave" class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Projeto Wave</mat-card-title>
+                    <mat-card-subtitle>Pesquisar as consultoras Natura e representantes Avon</mat-card-subtitle>
+                </mat-card-header>
+                <div mat-card-image class="imgHome imgWave"></div>
+                <mat-card-content class="social">
+                    <fa-icon [icon]="faBottleDroplet"></fa-icon>
+                    <fa-icon [icon]="faCity"></fa-icon>
+                    <fa-icon [icon]="faCartPlus"></fa-icon>
+                </mat-card-content>
+            </mat-card>
+    
+            <mat-card routerLink="/pesquisa-nordeste"  class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Pesquisa Nordeste</mat-card-title>
+                    <mat-card-subtitle>Pesquisar consultoras nas bases de acordo com a ação</mat-card-subtitle>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                </mat-card-header>
+                <div mat-card-image class="imgHome imgNordeste"></div>
+                <mat-card-content class="social">
+                    <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+                    <fa-icon [icon]="faTruckFast"></fa-icon>
+                    <fa-icon [icon]="faLocationDot"></fa-icon>
+                </mat-card-content>
+            </mat-card>
+            <mat-card routerLink="/plano-b-trocas" class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Planos B e Trocas</mat-card-title>
+                    <mat-card-subtitle>Pesquisar as consultoras Natura e representantes Avon</mat-card-subtitle>
+                </mat-card-header>
+                <div mat-card-image class="imgHome imgTroca"></div>
+                <mat-card-content class="social">
+                    <fa-icon [icon]="faTag"></fa-icon>
+                    <fa-icon [icon]="faBarcode"></fa-icon>
+                    <fa-icon [icon]="faGift"></fa-icon>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="home">
+            <mat-card routerLink="/cadastros-irregulares" class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Cadastros Irregulares</mat-card-title>
+                    <mat-card-subtitle>Pesquisar as consultoras Natura e representantes Avon</mat-card-subtitle>
+                </mat-card-header>
+                <div mat-card-image class="imgHome imgCadastro"></div>
+                <mat-card-content class="social">
+                    <fa-icon [icon]="faAddressCard"></fa-icon>
+                    <fa-icon [icon]="faFingerprint"></fa-icon>
+                    <fa-icon [icon]="faUserPen"></fa-icon>
+                </mat-card-content>
+            </mat-card>
+    
+            <mat-card routerLink="/pagamentos-rejeitados"  class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Pagamentos Rejeitados</mat-card-title>
+                    <mat-card-subtitle>Pesquisar consultoras nas bases de acordo com a ação</mat-card-subtitle>
+                </mat-card-header>
+                <div mat-card-image class="imgHome imgPagamento"></div>
+                <mat-card-content class="social">
+                    <fa-icon [icon]="faSackDollar"></fa-icon>
+                    <fa-icon [icon]="faMoneyBill1"></fa-icon>
+                    <fa-icon [icon]="faCreditCard"></fa-icon>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    
+</body>

@@ -1,0 +1,42 @@
+<body>
+    <div class="container">
+        <form>
+            <mat-card class="suporteCard">
+                <div id="logonatura">
+                </div>
+                <p class="space"></p>
+                <p class="suporteInput">
+                    <mat-card-subtitle>Natura Painel</mat-card-subtitle>
+                </p>
+                <p class="suporteInput">
+                    <mat-card-title>Login Painel</mat-card-title>
+                </p>
+                <mat-card-content>
+                    <p class="suporteInput">
+                        <mat-form-field appearance="standard" color="accent">
+                            <mat-label>Matrícula</mat-label>
+                            <input matInput placeholder="Digite sua matrícula" maxlength="8" name="user" [(ngModel)]="user">
+                            <mat-icon matSuffix>person</mat-icon>
+                        </mat-form-field>
+                    </p>
+
+                    <p class="suporteInput">
+                        <mat-form-field appearance="standard" color="accent">
+                            <mat-label>Senha</mat-label>
+                            <input matInput type="password" placeholder="Digite sua senha" maxlength="12" name="senha" [(ngModel)]="senha">
+                            <mat-icon matSuffix>lock</mat-icon>
+                            
+                        </mat-form-field>
+                    </p>
+                    
+                </mat-card-content>
+                
+                <mat-card-actions>
+                    <p class="suporteInput">
+                        <button (click)="logon(senha, user)" mat-raised-button color="accent">Login</button>
+                    </p>
+                </mat-card-actions>
+                </mat-card>
+        </form>
+    </div>
+</body>

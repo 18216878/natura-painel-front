@@ -1,0 +1,70 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/img/natura_screen.png');
+    background-size: cover;
+    margin-top: 1em;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 40em;
+    width: 80em;
+    border-radius: 2em;
+}
+
+form {
+    padding: 3em;
+    margin-right: auto;
+    margin-left: 45em;
+    width: 30em;
+    margin-top: 1em ;
+
+}
+
+.suporteCard {
+    border-radius: 2em;
+    width: 25em;
+}
+
+button {
+    width: 16em;
+    margin-left: 4em;
+    margin-right: 4em;
+}
+
+input {
+    width: 23em;
+    font-size: 1.2em;
+}
+
+#logonatura {
+    border-radius: 50%;
+    width: 7.5em;
+    height: 7.5em;
+    background-size: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('../../assets/img/natura_logo_2.jpg');
+}
+
+
+  .space {
+    margin: 1em;
+  }
+
+  .suporteInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+ 
+   
