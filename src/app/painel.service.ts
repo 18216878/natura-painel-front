@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class PainelService {
 
-  // SERVER_URL = 'https://localhost:44366';
-  SERVER_URL = 'https://10.171.2.240:44366';
+  SERVER_URL = 'https://localhost:44366';
+  // SERVER_URL = 'https://10.171.2.240:44366';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -27,5 +26,17 @@ export class PainelService {
 
   public getCpf(cpf: string){
     return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/cpf?cpf=${cpf}`)
+  }
+
+  public getPlanosBeTrocas(item_original: string){
+    return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas?item_original=${item_original}`)
+  }
+
+  public getCadastrosIrregulares(codigo: string){
+    return this.httpClient.get(`${this.SERVER_URL}/NatCadastrosIrregulares?codigo=${codigo}`)
+  }
+
+  public getPagamentosRejeitados(codigo: string){
+    return this.httpClient.get(`${this.SERVER_URL}/NatPagamentosRejeitados?consultora=${codigo}`)
   }
 }

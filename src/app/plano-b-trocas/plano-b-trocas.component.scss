@@ -1,0 +1,335 @@
+.tab {
+    width: 90em;
+  }
+  
+  .demo-table {
+    width: 100%;
+  }
+  
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-width {
+    margin: 1em;
+  }
+  
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #388E3C;
+    
+  }
+  
+  
+  .pesquisar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2em;
+    border: #388E3C 0.2em solid;
+    border-radius: 0.8em;
+    margin-bottom: 1em;
+  }
+  
+  .search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.6em;
+    padding-left: 1em;
+    padding: 0.3em;
+    border-radius: 0.8em;
+    margin-bottom: 1em;
+    max-width: 68em;
+    width: 100%;
+  }
+  
+  .options {
+    margin-right: 2em;
+  }
+  
+  
+  
+  
+  .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+  
+  .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #388E3C;
+      max-width: 90em;
+      width: 100%; 
+      flex-direction: row; 
+  
+  }
+  
+  #logoavon {
+      width: 6em;
+      height: 6em;
+      background-size: cover;
+      display: flex;
+      background-image: url('../../assets/img/nat.png');
+    }
+  
+  .inputSearch {
+      margin-left: 10em;
+      margin-right: 3em;
+      margin-bottom: 2em;
+      display: flex;
+      flex-direction: row;
+  }
+  h1 {
+      
+      color: #fff;
+      margin: 1em;
+  }
+  
+  h4 {
+      
+      color: #fff;
+      display: flex;
+      padding: 0.5em;
+      margin-left: 0.2em;
+  }
+  
+  .space {
+      margin: 1em;
+  
+  }
+  
+  .example-full-width {
+      width: 100%;
+      color:#388E3C;
+    }
+  
+    .example-form {
+      min-width: 30em;
+      max-width: 90em;
+      width: 100%;
+    }
+  
+    .mop {
+      max-width: 38em;
+      width: 100%;
+    }
+  
+    .inputPesquisa {
+      max-width: 20em;
+      width: 100%;
+      color:#388E3C;
+    }
+  
+    .mopMatricula {
+      max-width: 20em;
+      width: 100%;
+      color:#388E3C;
+    }
+  
+    .Rodape {
+      max-width: 20em;
+      width: 100%;
+      color:#388E3C;
+    }
+  
+    .matricula {
+      max-width: 20em;
+      width: 100%;
+      color:#388E3C;
+    }
+  
+    .codigoCn {
+      max-width: 35em;
+      width: 100%;
+      color:#388E3C;
+  }
+  
+    .waveLarge {
+      max-width: 43em;
+      width: 100%;
+      color:#388E3C;
+    }
+  
+    .waveNome {
+      max-width: 30em;
+      width: 100%;
+      color:#388E3C;
+    }
+  
+  
+    .pesquisa {
+      max-width: 10em;
+      width: 100%;
+    }
+    .start {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .ocorrencia {
+      max-width: 60em;
+      width: 100%;
+    }
+  
+    .select {
+      max-width: 28em;
+      width: 100%;
+      color:#388E3C;
+    }
+  
+    .confirmar {
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+    }
+    .botoes {
+      max-width: 28em;
+      width: 100%;
+      max-height: 3em;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+  
+    }
+  
+    .example-radio-group {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+      align-items: flex-start;
+    }
+    
+    .example-radio-button {
+      margin: 5px;
+    }
+  
+    .validar {
+      margin: 1em;
+      max-height: 3em;
+      height: 100%;
+      color: #fff;
+    }
+    
+    .color {
+      color: #fff;
+      vertical-align: middle;
+      margin-right: 0.3em;
+    }
+  
+    .menu {
+      vertical-align: middle;
+    }
+  
+    .logout {
+      color: #fff;
+    }
+  
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2em;
+      margin-bottom: 5em;
+      max-width: 90em;
+      width: 100%;
+      max-height: 90em;
+      height: 100%;
+      overflow-x: scroll;
+      overflow-y: scroll;
+  }
+  
+    table {
+
+      max-width: 90em;
+      width: 100%;
+      height: 90%;
+      position: sticky;
+  
+  }
+
+  .mat-column-select {
+    overflow: visible;
+  }
+
+  .mat-elevation-z8 {    
+    overflow-x: visible;
+  }
+
+  .mat-table {
+    overflow-x: scroll;
+  }
+
+  .mat-cell {
+    padding: 8px 8px 8px 0;
+  }
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  padding: 0px 10px;
+  line-break: unset;
+  width: 100%;
+  white-space: nowrap;
+  overflow:initial;
+  vertical-align: middle;
+}
+.mat-row {
+  height: 1em;
+}
+.mat-row,
+.mat-header-row {
+  display: table-row;
+}
+  
+  .title-card {
+    color: #388E3C;
+    font-weight: bold;
+  }
+  
+  .demo-row-is-clicked {
+    font-weight: bold;
+  }
+  
+    .mat-row:nth-child(even){
+      background-color: #C6E0B4;
+  }
+          
+  .mat-row:nth-child(odd){
+      background-color: #E2EFDA;
+  }
+  
+  .mat-header-cell, .mat-cell {
+      text-align: center !important;
+      
+  }
+  
+  th.mat-header-cell {
+      text-align: center !important;
+      background-color: #388E3C;
+      color: #FFF;
+  }
+  
+  td, th {
+      text-align: center !important;
+      vertical-align: middle !important;
+  }
+  
+  

@@ -19,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +35,8 @@ import { StopFormDialogComponent } from './projeto-wave/stop-form-dialog/stop-fo
 import { PlanoBTrocasComponent } from './plano-b-trocas/plano-b-trocas.component';
 import { CadastrosIrregularesComponent } from './cadastros-irregulares/cadastros-irregulares.component';
 import { PagamentosRejeitadosComponent } from './pagamentos-rejeitados/pagamentos-rejeitados.component';
+import { CpfPipe } from './cpf.pipe';
+import { CepPipe } from './cep.pipe';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import { PagamentosRejeitadosComponent } from './pagamentos-rejeitados/pagamento
     StopFormDialogComponent,
     PlanoBTrocasComponent,
     CadastrosIrregularesComponent,
-    PagamentosRejeitadosComponent
+    PagamentosRejeitadosComponent,
+    CpfPipe,
+    CepPipe
   ],
   imports: [
     BrowserModule,
@@ -69,11 +74,16 @@ import { PagamentosRejeitadosComponent } from './pagamentos-rejeitados/pagamento
     MatTabsModule,
     MatTableModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    CpfPipe,
+    CepPipe
+  ]
 })
 export class AppModule { }

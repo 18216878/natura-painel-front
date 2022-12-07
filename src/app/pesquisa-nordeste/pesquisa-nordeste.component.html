@@ -53,10 +53,172 @@
                 </button>
             </div>
         </div>
-
-        
-
   </form>
+
+  <div *ngIf="!clickedRows.size">
+    <div class="card">
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Nº do Pedido</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Nº Nota Fiscal</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Código da CN</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Nome da CN</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Data do Pedido</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+      
+    </div>
+    <div class="card">
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Aumento PTO</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Aumento Reais</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Limite Atual</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Qtde Vale Pontos</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Ação</p>
+          <p>Aguardando...</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+<div *ngFor="let clickedRow of clickedRows">
+  <div class="card">
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Nº do Pedido</p>
+        <p>{{clickedRow.numero_pedido}}</p>
+        <p *ngIf="clickedRow.numero_pedido===null">---</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Nº Nota Fiscal</p>
+        <p>{{clickedRow.numero_nota_fiscal}}</p>
+        <p *ngIf="clickedRow.numero_nota_fiscal===null">---</p>        
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Código da CN</p>
+        <p>{{clickedRow.codigo_cn}}</p>
+        <p *ngIf="clickedRow.codigo_cn===null">---</p>   
+      </mat-card-content>
+    </mat-card>
+    
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Nome da CN</p>
+        <p>{{clickedRow.nome_cn}}</p>
+        <p *ngIf="clickedRow.nome_cn===null">---</p>   
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Data do Pedido</p>
+        <p>{{clickedRow.data  | date : 'dd/MM/yyyy'}}</p>
+        <p *ngIf="clickedRow.data===null">---</p>   
+      </mat-card-content>
+    </mat-card>
+    
+  </div>
+  <div class="card">
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Aumento PTO</p>
+        <p>{{clickedRow.aumento_pto}}</p>
+        <p *ngIf="clickedRow.aumento_pto===null">---</p>   
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Aumento Reais</p>
+        <p>{{clickedRow.aumento_reais  | currency : 'BRL'}}</p>
+        <p *ngIf="clickedRow.aumento_reais===null">---</p>  
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Limite Atual</p>
+        <p>{{clickedRow.limite_atual  | currency : 'BRL'}}</p>
+        <p *ngIf="clickedRow.limite_atual===null">---</p>  
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Qtde Vale Pontos</p>
+        <p>{{clickedRow.qtde_vale_pontos}}</p>
+        <p *ngIf="clickedRow.qtde_vale_pontos===null">---</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card-width">
+      <mat-card-content>
+        <p class="title-card">Ação</p>
+        <p>{{clickedRow.acao}}</p>
+        <p *ngIf="clickedRow.acao.length===0">---</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+  
+  
 
   <div class="container">
 
@@ -115,28 +277,17 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr
             mat-row
+            (click)="clickedRows.clear()"
             (click)="clickedRows.add(row)"
             [class.demo-row-is-clicked]="clickedRows.has(row)"
-            *matRowDef="let row; columns: displayedColumns;"></tr>
+            *matRowDef="let row; columns: displayedColumns;"
+        ></tr>
       </table>
 </div>
 
-<div *ngIf="!clickedRows.size">
-  <form *ngFor="let clickedRow of clickedRows">
-
-    <mat-form-field class="mopMatricula" appearance="fill" color="primary">
-      <mat-label>Nº Pedido</mat-label>
-      <input matInput
-      readonly="true"
-      value="{{clickedRow.numero_pedido}}"
-      >
-      <mat-icon matSuffix>account_circle</mat-icon>
-      <mat-hint>Código da CN (Natura)</mat-hint>
-    </mat-form-field>
-
-  </form>
-</div>
+   
+  
+  </div>
+  
 
 
-
-</div>

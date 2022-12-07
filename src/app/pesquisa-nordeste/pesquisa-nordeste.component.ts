@@ -68,19 +68,20 @@ export class PesquisaNordesteComponent implements OnInit{
   ngOnInit(): void {
 
     this.user = this.accountService.get('user')?.toString();
-      this.formularioPesquisaNordeste = this.formBuilder.group({
-        codigo_cn:[''],
-        numero_pedido:[''],
-        cod_cn:[''],
-        nome_cn:[''],
-        data_pedido:[''],
-        numero_nota_fiscal:[''],
-        aumento_pto:[''],
-        aumento_reais:[''],
-        limite_atual:[''],
-        qtde_vale_pontos:[''],
-        acao:['']
-      })
+    this.formularioPesquisaNordeste = this.formBuilder.group({
+      codigo_cn:[''],
+      numero_pedido:[''],
+      cod_cn:[''],
+      nome_cn:[''],
+      data_pedido:[''],
+      numero_nota_fiscal:[''],
+      aumento_pto:[''],
+      aumento_reais:[''],
+      limite_atual:[''],
+      qtde_vale_pontos:[''],
+      acao:['']
+      
+    })
 
 
 
@@ -107,6 +108,7 @@ export class PesquisaNordesteComponent implements OnInit{
     this.codigo_cn = '';
     this.formularioPesquisaNordeste.reset();
     this.pesquisa_efetuada = false;
+    this.clickedRows.clear();
   }
 
 }

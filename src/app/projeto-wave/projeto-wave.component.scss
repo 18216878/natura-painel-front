@@ -7,10 +7,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding: 0.2em;
     border: #3F51B5 0.2em solid;
     border-radius: 0.8em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
   
   .search {
@@ -18,7 +18,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding-top: 0.6em;
+    padding-left: 1em;
+    padding: 0.3em;
     border-radius: 0.8em;
     margin-bottom: 1em;
     max-width: 68em;
@@ -30,7 +32,15 @@
   }
   
   
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
+  .card-width {
+    margin: 1em;
+  }
   
   .main {
       display: flex;
@@ -201,6 +211,52 @@
       color: #fff;
     }
   
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2em;
+      margin-bottom: 5em;
+  }
+  
+    table {
+      width: 90em;
+      height: 90%;
+  
+  }
+  
+  .title-card {
+    color: #3F51B5;
+    font-weight: bold;
+  }
+  
+  .demo-row-is-clicked {
+    font-weight: bold;
+  }
+  
+    .mat-row:nth-child(even){
+      background-color: #B4C6E7;
+  }
+          
+  .mat-row:nth-child(odd){
+      background-color: #D9E1F2;
+  }
+  
+  .mat-header-cell, .mat-cell {
+      text-align: center !important;
+      
+  }
+  
+  th.mat-header-cell {
+      text-align: center !important;
+      background-color: #3F51B5;
+      color: #FFF;
+  }
+  
+  td, th {
+      text-align: center !important;
+      vertical-align: middle !important;
+  }
     
   
   

@@ -6,15 +6,28 @@
   width: 100%;
 }
 
-.mat-mdc-row .mat-mdc-cell {
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-width {
+  margin: 1em;
+}
+
+.mat-row .mat-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
   cursor: pointer;
 }
 
-.mat-mdc-row:hover .mat-mdc-cell {
+.mat-row:hover .mat-cell {
   border-color: currentColor;
   cursor: pointer;
+  color: #FFF;
+  background-color: #FF5722;
+  
 }
 
 
@@ -23,10 +36,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  padding: 0.2em;
   border: #FF5722 0.2em solid;
   border-radius: 0.8em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .search {
@@ -34,7 +47,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  padding-top: 0.6em;
+  padding-left: 1em;
+  padding: 0.3em;
   border-radius: 0.8em;
   margin-bottom: 1em;
   max-width: 68em;
@@ -231,7 +246,7 @@ h4 {
     justify-content: center;
     align-items: center;
     margin-top: 2em;
-    margin-bottom: 2em;
+    margin-bottom: 5em;
 }
 
   table {
@@ -240,6 +255,10 @@ h4 {
 
 }
 
+.title-card {
+  color: #FF5722;
+  font-weight: bold;
+}
 
 .demo-row-is-clicked {
   font-weight: bold;
@@ -260,7 +279,7 @@ h4 {
 
 th.mat-header-cell {
     text-align: center !important;
-    background-color: #E06F07;
+    background-color: #FF5722;
     color: #FFF;
 }
 
@@ -268,6 +287,4 @@ td, th {
     text-align: center !important;
     vertical-align: middle !important;
 }
-
-  
 
