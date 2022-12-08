@@ -37,6 +37,8 @@ import { CadastrosIrregularesComponent } from './cadastros-irregulares/cadastros
 import { PagamentosRejeitadosComponent } from './pagamentos-rejeitados/pagamentos-rejeitados.component';
 import { CpfPipe } from './cpf.pipe';
 import { CepPipe } from './cep.pipe';
+import { DynamicsHistoricoComponent } from './dynamics-historico/dynamics-historico.component';
+import { SimuladorCobrancaComponent } from './simulador-cobranca/simulador-cobranca.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { CepPipe } from './cep.pipe';
     CadastrosIrregularesComponent,
     PagamentosRejeitadosComponent,
     CpfPipe,
-    CepPipe
+    CepPipe,
+    DynamicsHistoricoComponent,
+    SimuladorCobrancaComponent
   ],
   imports: [
     BrowserModule,

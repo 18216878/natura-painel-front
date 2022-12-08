@@ -1,1 +1,406 @@
-<p>pagamentos-rejeitados works!</p>
+<div class="main">
+    <div class="title">
+      <div>
+        <div id="logoavon"></div>
+      </div>
+      <h1>Pesquisa - {{title}}</h1>
+      <div class="menu">
+        <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}}
+        </h4>
+        <button
+          routerLink="/home"
+          class="logout"
+          color="accent"
+          mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+      </div>
+    </div>
+  
+    <p class="space"> </p>
+  
+    <form [formGroup]="formularioPagamentosRejeitados" class="example-form">
+      <div class="pesquisar">
+        <div class="search">
+
+            <mat-form-field class="codigoCn" appearance="fill" color="accent">
+                <mat-label>Código CN</mat-label>
+                <input
+                    matInput
+                    placeholder="Digite o Código davCN"
+                    ngDefaultControl
+                    formControlName="codigo_cn"
+                    [(ngModel)]="codigo_cn">
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-hint>Código CN</mat-hint>
+            </mat-form-field>
+
+        </div>
+
+        <div class="botoes">
+  
+          <button
+            class="validar"
+            mat-raised-button
+            [disabled]="codigo_cn === null || codigo_cn === undefined || codigo_cn === ''"
+            (click)="limpar()"
+            color="warn"
+            aria-label="Example icon button with a home icon">
+            <mat-icon>clear</mat-icon> Limpar
+          </button>
+  
+          <button
+            class="validar"
+            mat-raised-button
+            [disabled]="codigo_cn === null || codigo_cn === undefined || codigo_cn === ''"
+            (click)="pesquisar()"
+            color="accent"
+            aria-label="Example icon button with a home icon">
+            <mat-icon>search</mat-icon> Pesquisar
+          </button>
+        </div>
+      </div>
+  
+    </form>
+  
+    <div *ngIf="!clickedRows.size">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Agência Origem</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Conta</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">DAC</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Pagamento</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Devolução</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Carteira</p>
+              <p>Aguardando...</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Nosso Número</p>
+              <p>Aguardando...</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Valor Liquidado</p>
+              <p>Aguardando...</p>
+            </mat-card-content>
+          </mat-card>
+  
+      </div>
+      <div class="card">
+        
+        
+        
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Banco Pagamento</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Agência Pagamento</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Motivo Devolução</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Consultora</p>
+              <p>Aguardando...</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Titulo</p>
+              <p>Aguardando...</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Parcela</p>
+              <p>Aguardando...</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Valor</p>
+              <p>Aguardando...</p>
+            </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  
+    <div *ngFor="let clickedRow of clickedRows">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Agência Origem</p>
+            <p>{{clickedRow.agencia_origem}}</p>
+            <p *ngIf="clickedRow.agencia_origem===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Conta</p>
+            <p>{{clickedRow.conta}}</p>
+            <p *ngIf="clickedRow.conta===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">DAC</p>
+            <p>{{clickedRow.dac}}</p>
+            <p *ngIf="clickedRow.dac===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Pagamento</p>
+            <p>{{clickedRow.data_pagamento | date: 'dd/MM/yyyy'}}</p>
+            <p *ngIf="clickedRow.data_pagamento===null">---</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Data Devolução</p>
+              <p>{{clickedRow.data_devolucao | date: 'dd/MM/yyyy'}}</p>
+              <p *ngIf="clickedRow.data_devolucao===null">---</p>
+            </mat-card-content>
+        </mat-card>
+  
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Carteira</p>
+            <p>{{clickedRow.carteira}}</p>
+            <p *ngIf="clickedRow.carteira===null">---</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Nosso Número</p>
+              <p>{{clickedRow.nosso_numero}}</p>
+              <p *ngIf="clickedRow.nosso_numero===null">---</p>
+            </mat-card-content>
+          </mat-card>
+          
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Valor Liquidado</p>
+            <p>{{clickedRow.valor_liquidado | currency : 'BRL'}}</p>
+            <p *ngIf="clickedRow.valor_liquidado===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+      </div>
+      <div class="card">
+
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">banco_pagamento</p>
+            <p>{{clickedRow.banco_pagamento}}</p>
+            <p *ngIf="clickedRow.banco_pagamento===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Agência Pagamento</p>
+            <p>{{clickedRow.agencia_pagamento}}</p>
+            <p *ngIf="clickedRow.agencia_pagamento===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Motivo Devolução</p>
+            <p>{{clickedRow.motivo_devolucao}}</p>
+            <p *ngIf="clickedRow.motivo_devolucao===null">---</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Consultora</p>
+              <p>{{clickedRow.consultora}}</p>
+              <p *ngIf="clickedRow.consultora===null">---</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Título</p>
+              <p>{{clickedRow.titulo}}</p>
+              <p *ngIf="clickedRow.titulo===null">---</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Parcela</p>
+              <p>{{clickedRow.parcela}}</p>
+              <p *ngIf="clickedRow.parcela===null">---</p>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Valor</p>
+              <p>{{clickedRow.valor | currency : 'BRL'}}</p>
+              <p *ngIf="clickedRow.valor===null">---</p>
+            </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  
+    <p class="start">
+  
+      <div class="container">
+  
+        <table mat-table *ngIf="pesquisa_efetuada===true"
+          [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+          <ng-container matColumnDef="agencia_origem">
+            <th mat-header-cell *matHeaderCellDef> Agência Origem </th>
+            <td mat-cell *matCellDef="let element"> {{element.agencia_origem}}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="conta">
+            <th mat-header-cell *matHeaderCellDef> Conta </th>
+            <td mat-cell *matCellDef="let element"> {{element.conta}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="dac">
+            <th mat-header-cell *matHeaderCellDef> DAC </th>
+            <td mat-cell *matCellDef="let element"> {{element.dac}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="data_pagamento">
+            <th mat-header-cell *matHeaderCellDef> Data Pagamento </th>
+            <td mat-cell *matCellDef="let element"> {{element.data_pagamento | date: 'dd/MM/yyyy'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="data_devolucao">
+            <th mat-header-cell *matHeaderCellDef> Data Devolução </th>
+            <td mat-cell *matCellDef="let element"> {{element.data_devolucao | date: 'dd/MM/yyyy'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="carteira">
+            <th mat-header-cell *matHeaderCellDef> Carteira </th>
+            <td mat-cell *matCellDef="let element"> {{element.carteira}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nosso_numero">
+            <th mat-header-cell *matHeaderCellDef> Nosso Número </th>
+            <td mat-cell *matCellDef="let element"> {{element.nosso_numero}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="valor_liquidado">
+            <th mat-header-cell *matHeaderCellDef> Valor Liquidado </th>
+            <td mat-cell *matCellDef="let element"> {{element.valor_liquidado | currency : 'BRL'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="banco_pagamento">
+            <th mat-header-cell *matHeaderCellDef> Banco Pagamento </th>
+            <td mat-cell *matCellDef="let element"> {{element.banco_pagamento}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="agencia_pagamento">
+            <th mat-header-cell *matHeaderCellDef> Agência Pagamento </th>
+            <td mat-cell *matCellDef="let element"> {{element.agencia_pagamento}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="cod_barras">
+            <th mat-header-cell *matHeaderCellDef> Código de Barras </th>
+            <td mat-cell *matCellDef="let element"> {{element.cod_barras}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="motivo_devolucao">
+            <th mat-header-cell *matHeaderCellDef> Motivo Devolução </th>
+            <td mat-cell *matCellDef="let element"> {{element.motivo_devolucao}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="consultora">
+            <th mat-header-cell *matHeaderCellDef> Consultora </th>
+            <td mat-cell *matCellDef="let element"> {{element.consultora}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef> Título </th>
+            <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="parcela">
+            <th mat-header-cell *matHeaderCellDef> Parcela </th>
+            <td mat-cell *matCellDef="let element"> {{element.parcela}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef> Valor </th>
+            <td mat-cell *matCellDef="let element"> {{element.valor | currency : 'BRL'}} </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            (click)="clickedRows.clear()"
+            (click)="clickedRows.add(row)"
+            [class.demo-row-is-clicked]="clickedRows.has(row)"
+            *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  

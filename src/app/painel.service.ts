@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PainelService {
 
-  SERVER_URL = 'https://localhost:44366';
-  // SERVER_URL = 'https://10.171.2.240:44366';
+  // SERVER_URL = 'https://localhost:44366';
+  SERVER_URL = 'https://10.171.2.240:44366';
 
   constructor(private httpClient: HttpClient) {}
 

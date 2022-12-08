@@ -26,7 +26,7 @@
                     <mat-label>Item Original</mat-label>
                     <input
                         matInput
-                        placeholder="Digite o Nº d Item Original"
+                        placeholder="Digite o Nº do Item Original"
                         ngDefaultControl
                         formControlName="item_original"
                         [(ngModel)]="item_original">
@@ -71,35 +71,35 @@
         <div class="card">
             <mat-card class="card-width">
               <mat-card-content>
-                <p class="title-card">tipo_estrutura</p>
+                <p class="title-card">Tipo Estrutura</p>
                 <p>Aguardando...</p>
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
-                <p class="title-card">nome_estrutura</p>
+                <p class="title-card">Nome Estrutura</p>
                 <p>Aguardando...</p>       
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
-                <p class="title-card">tipo_mensagem</p>
+                <p class="title-card">Tipo Mensagem</p>
                 <p>Aguardando...</p> 
               </mat-card-content>
             </mat-card>
             
             <mat-card class="card-width">
               <mat-card-content>
-                <p class="title-card">item_original</p>
+                <p class="title-card">Item Original</p>
                 <p>Aguardando...</p>  
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
-                <p class="title-card">tipo_item_original</p>
+                <p class="title-card">Tipo Item Original</p>
                 <p>Aguardando...</p> 
               </mat-card-content>
             </mat-card>
@@ -108,14 +108,14 @@
           <div class="card">
             <mat-card class="card-width">
               <mat-card-content>
-                <p class="title-card">item_substituto</p>
+                <p class="title-card">Item Substituto</p>
                 <p>Aguardando...</p>  
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
-                <p class="title-card">nome_composicao_item_substitut</p>
+                <p class="title-card">Nome Composicao Item Substituto</p>
                 <p>Aguardando...</p>
               </mat-card-content>
             </mat-card>
@@ -127,7 +127,7 @@
       <div class="card">
         <mat-card class="card-width">
           <mat-card-content>
-            <p class="title-card">tipo_estrutura</p>
+            <p class="title-card">Tipo Estrutura</p>
             <p>{{clickedRow.tipo_estrutura}}</p>
             <p *ngIf="clickedRow.tipo_estrutura===null">---</p>
           </mat-card-content>
@@ -135,7 +135,7 @@
     
         <mat-card class="card-width">
           <mat-card-content>
-            <p class="title-card">nome_estrutura</p>
+            <p class="title-card">Nome Estrutura</p>
             <p>{{clickedRow.nome_estrutura}}</p>
             <p *ngIf="clickedRow.nome_estrutura===null">---</p>        
           </mat-card-content>
@@ -143,7 +143,7 @@
     
         <mat-card class="card-width">
           <mat-card-content>
-            <p class="title-card">tipo_mensagem</p>
+            <p class="title-card">Tipo Mensagem</p>
             <p>{{clickedRow.tipo_mensagem}}</p>
             <p *ngIf="clickedRow.tipo_mensagem===null">---</p>   
           </mat-card-content>
@@ -151,7 +151,7 @@
         
         <mat-card class="card-width">
           <mat-card-content>
-            <p class="title-card">item_original</p>
+            <p class="title-card">Item Original</p>
             <p>{{clickedRow.item_original}}</p>
             <p *ngIf="clickedRow.item_original===null">---</p>   
           </mat-card-content>
@@ -159,7 +159,7 @@
     
         <mat-card class="card-width">
           <mat-card-content>
-            <p class="title-card">tipo_item_original</p>
+            <p class="title-card">Tipo Item Original</p>
             <p>{{clickedRow.tipo_item_original}}</p>
             <p *ngIf="clickedRow.tipo_item_original===null">---</p>   
           </mat-card-content>
@@ -169,7 +169,7 @@
       <div class="card">
         <mat-card class="card-width">
           <mat-card-content>
-            <p class="title-card">item_substituto</p>
+            <p class="title-card">Item Substituto</p>
             <p>{{clickedRow.item_substituto}}</p>
             <p *ngIf="clickedRow.item_substituto===null">---</p>   
           </mat-card-content>
@@ -177,7 +177,7 @@
     
         <mat-card class="card-width">
           <mat-card-content>
-            <p class="title-card">nome_composicao_item_substitut</p>
+            <p class="title-card">Nome Composicao Item Substituto</p>
             <p>{{clickedRow.nome_composicao_item_substitut}}</p>
             <p *ngIf="clickedRow.nome_composicao_item_substitut===null">---</p>  
           </mat-card-content>
@@ -196,107 +196,107 @@
                 [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
                 <ng-container matColumnDef="cd_mensagem">
-                    <th mat-header-cell *matHeaderCellDef> cd_mensagem </th>
+                    <th mat-header-cell *matHeaderCellDef> Cód Mensagem </th>
                     <td mat-cell *matCellDef="let element"> {{element.cd_mensagem}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="dc_mensagem">
-                    <th mat-header-cell *matHeaderCellDef> dc_mensagem </th>
+                    <th mat-header-cell *matHeaderCellDef> Descrição Mensagem </th>
                     <td mat-cell *matCellDef="let element"> {{element.dc_mensagem}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="tipo_estrutura">
-                    <th mat-header-cell *matHeaderCellDef> tipo_estrutura </th>
+                    <th mat-header-cell *matHeaderCellDef> Tipo Estrutura </th>
                     <td mat-cell *matCellDef="let element"> {{element.tipo_estrutura}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="cd_estrutura_comercial">
-                    <th mat-header-cell *matHeaderCellDef> cd_estrutura_comercial </th>
+                    <th mat-header-cell *matHeaderCellDef> Cód Estrutura Comercial </th>
                     <td mat-cell *matCellDef="let element"> {{element.cd_estrutura_comercial}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="nome_estrutura">
-                    <th mat-header-cell *matHeaderCellDef> nome_estrutura </th>
+                    <th mat-header-cell *matHeaderCellDef> Nome Estrutura </th>
                     <td mat-cell *matCellDef="let element"> {{element.nome_estrutura}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="nm_ciclo_operacional_inicio">
-                    <th mat-header-cell *matHeaderCellDef> nm_ciclo_operacional_inicio </th>
+                    <th mat-header-cell *matHeaderCellDef> Ciclo Operacional Início </th>
                     <td mat-cell *matCellDef="let element"> {{element.nm_ciclo_operacional_inicio}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="nm_ciclo_operacional_termino">
-                    <th mat-header-cell *matHeaderCellDef> nm_ciclo_operacional_termino </th>
+                    <th mat-header-cell *matHeaderCellDef> Ciclo Operacional Término </th>
                     <td mat-cell *matCellDef="let element"> {{element.nm_ciclo_operacional_termino}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="dt_inicio">
-                    <th mat-header-cell *matHeaderCellDef> dt_inicio </th>
+                    <th mat-header-cell *matHeaderCellDef> Data Início </th>
                     <td mat-cell *matCellDef="let element"> {{element.dt_inicio | date : 'dd/mm/yyyy'}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="dt_termino">
-                    <th mat-header-cell *matHeaderCellDef> dt_termino </th>
+                    <th mat-header-cell *matHeaderCellDef> Data Término </th>
                     <td mat-cell *matCellDef="let element"> {{element.dt_termino | date : 'dd/mm/yyyy'}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="tipo_mensagem">
-                    <th mat-header-cell *matHeaderCellDef> tipo_mensagem </th>
+                    <th mat-header-cell *matHeaderCellDef> Tipo Mensagem </th>
                     <td mat-cell *matCellDef="let element"> {{element.tipo_mensagem}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="tipo_item_original">
-                    <th mat-header-cell *matHeaderCellDef> tipo_item_original </th>
+                    <th mat-header-cell *matHeaderCellDef> Tipo Item Original </th>
                     <td mat-cell *matCellDef="let element"> {{element.tipo_item_original}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="item_original">
-                    <th mat-header-cell *matHeaderCellDef> item_original </th>
+                    <th mat-header-cell *matHeaderCellDef> Item Original </th>
                     <td mat-cell *matCellDef="let element"> {{element.item_original}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="composicao_item_original">
-                    <th mat-header-cell *matHeaderCellDef> composicao_item_original </th>
+                    <th mat-header-cell *matHeaderCellDef> Composição Item Original </th>
                     <td mat-cell *matCellDef="let element"> {{element.composicao_item_original}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="nome_composicao_item_original">
-                    <th mat-header-cell *matHeaderCellDef> nome_composicao_item_original </th>
+                    <th mat-header-cell *matHeaderCellDef> Nome Composição Item Original </th>
                     <td mat-cell *matCellDef="let element"> {{element.nome_composicao_item_original}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="tipo_item_original_2">
-                    <th mat-header-cell *matHeaderCellDef> tipo_item_original_2 </th>
+                    <th mat-header-cell *matHeaderCellDef> Tipo Item Original 2 </th>
                     <td mat-cell *matCellDef="let element"> {{element.tipo_item_original_2}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="item_substituto">
-                    <th mat-header-cell *matHeaderCellDef> item_substituto </th>
+                    <th mat-header-cell *matHeaderCellDef> Item Substituto </th>
                     <td mat-cell *matCellDef="let element"> {{element.item_substituto}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="composicao_item_substituto">
-                    <th mat-header-cell *matHeaderCellDef> composicao_item_substituto </th>
+                    <th mat-header-cell *matHeaderCellDef> Composição Item Substituto </th>
                     <td mat-cell *matCellDef="let element"> {{element.composicao_item_substituto}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="nome_composicao_item_substitut">
-                    <th mat-header-cell *matHeaderCellDef> nome_composicao_item_substitut </th>
+                    <th mat-header-cell *matHeaderCellDef> Nome Composição Item Substituto </th>
                     <td mat-cell *matCellDef="let element"> {{element.nome_composicao_item_substitut}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="exibe_box_troca_informa">
-                    <th mat-header-cell *matHeaderCellDef> exibe_box_troca_informa </th>
+                    <th mat-header-cell *matHeaderCellDef> Exibe Box Troca Informa </th>
                     <td mat-cell *matCellDef="let element"> {{element.exibe_box_troca_informa}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="qtde_registros_por_mensagem">
-                    <th mat-header-cell *matHeaderCellDef> qtde_registros_por_mensagem </th>
+                    <th mat-header-cell *matHeaderCellDef> Qtde Registros Por Mensagem </th>
                     <td mat-cell *matCellDef="let element"> {{element.qtde_registros_por_mensagem}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="data_execucao_da_query">
-                    <th mat-header-cell *matHeaderCellDef> data_execucao_da_query </th>
+                    <th mat-header-cell *matHeaderCellDef> Data Execução da Query </th>
                     <td mat-cell *matCellDef="let element"> {{element.data_execucao_da_query | date : 'dd/mm/yyyy'}}</td>
                 </ng-container>
 
