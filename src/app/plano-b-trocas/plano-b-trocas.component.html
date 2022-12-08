@@ -67,6 +67,125 @@
 
     </form>
 
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">tipo_estrutura</p>
+                <p>Aguardando...</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">nome_estrutura</p>
+                <p>Aguardando...</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">tipo_mensagem</p>
+                <p>Aguardando...</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">item_original</p>
+                <p>Aguardando...</p>  
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">tipo_item_original</p>
+                <p>Aguardando...</p> 
+              </mat-card-content>
+            </mat-card>
+            
+          </div>
+          <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">item_substituto</p>
+                <p>Aguardando...</p>  
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">nome_composicao_item_substitut</p>
+                <p>Aguardando...</p>
+              </mat-card-content>
+            </mat-card>
+        
+          </div>
+      </div>
+    
+    <div *ngFor="let clickedRow of clickedRows">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">tipo_estrutura</p>
+            <p>{{clickedRow.tipo_estrutura}}</p>
+            <p *ngIf="clickedRow.tipo_estrutura===null">---</p>
+          </mat-card-content>
+        </mat-card>
+    
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">nome_estrutura</p>
+            <p>{{clickedRow.nome_estrutura}}</p>
+            <p *ngIf="clickedRow.nome_estrutura===null">---</p>        
+          </mat-card-content>
+        </mat-card>
+    
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">tipo_mensagem</p>
+            <p>{{clickedRow.tipo_mensagem}}</p>
+            <p *ngIf="clickedRow.tipo_mensagem===null">---</p>   
+          </mat-card-content>
+        </mat-card>
+        
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">item_original</p>
+            <p>{{clickedRow.item_original}}</p>
+            <p *ngIf="clickedRow.item_original===null">---</p>   
+          </mat-card-content>
+        </mat-card>
+    
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">tipo_item_original</p>
+            <p>{{clickedRow.tipo_item_original}}</p>
+            <p *ngIf="clickedRow.tipo_item_original===null">---</p>   
+          </mat-card-content>
+        </mat-card>
+        
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">item_substituto</p>
+            <p>{{clickedRow.item_substituto}}</p>
+            <p *ngIf="clickedRow.item_substituto===null">---</p>   
+          </mat-card-content>
+        </mat-card>
+    
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">nome_composicao_item_substitut</p>
+            <p>{{clickedRow.nome_composicao_item_substitut}}</p>
+            <p *ngIf="clickedRow.nome_composicao_item_substitut===null">---</p>  
+          </mat-card-content>
+        </mat-card>
+    
+      </div>
+    </div>
+
 
 
 

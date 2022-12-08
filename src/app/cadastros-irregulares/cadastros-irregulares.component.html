@@ -1,1 +1,297 @@
-<p>cadastros-irregulares works!</p>
+<div class="main">
+    <div class="title">
+      <div>
+        <div id="logoavon"></div>
+      </div>
+      <h1>Pesquisa - {{title}}</h1>
+      <div class="menu">
+        <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}}
+        </h4>
+        <button
+          routerLink="/home"
+          class="logout"
+          color="primary"
+          mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+      </div>
+    </div>
+  
+    <p class="space"> </p>
+  
+    <form [formGroup]="formularioCadastrosIrregulares" class="example-form">
+      <div class="pesquisar">
+        <div class="search">
+
+            <mat-form-field class="codigoCn" appearance="fill" color="primary">
+                <mat-label>Código CN</mat-label>
+                <input
+                    matInput
+                    placeholder="Digite o Código davCN"
+                    ngDefaultControl
+                    formControlName="codigo_cn"
+                    [(ngModel)]="codigo_cn">
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-hint>Código CN</mat-hint>
+            </mat-form-field>
+
+        </div>
+
+        <div class="botoes">
+  
+          <button
+            class="validar"
+            mat-raised-button
+            [disabled]="codigo_cn === null || codigo_cn === undefined || codigo_cn === ''"
+            (click)="limpar()"
+            color="warn"
+            aria-label="Example icon button with a home icon">
+            <mat-icon>clear</mat-icon> Limpar
+          </button>
+  
+          <button
+            class="validar"
+            mat-raised-button
+            [disabled]="codigo_cn === null || codigo_cn === undefined || codigo_cn === ''"
+            (click)="pesquisar()"
+            color="primary"
+            aria-label="Example icon button with a home icon">
+            <mat-icon>search</mat-icon> Pesquisar
+          </button>
+        </div>
+      </div>
+  
+    </form>
+  
+    <div *ngIf="!clickedRows.size">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Inicio</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Código</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Nome</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">CPF</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">E-mail</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Espaco Digital</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Status</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Envio Notificação</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Última Interação CN</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Orientação Atendimento N1</p>
+            <p>Aguardando...</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  
+    <div *ngFor="let clickedRow of clickedRows">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Inicio</p>
+            <p>{{clickedRow.data_inicio | date : 'dd/MM/yyyy'}}</p>
+            <p *ngIf="clickedRow.data_inicio===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Código</p>
+            <p>{{clickedRow.codigo}}</p>
+            <p *ngIf="clickedRow.codigo===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Nome</p>
+            <p>{{clickedRow.nome}}</p>
+            <p *ngIf="clickedRow.nome===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">CPF</p>
+            <p>{{clickedRow.cpf | cpf}}</p>
+            <p *ngIf="clickedRow.cpf===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">E-mail</p>
+            <p>{{clickedRow.email}}</p>
+            <p *ngIf="clickedRow.email===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Espaco Digital</p>
+              <p>{{clickedRow.espaco_digital}}</p>
+              <p *ngIf="clickedRow.espaco_digital===null">---</p>
+            </mat-card-content>
+          </mat-card>
+          
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Status</p>
+            <p>{{clickedRow.status}}</p>
+            <p *ngIf="clickedRow.status===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Envio Notificacao</p>
+            <p>{{clickedRow.data_envio_notificacao | date : 'dd/MM/yyyy HH:mm:ss'}}</p>
+            <p *ngIf="clickedRow.data_envio_notificacao===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Última Interação CN</p>
+            <p>{{clickedRow.data_ultima_interacao_cn | date : 'dd/MM/yyyy HH:mm:ss'}}</p>
+            <p *ngIf="clickedRow.data_ultima_interacao_cn===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Orientacao Atendimento N1</p>
+            <p>{{clickedRow.orientacao_atendimento_n1}}</p>
+            <p *ngIf="clickedRow.orientacao_atendimento_n1===null">---</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  
+    <p class="start">
+  
+      <div class="container">
+  
+        <table mat-table *ngIf="pesquisa_efetuada===true"
+          [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+          <ng-container matColumnDef="data_inicio">
+            <th mat-header-cell *matHeaderCellDef> Data Inicio </th>
+            <td mat-cell *matCellDef="let element"> {{element.data_inicio | date : 'dd/MM/yyyy'}}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef> Código </th>
+            <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="cpf">
+            <th mat-header-cell *matHeaderCellDef> CPF </th>
+            <td mat-cell *matCellDef="let element"> {{element.cpf | cpf}}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="espaco_digital">
+            <th mat-header-cell *matHeaderCellDef> Espaco Digital </th>
+            <td mat-cell *matCellDef="let element"> {{element.espaco_digital}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="data_envio_notificacao">
+            <th mat-header-cell *matHeaderCellDef> Data Envio Notificacao </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.data_envio_notificacao | date : 'dd/MM/yyyy HH:mm:ss'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="data_ultima_interacao_cn">
+            <th mat-header-cell *matHeaderCellDef> Data Última Interacao CN </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.data_ultima_interacao_cn | date : 'dd/MM/yyyy HH:mm:ss'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="orientacao_atendimento_n1">
+            <th mat-header-cell *matHeaderCellDef> Orientacao Atendimento N1 </th>
+            <td mat-cell *matCellDef="let element"> {{element.orientacao_atendimento_n1}} </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            (click)="clickedRows.clear()"
+            (click)="clickedRows.add(row)"
+            [class.demo-row-is-clicked]="clickedRows.has(row)"
+            *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  
