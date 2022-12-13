@@ -5,24 +5,28 @@ import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { DynamicsService } from '../dynamics.service';
 
+export interface OData {
+  odatacontext: string;
+  value: PeriodicElement;
+}
+
+var iOData: OData[] = [];
+
 export interface PeriodicElement {
-  agencia_origem: number;
-  conta: number;
-  dac: number;
-  cpf: string;
-  data_pagamento: Date;
-  data_devolucao: Date;
-  carteira: number;
-  nosso_numero: number;
-  valor_liquidado: number;
-  banco_pagamento: string;
-  agencia_pagamento: number;
-  cod_barras: string;
-  motivo_devolucao: string;
-  consultora: string;
-  titulo: number;
-  parcela: number;
-  valor: number;
+  ticketnumber: string;
+  title: string;
+  _customerid_valueODataCommunityDisplayV1FormattedValue: string;
+  _nat_naturaorder_valueODataCommunityDisplayV1FormattedValue: string;
+  createdonODataCommunityDisplayV1FormattedValue: string;
+  caseorigincodeODataCommunityDisplayV1FormattedValue: string;
+  statuscodeODataCommunityDisplayV1FormattedValue: string;
+  _nat_primarycategory_valueODataCommunityDisplayV1FormattedValue: string;
+  _nat_reason_valueODataCommunityDisplayV1FormattedValue: string;
+  _nat_secondcategory_valueODataCommunityDisplayV1FormattedValue: string;
+  _nat_solution_valueODataCommunityDisplayV1FormattedValue: string;
+  _nat_solutionsecondlevel_valueODataCommunityDisplayV1FormattedValue: string;
+  _ownerid_valueODataCommunityDisplayV1FormattedValue: string;
+  description: string;
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
@@ -36,23 +40,23 @@ var ELEMENT_DATA: PeriodicElement[] = [];
 export class DynamicsHistoricoComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'agencia_origem',
-    'conta',
-    'dac',
-    'data_pagamento',
-    'data_devolucao',
-    'carteira',
-    'nosso_numero',
-    'valor_liquidado',
-    'banco_pagamento',
-    'agencia_pagamento',
-    'cod_barras',
-    'motivo_devolucao',
-    'consultora',
-    'titulo',
-    'parcela',
-    'valor'
+    'ticketnumber',
+    'title',
+    '_customerid_valueODataCommunityDisplayV1FormattedValue',
+    '_nat_naturaorder_valueODataCommunityDisplayV1FormattedValue',
+    'createdonODataCommunityDisplayV1FormattedValue',
+    'caseorigincodeODataCommunityDisplayV1FormattedValue',
+    'statuscodeODataCommunityDisplayV1FormattedValue',
+    '_nat_primarycategory_valueODataCommunityDisplayV1FormattedValue',
+    '_nat_secondcategory_valueODataCommunityDisplayV1FormattedValue',
+    '_nat_reason_valueODataCommunityDisplayV1FormattedValue',
+    '_nat_solution_valueODataCommunityDisplayV1FormattedValue',
+    '_nat_solutionsecondlevel_valueODataCommunityDisplayV1FormattedValue',
+    '_ownerid_valueODataCommunityDisplayV1FormattedValue',
+    'description'
   ];
+  
+  dataSrc: any = iOData;
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
   
@@ -73,38 +77,62 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   storage: Storage;
   router: Router;
-  formularioPagamentosRejeitados: FormGroup;
+  formularioDynamics: FormGroup;
   user: string;
 
+  checked = false;
   public title: string = "Pagamentos Rejeitados";
-  public codigo_cn?: string = "";
+  identificadores: string[] = ['Código', 'Pedido'];
+  selecionado: string;  
 
-  
+  public codigo?: string = undefined;
+  public pedido?: string = undefined;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
-    this.formularioPagamentosRejeitados = this.formBuilder.group({
-      codigo_cn:['']      
+    this.formularioDynamics = this.formBuilder.group({
+      selecionado:[''],
+      codigo:[''],
+      pedido:[''],    
     })
   }
 
 
-  pesquisar() {
+  pesquisarCodigo(codigo: string) {
 
-    this.dynamicsService.getDynamics().subscribe(
+    this.pesquisa_efetuada = true;
+    this.dynamicsService.getDynamicsCode(codigo).subscribe(
       data => {
-        console.log(data);
+        this.dataSrc = data;
+        this.dataSource = this.dataSrc.value;
       }
     );
+  }
 
-    
+  
+  pesquisarPedido(pedido: string) {
+
+    this.pesquisa_efetuada = true;
+    this.dynamicsService.getDynamicsOrder(pedido).subscribe(
+      data => {
+        this.dataSrc = data;
+        this.dataSource = this.dataSrc.value;
+      }
+    );
+  }
+
+  onSelectId(event: Event) {
+
+    var valor = event.toString();
+    this.selecionado = valor;    
     
   }
+
 
   limpar() {
     ELEMENT_DATA = [];
     this.dataSource = ELEMENT_DATA;
-    this.formularioPagamentosRejeitados.reset();
+    this.formularioDynamics.reset();
     this.pesquisa_efetuada = false;
     this.clickedRows.clear();
   }
