@@ -32,7 +32,7 @@
                           [(ngModel)]="cod_cn_form"
                           >
                           <mat-icon matSuffix>check_circle</mat-icon>
-                          <mat-hint>Canal</mat-hint>
+                          <mat-hint>Código CN</mat-hint>
                         </mat-form-field>
             
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
@@ -79,32 +79,35 @@
                         </mat-form-field>
             
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                          <mat-label>Data de Vencimento</mat-label>
+                          <mat-label>Data </mat-label>
                           <input
                           matInput
+                          [readonly]="true"
                           [matDatepicker]="picker"
                           ngDefaultControl
-                          formControlName="titulo_form"
-                          [(ngModel)]="titulo_form"
+                          formControlName="data_vencimento_form"
+                          [(ngModel)]="data_vencimento_form"
                           >
-                          <mat-hint>data_vencimento</mat-hint>
+                          <mat-hint>Data de Vencimento</mat-hint>
                           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
             
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                          <mat-label>Item</mat-label>
+                          <mat-label>Atraso</mat-label>
                           <input
                           matInput
                           ngDefaultControl
-                          formControlName="item_form"
-                          [(ngModel)]="item_form"
+                          formControlName="atraso_form"
+                          [(ngModel)]="atraso_form"
                           >
                           <mat-icon matSuffix>fingerprint</mat-icon>
-                          <mat-hint>Usuario ID</mat-hint>
+                          <mat-hint>Dias de Atraso</mat-hint>
                         </mat-form-field>
                         
                       </p>
+
+                      
     
                 </form>
             </mat-card>

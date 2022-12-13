@@ -82,18 +82,20 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   checked = false;
   public title: string = "Pagamentos Rejeitados";
-  identificadores: string[] = ['Código', 'Pedido'];
+  identificadores: string[] = ['Código', 'Pedido', 'CPF'];
   selecionado: string;  
 
   public codigo?: string = undefined;
   public pedido?: string = undefined;
+  public cpf?: string = undefined;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
     this.formularioDynamics = this.formBuilder.group({
       selecionado:[''],
       codigo:[''],
-      pedido:[''],    
+      pedido:[''], 
+      cpf:['']   
     })
   }
 
@@ -114,6 +116,17 @@ export class DynamicsHistoricoComponent implements OnInit {
 
     this.pesquisa_efetuada = true;
     this.dynamicsService.getDynamicsOrder(pedido).subscribe(
+      data => {
+        this.dataSrc = data;
+        this.dataSource = this.dataSrc.value;
+      }
+    );
+  }
+
+  pesquisarCpf(cpf: string) {
+
+    this.pesquisa_efetuada = true;
+    this.dynamicsService.getDynamicsDocument(cpf).subscribe(
       data => {
         this.dataSrc = data;
         this.dataSource = this.dataSrc.value;

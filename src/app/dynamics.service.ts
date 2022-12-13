@@ -103,6 +103,35 @@ export class DynamicsService {
 
 }
 
+public getDynamicsDocument(document: string) {
 
+  var url = `https://natura.crm2.dynamics.com/api/data/v9.0/incidents?fetchXml=<fetch version=\"1.0\" output-format=\"xml-platform\" mapping=\"logical\" distinct=\"false\"><entity name=\"incident\"><attribute name=\"incidentid\" /><attribute name=\"ticketnumber\" /><attribute name=\"title\" /><attribute name=\"statuscode\" /><attribute name=\"createdon\" /><attribute name=\"nat_primarycategory\" /><attribute name=\"nat_secondcategory\" /><attribute name=\"nat_reason\" /><attribute name=\"nat_solution\" /><attribute name=\"nat_solutionsecondlevel\" /><attribute name=\"ownerid\" /><attribute name=\"nat_naturacode\" /><attribute name=\"customerid\" /><attribute name=\"nat_naturaorder\" /><attribute name=\"ownerid\" /><attribute name=\"caseorigincode\" /><attribute name=\"nat_title\" /><attribute name=\"description\" /><order attribute=\"title\" descending=\"false\" /><filter type=\"and\"><condition attribute=\"statecode\" operator=\"not-null\" /><condition attribute="nat_clientdocument" operator="eq" value="${document}" /></filter></entity></fetch>`;
+  fetch('../../assets/at.txt').then(
+    response => response.text()).then(
+      text => {
+        this.storage.removeItem("AuthToken");
+        this.storage.setItem("AuthToken", text);
+
+      }
+  );
+
+  this.token = this.storage.getItem("AuthToken");
+  
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'OData-MaxVersion': '4.0',
+    'OData-Version': '4.0',
+    'Prefer': 'odata.include-annotations="OData.Community.Display.V1.FormattedValue"',
+    'Authorization': `Bearer ${this.token}`
+  })
+  };
+
+  
+
+  return this.httpClient.get(url, httpOptions);
+
+}
 
 }

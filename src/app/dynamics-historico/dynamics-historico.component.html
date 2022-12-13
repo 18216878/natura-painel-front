@@ -59,6 +59,19 @@
             <mat-icon matSuffix>fingerprint</mat-icon>
             <mat-hint>Nº do Pedido</mat-hint>
           </mat-form-field>
+
+          <mat-form-field *ngIf="selecionado=='CPF'"
+            class="mopMatricula" appearance="fill" color="accent">
+            <mat-label>CPF</mat-label>
+            <input
+              matInput
+              placeholder="Digite ou cole aqui o Nº do CPF..."
+              ngDefaultControl
+              formControlName="cpf"
+              [(ngModel)]="cpf">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>Nº do CPF</mat-hint>
+          </mat-form-field>
         </div>
 
         <div class="botoes">
@@ -68,7 +81,8 @@
           mat-raised-button
           [disabled]="(codigo=== null || codigo=== undefined ||
           codigo=== '') && (pedido === null || pedido ===
-          undefined || pedido === '')"
+          undefined || pedido === '') && (cpf === null || cpf ===
+          undefined || cpf === '')"
           (click)="limpar()"
           color="warn"
           aria-label="Example icon button with a home icon">
@@ -83,7 +97,8 @@
               mat-raised-button
               [disabled]="(codigo=== null || codigo=== undefined ||
               codigo=== '') && (pedido === null || pedido ===
-              undefined || pedido === '')"
+              undefined || pedido === '') && (cpf === null || cpf ===
+              undefined || cpf === '')"
               (click)="pesquisarCodigo(codigo)"
               color="accent"
               aria-label="Example icon button with a home icon">
@@ -96,8 +111,23 @@
               mat-raised-button
               [disabled]="(codigo=== null || codigo=== undefined ||
               codigo=== '') && (pedido === null || pedido ===
-              undefined || pedido === '')"
+              undefined || pedido === '') && (cpf === null || cpf ===
+              undefined || cpf === '')"
               (click)="pesquisarPedido(pedido)"
+              color="accent"
+              aria-label="Example icon button with a home icon">
+              <mat-icon>search</mat-icon> Pesquisar
+            </button>
+
+            <button
+              *ngIf="selecionado=='CPF'"
+              class="validar"
+              mat-raised-button
+              [disabled]="(codigo=== null || codigo=== undefined ||
+              codigo=== '') && (pedido === null || pedido ===
+              undefined || pedido === '') && (cpf === null || cpf ===
+              undefined || cpf === '')"
+              (click)="pesquisarCpf(cpf)"
               color="accent"
               aria-label="Example icon button with a home icon">
               <mat-icon>search</mat-icon> Pesquisar

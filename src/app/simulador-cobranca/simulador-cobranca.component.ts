@@ -79,7 +79,7 @@ export class SimuladorCobrancaComponent implements OnInit {
       titulo_form:[''],
       item_form:[''],
       valor_form:[''],
-      data_vencimeno_form:[''],
+      data_vencimento_form:[''],
       atraso_form:[''],
       multa_form:[''],
       juros_form:[''],
