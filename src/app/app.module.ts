@@ -13,8 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule }  from '@angular/material/dialog';
-import { HttpClientModule } from '@angular/common/http';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -39,6 +39,8 @@ import { CpfPipe } from './cpf.pipe';
 import { CepPipe } from './cep.pipe';
 import { DynamicsHistoricoComponent } from './dynamics-historico/dynamics-historico.component';
 import { SimuladorCobrancaComponent } from './simulador-cobranca/simulador-cobranca.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -75,13 +77,15 @@ import { SimuladorCobrancaComponent } from './simulador-cobranca/simulador-cobra
     HttpClientModule,
     MatDialogModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatTabsModule,
     MatTableModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatRadioModule,
     FontAwesomeModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    CurrencyMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent],
