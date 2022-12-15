@@ -137,7 +137,5 @@ export class ProjetoWaveComponent implements OnInit {
     this.selecionado = valor;    
     
   }
-
-
-
+  
 }

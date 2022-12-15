@@ -1,0 +1,20 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="atraso_condicao">
+        <th mat-header-cell *matHeaderCellDef> Atraso / Condição </th>
+        <td mat-cell *matCellDef="let element"> {{element.atraso_condicao}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="desconto">
+        <th mat-header-cell *matHeaderCellDef> Desconto </th>
+        <td mat-cell *matCellDef="let element"> {{element.desconto | percent}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="cyber">
+        <th mat-header-cell *matHeaderCellDef> Cyber </th>
+        <td mat-cell *matCellDef="let element"> {{element.cyber | percent: '1.2-4'}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>          
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

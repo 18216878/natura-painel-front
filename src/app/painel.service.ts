@@ -16,11 +16,11 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWaveUsers?user=${user}`)
   }
 
-  public getNaturaCode(naturaCode: string){
+  public getNaturaCode(naturaCode: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/codigo-natura?codigo_natura=${naturaCode}`)
   }
 
-  public getAvonCode(avonCode: string){
+  public getAvonCode(avonCode: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/codigo-avon?codigo_avon=${avonCode}`)
   }
 
@@ -28,15 +28,23 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/cpf?cpf=${cpf}`)
   }
 
-  public getPlanosBeTrocas(item_original: string){
+  public getPlanosBeTrocas(item_original: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas?item_original=${item_original}`)
   }
 
-  public getCadastrosIrregulares(codigo: string){
+  public getCadastrosIrregulares(codigo: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatCadastrosIrregulares?codigo=${codigo}`)
   }
 
-  public getPagamentosRejeitados(codigo: string){
+  public getPagamentosRejeitados(codigo: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatPagamentosRejeitados?consultora=${codigo}`)
+  }
+
+  public getFeriados(): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatFeriados`)
+  }
+
+  public getDynamicsToken(): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatDynamics`)
   }
 }

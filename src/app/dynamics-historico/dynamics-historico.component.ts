@@ -81,7 +81,7 @@ export class DynamicsHistoricoComponent implements OnInit {
   user: string;
 
   checked = false;
-  public title: string = "Pagamentos Rejeitados";
+  public title: string = "Dynamiics Histórico";
   identificadores: string[] = ['Código', 'Pedido', 'CPF'];
   selecionado: string;  
 
@@ -102,6 +102,8 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   pesquisarCodigo(codigo: string) {
 
+    this.dynamicsService.tokenGenerate();
+
     this.pesquisa_efetuada = true;
     this.dynamicsService.getDynamicsCode(codigo).subscribe(
       data => {
@@ -114,6 +116,8 @@ export class DynamicsHistoricoComponent implements OnInit {
   
   pesquisarPedido(pedido: string) {
 
+    this.dynamicsService.tokenGenerate();
+
     this.pesquisa_efetuada = true;
     this.dynamicsService.getDynamicsOrder(pedido).subscribe(
       data => {
@@ -124,6 +128,8 @@ export class DynamicsHistoricoComponent implements OnInit {
   }
 
   pesquisarCpf(cpf: string) {
+
+    this.dynamicsService.tokenGenerate();
 
     this.pesquisa_efetuada = true;
     this.dynamicsService.getDynamicsDocument(cpf).subscribe(

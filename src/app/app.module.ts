@@ -20,6 +20,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
+import { LOCALE_ID } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import {registerLocaleData} from '@angular/common';
+registerLocaleData(localePt)
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +46,8 @@ import { DynamicsHistoricoComponent } from './dynamics-historico/dynamics-histor
 import { SimuladorCobrancaComponent } from './simulador-cobranca/simulador-cobranca.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { HttpClientModule } from '@angular/common/http';
+import { SimuladorEmptyDialogComponent } from './simulador-cobranca/simulador-empty-dialog/simulador-empty-dialog.component';
+import { AlcadaAcordoDiferenciadoComponent } from './simulador-cobranca/alcada-acordo-diferenciado/alcada-acordo-diferenciado.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +66,9 @@ import { HttpClientModule } from '@angular/common/http';
     CpfPipe,
     CepPipe,
     DynamicsHistoricoComponent,
-    SimuladorCobrancaComponent
+    SimuladorCobrancaComponent,
+    SimuladorEmptyDialogComponent,
+    AlcadaAcordoDiferenciadoComponent
   ],
   imports: [
     BrowserModule,
@@ -82,12 +91,18 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
     MatRadioModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     CurrencyMaskModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: "pt-BR"
+    }
+  ],
   bootstrap: [AppComponent],
   exports: [
     CpfPipe,
