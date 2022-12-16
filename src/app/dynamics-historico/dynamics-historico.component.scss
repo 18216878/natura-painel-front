@@ -252,6 +252,16 @@
   
   }
 
+  .carregando{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em;
+  }
+  h5 {
+    margin: 1em;
+  }
+
   
   .mat-column-select {
     overflow: visible;

@@ -42,6 +42,7 @@ export class ProjetoWaveComponent implements OnInit {
   ) { 
     this.router = router;
     this.storage = window.localStorage;
+    window.scroll(0, 0);
   }
 
   storage: Storage;

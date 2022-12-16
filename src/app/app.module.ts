@@ -21,6 +21,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
@@ -48,6 +49,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { SimuladorEmptyDialogComponent } from './simulador-cobranca/simulador-empty-dialog/simulador-empty-dialog.component';
 import { AlcadaAcordoDiferenciadoComponent } from './simulador-cobranca/alcada-acordo-diferenciado/alcada-acordo-diferenciado.component';
+import { ExtratoComponent } from './simulador-cobranca/extrato/extrato.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { AlcadaAcordoDiferenciadoComponent } from './simulador-cobranca/alcada-a
     DynamicsHistoricoComponent,
     SimuladorCobrancaComponent,
     SimuladorEmptyDialogComponent,
-    AlcadaAcordoDiferenciadoComponent
+    AlcadaAcordoDiferenciadoComponent,
+    ExtratoComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +94,7 @@ import { AlcadaAcordoDiferenciadoComponent } from './simulador-cobranca/alcada-a
     MatTableModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     MatChipsModule,
     MatRadioModule,
     FontAwesomeModule,

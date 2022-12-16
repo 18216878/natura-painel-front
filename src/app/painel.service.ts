@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class PainelService {
 
   // SERVER_URL = 'https://localhost:44366';
-  SERVER_URL = 'https://10.171.2.240:44366';
+  SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -46,5 +46,9 @@ export class PainelService {
 
   public getDynamicsToken(): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatDynamics`)
+  }
+
+  public getValePontos(codigo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatValePontos?codigo=${codigo}`)
   }
 }

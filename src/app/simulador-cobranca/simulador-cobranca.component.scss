@@ -95,6 +95,13 @@ h4 {
     height: 100%;
 }
 
+.right-side {
+  margin-left: 0;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
 .left-panel {
     max-width: 90em;
     width: 70%;

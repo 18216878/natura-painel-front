@@ -73,12 +73,14 @@ export class DynamicsHistoricoComponent implements OnInit {
   ) { 
     this.router = router;
     this.storage = window.localStorage;
+    window.scroll(0, 0);
   }
 
   storage: Storage;
   router: Router;
   formularioDynamics: FormGroup;
   user: string;
+  public carregando: Boolean = false;
 
   checked = false;
   public title: string = "Dynamiics Histórico";
@@ -101,6 +103,7 @@ export class DynamicsHistoricoComponent implements OnInit {
 
 
   pesquisarCodigo(codigo: string) {
+    this.carregando = true;
 
     this.dynamicsService.tokenGenerate();
 
@@ -111,10 +114,14 @@ export class DynamicsHistoricoComponent implements OnInit {
         this.dataSource = this.dataSrc.value;
       }
     );
+
+    this.carregando = false;
   }
 
   
   pesquisarPedido(pedido: string) {
+
+    this.carregando = true;
 
     this.dynamicsService.tokenGenerate();
 
@@ -125,9 +132,13 @@ export class DynamicsHistoricoComponent implements OnInit {
         this.dataSource = this.dataSrc.value;
       }
     );
+
+    this.carregando = false;
   }
 
   pesquisarCpf(cpf: string) {
+
+    this.carregando = true;
 
     this.dynamicsService.tokenGenerate();
 
@@ -138,6 +149,8 @@ export class DynamicsHistoricoComponent implements OnInit {
         this.dataSource = this.dataSrc.value;
       }
     );
+
+    this.carregando = false;
   }
 
   onSelectId(event: Event) {

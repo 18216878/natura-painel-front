@@ -8,6 +8,7 @@ import { PainelService } from '../painel.service';
 import { DateAdapter } from '@angular/material/core';
 import { SimuladorEmptyDialogComponent } from './simulador-empty-dialog/simulador-empty-dialog.component';
 import { AlcadaAcordoDiferenciadoComponent } from './alcada-acordo-diferenciado/alcada-acordo-diferenciado.component';
+import { ExtratoComponent } from './extrato/extrato.component';
 
 @Component({
   selector: 'app-simulador-cobranca',
@@ -22,7 +23,7 @@ export class SimuladorCobrancaComponent implements OnInit {
     const day = new Date(data.getFullYear(), data.getMonth(), data.getDate());
     const semana = (d || new Date()).getDay();
     const sevenDays = moment(data).add('days', 7);
-    return d >= day && d <= sevenDays && semana !== 0 && semana !== 6;
+    return d > day && d <= sevenDays && semana !== 0 && semana !== 6;
   };
 
   displayedColumns: string[] = [
@@ -79,7 +80,7 @@ export class SimuladorCobrancaComponent implements OnInit {
   valor_original: number = 0;
   condicao_pagamento: string;
   parcelas: number;
-  debito_atualizado: number;
+  debito_atualizado: number = 0;
   multa_fixa_form: number;
   multa_aplicada_form: number;
   total_multa: number;
@@ -227,6 +228,7 @@ export class SimuladorCobrancaComponent implements OnInit {
       this.openDialog();
     }
     else {
+      this.multa_fixa = 0.0233
       var newRow = {
         cod_cn: this.cod_cn_form,
         titulo: this.titulo_form,
@@ -242,10 +244,10 @@ export class SimuladorCobrancaComponent implements OnInit {
       this.dataSource = [...this.dataSource, newRow];
 
       this.valor_original = this.valor_original + this.valor_form;
+      this.debito_atualizado = this.debito_atualizado + this.valor_atualizado_form;
   
-      console.log(this.valor_form);
-      console.log(this.valor_original);
       this.exibir_tabela = true;
+      
   
       this.dados_adicionados++; 
       this.formularioSimuladorCobranca.reset();
@@ -264,25 +266,25 @@ export class SimuladorCobrancaComponent implements OnInit {
 
   calcularAtraso(){
 
-    if (
-      this.data_pagamento === null ||
-      this.data_pagamento === undefined  
-    )
-    {
-
-    }
-    else{
+    if (this.data_pagamento !== undefined){
 
       const moment = require('moment');
       const now = moment(this.data_pagamento);
       
       const past = this.data_vencimento_form;
-      const duration = moment.duration(now.diff(past));
+      const duration = moment.duration(now.subtract(1, 'days').diff(past));
       const days = duration.asDays();
-  
+
       this.atraso_form = days;
-    }
-    
+
+      this.multa_form = this.valor_form * this.multa_fixa;
+
+      this.juros_form = this.valor_form * this.juros_mes_aplicado * this.atraso_form;
+
+      this.valor_atualizado_form = this.valor_form + this.multa_form + this.juros_form;
+
+
+    }    
 
   }
 
@@ -297,6 +299,38 @@ export class SimuladorCobrancaComponent implements OnInit {
     const dialogRef = this.dialog.open(AlcadaAcordoDiferenciadoComponent, {
       width: '50em',
       height: '20em'
+    });
+
+  }
+
+  limparTudo(){
+    this.formularioSimuladorCobranca.reset();
+    this.formularioLateral.reset();
+    this.limparTabela();
+  }
+
+  geraExtrato(){
+
+  }
+
+  calcularMulta(){
+    if(this.condicao_pagamento==='Parcelado'){
+      this.juros_mes_aplicado = 0.0026;
+    }
+    else{
+      this.juros_mes_aplicado = 0.0017;
+    }
+    this.juros_dia_aplicado = this.juros_mes_aplicado / 30
+  }
+
+  simularAcordo(){
+
+  }
+
+  gerarExtrato() {
+    const dialogRef = this.dialog.open(ExtratoComponent, {
+      width: '50em',
+      height: '40em'
     });
 
   }

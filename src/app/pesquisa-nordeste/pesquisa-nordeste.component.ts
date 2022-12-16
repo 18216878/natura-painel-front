@@ -3,19 +3,32 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
-import { PesquisaService } from '../pesquisa.service';
+import { PainelService } from '../painel.service';
 
 export interface PeriodicElement {
-  numero_pedido: number;
-  numero_nota_fiscal: string;
-  codigo_cn: number;
-  nome_cn: string;
-  data: Date;
-  aumento_pto: number;
-  aumento_reais: number;
-  limite_atual: number;
+  cod_gm: number;
+  nome_gm: string;
+  cod_re: number;
+  nome_re: string;
+  cod_gv: number;
+  nome_gv: string;
+  cod_setor: number;
+  nome_setor: string;
+  cod_grupo: number;
+  nome_completo: number;
+  situacao_vale_pontos: string;
+  motivo_inativacao_vale_pontos: string;
+  data_inativacao_vale_pontos: Date;
   qtde_vale_pontos: number;
-  acao: string;
+  qtde_pontos_unitarios: number;
+  numero_pedido_conquista: number;
+  ciclo_pedido_conquista: number;
+  data_conquista: Date;
+  numero_pedido_processamento: number;
+  ciclo_pedido_processamento: number;
+  ciclo_inicio: number;
+  ciclo_termino: number;
+  nome_campanha: string;
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
@@ -27,14 +40,39 @@ var ELEMENT_DATA: PeriodicElement[] = [];
 })
 export class PesquisaNordesteComponent implements OnInit{
 
-  displayedColumns: string[] = ['numero_pedido', 'numero_nota_fiscal', 'codigo_cn', 'nome_cn', 'data', 'aumento_pto', 'aumento_reais', 'limite_atual', 'qtde_vale_pontos', 'acao'];
+  displayedColumns: string[] = [
+    'cod_gm',
+    'nome_gm',
+    'cod_re',
+    'nome_re',
+    'cod_gv',
+    'nome_gv',
+    'cod_setor',
+    'nome_setor',
+    'cod_grupo',
+    'cod_consultora',
+    'nome_completo',
+    'situacao_vale_pontos',
+    'motivo_inativacao_vale_pontos',
+    'data_inativacao_vale_pontos',
+    'qtde_vale_pontos',
+    'qtde_pontos_unitarios',
+    'numero_pedido_conquista',
+    'ciclo_pedido_conquista',
+    'data_conquista',
+    'numero_pedido_processamento',
+    'ciclo_pedido_processamento',
+    'ciclo_inicio',
+    'ciclo_termino',
+    'nome_campanha'
+  ];
   dataSource = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
 
-  public codigo_cn: string = '';
+  public codigo_cn: number = undefined;
 
   constructor(
-    private pesquisaService: PesquisaService,
+    private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
@@ -42,6 +80,7 @@ export class PesquisaNordesteComponent implements OnInit{
   ) { 
     this.router = router;
     this.storage = window.localStorage;
+    window.scroll(0, 0);
   }
 
   storage: Storage;
@@ -51,7 +90,7 @@ export class PesquisaNordesteComponent implements OnInit{
   formularioResultPesquisaNordeste: FormGroup;
 
 
-  public title: string = "Nordeste";
+  public title: string = "Lista Vale Pontos";
   public numero_pedido: string;
   public cod_cn: string;
   public nome_cn: string;
@@ -70,20 +109,18 @@ export class PesquisaNordesteComponent implements OnInit{
     this.user = this.accountService.get('user')?.toString();
     this.formularioPesquisaNordeste = this.formBuilder.group({
       codigo_cn:[''],
-      numero_pedido:[''],
-      cod_cn:[''],
-      nome_cn:[''],
-      data_pedido:[''],
-      numero_nota_fiscal:[''],
-      aumento_pto:[''],
-      aumento_reais:[''],
-      limite_atual:[''],
-      qtde_vale_pontos:[''],
-      acao:['']
+      nome_gm:[''],
+      nome_re:[''],
+      nome_gv:[''],
+      nome_setor:[''],
+      nome_completo:[''],
+      situacao_vale_pontos:[''],
+      qtde_pontos_unitarios:[''],
+      numero_pedido_conquista:[''],
+      data_conquista:[''],
+      nome_campanha:['']
       
     })
-
-
 
   }
 
@@ -91,8 +128,8 @@ export class PesquisaNordesteComponent implements OnInit{
 
     this.pesquisa_efetuada = true;
     var texto = this.codigo_cn;
-    if (texto.length > 0) {      
-      this.pesquisaService.getRecords(texto).subscribe(
+    if (texto !== undefined) {      
+      this.painelService.getValePontos(texto).subscribe(
         data => {
           this.dataSource = data;
         }
@@ -105,7 +142,7 @@ export class PesquisaNordesteComponent implements OnInit{
   limpar(){
     ELEMENT_DATA = [];
     this.dataSource = ELEMENT_DATA;
-    this.codigo_cn = '';
+    this.codigo_cn = undefined;
     this.formularioPesquisaNordeste.reset();
     this.pesquisa_efetuada = false;
     this.clickedRows.clear();

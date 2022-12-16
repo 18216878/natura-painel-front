@@ -272,6 +272,7 @@
                   ngDefaultControl
                   formControlName="data_pagamento"
                   [(ngModel)]="data_pagamento"
+                  (dateChange)="calcularAtraso()"
                   >
                   <mat-hint>Selecione a Data</mat-hint>
                   <mat-datepicker-toggle matSuffix [for]="pagamento"></mat-datepicker-toggle>
@@ -293,9 +294,15 @@
                   <mat-hint>Valor Original</mat-hint>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="mopMatricula"  color="accent">
+                <mat-form-field
+                    appearance="fill" class="mopMatricula"  color="accent">
                   <mat-label>Condição de Negociação</mat-label>
-                  <mat-select disableRipple ngDefaultControl formControlName="condicao_pagamento" [(ngModel)]="condicao_pagamento">
+                  <mat-select
+                    disableRipple
+                    ngDefaultControl
+                    formControlName="condicao_pagamento"
+                    [(ngModel)]="condicao_pagamento"
+                    (selectionChange)="calcularMulta()">
                     <mat-option [value]="'A Vista'">A Vista</mat-option>
                     <mat-option [value]="'Parcelado'">Parcelado</mat-option>
                   </mat-select>
@@ -331,6 +338,41 @@
                   <mat-hint>Débito Atualizado</mat-hint>
                 </mat-form-field>
 
+                <div class="right-side">
+                  <button
+                    mat-icon-button
+                    class="validar"
+                    matTooltip="Limpar Tudo"
+                    (click)="limparTudo()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+
+                  <button
+                    mat-icon-button
+                    class="validar"
+                    (click)="simularAcordo()"
+                    matTooltip="Simular Acordo"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>attach_money</mat-icon>
+                  </button>
+
+                  <button
+                    mat-icon-button
+                    class="validar"
+                    (click)="gerarExtrato()"
+                    matTooltip="Gerar Extrato"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>cloud_download</mat-icon>
+                  </button>
+
+
+
+                </div>
+                  
 
 
               
@@ -478,6 +520,7 @@
                 ngDefaultControl
                 formControlName="juros_dia_aplicado"
                 [(ngModel)]="juros_dia_aplicado"
+                mask="0.00%"
                 >
                 <mat-icon matSuffix>fingerprint</mat-icon>
                 <mat-hint>Dias de Atraso</mat-hint>
@@ -521,11 +564,6 @@
         
 
       </div>
-
-
-
-
-
 
 </div>
 
