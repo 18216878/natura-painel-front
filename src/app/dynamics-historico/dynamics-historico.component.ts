@@ -90,6 +90,7 @@ export class DynamicsHistoricoComponent implements OnInit {
   public codigo?: string = undefined;
   public pedido?: string = undefined;
   public cpf?: string = undefined;
+  public client_id: string = null;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
@@ -104,16 +105,25 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   pesquisarCodigo(codigo: string) {
     this.carregando = true;
+    this.pesquisa_efetuada = true;
 
     this.dynamicsService.tokenGenerate();
 
-    this.pesquisa_efetuada = true;
-    this.dynamicsService.getDynamicsCode(codigo).subscribe(
+    this.dynamicsService.getContactCode(codigo).subscribe(
       data => {
         this.dataSrc = data;
-        this.dataSource = this.dataSrc.value;
+        this.client_id = this.dataSrc.value[0].contactid;
+
+        this.dynamicsService.getDynamicsCode(this.client_id).subscribe(
+          data => {
+            this.dataSrc = data;
+            this.dataSource = this.dataSrc.value;            
+          }
+
+          );
+        
       }
-    );
+    )
 
     this.carregando = false;
   }
@@ -139,16 +149,26 @@ export class DynamicsHistoricoComponent implements OnInit {
   pesquisarCpf(cpf: string) {
 
     this.carregando = true;
+    this.pesquisa_efetuada = true;
 
     this.dynamicsService.tokenGenerate();
 
-    this.pesquisa_efetuada = true;
-    this.dynamicsService.getDynamicsDocument(cpf).subscribe(
+    this.dynamicsService.getContactDocument(cpf).subscribe(
       data => {
         this.dataSrc = data;
-        this.dataSource = this.dataSrc.value;
+        this.client_id = this.dataSrc.value[0].contactid;
+
+        this.dynamicsService.getDynamicsDocument(this.client_id).subscribe(
+          data => {
+            this.dataSrc = data;
+            this.dataSource = this.dataSrc.value;
+            
+          }
+    
+          );
+        
       }
-    );
+    )
 
     this.carregando = false;
   }

@@ -26,6 +26,14 @@ export class SimuladorCobrancaComponent implements OnInit {
     return d > day && d <= sevenDays && semana !== 0 && semana !== 6;
   };
 
+  myFilterP = (d: Date | null): boolean => {
+    const moment = require('moment');
+    const data = new Date();
+    const day = new Date(data.getFullYear(), data.getMonth(), data.getDate());
+    const semana = (d || new Date()).getDay();
+    return d < day && semana !== 0 && semana !== 6;
+  };
+
   displayedColumns: string[] = [
     'cod_cn',
     'titulo',

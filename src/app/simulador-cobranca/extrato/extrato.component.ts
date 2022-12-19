@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { jsPDF } from "jspdf";
 import { ViewChild, ElementRef } from '@angular/core';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 export interface PeriodicElement {
   titulo: string;
@@ -48,15 +51,8 @@ export class ExtratoComponent implements OnInit {
     const moment = require('moment');
     var arquivo = "79622690 - " + moment(new Date()).format('YYYYMMDD_HHMMSS') + ".pdf"
 
-    let pdf = new jsPDF('p', 'pt', 'a4');
-
-    pdf.html(this.el.nativeElement, {
-      callback: (pdf) => {
-        pdf.save(arquivo);
-      }
-    })
-
-
+   
+    
   }
 
 }
