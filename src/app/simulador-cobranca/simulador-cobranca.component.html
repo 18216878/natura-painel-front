@@ -107,7 +107,7 @@
                           formControlName="atraso_form"
                           [(ngModel)]="atraso_form"
                           >
-                          <mat-icon matSuffix>fingerprint</mat-icon>
+                          <mat-icon matSuffix>access_time</mat-icon>
                           <mat-hint>Dias de Atraso</mat-hint>
                         </mat-form-field>
                         
@@ -120,6 +120,7 @@
                           <input
                           matInput
                           ngDefaultControl
+                          [readonly]="true"
                           formControlName="multa_form"
                           [(ngModel)]="multa_form"
                           currencyMask
@@ -134,6 +135,7 @@
                           <input
                           matInput
                           ngDefaultControl
+                          [readonly]="true"
                           formControlName="juros_form"
                           [(ngModel)]="juros_form"
                           currencyMask
@@ -148,6 +150,7 @@
                           <input
                           matInput
                           ngDefaultControl
+                          [readonly]="true"
                           formControlName="valor_atualizado_form"
                           [(ngModel)]="valor_atualizado_form"
                           currencyMask
@@ -165,7 +168,7 @@
                           (click)="limpar()"
                           color="warn"
                           aria-label="Example icon button with a home icon">
-                          <mat-icon>clear</mat-icon> Limpar Formulário
+                          <mat-icon>delete</mat-icon> Limpar Formulário
                         </button>
 
                         <button *ngIf="exibir_tabela===true"
@@ -174,7 +177,7 @@
                           (click)="limparTabela()"
                           color="warn"
                           aria-label="Example icon button with a home icon">
-                          <mat-icon>add</mat-icon> Limpar Tabela
+                          <mat-icon>delete</mat-icon> Limpar Tabela
                         </button>
     
 
@@ -279,22 +282,7 @@
                   <mat-datepicker-toggle matSuffix [for]="pagamento"></mat-datepicker-toggle>
                   <mat-datepicker #pagamento></mat-datepicker>
                 </mat-form-field>
-
-                <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                  <mat-label>Valor Original</mat-label>
-                  <input
-                  matInput
-                  ngDefaultControl
-                  [readonly]="true"
-                  formControlName="valor_original"
-                  [(ngModel)]="valor_original"
-                  currencyMask
-                  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                  >
-                  <mat-icon matSuffix>attach_money</mat-icon>
-                  <mat-hint>Valor Original</mat-hint>
-                </mat-form-field>
-
+                
                 <mat-form-field
                     appearance="fill" class="mopMatricula"  color="accent">
                   <mat-label>Condição de Negociação</mat-label>
@@ -324,20 +312,17 @@
                   <mat-hint>Selecione uma opção</mat-hint>
                 </mat-form-field>
 
-                <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                  <mat-label>Débito Atualizado</mat-label>
-                  <input
-                  matInput
-                  [readonly]="true"
-                  ngDefaultControl
-                  formControlName="debito_atualizado"
-                  [(ngModel)]="debito_atualizado"
-                  currencyMask
-                  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                  >
-                  <mat-icon matSuffix>attach_money</mat-icon>
-                  <mat-hint>Débito Atualizado</mat-hint>
-                </mat-form-field>
+                <p class="space"></p>
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">Valor Original</h5>
+                  <h5>💵 {{valor_original | currency: 'BRL'}}</h5>
+                </div>
+                
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">Débito Atualizado</h5>
+                  <h5>💵 {{debito_atualizado | currency: 'BRL'}}</h5>
+                </div>
+                <p class="space"></p>
 
                 <div class="right-side">
                   <button
@@ -437,46 +422,26 @@
               <mat-card-subtitle>Dados Gerais</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>Multa Fixa</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="multa_fixa_form"
-                [(ngModel)]="multa_fixa_form"
-                >
-                <mat-icon matSuffix>fingerprint</mat-icon>
-                <mat-hint>Dias de Atraso</mat-hint>
-              </mat-form-field>
+              <mat-card>
 
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>Multa Aplicada</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="multa_aplicada_form"
-                [(ngModel)]="multa_aplicada_form"
-                >
-                <mat-icon matSuffix>fingerprint</mat-icon>
-                <mat-hint>Dias de Atraso</mat-hint>
-              </mat-form-field>
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">Multa Fixa</h5>
+                  <h5>🔺 {{multa_fixa_form | percent: '1.2-2'}}</h5>
+                </div>
+                
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">Multa Aplicada</h5>
+                  <h5>🔺 {{multa_aplicada_form | percent: '1.2-2'}}</h5>
+                </div>
 
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>R$ Total Multa</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="total_multa"
-                [(ngModel)]="total_multa"
-                currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                >
-                <mat-icon matSuffix>attach_money</mat-icon>
-                <mat-hint>R$ Total Multa</mat-hint>
-              </mat-form-field>
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">R$ Total Multa</h5>
+                  <h5>💵 {{total_multa | currency: 'BRL'}}
+                  </h5>
+                </div>
+
+              </mat-card>
+              
 
             </mat-card-content>
           </mat-card>
@@ -487,76 +452,37 @@
               <mat-card-subtitle>Dados Gerais</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>Juros Mês</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="juros_mes"
-                [(ngModel)]="juros_mes"
-                >
-                <mat-icon matSuffix>fingerprint</mat-icon>
-                <mat-hint>Dias de Atraso</mat-hint>
-              </mat-form-field>
+              <mat-card>
 
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>Juros Mês Aplicado</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="juros_mes_aplicado"
-                [(ngModel)]="juros_mes_aplicado"
-                >
-                <mat-icon matSuffix>fingerprint</mat-icon>
-                <mat-hint>Dias de Atraso</mat-hint>
-              </mat-form-field>
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">Juros Mês</h5>
+                  <h5>🔺 {{juros_mes | percent: '1.2-2'}}</h5>
+                </div>
 
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>Juros Dia Aplicado</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="juros_dia_aplicado"
-                [(ngModel)]="juros_dia_aplicado"
-                mask="0.00%"
-                >
-                <mat-icon matSuffix>fingerprint</mat-icon>
-                <mat-hint>Dias de Atraso</mat-hint>
-              </mat-form-field>
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">Juros Mês Aplicado</h5>
+                  <h5>🔺 {{juros_mes_aplicado | percent: '1.2-2'}}</h5>
+                </div>
+                
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">Juros Dia Aplicado</h5>
+                  <h5>🔺 {{juros_dia_aplicado | percent: '1.2-2'}}</h5>
+                </div>
 
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>R$ Total Juros Atraso</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="total_juros_atraso"
-                [(ngModel)]="total_juros_atraso"
-                currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                >
-                <mat-icon matSuffix>attach_money</mat-icon>
-                <mat-hint>R$ Total Multa</mat-hint>
-              </mat-form-field>
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">R$ Total Juros Atraso</h5>
+                  <h5 currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }">
+                    💵 {{total_juros_atraso}}
+                  </h5>
+                </div>
 
-              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                <mat-label>R$ Total Juros Parcelas</mat-label>
-                <input
-                matInput
-                [readonly]="true"
-                ngDefaultControl
-                formControlName="total_juros_parcelas"
-                [(ngModel)]="total_juros_parcelas"
-                currencyMask
-                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                >
-                <mat-icon matSuffix>attach_money</mat-icon>
-                <mat-hint>R$ Total Multa</mat-hint>
-              </mat-form-field>
-
+                <div class="parcelas">
+                  <h5 class="parcelamento" color="accent">R$ Total Juros Parcelas</h5>
+                  <h5 currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }">
+                    💵 {{total_juros_parcelas}}
+                  </h5>
+                </div>
+              </mat-card>
             </mat-card-content>
           </mat-card>
         </form>

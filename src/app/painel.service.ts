@@ -51,4 +51,5 @@ export class PainelService {
   public getValePontos(codigo: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatValePontos?codigo=${codigo}`)
   }
+
 }

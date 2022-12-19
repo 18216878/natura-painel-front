@@ -49,7 +49,6 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { SimuladorEmptyDialogComponent } from './simulador-cobranca/simulador-empty-dialog/simulador-empty-dialog.component';
 import { AlcadaAcordoDiferenciadoComponent } from './simulador-cobranca/alcada-acordo-diferenciado/alcada-acordo-diferenciado.component';
-import { ExtratoComponent } from './simulador-cobranca/extrato/extrato.component';
 
 @NgModule({
   declarations: [
@@ -70,8 +69,7 @@ import { ExtratoComponent } from './simulador-cobranca/extrato/extrato.component
     DynamicsHistoricoComponent,
     SimuladorCobrancaComponent,
     SimuladorEmptyDialogComponent,
-    AlcadaAcordoDiferenciadoComponent,
-    ExtratoComponent
+    AlcadaAcordoDiferenciadoComponent
   ],
   imports: [
     BrowserModule,

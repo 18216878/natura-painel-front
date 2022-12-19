@@ -8,7 +8,7 @@ import { PainelService } from '../painel.service';
 import { DateAdapter } from '@angular/material/core';
 import { SimuladorEmptyDialogComponent } from './simulador-empty-dialog/simulador-empty-dialog.component';
 import { AlcadaAcordoDiferenciadoComponent } from './alcada-acordo-diferenciado/alcada-acordo-diferenciado.component';
-import { ExtratoComponent } from './extrato/extrato.component';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-simulador-cobranca',
@@ -91,7 +91,7 @@ export class SimuladorCobrancaComponent implements OnInit {
   debito_atualizado: number = 0;
   multa_fixa_form: number;
   multa_aplicada_form: number;
-  total_multa: number;
+  total_multa: number = 0;
   juros_mes: number;
   juros_mes_aplicado: number;
   juros_dia_aplicado: number;
@@ -253,6 +253,7 @@ export class SimuladorCobrancaComponent implements OnInit {
 
       this.valor_original = this.valor_original + this.valor_form;
       this.debito_atualizado = this.debito_atualizado + this.valor_atualizado_form;
+      this.total_multa = this.total_multa + this.multa_form;
   
       this.exibir_tabela = true;
       
@@ -290,6 +291,10 @@ export class SimuladorCobrancaComponent implements OnInit {
       this.juros_form = this.valor_form * this.juros_mes_aplicado * this.atraso_form;
 
       this.valor_atualizado_form = this.valor_form + this.multa_form + this.juros_form;
+
+      this.multa_fixa_form = this.multa_fixa;
+      this.multa_aplicada_form = this.multa_fixa_form;
+
 
 
     }    
@@ -336,10 +341,100 @@ export class SimuladorCobrancaComponent implements OnInit {
   }
 
   gerarExtrato() {
-    const dialogRef = this.dialog.open(ExtratoComponent, {
-      width: '50em',
-      height: '40em'
-    });
+    const moment = require('moment');
+    var arquivo = "79622690 - " + moment(new Date()).format('YYYYMMDD_HHmmss') + ".pdf"
+    var mensagem = "Extrato gerado em " + moment(new Date()).format('DD/MM/YYYY') + " às " + moment(new Date()).format('HH:mm:ss');
+
+    var doc = new jsPDF();
+
+    doc.addImage("../../../assets/img/revendedora-natura-cadastro.png", "PNG", 50, 2, 90, 20);
+    doc.setFontSize(12);
+
+    doc.setLineWidth(0.5);
+    doc.line(20, 28, 185, 28);
+
+    doc.setLineWidth(0.5);
+    doc.line(20, 28, 20, 96);
+
+    doc.setLineWidth(0.5);
+    doc.line(20, 96, 185, 96);
+
+    doc.setLineWidth(0.5);
+    doc.line(185, 28, 185, 96);
+
+
+    doc.setTextColor(255,87,34);
+    doc.text("Código CN", 25, 40);
+    doc.setTextColor(100);
+    doc.text("79622690", 158, 40);
+
+    doc.setTextColor(255,87,34);
+    doc.text("Condição de Pagamento", 25, 50);
+    doc.setTextColor(100);
+    doc.text("Parcelado", 158, 50);
+    
+    doc.setTextColor(255,87,34);
+    doc.text("Parcelas", 25, 60);
+    doc.setTextColor(100);
+    doc.text("4", 158, 60);
+    
+    doc.setTextColor(255,87,34);
+    doc.text("Valor Parcela", 25, 70);
+    doc.setTextColor(100);
+    doc.text("R$ 556,26", 158, 70);
+    
+    doc.setTextColor(255,87,34);
+    doc.text("Data de Pagamento", 25, 80);
+    doc.setTextColor(100);
+    doc.text("22/12/2022", 158, 80);
+    
+    doc.setTextColor(255,87,34);
+    doc.text("Alçada de Negociação", 25, 90);
+    doc.setTextColor(100);
+    doc.text("0,26%", 158, 90);
+
+
+    var data = [
+      {
+      titulo: "1608613138",
+      item: "3",
+      valor: "R$ 669,66",
+      data_vencimento: "16/11/2022",
+      atraso: "25"
+    },
+    {
+      titulo: "1610666004",
+      item: "3",
+      valor: "R$ 708,91",
+      data_vencimento: "28/11/2022",
+      atraso: "13"
+    },
+    {
+      titulo: "1612094883",
+      item: "2",
+      valor: "R$ 500,90",
+      data_vencimento: "29/11/2022",
+      atraso: "12"
+    }
+   
+  ];
+
+  var headers = [
+    "titulo",
+    "item",
+    "valor",
+    "data_vencimento",
+    "atraso"
+  ];
+  
+
+  doc.table(40, 110, data, headers, { autoSize: true });
+
+  doc.setTextColor(0, 0, 0);
+  doc.setFontSize(10);
+  doc.text(mensagem, 20, 280);
+
+  doc.save(arquivo)
 
   }
 
