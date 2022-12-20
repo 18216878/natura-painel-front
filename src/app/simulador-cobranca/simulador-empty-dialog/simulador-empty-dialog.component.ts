@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CondicaoNegociacaoComponent } from '../condicao-negociacao/condicao-negociacao.component';
 
 @Component({
   selector: 'app-simulador-empty-dialog',
@@ -9,7 +10,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class SimuladorEmptyDialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<SimuladorEmptyDialogComponent>,
+    public dialogRef: MatDialogRef<CondicaoNegociacaoComponent>,
   ) { }
 
   ngOnInit(): void {

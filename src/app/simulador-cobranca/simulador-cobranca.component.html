@@ -19,25 +19,86 @@
 
       <div class="simulador">
         <div class="left-panel">
-            <mat-card class="example-card">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title class="titulo-form">Dados Gerais</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="formularioDadosIniciais" class="example-form">
+              <p class="start">
+                <mat-form-field class="insert-row" appearance="fill" color="accent">
+                  <mat-label>Código CN</mat-label>
+                  <input
+                  matInput
+                  ngDefaultControl
+                  placeholder="Digite o Código da CN"
+                  formControlName="cod_cn_form"
+                  [(ngModel)]="cod_cn_form"
+                  >
+                  <mat-icon matSuffix>check_circle</mat-icon>
+                  <mat-hint>Código CN</mat-hint>
+                </mat-form-field>
+  
+                <mat-form-field class="insert-row" appearance="fill" color="accent">
+                <mat-label>Data Pagamento</mat-label>
+                    <input
+                    matInput
+                    [matDatepickerFilter]="myFilter"
+                    [readonly]="true"
+                    [matDatepicker]="pagamento"
+                    ngDefaultControl
+                    formControlName="data_pagamento"
+                    [(ngModel)]="data_pagamento"
+                    (dateChange)="calcularAtraso()"
+                    >
+                    <mat-hint>Selecione a Data</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="pagamento"></mat-datepicker-toggle>
+                    <mat-datepicker #pagamento></mat-datepicker>
+                  </mat-form-field>
+                  
+                  <mat-form-field appearance="fill" class="insert-row"  color="accent">
+                    <mat-label>Tipo Negociação</mat-label>
+                    <mat-select
+                      disableRipple
+                      ngDefaultControl
+                      formControlName="condicao_pagamento"
+                      [(ngModel)]="condicao_pagamento"
+                      >
+                      <mat-option [value]="'A Vista'">A Vista</mat-option>
+                      <mat-option [value]="'Parcelado'">Parcelado</mat-option>
+                    </mat-select>
+                    <mat-icon matPrefix>credit_card</mat-icon>
+                    <mat-hint>Selecione uma opção</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" class="insert-row"  color="accent" >
+                    <mat-label>Parcelas</mat-label>
+                    <mat-select
+                      disableRipple
+                      [disabled]="condicao_pagamento!=='Parcelado'"
+                      ngDefaultControl
+                      formControlName="parcelas"
+                      [(ngModel)]="parcelas">
+                      <mat-option [value]="1">1</mat-option>
+                      <mat-option [value]="2">2</mat-option>
+                      <mat-option [value]="3">3</mat-option>
+                      <mat-option [value]="4">4</mat-option>
+                      <mat-option [value]="5">5</mat-option>
+                    </mat-select>
+                    <mat-icon matPrefix>credit_card</mat-icon>
+                    <mat-hint>Selecione uma opção</mat-hint>
+                  </mat-form-field>
+              </p>
+            </form>
+
+          </mat-card>
+            
+          <mat-card class="example-card">
               <mat-card-header>
-                <mat-card-title class="titulo-form">Insira os dados para a simulação</mat-card-title>
+                <mat-card-title class="titulo-form">Insira os títulos para a simulação</mat-card-title>
               </mat-card-header>
                 <form [formGroup]="formularioSimuladorCobranca" class="example-form">
                     <p class="start">
-                        <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                          <mat-label>Código CN</mat-label>
-                          <input
-                          matInput
-                          ngDefaultControl
-                          placeholder="Digite o Código da CN"
-                          formControlName="cod_cn_form"
-                          [(ngModel)]="cod_cn_form"
-                          >
-                          <mat-icon matSuffix>check_circle</mat-icon>
-                          <mat-hint>Código CN</mat-hint>
-                        </mat-form-field>
-            
+                        
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
                           <mat-label>Título</mat-label>
                           <input
@@ -61,12 +122,9 @@
                           [(ngModel)]="item_form"
                           >
                           <mat-icon matSuffix>fingerprint</mat-icon>
-                          <mat-hint>Usuario ID</mat-hint>
+                          <mat-hint>Nº do Item</mat-hint>
                         </mat-form-field>
-                        
-                      </p>
-    
-                      <p class="start">
+
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
                           <mat-label>Valor</mat-label>
                           <input
@@ -78,11 +136,16 @@
                           [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                           >
                           <mat-icon matSuffix>attach_money</mat-icon>
-                          <mat-hint>Canal</mat-hint>
+                          <mat-hint>Valor</mat-hint>
                         </mat-form-field>
-            
+                        
+                      </p>
+                      
+
+                      <p class="start">
+
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                          <mat-label>Data de Vencimento</mat-label>
+                          <mat-label>Data Vencimento</mat-label>
                           <input
                           matInput
                           [readonly]="true"
@@ -97,7 +160,7 @@
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
-            
+
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
                           <mat-label>Atraso</mat-label>
                           <input
@@ -110,11 +173,6 @@
                           <mat-icon matSuffix>access_time</mat-icon>
                           <mat-hint>Dias de Atraso</mat-hint>
                         </mat-form-field>
-                        
-                      </p>
-                      
-
-                      <p class="start">
                         <mat-form-field class="mopMatricula" appearance="fill" color="accent">
                           <mat-label>Multa</mat-label>
                           <input
@@ -128,36 +186,6 @@
                           >
                           <mat-icon matSuffix>attach_money</mat-icon>
                           <mat-hint>Multa</mat-hint>
-                        </mat-form-field>
-            
-                        <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                          <mat-label>Juros</mat-label>
-                          <input
-                          matInput
-                          ngDefaultControl
-                          [readonly]="true"
-                          formControlName="juros_form"
-                          [(ngModel)]="juros_form"
-                          currencyMask
-                          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                          >
-                          <mat-icon matSuffix>attach_money</mat-icon>
-                          <mat-hint>Juros</mat-hint>
-                        </mat-form-field>
-            
-                        <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                          <mat-label>Valor Atualizado</mat-label>
-                          <input
-                          matInput
-                          ngDefaultControl
-                          [readonly]="true"
-                          formControlName="valor_atualizado_form"
-                          [(ngModel)]="valor_atualizado_form"
-                          currencyMask
-                          [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                          >
-                          <mat-icon matSuffix>attach_money</mat-icon>
-                          <mat-hint>Valor Atualizado</mat-hint>
                         </mat-form-field>
                         
                       </p>
@@ -264,55 +292,7 @@
               <mat-card-title>Condições do Acordo</mat-card-title>
               <mat-card-subtitle>Dados Gerais</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
-              
-                <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-                  <mat-label>Data de Pagamento</mat-label>
-                  <input
-                  matInput
-                  [matDatepickerFilter]="myFilter"
-                  [readonly]="true"
-                  [matDatepicker]="pagamento"
-                  ngDefaultControl
-                  formControlName="data_pagamento"
-                  [(ngModel)]="data_pagamento"
-                  (dateChange)="calcularAtraso()"
-                  >
-                  <mat-hint>Selecione a Data</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="pagamento"></mat-datepicker-toggle>
-                  <mat-datepicker #pagamento></mat-datepicker>
-                </mat-form-field>
-                
-                <mat-form-field
-                    appearance="fill" class="mopMatricula"  color="accent">
-                  <mat-label>Condição de Negociação</mat-label>
-                  <mat-select
-                    disableRipple
-                    ngDefaultControl
-                    formControlName="condicao_pagamento"
-                    [(ngModel)]="condicao_pagamento"
-                    (selectionChange)="calcularMulta()">
-                    <mat-option [value]="'A Vista'">A Vista</mat-option>
-                    <mat-option [value]="'Parcelado'">Parcelado</mat-option>
-                  </mat-select>
-                  <mat-icon matPrefix>credit_card</mat-icon>
-                  <mat-hint>Selecione uma opção</mat-hint>
-                </mat-form-field>
-
-                <mat-form-field *ngIf="condicao_pagamento==='Parcelado'" appearance="fill" class="mopMatricula"  color="accent">
-                  <mat-label>Parcelas</mat-label>
-                  <mat-select disableRipple ngDefaultControl formControlName="parcelas" [(ngModel)]="parcelas">
-                    <mat-option [value]="1">1</mat-option>
-                    <mat-option [value]="2">2</mat-option>
-                    <mat-option [value]="3">3</mat-option>
-                    <mat-option [value]="4">4</mat-option>
-                    <mat-option [value]="5">5</mat-option>
-                  </mat-select>
-                  <mat-icon matPrefix>credit_card</mat-icon>
-                  <mat-hint>Selecione uma opção</mat-hint>
-                </mat-form-field>
-
-                <p class="space"></p>
+            <mat-card-content>                  
                 <div class="parcelas">
                   <h5 class="parcelamento" color="accent">Valor Original</h5>
                   <h5>💵 {{valor_original | currency: 'BRL'}}</h5>

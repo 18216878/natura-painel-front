@@ -49,6 +49,10 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { HttpClientModule } from '@angular/common/http';
 import { SimuladorEmptyDialogComponent } from './simulador-cobranca/simulador-empty-dialog/simulador-empty-dialog.component';
 import { AlcadaAcordoDiferenciadoComponent } from './simulador-cobranca/alcada-acordo-diferenciado/alcada-acordo-diferenciado.component';
+import { CondicaoNegociacaoComponent } from './simulador-cobranca/condicao-negociacao/condicao-negociacao.component';
+import { QuatroParcelasComponent } from './simulador-cobranca/quatro-parcelas/quatro-parcelas.component';
+import { CincoParcelasComponent } from './simulador-cobranca/cinco-parcelas/cinco-parcelas.component';
+import { SelecionarParcelasComponent } from './simulador-cobranca/selecionar-parcelas/selecionar-parcelas.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +73,11 @@ import { AlcadaAcordoDiferenciadoComponent } from './simulador-cobranca/alcada-a
     DynamicsHistoricoComponent,
     SimuladorCobrancaComponent,
     SimuladorEmptyDialogComponent,
-    AlcadaAcordoDiferenciadoComponent
+    AlcadaAcordoDiferenciadoComponent,
+    CondicaoNegociacaoComponent,
+    QuatroParcelasComponent,
+    CincoParcelasComponent,
+    SelecionarParcelasComponent
   ],
   imports: [
     BrowserModule,
