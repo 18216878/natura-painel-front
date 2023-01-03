@@ -87,7 +87,8 @@
                     <mat-icon matPrefix>credit_card</mat-icon>
                     <mat-hint>Selecione uma opção</mat-hint>
                   </mat-form-field>
-              </p>
+
+                </p>
             </form>
 
           </mat-card>
@@ -335,8 +336,6 @@
                     <mat-icon>cloud_download</mat-icon>
                   </button>
 
-
-
                 </div>
                   
 
@@ -351,44 +350,60 @@
               <mat-card-subtitle>Dados Gerais</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <div>
-                <h5 class="parcelamento" color="accent">Parcela 1 ou A Vista</h5>
+              <div *ngIf="condicao_pagamento==='A Vista'">
+                <h5 class="parcelamento" color="accent">A Vista</h5>
                 <div class="parcelas">
-                  <h5>📅 14/12/2022</h5>
-                  <h5>💵 R$ 550,35</h5>
-                  <h5>🔺 R$ 77,35</h5>
+                  <h5>📅 {{data_pagamento_a_vista | date: 'dd/MM/yyyy'}}</h5>
+                  <h5>💵 {{valor_a_vista | currency: 'BRL'}}</h5>
+                  <h5>🔺 {{juros_a_vista | currency: 'BRL'}}</h5>
                 </div>
               </div>
-              <div *ngIf="parcelas>=2">
-                <h5 class="parcelamento" color="accent">Parcela 2</h5>
-                <div class="parcelas">
-                  <h5>📅 14/12/2022</h5>
-                  <h5>💵 R$ 550,35</h5>
-                  <h5>🔺 R$ 77,35</h5>
+              <div *ngIf="condicao_pagamento==='Parcelado'">
+                <div *ngIf="parcelas>=1">
+                  <div class="parcelas">
+                    <h5 class="parcelamento" color="accent">Parcela Sem Encargo</h5>
+                    <h5>💵 {{parcela_sem_encargo | currency: 'BRL'}}</h5>
+                  </div>
                 </div>
-              </div>
-              <div *ngIf="parcelas>=3">
-                <h5 class="parcelamento" color="accent">Parcela 3</h5>
-                <div class="parcelas">
-                  <h5>📅 14/12/2022</h5>
-                  <h5>💵 R$ 550,35</h5>
-                  <h5>🔺 R$ 77,35</h5>
+                <div *ngIf="parcelas>=1">
+                  <h5 class="parcelamento" color="accent">Parcela 1</h5>
+                  <div class="parcelas">
+                    <h5>📅 {{data_pagamento_parcela1 | date: 'dd/MM/yyyy'}}</h5>
+                    <h5>💵 {{valor_parcela1 | currency: 'BRL'}}</h5>
+                    <h5>🔺 {{juros_parcela1 | currency: 'BRL'}}</h5>
+                  </div>
                 </div>
-              </div>
-              <div *ngIf="parcelas>=4">
-                <h5 class="parcelamento" color="accent">Parcela 4</h5>
-                <div class="parcelas">
-                  <h5>📅 14/12/2022</h5>
-                  <h5>💵 R$ 550,35</h5>
-                  <h5>🔺 R$ 77,35</h5>
+                <div *ngIf="parcelas>=2">
+                  <h5 class="parcelamento" color="accent">Parcela 2</h5>
+                  <div class="parcelas">
+                    <h5>📅 {{data_pagamento_parcela2 | date: 'dd/MM/yyyy'}}</h5>
+                    <h5>💵 {{valor_parcela2 | currency: 'BRL'}}</h5>
+                    <h5>🔺 {{juros_parcela2 | currency: 'BRL'}}</h5>
+                  </div>
                 </div>
-              </div>
-              <div *ngIf="parcelas>=5">
-                <h5 class="parcelamento" color="accent">Parcela 5</h5>
-                <div class="parcelas">
-                  <h5>📅 14/12/2022</h5>
-                  <h5>💵 R$ 550,35</h5>
-                  <h5>🔺 R$ 77,35</h5>
+                <div *ngIf="parcelas>=3">
+                  <h5 class="parcelamento" color="accent">Parcela 3</h5>
+                  <div class="parcelas">
+                    <h5>📅 {{data_pagamento_parcela3 | date: 'dd/MM/yyyy'}}</h5>
+                    <h5>💵 {{valor_parcela3 | currency: 'BRL'}}</h5>
+                    <h5>🔺 {{juros_parcela3 | currency: 'BRL'}}</h5>
+                  </div>
+                </div>
+                <div *ngIf="parcelas>=4">
+                  <h5 class="parcelamento" color="accent">Parcela 4</h5>
+                  <div class="parcelas">
+                    <h5>📅 {{data_pagamento_parcela4 | date: 'dd/MM/yyyy'}}</h5>
+                    <h5>💵 {{valor_parcela4 | currency: 'BRL'}}</h5>
+                    <h5>🔺 {{juros_parcela4 | currency: 'BRL'}}</h5>
+                  </div>
+                </div>
+                <div *ngIf="parcelas>=5">
+                  <h5 class="parcelamento" color="accent">Parcela 5</h5>
+                  <div class="parcelas">
+                    <h5>📅 {{data_pagamento_parcela5 | date: 'dd/MM/yyyy'}}</h5>
+                    <h5>💵 {{valor_parcela5 | currency: 'BRL'}}</h5>
+                    <h5>🔺 {{juros_parcela5 | currency: 'BRL'}}</h5>
+                  </div>
                 </div>
               </div>
               

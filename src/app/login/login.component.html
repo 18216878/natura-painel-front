@@ -33,7 +33,8 @@
                 
                 <mat-card-actions>
                     <p class="suporteInput">
-                        <button (click)="logon(senha, user)" mat-raised-button color="accent">Login</button>
+                        <button *ngIf="carregando===false" (click)="logon(senha, user)" mat-raised-button color="accent">Login</button>
+                        <mat-spinner [diameter]="40" color="accent" *ngIf="carregando===true"></mat-spinner>
                     </p>
                 </mat-card-actions>
                 </mat-card>

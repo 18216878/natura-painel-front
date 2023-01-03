@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   public formulario: FormGroup;
   public senha: string = '';
   public user: string;
+  public carregando: Boolean;
 
   private storage: Storage;
 
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.clear();
+    this.carregando = false;
 
 
     this.formulario = this.formBuilder.group({
@@ -58,25 +60,30 @@ export class LoginComponent implements OnInit {
 
   logon(senha : string, user: string) {
 
+    this.carregando = true;
     var encrypt = Md5.hashStr(senha);   
-
+    
     if (user.length > 0) {      
       this.painelService.getUser(user).subscribe(
         data => {
           this.dataSource = data;
           if(this.dataSource.length == 0){
             this.openDialog();
+            this.carregando = false;
           }
           else if(this.dataSource[0].password == encrypt){
             this.accountService.set('user', user);
             this.accountService.set('id', this.dataSource[0].id.toString());
             var logado = this.isLoggedIn();
+            this.carregando = false;
             if (logado == true) {
+              this.carregando = false;
               this.router.navigate(['../home'])
             }
           }
           else {
             this.openDialog();
+            this.carregando = false;
           }
 
         }
@@ -85,7 +92,9 @@ export class LoginComponent implements OnInit {
     }
     else if (user.length == 0 || senha.length == 0) {
       this.openDialog();
+      this.carregando = false;
     }
+
 
   }
 

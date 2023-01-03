@@ -13,6 +13,12 @@ import { QuatroParcelasComponent } from './quatro-parcelas/quatro-parcelas.compo
 import { CincoParcelasComponent } from './cinco-parcelas/cinco-parcelas.component';
 import { SelecionarParcelasComponent } from './selecionar-parcelas/selecionar-parcelas.component';
 
+export interface IFeriados {
+  feriado: Date;
+}
+
+var iFeriados: IFeriados[];
+
 @Component({
   selector: 'app-simulador-cobranca',
   templateUrl: './simulador-cobranca.component.html',
@@ -34,7 +40,10 @@ export class SimuladorCobrancaComponent implements OnInit {
     const data = new Date();
     const day = new Date(data.getFullYear(), data.getMonth(), data.getDate());
     const semana = (d || new Date()).getDay();
-    return d < day && semana !== 0 && semana !== 6;
+        
+    const duration = moment(data).add(-187, 'days');
+ 
+    return d < day && d >= duration && semana !== 0 && semana !== 6;
   };
 
   displayedColumns: string[] = [
@@ -83,6 +92,7 @@ export class SimuladorCobrancaComponent implements OnInit {
   multa_form: number;
   juros_form: number;
   valor_atualizado_form: number;
+  valor_corrigido: number = 0;
 
   dados_adicionados: number = 0;
 
@@ -100,7 +110,40 @@ export class SimuladorCobrancaComponent implements OnInit {
   total_juros_atraso: number;
   total_juros_parcelas: number;
 
+  aux: any;
+  fer: any;
+  dia: any;
+  vct: any;
+  dia_semana: any;
+  aux_date: any;
+
   multa_fixa: number = 0.0233;
+
+  parcela_sem_encargo: number;
+  valor_a_vista: number = 0;
+  valor_parcela1: number = 0;
+  valor_parcela2: number = 0;
+  valor_parcela3: number = 0;
+  valor_parcela4: number = 0;
+  valor_parcela5: number = 0;
+
+  juros_a_vista: number = 0;
+  juros_parcela1: number = 0;
+  juros_parcela2: number = 0;
+  juros_parcela3: number = 0;
+  juros_parcela4: number = 0;
+  juros_parcela5: number = 0;
+
+  data_pagamento_a_vista: Date;
+  data_pagamento_parcela1: Date;
+  data_pagamento_parcela2: Date;
+  data_pagamento_parcela3: Date;
+  data_pagamento_parcela4: Date;
+  data_pagamento_parcela5: Date;
+
+  data_vencimento_inicial: Date;
+
+  feriados = iFeriados;
   
   public title: string = "Simulador Cobrança";
 
@@ -140,6 +183,12 @@ export class SimuladorCobrancaComponent implements OnInit {
       total_juros_parcelas:['']
    
     })
+
+    this.painelService.getFeriados().subscribe(
+      data => {
+        this.feriados = data
+      }
+    )  
 
   }
 
@@ -315,12 +364,28 @@ export class SimuladorCobrancaComponent implements OnInit {
     this.formularioSimuladorCobranca.reset();
     this.formularioLateral.reset();
     this.formularioDadosIniciais.reset();
+    this.valor_original = 0;
+    this.debito_atualizado = 0;
+    this.juros_mes_aplicado = undefined;
+    this.juros_dia_aplicado = undefined;
+    this.multa_fixa_form = undefined;
+    this.multa_aplicada_form = undefined;
+    this.total_multa = undefined;
+    this.valor_parcela1 = 0;
+    this.valor_parcela2 = 0;
+    this.valor_parcela3 = 0;
+    this.valor_parcela4 = 0;
+    this.valor_parcela5 = 0;
+    this.juros_parcela1 = 0;
+    this.juros_parcela2 = 0;
+    this.juros_parcela3 = 0;
+    this.juros_parcela4 = 0;
+    this.juros_parcela5 = 0;
+    this.parcela_sem_encargo = 0;
+    this.valor_corrigido = 0;
     this.limparTabela();
   }
 
-  geraExtrato(){
-
-  }
 
   
   simularAcordo(){
@@ -390,7 +455,8 @@ export class SimuladorCobrancaComponent implements OnInit {
           this.juros_mes_aplicado = 0;
         }
       }
-      
+    
+
       this.juros_dia_aplicado = this.juros_mes_aplicado / 30
 
       this.dataSource.map(
@@ -401,9 +467,199 @@ export class SimuladorCobrancaComponent implements OnInit {
         }
       )
       
+      const moment = require('moment');
 
-      
+      if (this.condicao_pagamento === 'A Vista'){
+        this.parcela_sem_encargo = this.valor_original;
+        this.data_pagamento_a_vista = this.data_pagamento;
+        this.valor_a_vista = this.valor_original;
+        this.juros_a_vista = this.debito_atualizado - this.valor_original;
+      }
 
+      if (this.condicao_pagamento === 'Parcelado'){
+        this.parcela_sem_encargo = this.valor_original / this.parcelas;
+        this.data_pagamento_parcela1 = this.data_pagamento;
+        this.valor_parcela1 = this.debito_atualizado / this.parcelas;
+
+        var now = moment(this.data_pagamento_parcela1);
+        var past = this.data_pagamento;
+        this.juros_parcela1 = this.parcela_sem_encargo * this.juros_mes_aplicado * 0;
+
+
+      if(this.parcelas >=2){
+        this.data_pagamento_parcela2 = this.calculaDataParcela(this.data_pagamento_parcela1, 29);
+        this.valor_parcela2 = this.valor_parcela1;
+
+        var now = moment(this.data_pagamento_parcela2);
+        var auxPast = moment(this.data_pagamento);
+        var past = new Date(auxPast.year(), auxPast.month(), auxPast.date());
+        var duration = moment.duration(now.diff(past));
+        var days = duration.asDays();
+        this.juros_parcela2 = this.parcela_sem_encargo * this.juros_mes_aplicado * days;
+      }
+
+      if(this.parcelas >=3){
+        this.data_pagamento_parcela3 = this.calculaDataParcela(this.data_pagamento_parcela2, 29);
+        this.valor_parcela3 = this.valor_parcela1;
+
+        var now = moment(this.data_pagamento_parcela3);
+        var auxPast = moment(this.data_pagamento);
+        var past = new Date(auxPast.year(), auxPast.month(), auxPast.date());
+        var duration = moment.duration(now.diff(past));
+        var days = duration.asDays();
+        this.juros_parcela3 = this.parcela_sem_encargo * this.juros_mes_aplicado * days;
+      }
+
+      if(this.parcelas >=4){
+        this.data_pagamento_parcela4 = this.calculaDataParcela(this.data_pagamento_parcela3, 29);
+        this.valor_parcela4 = this.valor_parcela1;
+
+        var now = moment(this.data_pagamento_parcela4);
+        var auxPast = moment(this.data_pagamento);
+        var past = new Date(auxPast.year(), auxPast.month(), auxPast.date());
+        var duration = moment.duration(now.diff(past));
+        var days = duration.asDays();
+        this.juros_parcela4 = this.parcela_sem_encargo * this.juros_mes_aplicado * days;
+      }
+
+      if(this.parcelas >=5){
+        this.data_pagamento_parcela5 = this.calculaDataParcela(this.data_pagamento_parcela4, 29);
+        this.valor_parcela5 = this.valor_parcela1;
+
+        var now = moment(this.data_pagamento_parcela5);
+        var auxPast = moment(this.data_pagamento);
+        var past = new Date(auxPast.year(), auxPast.month(), auxPast.date());
+        var duration = moment.duration(now.diff(past));
+        var days = duration.asDays();
+        this.juros_parcela5 = this.parcela_sem_encargo * this.juros_mes_aplicado * days;
+      }
+
+      this.valor_corrigido =
+        this.valor_parcela1 +
+        this.valor_parcela2 +
+        this.valor_parcela3 +
+        this.valor_parcela4 +
+        this.valor_parcela5 +
+        this.juros_parcela1 +
+        this.juros_parcela2 +
+        this.juros_parcela3 +
+        this.juros_parcela4 +
+        this.juros_parcela5
+
+      }
+
+      this.valor_parcela1 = this.valor_corrigido / this.parcelas;
+      if(this.parcelas >=2){
+        this.valor_parcela2 = this.valor_corrigido / this.parcelas;
+      }
+      if(this.parcelas >=3){
+        this.valor_parcela3 = this.valor_corrigido / this.parcelas;
+      }
+      if(this.parcelas >=4){
+        this.valor_parcela4 = this.valor_corrigido / this.parcelas;
+      }
+      if(this.parcelas >=5){
+        this.valor_parcela5 = this.valor_corrigido / this.parcelas;
+      }      
+
+    }
+
+  }
+
+  calculaDataParcela(dataInicial: Date, totalDias: number): Date{
+    
+    const moment = require('moment');
+    var tempo_total = moment(dataInicial).add(totalDias, 'days');
+    
+    this.data_vencimento_inicial = new Date(tempo_total.year(), tempo_total.month(), tempo_total.date());
+    
+    var dataFinal = this.calculaFeriado(dataInicial, this.data_vencimento_inicial);
+
+    dataFinal = this.calculaSabado(dataFinal);
+    dataFinal = this.calculaDomingo(dataFinal);
+    this.data_vencimento_inicial = dataFinal;
+    return this.data_vencimento_inicial;
+        
+  }
+
+  calculaFeriado(dataInicial: Date, dataFinal: Date): Date{
+
+    const moment = require('moment');
+
+    moment.updateLocale('pt-BR', {
+      parentLocale: 'pt',
+      /* */
+    });
+
+    var itens = [];
+    this.feriados.forEach(
+      f => {
+        itens.push(f.feriado)
+      }
+    )
+
+    var i = 0;
+    for (var item of itens){
+      i++;
+      var auxItem = moment(item);
+      var auxDtIni = moment(dataInicial);
+      var auxDtFim = moment(dataFinal);
+      var newItem = new Date(auxItem.year(), auxItem.month(), auxItem.date());
+      var newDtIni = new Date(auxDtIni.year(), auxDtIni.month(), auxDtIni.date());
+      var newDtFim = new Date(auxDtFim.year(), auxDtFim.month(), auxDtFim.date());
+      var j = auxItem >= auxDtIni && auxItem <= auxDtFim;
+
+      if (j === true){
+        const resultado = auxDtFim.add(1, 'days');
+        dataFinal = new Date(resultado.year(), resultado.month(), resultado.date());
+        if(i >= itens.length){
+          return dataFinal;
+        }
+      }
+    }
+    
+    return dataFinal;
+  
+  }
+
+  calculaSabado(sabado: Date): Date{
+    var dataAjustada;
+    const moment = require('moment');
+
+    moment.updateLocale('pt-BR', {
+      parentLocale: 'pt',
+      /* */
+    });
+
+    if (moment(sabado).weekday() === 6){
+      this.aux_date = moment(sabado).add(2, 'days');
+      dataAjustada = new Date(this.aux_date.year(), this.aux_date.month(), this.aux_date.date());
+      return dataAjustada;
+    }
+    else {
+      dataAjustada = sabado;
+      return dataAjustada;
+    }
+
+  }
+
+  calculaDomingo(domingo: Date): Date{
+    var dataAjustada;
+    const moment = require('moment');
+
+    moment.updateLocale('pt-BR', {
+      parentLocale: 'pt',
+      /* */
+    });
+
+    if (moment(domingo).weekday() === 0){
+      this.aux_date = moment(domingo).add(1, 'days');
+      dataAjustada = new Date(this.aux_date.year(), this.aux_date.month(), this.aux_date.date());
+      return dataAjustada;
+    }
+    else {
+      dataAjustada = domingo;
+      return dataAjustada;
     }
 
   }
@@ -444,12 +700,24 @@ export class SimuladorCobrancaComponent implements OnInit {
     doc.setTextColor(255,87,34);
     doc.text("Parcelas", 25, 60);
     doc.setTextColor(100);
-    doc.text(this.parcelas.toString(), 158, 60);
+    if(this.condicao_pagamento === 'A Vista'){
+      doc.text("1", 158, 60);
+      doc.setTextColor(255,87,34);
+      doc.text("Valor A Vista", 25, 70);
+      doc.setTextColor(100);
+      var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valor_a_vista);
+      doc.text(vlr, 158, 70);
+    }
+    else{
+      doc.text(this.parcelas.toString(), 158, 60);
+      doc.setTextColor(255,87,34);
+      doc.text("Valor Parcela", 25, 70);
+      doc.setTextColor(100);
+      var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valor_parcela1);
+      doc.text(vlr, 158, 70);
+    }
     
-    doc.setTextColor(255,87,34);
-    doc.text("Valor Parcela", 25, 70);
-    doc.setTextColor(100);
-    doc.text("R$ 556,26", 158, 70);
+    
     
     doc.setTextColor(255,87,34);
     doc.text("Data de Pagamento", 25, 80);
@@ -503,5 +771,7 @@ export class SimuladorCobrancaComponent implements OnInit {
   doc.save(arquivo)
 
   }
+
+  
 
 }

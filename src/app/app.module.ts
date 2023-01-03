@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskModule } from 'ngx-mask';
+
 
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -53,6 +54,7 @@ import { CondicaoNegociacaoComponent } from './simulador-cobranca/condicao-negoc
 import { QuatroParcelasComponent } from './simulador-cobranca/quatro-parcelas/quatro-parcelas.component';
 import { CincoParcelasComponent } from './simulador-cobranca/cinco-parcelas/cinco-parcelas.component';
 import { SelecionarParcelasComponent } from './simulador-cobranca/selecionar-parcelas/selecionar-parcelas.component';
+
 
 @NgModule({
   declarations: [
