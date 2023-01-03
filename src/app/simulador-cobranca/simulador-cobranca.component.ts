@@ -671,104 +671,124 @@ export class SimuladorCobrancaComponent implements OnInit {
 
     var doc = new jsPDF();
 
-    doc.addImage("../../../assets/img/revendedora-natura-cadastro.png", "PNG", 50, 2, 90, 20);
-    doc.setFontSize(12);
-
-    doc.setLineWidth(0.5);
-    doc.line(20, 28, 185, 28);
-
-    doc.setLineWidth(0.5);
-    doc.line(20, 28, 20, 96);
-
-    doc.setLineWidth(0.5);
-    doc.line(20, 96, 185, 96);
-
-    doc.setLineWidth(0.5);
-    doc.line(185, 28, 185, 96);
+    var myImage = new Image();
+    var codigoCn = this.cod_cn_form.toString();
+    var condicaoPagamento = this.condicao_pagamento;
+    var valorAVista = this.valor_a_vista;
+    var parcelasPag = this.parcelas.toString();
+    var valorParcela = this.valor_parcela1;
+    var dataPagamento = moment(this.data_pagamento).format('DD/MM/YYYY');
+    var jursMesAplicado = this.juros_mes_aplicado;
+    var dataSourceMap = this.dataSource;
 
 
-    doc.setTextColor(255,87,34);
-    doc.text("Código CN", 25, 40);
-    doc.setTextColor(100);
-    doc.text(this.cod_cn_form.toString(), 158, 40);
+    // myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
+    myImage.src = '../../../assets/img/revendedora-natura-cadastro.png';
 
-    doc.setTextColor(255,87,34);
-    doc.text("Condição de Pagamento", 25, 50);
-    doc.setTextColor(100);
-    doc.text(this.condicao_pagamento, 158, 50);
-    
-    doc.setTextColor(255,87,34);
-    doc.text("Parcelas", 25, 60);
-    doc.setTextColor(100);
-    if(this.condicao_pagamento === 'A Vista'){
-      doc.text("1", 158, 60);
-      doc.setTextColor(255,87,34);
-      doc.text("Valor A Vista", 25, 70);
-      doc.setTextColor(100);
-      var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valor_a_vista);
-      doc.text(vlr, 158, 70);
-    }
-    else{
-      doc.text(this.parcelas.toString(), 158, 60);
-      doc.setTextColor(255,87,34);
-      doc.text("Valor Parcela", 25, 70);
-      doc.setTextColor(100);
-      var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valor_parcela1);
-      doc.text(vlr, 158, 70);
-    }
-    
-    
-    
-    doc.setTextColor(255,87,34);
-    doc.text("Data de Pagamento", 25, 80);
-    doc.setTextColor(100);
-    
-    doc.text(moment(this.data_pagamento).format('DD/MM/YYYY'), 158, 80);
-    
-    doc.setTextColor(255,87,34);
-    doc.text("Alçada de Negociação", 25, 90);
-    doc.setTextColor(100);
-    const number = 0.7555;
+    myImage.onload = function(){
 
-    var juros_percent = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumSignificantDigits: 2,  maximumSignificantDigits: 2}).format(this.juros_mes_aplicado);
-    doc.text(juros_percent.toString(), 158, 90);
+      doc.addImage(myImage, "PNG", 50, 2, 90, 20);
+      // doc.addImage("../../../assets/img/revendedora-natura-cadastro.png", "PNG", 50, 2, 90, 20);
+      // doc.addImage("assets/img/revendedora-natura-cadastro.png", "PNG", 50, 2, 90, 20);
+      doc.setFontSize(12);
 
-    var data = [];
-
-    this.dataSource.map(
-      obj => {
-        var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(obj.valor);
-        var dt = new Intl.DateTimeFormat('pt-BR').format(obj.data_vencimento);
-        var d =
-          {
-            titulo: obj.titulo,
-            item: obj.item.toString(),
-            valor: vlr.toString(),
-            data_vencimento: dt,
-            atraso: obj.atraso.toString()
-          }
-
-          data.push(d);
-        
-      }
-    )
-
-  var headers = [
-    "titulo",
-    "item",
-    "valor",
-    "data_vencimento",
-    "atraso"
-  ];
+      doc.setLineWidth(0.5);
+      doc.line(20, 28, 185, 28);
   
+      doc.setLineWidth(0.5);
+      doc.line(20, 28, 20, 96);
+  
+      doc.setLineWidth(0.5);
+      doc.line(20, 96, 185, 96);
 
-  doc.table(40, 110, data, headers, { autoSize: true });
+      doc.setLineWidth(0.5);
+      doc.line(185, 28, 185, 96);
+  
+  
+      doc.setTextColor(255,87,34);
+      doc.text("Código CN", 25, 40);
+      doc.setTextColor(100);
+      doc.text(codigoCn, 158, 40);
+  
+      doc.setTextColor(255,87,34);
+      doc.text("Condição de Pagamento", 25, 50);
+      doc.setTextColor(100);
+      doc.text(condicaoPagamento, 158, 50);
 
-  doc.setTextColor(0, 0, 0);
-  doc.setFontSize(10);
-  doc.text(mensagem, 20, 280);
+      doc.setTextColor(255,87,34);
+      doc.text("Parcelas", 25, 60);
+      doc.setTextColor(100);
+      if(condicaoPagamento === 'A Vista'){
+        doc.text("1", 158, 60);
+        doc.setTextColor(255,87,34);
+        doc.text("Valor A Vista", 25, 70);
+        doc.setTextColor(100);
+        var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorAVista);
+        doc.text(vlr, 158, 70);
+      }
+      else{
+        doc.text(parcelasPag, 158, 60);
+        doc.setTextColor(255,87,34);
+        doc.text("Valor Parcela", 25, 70);
+        doc.setTextColor(100);
+        var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorParcela);
+        doc.text(vlr, 158, 70);
+      }
+      
+      
+      
+      doc.setTextColor(255,87,34);
+      doc.text("Data de Pagamento", 25, 80);
+      doc.setTextColor(100);
+      
+      doc.text(dataPagamento, 158, 80);
+      
+      doc.setTextColor(255,87,34);
+      doc.text("Alçada de Negociação", 25, 90);
+      doc.setTextColor(100);
+      const number = 0.7555;
+  
+      var juros_percent = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumSignificantDigits: 2,  maximumSignificantDigits: 2}).format(jursMesAplicado);
+      doc.text(juros_percent.toString(), 158, 90);
 
-  doc.save(arquivo)
+      var data = [];
+
+
+
+      dataSourceMap.map(
+        obj => {
+          var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(obj.valor);
+          var dt = new Intl.DateTimeFormat('pt-BR').format(obj.data_vencimento);
+          var d =
+            {
+              titulo: obj.titulo,
+              item: obj.item.toString(),
+              valor: vlr.toString(),
+              data_vencimento: dt,
+              atraso: obj.atraso.toString()
+            }
+  
+            data.push(d);
+          
+        }
+      )
+
+      var headers = [
+        "titulo",
+        "item",
+        "valor",
+        "data_vencimento",
+        "atraso"
+      ];
+      
+      doc.table(40, 110, data, headers, { autoSize: true });
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(10);
+      doc.text(mensagem, 20, 280);
+      doc.save(arquivo)
+
+    };
+
 
   }
 

@@ -12,7 +12,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $midias-primary: mat.define-palette(mat.$indigo-palette);
-$midias-accent: mat.define-palette(mat.$orange-palette, 800);
+$midias-accent: mat.define-palette(mat.$deep-orange-palette);
 $midias-warn: mat.define-palette(mat.$red-palette);
 $midias-typography: mat.define-typography-config($font-family:'"Montserrat",sans-serif');
 
