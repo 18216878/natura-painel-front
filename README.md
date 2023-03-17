@@ -1,7 +1,7 @@
 ![csu_natura](https://user-images.githubusercontent.com/96271597/225901721-96a25154-a785-4255-a964-2fc77f9effbc.png)
 
 
-# Projeto Painel Wave2
+# Projeto Painel Wave2 Front End
 
 Projeto de desenvolvimento de um Painel de Consulta para diversas situações, como:
 
@@ -16,8 +16,6 @@ Projeto de desenvolvimento de um Painel de Consulta para diversas situações, c
 <br>
 
 ## Tecnologias Utilizadas
-
-### Front End
 
 <div style="display: inline-block">
   <img align="center" alt="Hugo-Angular" height="40" width="40" src="https://github.com/18216878/18216878/blob/master/angularjs-original.svg?raw=true">
@@ -54,32 +52,18 @@ Projeto de desenvolvimento de um Painel de Consulta para diversas situações, c
 <br>
 
 
-### Back End
+### Serviços Back End
+
+#### Interno
 
 <div style="display: inline-block">
   <img align="center" alt="Hugo-CSharp" height="30" width="40" src="https://github.com/18216878/18216878/blob/master/csharp-original.svg?raw=true">
-  Linguagem de Programação C#
+  API Painel Wave 2
 </div>
 <br>
-<div style="display: inline-block">
-  <img align="center" alt="Hugo-DotNetCore" height="30" width="40" src="https://github.com/18216878/18216878/blob/master/dotnetcore-original.svg?raw=true">
-  .NET na versão 5.0 
-</div>
-<br/>
 
-<div style="display: inline-block">
-  <img align="center" alt="Hugo-Swagger" height="30" width="30" src="https://github.com/18216878/18216878/blob/master/swagger.png?raw=true">
-  Swagger API Development 
-</div>
-<br/>
 
-<div style="display: inline-block">
-  <img align="center" alt="Hugo-MySql" height="30" width="40" src="https://github.com/18216878/18216878/blob/master/mariadb-original.svg?raw=true">
-  Banco de Dados utilizado ➡️ MariaDB versão 5.5.52
-</div>
-<br/>
-
-### Serviços Externos
+#### Externo
 
 <div style="display: inline-block">
   <img align="center" alt="Hugo-Swagger" height="30" width="30" src="https://github.com/18216878/18216878/blob/master/dynamics-original.png?raw=true">
