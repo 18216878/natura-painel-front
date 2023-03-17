@@ -22,7 +22,26 @@
         <div class="pesquisar">
             <div class="search">
 
-                <mat-form-field class="codigoCn" appearance="fill" color="primary">
+
+                <mat-form-field
+                  appearance="fill"
+                  class="mopMatricula"
+                  color="primary">
+            
+                  <mat-label>Selecione o Item de Pesquisa</mat-label>
+                  <mat-select disableRipple ngDefaultControl
+                  formControlName="selecionado" [ngModel]="selecionado"
+                  (valueChange)="onSelectId($event)">
+                  <mat-option *ngFor="let id of identificadores" [value]="id">
+                    {{id}}</mat-option>
+                  </mat-select>
+                  <mat-icon matPrefix>search</mat-icon>  
+                  <mat-hint>Selecione uma opção</mat-hint>
+          
+                </mat-form-field>
+                
+                <mat-form-field *ngIf="selecionado==='Item Original'"
+                class="codigoCn" appearance="fill" color="primary">
                     <mat-label>Item Original</mat-label>
                     <input
                         matInput
@@ -32,7 +51,20 @@
                         [(ngModel)]="item_original">
                     <mat-icon matSuffix>account_circle</mat-icon>
                     <mat-hint>Item Original</mat-hint>
-                </mat-form-field>
+                  </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Item Substituto'"
+                class="codigoCn" appearance="fill" color="primary">
+                    <mat-label>Item Substituto</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Nº do Item Substituto"
+                        ngDefaultControl
+                        formControlName="item_substituto"
+                        [(ngModel)]="item_substituto">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Item Substituto</mat-hint>
+                  </mat-form-field>  
 
             </div>
 
@@ -52,12 +84,25 @@
                 </button>
 
                 <button
+                    *ngIf="selecionado==='Item Original'"
                     class="validar"
                     mat-raised-button
                     [disabled]="item_original === null || item_original ===
                     undefined ||
                     item_original === ''"
-                    (click)="pesquisar()"
+                    (click)="pesquisarIO()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                <button
+                    *ngIf="selecionado==='Item Substituto'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="item_substituto === null || item_substituto ===
+                    undefined ||
+                    item_substituto === ''"
+                    (click)="pesquisarIS()"
                     color="primary"
                     aria-label="Example icon button with a home icon">
                     <mat-icon>search</mat-icon> Pesquisar
@@ -72,35 +117,35 @@
             <mat-card class="card-width">
               <mat-card-content>
                 <p class="title-card">Tipo Estrutura</p>
-                <p>Aguardando...</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
                 <p class="title-card">Nome Estrutura</p>
-                <p>Aguardando...</p>       
+                <p>Clique eu uma linha da tabela para exibir.</p>       
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
                 <p class="title-card">Tipo Mensagem</p>
-                <p>Aguardando...</p> 
+                <p>Clique eu uma linha da tabela para exibir.</p> 
               </mat-card-content>
             </mat-card>
             
             <mat-card class="card-width">
               <mat-card-content>
                 <p class="title-card">Item Original</p>
-                <p>Aguardando...</p>  
+                <p>Clique eu uma linha da tabela para exibir.</p>  
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
                 <p class="title-card">Tipo Item Original</p>
-                <p>Aguardando...</p> 
+                <p>Clique eu uma linha da tabela para exibir.</p> 
               </mat-card-content>
             </mat-card>
             
@@ -109,14 +154,14 @@
             <mat-card class="card-width">
               <mat-card-content>
                 <p class="title-card">Item Substituto</p>
-                <p>Aguardando...</p>  
+                <p>Clique eu uma linha da tabela para exibir.</p>  
               </mat-card-content>
             </mat-card>
         
             <mat-card class="card-width">
               <mat-card-content>
                 <p class="title-card">Nome Composicao Item Substituto</p>
-                <p>Aguardando...</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
               </mat-card-content>
             </mat-card>
         

@@ -28,8 +28,12 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/cpf?cpf=${cpf}`)
   }
 
-  public getPlanosBeTrocas(item_original: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas?item_original=${item_original}`)
+  public getPlanosBeTrocasIO(item_original: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas/item-original?item_original=${item_original}`)
+  
+  }
+  public getPlanosBeTrocasIS(item_substituto: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas/item-substituto?item_substituto=${item_substituto}`)
   }
 
   public getCadastrosIrregulares(codigo: string): Observable<any>{

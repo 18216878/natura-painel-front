@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AccountGuard] },
   { path: 'projeto-wave', component: ProjetoWaveComponent, canActivate: [AccountGuard] },
-  { path: 'pesquisa-nordeste', component: PesquisaNordesteComponent, canActivate: [AccountGuard] },
+  { path: 'vale-pontos', component: PesquisaNordesteComponent, canActivate: [AccountGuard] },
   { path: 'plano-b-trocas', component: PlanoBTrocasComponent, canActivate: [AccountGuard] },
   { path: 'cadastros-irregulares', component: CadastrosIrregularesComponent, canActivate: [AccountGuard] },
   { path: 'pagamentos-rejeitados', component: PagamentosRejeitadosComponent, canActivate: [AccountGuard] },

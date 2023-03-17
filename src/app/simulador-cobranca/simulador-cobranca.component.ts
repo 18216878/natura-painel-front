@@ -682,8 +682,8 @@ export class SimuladorCobrancaComponent implements OnInit {
     var dataSourceMap = this.dataSource;
 
 
-    // myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
-    myImage.src = '../../../assets/img/revendedora-natura-cadastro.png';
+    myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
+    // myImage.src = './assets/img/revendedora-natura-cadastro.png';
 
     myImage.onload = function(){
 

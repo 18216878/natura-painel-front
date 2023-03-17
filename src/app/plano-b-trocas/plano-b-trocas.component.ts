@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit, ViewChild, Input  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { PainelService } from '../painel.service';
@@ -73,7 +74,8 @@ export class PlanoBTrocasComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private _snackBar: MatSnackBar
   ) { 
     this.router = router;
     this.storage = window.localStorage;
@@ -87,27 +89,58 @@ export class PlanoBTrocasComponent implements OnInit {
 
   public title: string = "Planos B e Trocas";
   public item_original?: string = "";
+  public item_substituto?: string = "";
+  identificadores: string[] = ['Item Original', 'Item Substituto'];
+  selecionado: string;  
 
-  
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
     this.formularioPlanoBeTrocas = this.formBuilder.group({
-      item_original:['']      
+      selecionado:[''],
+      item_original:[''],      
+      item_substituto:['']      
     })
   }
 
-  pesquisar() {
+  pesquisarIO() {
 
     this.pesquisa_efetuada = true;
-    this.painelService.getPlanosBeTrocas(this.item_original).subscribe(
+    this.painelService.getPlanosBeTrocasIO(this.item_original).subscribe(
       data => {
-        console.table(data);
         this.dataSource = data;
+        if (this.dataSource.length === 0) {
+          var message = 'Sem dados';
+          var action = 'Fechar';
+          this._snackBar.open(message, action);
+        }
+      },
+      err => {
+        var message = 'Erro durante a pesquisa. Tente novamente';     
+        var action = 'Fechar'     
+        this._snackBar.open(message, action);
       }
     )
+  }
 
-    
+  pesquisarIS() {
+
+    this.pesquisa_efetuada = true;
+    this.painelService.getPlanosBeTrocasIS(this.item_substituto).subscribe(
+      data => {
+        this.dataSource = data;
+        if (this.dataSource.length === 0) {
+          var message = 'Sem dados';
+          var action = 'Fechar';
+          this._snackBar.open(message, action);
+        }
+      },
+      err => {
+        var message = 'Erro durante a pesquisa. Tente novamente';     
+        var action = 'Fechar'     
+        this._snackBar.open(message, action);
+      }
+    )
   }
 
 
@@ -117,6 +150,13 @@ export class PlanoBTrocasComponent implements OnInit {
     this.formularioPlanoBeTrocas.reset();
     this.pesquisa_efetuada = false;
     this.clickedRows.clear();
+  }
+
+  onSelectId(event: Event) {
+
+    var valor = event.toString();
+    this.selecionado = valor;    
+    
   }
 
 }

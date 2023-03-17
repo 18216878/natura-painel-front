@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit, ViewChild, Input  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { PainelService } from '../painel.service';
@@ -50,7 +51,8 @@ export class CadastrosIrregularesComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private _snackBar: MatSnackBar
   ) { 
     this.router = router;
     this.storage = window.localStorage;
@@ -80,6 +82,16 @@ export class CadastrosIrregularesComponent implements OnInit {
     this.painelService.getCadastrosIrregulares(this.codigo_cn).subscribe(
       data => {
         this.dataSource = data;
+        if (this.dataSource.length === 0) {
+          var message = 'Sem dados';
+          var action = 'Fechar';
+          this._snackBar.open(message, action);
+        }
+      },
+      err => {
+        var message = 'Erro durante a pesquisa. Tente novamente';     
+        var action = 'Fechar'     
+        this._snackBar.open(message, action);
       }
     )
 

@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit, ViewChild, Input  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { DynamicsService } from '../dynamics.service';
@@ -69,7 +70,8 @@ export class DynamicsHistoricoComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private _snackBar: MatSnackBar
   ) { 
     this.router = router;
     this.storage = window.localStorage;
@@ -106,22 +108,46 @@ export class DynamicsHistoricoComponent implements OnInit {
   pesquisarCodigo(codigo: string) {
     this.carregando = true;
     this.pesquisa_efetuada = true;
+    this.dataSrc = [];
+    this.dataSource = [];
 
     this.dynamicsService.tokenGenerate();
 
     this.dynamicsService.getContactCode(codigo).subscribe(
       data => {
         this.dataSrc = data;
-        this.client_id = this.dataSrc.value[0].contactid;
-
-        this.dynamicsService.getDynamicsCode(this.client_id).subscribe(
-          data => {
-            this.dataSrc = data;
-            this.dataSource = this.dataSrc.value;            
-          }
-
-          );
+        if (this.dataSrc.value.length === 0) {
+          var message = 'Sem dados';
+          var action = 'Fechar';
+          this._snackBar.open(message, action);
+        }
+        else{
+          this.client_id = this.dataSrc.value[0].contactid;
+          this.dynamicsService.getDynamicsCode(this.client_id).subscribe(
+            data => {
+              this.dataSrc = data;
+              this.dataSource = this.dataSrc.value;
+              console.log(data['status']);
+              if (this.dataSource.length === 0) {
+                var message = 'Sem dados';
+                var action = 'Fechar'
+                this._snackBar.open(message, action);
+              }          
+            },
+            err => {
+              var message = 'Erro durante a pesquisa. Tente novamente';
+              var action = 'Fechar'
+              this._snackBar.open(message, action);
+            }
+  
+            );
+        }
         
+      },
+      err => {
+        var message = 'Erro durante a pesquisa. Tente novamente';        
+        var action = 'Fechar'        
+        this._snackBar.open(message, action);
       }
     )
 

@@ -23,6 +23,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
@@ -105,6 +106,7 @@ import { SelecionarParcelasComponent } from './simulador-cobranca/selecionar-par
     MatTooltipModule,
     MatChipsModule,
     MatRadioModule,
+    MatSnackBarModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     CurrencyMaskModule
