@@ -1,4 +1,4 @@
-![csu-natura](https://user-images.githubusercontent.com/96271597/231229521-2c11df64-4fe6-4811-a9bd-0e459dc07399.png)
+<img align="center" alt="Hugo-CSharp" height="120" width="500" src="https://github.com/18216878/18216878/blob/master/csu-natura.png?raw=true">
 
 
 # Projeto Painel Wave2 Front End
