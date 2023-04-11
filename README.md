@@ -1,18 +1,28 @@
-![csu_natura](https://user-images.githubusercontent.com/96271597/225901721-96a25154-a785-4255-a964-2fc77f9effbc.png)
+![csu-natura](https://user-images.githubusercontent.com/96271597/231229521-2c11df64-4fe6-4811-a9bd-0e459dc07399.png)
 
 
 # Projeto Painel Wave2 Front End
 
 Projeto de desenvolvimento de um Painel de Consulta para diversas situações, como:
 
-##### 📝 Lista de Consultoras Natura que também são Representantes Natura
+<img align="center" alt="Hugo-CSharp" height="30" width="120" src="https://github.com/18216878/18216878/blob/master/revendedora-natura-cadastro.png?raw=true">
 
+##### 📝 Lista de Consultoras Natura que também são Representantes Avon
 ##### 📝 Lista de Pagamentos Rejeitados
 ##### 📝 Lista de Vale Pontos
 ##### 📝 Lista de Planos B e Trocas de Produtos
 ##### 📝 Lista de Cadastros Irregulares
 ##### 📝 Hisórico de Tabulações do Dynamics
 ##### 📝 Simulador de Negociação Cobrança
+##### 📝 Lista de Consultoras Destaques 2022
+<br>
+
+<img align="center" alt="Hugo-CSharp" height="30" width="100" src="https://github.com/18216878/18216878/blob/master/avon.png?raw=true">
+
+##### 📝 Lista de Representantes Avon que também são Consultoras Natura
+##### 📝 Lista de Rejeição de Pagamento
+##### 📝 Lista TAG2H
+
 <br>
 
 ## Tecnologias Utilizadas
