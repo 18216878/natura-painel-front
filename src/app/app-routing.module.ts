@@ -10,17 +10,29 @@ import { CadastrosIrregularesComponent } from './cadastros-irregulares/cadastros
 import { PagamentosRejeitadosComponent } from './pagamentos-rejeitados/pagamentos-rejeitados.component';
 import { SimuladorCobrancaComponent } from './simulador-cobranca/simulador-cobranca.component';
 import { DynamicsHistoricoComponent } from './dynamics-historico/dynamics-historico.component';
+import { NaturaMainComponent } from './natura-main/natura-main.component';
+import { AvonMainComponent } from './avon-main/avon-main.component';
+import { ProjetoWaveAvonComponent } from './projeto-wave-avon/projeto-wave-avon.component';
+import { DestaquesComponent } from './destaques/destaques.component';
+import { RejeicaoPagamentoComponent } from './rejeicao-pagamento/rejeicao-pagamento.component';
+import { Tag2hComponent } from './tag2h/tag2h.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AccountGuard] },
-  { path: 'projeto-wave', component: ProjetoWaveComponent, canActivate: [AccountGuard] },
-  { path: 'vale-pontos', component: PesquisaNordesteComponent, canActivate: [AccountGuard] },
-  { path: 'plano-b-trocas', component: PlanoBTrocasComponent, canActivate: [AccountGuard] },
-  { path: 'cadastros-irregulares', component: CadastrosIrregularesComponent, canActivate: [AccountGuard] },
-  { path: 'pagamentos-rejeitados', component: PagamentosRejeitadosComponent, canActivate: [AccountGuard] },
-  { path: 'dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
-  { path: 'simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
+  { path: 'natura', component: NaturaMainComponent, canActivate: [AccountGuard] },
+  { path: 'avon', component: AvonMainComponent, canActivate: [AccountGuard] },
+  { path: 'natura/projeto-wave', component: ProjetoWaveComponent, canActivate: [AccountGuard] },
+  { path: 'natura/vale-pontos', component: PesquisaNordesteComponent, canActivate: [AccountGuard] },
+  { path: 'natura/plano-b-trocas', component: PlanoBTrocasComponent, canActivate: [AccountGuard] },
+  { path: 'natura/cadastros-irregulares', component: CadastrosIrregularesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/pagamentos-rejeitados', component: PagamentosRejeitadosComponent, canActivate: [AccountGuard] },
+  { path: 'natura/dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
+  { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
+  { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
+  { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },
+  { path: 'avon/tag2h', component: Tag2hComponent, canActivate: [AccountGuard] },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 

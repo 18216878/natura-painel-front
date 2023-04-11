@@ -1,0 +1,352 @@
+<div class="main">
+    <div class="title">
+      <div>
+        <div id="logonaturaeco"></div>
+      </div>
+      <h1>Pesquisa - {{title}}</h1>
+      <div class="menu">
+        <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}}
+        </h4>
+        <button
+          routerLink="/avon"
+          class="logout"
+          color="primary"
+          [disabled]="checked===true"
+          mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+      </div>
+    </div>
+  
+    <p class="space"> </p>
+  
+    <form [formGroup]="formularioProjetoWave" class="example-form">
+      <div class="pesquisar">
+        <div class="search">
+          <mat-form-field appearance="fill" class="mopMatricula"
+            color="primary">
+            <mat-label>Selecione o Item de Pesquisa</mat-label>
+            <mat-select disableRipple ngDefaultControl
+              formControlName="selecionado" [ngModel]="selecionado"
+              (valueChange)="onSelectId($event)">
+              <mat-option *ngFor="let id of identificadores" [value]="id">
+                {{id}}</mat-option>
+            </mat-select>
+            <mat-icon matPrefix>search</mat-icon>
+            <mat-hint>Selecione uma opção</mat-hint>
+          </mat-form-field>
+  
+          <mat-form-field *ngIf="selecionado=='Código Natura'"
+            class="mopMatricula" appearance="fill" color="primary">
+            <mat-label>Código Natura</mat-label>
+            <input
+              matInput
+              [readonly]="checked===true"
+              [disabled]="selecionado!=='Código Natura'"
+              placeholder="Digite ou cole aqui o Código da Consultora Natura..."
+              ngDefaultControl
+              formControlName="codigo_natura"
+              [(ngModel)]="codigo_natura">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>Código da Consultora Natura</mat-hint>
+          </mat-form-field>
+  
+          <mat-form-field *ngIf="selecionado=='Código Avon'"
+            class="mopMatricula" appearance="fill" color="primary">
+            <mat-label>Código Avon</mat-label>
+            <input
+              matInput
+              [readonly]="checked===true"
+              placeholder="Digite ou cole aqui o Representante Avon..."
+              ngDefaultControl
+              formControlName="codigo_avon"
+              [(ngModel)]="codigo_avon">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>Código da Representante Avon</mat-hint>
+          </mat-form-field>
+  
+          <mat-form-field *ngIf="selecionado=='CPF'" class="mopMatricula"
+            appearance="fill" color="primary">
+            <mat-label>CPF</mat-label>
+            <input
+              matInput
+              [readonly]="checked===true"
+              placeholder="Digite ou cole aqui o CPF..."
+              ngDefaultControl
+              formControlName="cpf_cn_rep"
+              [(ngModel)]="cpf_cn_rep"
+              mask="000.000.000-00">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-hint>CPF de 11 dígitos (somente números) </mat-hint>
+          </mat-form-field>
+        </div>
+  
+  
+        <div class="botoes">
+  
+          <button
+            class="validar"
+            mat-raised-button
+            [disabled]="(cpf_cn_rep === null || cpf_cn_rep === undefined ||
+            cpf_cn_rep === '') && (codigo_avon === null || codigo_avon ===
+            undefined || codigo_avon === '')&& (codigo_natura === null ||
+            codigo_natura === undefined || codigo_natura === '')"
+            (click)="limpar()"
+            color="warn"
+            aria-label="Example icon button with a home icon">
+            <mat-icon>clear</mat-icon> Limpar
+          </button>
+  
+          <button
+            class="validar"
+            mat-raised-button
+            [disabled]="(cpf_cn_rep === null || cpf_cn_rep === undefined ||
+            cpf_cn_rep === '') && (codigo_avon === null || codigo_avon ===
+            undefined || codigo_avon === '')&& (codigo_natura === null ||
+            codigo_natura === undefined || codigo_natura === '')"
+            (click)="pesquisar()"
+            color="primary"
+            aria-label="Example icon button with a home icon">
+            <mat-icon>search</mat-icon> Pesquisar
+          </button>
+        </div>
+      </div>
+  
+    </form>
+  
+  
+  
+  
+    <div *ngIf="!clickedRows.size">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Código Natura</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Código Avon</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">CPF</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Nome</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">CEP</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Nível</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Estrutura Comercial</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Cadastro Natura</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Cadastro Avon</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">E-mail</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  
+    <div *ngFor="let clickedRow of clickedRows">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Código Natura</p>
+            <p>{{clickedRow.codigo_natura}}</p>
+            <p *ngIf="clickedRow.codigo_natura===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Código Avon</p>
+            <p>{{clickedRow.codigo_avon}}</p>
+            <p *ngIf="clickedRow.codigo_avon===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">CPF</p>
+            <p>{{clickedRow.cpf | cpf}}</p>
+            <p *ngIf="clickedRow.cpf===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Nome</p>
+            <p>{{clickedRow.nome}}</p>
+            <p *ngIf="clickedRow.nome===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">CEP</p>
+            <p>{{clickedRow.cep | cep}}</p>
+            <p *ngIf="clickedRow.cep===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Nível</p>
+            <p>{{clickedRow.nivel}}</p>
+            <p *ngIf="clickedRow.nivel===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Estrutura Comercial</p>
+            <p>{{clickedRow.estrutura_comercial}}</p>
+            <p *ngIf="clickedRow.estrutura_comercial===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Cadastro Natura</p>
+            <p>{{clickedRow.data_cadastro_wave2_natura | date : 'dd/MM/yyyy'}}</p>
+            <p *ngIf="clickedRow.data_cadastro_wave2_natura===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Data Cadastro Avon</p>
+            <p>{{clickedRow.data_cadastro_wave2_avon | date : 'dd/MM/yyyy'}}</p>
+            <p *ngIf="clickedRow.data_cadastro_wave2_avon===null">---</p>
+          </mat-card-content>
+        </mat-card>
+  
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">E-mail</p>
+            <p>{{clickedRow.email}}</p>
+            <p *ngIf="clickedRow.email===null">---</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  
+    <p class="start">
+  
+      <div class="container">
+  
+        <table mat-table *ngIf="pesquisa_efetuada===true"
+          [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+          <ng-container matColumnDef="codigo_natura">
+            <th mat-header-cell *matHeaderCellDef> Código Natura </th>
+            <td mat-cell *matCellDef="let element"> {{element.codigo_natura}}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="codigo_avon">
+            <th mat-header-cell *matHeaderCellDef> Código Avon </th>
+            <td mat-cell *matCellDef="let element"> {{element.codigo_avon}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="cpf">
+            <th mat-header-cell *matHeaderCellDef> CPF </th>
+            <td mat-cell *matCellDef="let element"> {{element.cpf | cpf}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="cep">
+            <th mat-header-cell *matHeaderCellDef> CEP </th>
+            <td mat-cell *matCellDef="let element"> {{element.cep | cep}}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="nivel">
+            <th mat-header-cell *matHeaderCellDef> Nível </th>
+            <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="estrutura_comercial">
+            <th mat-header-cell *matHeaderCellDef> Estrutura Comercial </th>
+            <td mat-cell *matCellDef="let element"> {{element.estrutura_comercial
+              | currency : 'BRL'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="data_cadastro_wave2_natura">
+            <th mat-header-cell *matHeaderCellDef> Data Cadastro Natura </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.data_cadastro_wave2_natura | date : 'dd/MM/yyyy'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="data_cadastro_wave2_avon">
+            <th mat-header-cell *matHeaderCellDef> Data Cadastro Avon </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.data_cadastro_wave2_avon | date : 'dd/MM/yyyy'}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            (click)="clickedRows.clear()"
+            (click)="clickedRows.add(row)"
+            [class.demo-row-is-clicked]="clickedRows.has(row)"
+            *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  

@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>❌ Acesso Negado!</h1>
+<h1 mat-dialog-title>🚫 Acesso Negado!</h1>
 <div mat-dialog-content>
   <p>Usuário ou senha inválidos</p>
 </div>
-<div mat-dialog-actions>
-  <button mat-raised-button color="accent" (click)="closeDialog()">Ok</button>
-</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close><mat-icon>clear</mat-icon>Fechar</button>
+</mat-dialog-actions>

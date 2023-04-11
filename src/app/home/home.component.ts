@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faCircleExclamation, faTruckFast, faCity, faCartPlus, faMagnifyingGlass, faLocationDot, faBottleDroplet , faSackDollar, faAddressCard, faFingerprint, faUserPen, faTag, faBarcode, faGift } from '@fortawesome/free-solid-svg-icons';
+import { faCircleExclamation, faTruckFast, faCity, faCartPlus, faMagnifyingGlass, faLocationDot, faBottleDroplet , faSackDollar, faAddressCard, faFingerprint, faUserPen, faTag, faBarcode, faGift, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { faFaceAngry, faFaceSmile, faFaceFrown, faEnvelope, faThumbsDown, faThumbsUp, faMoneyBill1, faCreditCard } from '@fortawesome/free-regular-svg-icons';
 import { faFacebook, faInstagram, faTwitter, faShopify } from '@fortawesome/free-brands-svg-icons';
 import {  } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 
 @Component({
@@ -60,6 +61,7 @@ export class HomeComponent implements OnInit {
   faTag = faTag;
   faBarcode = faBarcode;
   faGift = faGift;
+  faCircleInfo = faCircleInfo;
 
   ngOnInit(): void {
 
@@ -71,6 +73,11 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(LogoutFormDialogComponent, {
       width: '35em'
     });
+  }
+
+  openInfoDialog() {
+    const dialogRef = this.dialog.open(InfoDialogComponent);
+
   }
 
 

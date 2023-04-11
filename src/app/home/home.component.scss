@@ -3,6 +3,23 @@ body {
 
 }
 
+.natura-avatar {
+  background-image: url('../../assets/img/natura_logo_2.jpg');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.avon-avatar {
+  background-image: url('../../assets/img/avon_logo.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+
 .main {
     display: flex;
     justify-content: center;
@@ -15,18 +32,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #FF5722;
+  background-color: #000;
   max-width: 90em;
   width: 100%;
 
 }
     
 #logonatura {
-  width: 6em;
-  height: 6em;
+  width: 12em;
+  height: 1.7em;
   background-size: cover;
   display: flex;
-  background-image: url('../../assets/img/nat.png');
+  background-image: url('../../assets/img/naturaecobranco.png');
+  margin-left: 0.5em;
 }
     
 h1 {
@@ -81,11 +99,11 @@ h4 {
 .imgHome {
   width: 27em;
   height: 14em;
-  zoom: inherit;
+
 }
 
 .imgWave {
-  background-image: url('../../assets/img/projeto-wave-home.png');
+  background-image: url('../../assets/img/natura_screen.png');
   background-size: cover;
 
 }
@@ -123,7 +141,7 @@ h4 {
 
 
 .imgNordeste {
-  background-image: url('../../assets/img/dia-das-maes-natura-2021.png');
+  background-image: url('../../assets/img/avon-maes.jpg');
   background-size: cover;
 }
 
@@ -136,8 +154,21 @@ fa-icon:hover{
   cursor: pointer;
 }
 
-.social {
+.natura-social {
   color: #FF5722;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+
+}
+
+span:hover {
+  cursor: pointer;
+}
+
+.avon-social {
+  color: #E91E63;
   display: flex;
   justify-content: space-around;
   align-items: center;

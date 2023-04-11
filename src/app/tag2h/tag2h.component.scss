@@ -1,0 +1,350 @@
+.tab {
+    width: 90em;
+  }
+  
+  .codigoCn {
+    max-width: 35em;
+    width: 100%;
+    color:#E91E63;
+}
+
+.fab-button {
+  margin-right: 0.3em;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90em;
+  width: 100%;
+  max-height: 30em;
+  height: 100%;
+}
+
+  .pesquisar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2em;
+    border: #E91E63 0.2em solid;
+    border-radius: 0.8em;
+    margin-bottom: 1em;
+  }
+
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #E91E63;
+    
+  }
+  
+  .search {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.6em;
+    padding-left: 1em;
+    padding: 0.3em;
+    border-radius: 0.8em;
+    margin-bottom: 1em;
+    max-width: 68em;
+    width: 100%;
+  }
+
+  .options {
+    margin-right: 2em;
+  }
+  
+  
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-width {
+    margin: 1em;
+  }
+  
+  .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+  
+  .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #E91E63;
+      max-width: 90em;
+      width: 100%;
+  
+  }
+  
+  #logoavon {
+    width: 7.7em;
+    height: 2em;
+    background-size: cover;
+    display: flex;
+    background-image: url('../../assets/img/avon.png  ');
+  }
+  
+  .inputSearch {
+      margin-left: 10em;
+      margin-right: 3em;
+      margin-bottom: 2em;
+  }
+  h1 {
+      
+      color: #fff;
+      margin: 1em;
+  }
+  
+  h4 {
+      
+      color: #fff;
+      display: flex;
+      padding: 0.5em;
+      margin-left: 0.2em;
+  }
+  
+  .space {
+      margin: 1em;
+  
+  }
+  
+  .example-full-width {
+      width: 100%;
+      color:#E91E63;
+    }
+  
+    .example-form {
+      min-width: 30em;
+      max-width: 90em;
+      width: 100%;
+    }
+  
+    .mop {
+      max-width: 38em;
+      width: 100%;
+    }
+
+    .inputPesquisa {
+      max-width: 20em;
+      width: 100%;
+      color:#E91E63;
+    }
+  
+    .mopMatricula {
+      max-width: 20em;
+      width: 100%;
+      color:#E91E63;
+    }
+  
+    .Rodape {
+      max-width: 20em;
+      width: 100%;
+      color:#E91E63;
+    }
+  
+    .matricula {
+      max-width: 20em;
+      width: 100%;
+      color:#E91E63;
+    }
+  
+    .waveLarge {
+      max-width: 43em;
+      width: 100%;
+      color:#E91E63;
+    }
+  
+    .waveNome {
+      max-width: 30em;
+      width: 100%;
+      color:#E91E63;
+    }
+  
+  
+    .pesquisa {
+      max-width: 10em;
+      width: 100%;
+    }
+    .start {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .ocorrencia {
+      max-width: 60em;
+      width: 100%;
+    }
+  
+    .select {
+      max-width: 28em;
+      width: 100%;
+      color:#E91E63;
+    }
+  
+    .confirmar {
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+    }
+    .botoes {
+      max-width: 28em;
+      width: 100%;
+      max-height: 3em;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+    }
+
+    .example-radio-group {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0;
+      align-items: flex-start;
+    }
+    
+    .example-radio-button {
+      margin: 5px;
+    }
+  
+    .validar {
+      margin: 1em;
+      max-height: 3em;
+      height: 100%;
+      color: #fff;
+    }
+    
+    .color {
+      color: #fff;
+      vertical-align: middle;
+      margin-right: 0.3em;
+    }
+  
+    .menu {
+      vertical-align: middle;
+    }
+  
+    .logout {
+      color: #fff;
+    }
+  
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2em;
+      margin-bottom: 5em;
+      max-width: 90em;
+      width: 100%;
+      max-height: 20em;
+      height: 100%;
+  }
+  
+    table {
+      display: block;
+      max-width: 90em;
+      width: 100%;
+      height: 20em;
+      position: sticky;
+  
+  }
+
+  .carregando{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em;
+  }
+  h5 {
+    margin: 1em;
+  }
+
+  
+  .mat-column-select {
+    overflow: visible;
+  }
+
+  .mat-elevation-z8 {    
+    overflow-x: visible;
+  }
+
+  .mat-table {
+    overflow-x: scroll;
+  }
+
+  .mat-cell {
+    padding: 8px 8px 8px 0;
+  }
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  padding: 0px 10px;
+  line-break: unset;
+  width: 100%;
+  white-space: nowrap;
+  overflow:initial;
+  vertical-align: middle;
+}
+.mat-row {
+  height: 1.3em;
+}
+.mat-row,
+.mat-header-row {
+  display: table-row;
+}
+  
+  
+  .title-card {
+    color: #E91E63;
+    font-weight: bold;
+  }
+  
+  .demo-row-is-clicked {
+    font-weight: bold;
+  }
+  
+    .mat-row:nth-child(even){
+      background-color: #F3ABD2;
+  }
+          
+  .mat-row:nth-child(odd){
+      background-color: #FAD3E9;
+  }
+  
+  .mat-header-cell, .mat-cell {
+      text-align: center !important;
+      
+  }
+  
+  th.mat-header-cell {
+      text-align: center !important;
+      background-color: #E91E63;
+      color: #FFF;
+  }
+  
+  td, th {
+      text-align: center !important;
+      vertical-align: middle !important;
+  }
+    
+  
+  

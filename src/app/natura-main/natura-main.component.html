@@ -1,0 +1,183 @@
+<body>
+    <div class="main">
+        <header class="title">
+            <div id="logonatura"></div>
+            <h1>Painel Natura - Home</h1>
+            <div class="menu">
+                <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}} </h4>
+                <button routerLink="/home" class="logout" color="primary" mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+            </div>
+        </header>
+        <p class="space"> </p>
+        <div class="home">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="una-avatar"></div>
+                    <mat-card-title>Projeto Wave</mat-card-title>
+                    <mat-card-subtitle>Pesquisar as consultoras Natura e representantes Avon</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgWave"
+                    routerLink="/natura/projeto-wave"></div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+    
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="pontos-avatar"></div>
+                    <mat-card-title>Vale Pontos</mat-card-title>
+                    <mat-card-subtitle>Pesquisar consultoras nas bases de Vale Pontos</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgNordeste"
+                    routerLink="/natura/vale-pontos">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="troca-avatar"></div>
+                    <mat-card-title>Planos B e Trocas</mat-card-title>
+                    <mat-card-subtitle>Pesquisar quais são os itens substitutos em relação aos originais</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgTroca"
+                    routerLink="/natura/plano-b-trocas">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="home">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="cadastro-avatar"></div>
+                    <mat-card-title>Cadastros Irregulares</mat-card-title>
+                    <mat-card-subtitle>Pesquisar as consultoras com cadastros irregulares</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgCadastro"
+                    routerLink="/natura/cadastros-irregulares">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+    
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="pagamento-avatar"></div>
+                    <mat-card-title>Pagamentos Rejeitados</mat-card-title>
+                    <mat-card-subtitle>Pesquisar consultoras com pagamentos não baixados</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgPagamento"
+                    routerLink="/natura/pagamentos-rejeitados">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="dynamics-avatar"></div>
+                    <mat-card-title>Dynamics Histórico</mat-card-title>
+                    <mat-card-subtitle>Pesquisar o histórico das consultoras nas bases do Dynamics</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgDynamics"
+                    routerLink="/natura/dynamics-historico">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="home">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="simulador-avatar"></div>
+                    <mat-card-title>Simulador Cobrança</mat-card-title>
+                    <mat-card-subtitle>Simular valores para pagamento de acordo</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgSimulador"
+                    routerLink="/natura/simulador-cobranca">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="trofeu-avatar"></div>
+                    <mat-card-title>Consultoras Destaques</mat-card-title>
+                    <mat-card-subtitle>Consultoras destaques do ano anterior e premiação</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgDestaques"
+                    routerLink="/natura/destaques">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openInfoDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    
+</body>

@@ -56,4 +56,36 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatValePontos?codigo=${codigo}`)
   }
 
+  public getDestaquesCodigo(codigo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatDestaques/codigo?codigo=${codigo}`)
+  }
+
+  public getDestaquesNome(nome: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatDestaques/nome?nome=${nome}`)
+  }
+
+  public getAvonRejeicaoPagamentoRegistro(registro: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonRejeicaoPagamento/registro?registro=${registro}`)
+  }
+
+  public getAvonRejeicaoPagamentoStatus(status: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonRejeicaoPagamento/status?status=${status}`)
+  }
+
+  public getAvonRejeicaoPagamentoData(data: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonRejeicaoPagamento/data?data=${data}`)
+  }
+
+  public getAvonTag2hAno(ano: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonTag2h/ano?ano=${ano}`)
+  }
+
+  public getAvonTag2hCpInicial(cpInicial: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonTag2h/cpinicial?cpInicial=${cpInicial}`)
+  }
+
+  public getAvonTag2hPremio(premio: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonTag2h/premio?premio=${premio}`)
+  }
+
 }

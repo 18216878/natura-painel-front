@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
@@ -55,6 +56,14 @@ import { CondicaoNegociacaoComponent } from './simulador-cobranca/condicao-negoc
 import { QuatroParcelasComponent } from './simulador-cobranca/quatro-parcelas/quatro-parcelas.component';
 import { CincoParcelasComponent } from './simulador-cobranca/cinco-parcelas/cinco-parcelas.component';
 import { SelecionarParcelasComponent } from './simulador-cobranca/selecionar-parcelas/selecionar-parcelas.component';
+import { NaturaMainComponent } from './natura-main/natura-main.component';
+import { AvonMainComponent } from './avon-main/avon-main.component';
+import { ProjetoWaveAvonComponent } from './projeto-wave-avon/projeto-wave-avon.component';
+import { DestaquesComponent } from './destaques/destaques.component';
+import { MecanicaComponent } from './destaques/mecanica/mecanica.component';
+import { RejeicaoPagamentoComponent } from './rejeicao-pagamento/rejeicao-pagamento.component';
+import { Tag2hComponent } from './tag2h/tag2h.component';
+import { InfoDialogComponent } from './home/info-dialog/info-dialog.component';
 
 
 @NgModule({
@@ -80,7 +89,15 @@ import { SelecionarParcelasComponent } from './simulador-cobranca/selecionar-par
     CondicaoNegociacaoComponent,
     QuatroParcelasComponent,
     CincoParcelasComponent,
-    SelecionarParcelasComponent
+    SelecionarParcelasComponent,
+    NaturaMainComponent,
+    AvonMainComponent,
+    ProjetoWaveAvonComponent,
+    DestaquesComponent,
+    MecanicaComponent,
+    RejeicaoPagamentoComponent,
+    Tag2hComponent,
+    InfoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +124,7 @@ import { SelecionarParcelasComponent } from './simulador-cobranca/selecionar-par
     MatChipsModule,
     MatRadioModule,
     MatSnackBarModule,
+    MatPaginatorModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     CurrencyMaskModule

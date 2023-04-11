@@ -1,0 +1,175 @@
+body {
+    background-color: #F4F4F3;
+
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F4F4F3;
+  }
+  
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #E91E63;
+  max-width: 90em;
+  width: 100%;
+
+}
+
+.pagamento-avatar {
+    background-image: url('../../assets/img/pagamento-avatar.png');
+    background-size: cover;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+  }
+
+.una-avatar {
+    background-image: url('../../assets/img/una.png');
+    background-size: cover;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+  }
+    
+.tag-avatar {
+    background-image: url('../../assets/img/tag2h.png');
+    background-size: cover;
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+  }
+    
+#logoavon {
+  width: 7.7em;
+  height: 2em;
+  background-size: cover;
+  display: flex;
+  background-image: url('../../assets/img/avon.png');
+}
+    
+h1 {
+  color: #fff;
+}
+
+h4 {
+    
+  color: #fff;
+  display: flex;
+  padding: 0.5em;
+  margin-left: 0.2em;
+}
+    
+.space {
+  margin: 1em;
+
+}
+    
+.example-card {
+    max-width: 25em;
+    margin: 2em;
+    transition: transform .5s;
+}
+      
+.example-card:hover {
+  transform: scale(1.2);
+}
+    
+.example-header-image {
+  background-size: cover;
+}
+
+.home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+    
+    
+    
+.menu {
+  vertical-align: middle;
+  color: #fff;
+}
+    
+.logout {
+  color: #fff;
+}
+
+.imgHome {
+  width: 27em;
+  height: 14em;
+  zoom: inherit;
+}
+
+.imgWave {
+  background-image: url('../../assets/img/projeto-wave-home.png');
+  background-size: cover;
+
+}
+
+.imgTroca {
+  background-image: url('../../assets/img/troca.jpg');
+  background-size: cover;
+
+}
+
+.imgCadastro {
+  background-image: url('../../assets/img/cadasro.jpg');
+  background-size: cover;
+
+}
+
+.imgPagamento {
+  background-image: url('../../assets/img/pagamento.png');
+  background-size: cover;
+
+}
+
+.imgDynamics {
+  background-image: url('../../assets/img/dynamics-home.jpg');
+  background-size: cover;
+
+}
+
+.imgSimulador {
+  background-image: url('../../assets/img/simulador-home.jpg');
+  background-size: cover;
+
+}
+
+
+
+.imgNordeste {
+  background-image: url('../../assets/img/dia-das-maes-natura-2021.png');
+  background-size: cover;
+}
+
+
+.imgHome:hover {
+  cursor: pointer;
+}
+
+fa-icon:hover{
+  cursor: pointer;
+}
+
+.social {
+  color: #E91E63;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+
+}
+
+.card-header {
+  background-color: #E91E63;
+  color: #fff;
+}
