@@ -88,4 +88,13 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/AvonTag2h/premio?premio=${premio}`)
   }
 
+  public postAcessos(jsonTab: JSON) {
+    this.httpClient.post(`${this.SERVER_URL}/Acessos`, jsonTab, {observe: 'response'}).subscribe(
+      data => {
+        return data;
+      }
+    );
+  }
+
+
 }

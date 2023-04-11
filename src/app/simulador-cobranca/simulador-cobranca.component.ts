@@ -487,7 +487,7 @@ export class SimuladorCobrancaComponent implements OnInit {
 
 
       if(this.parcelas >=2){
-        this.data_pagamento_parcela2 = this.calculaDataParcela(this.data_pagamento_parcela1, 29);
+        this.data_pagamento_parcela2 = this.calculaDataParcela(this.data_pagamento_parcela1, 30);
         this.valor_parcela2 = this.valor_parcela1;
 
         var now = moment(this.data_pagamento_parcela2);
@@ -499,7 +499,7 @@ export class SimuladorCobrancaComponent implements OnInit {
       }
 
       if(this.parcelas >=3){
-        this.data_pagamento_parcela3 = this.calculaDataParcela(this.data_pagamento_parcela2, 29);
+        this.data_pagamento_parcela3 = this.calculaDataParcela(this.data_pagamento_parcela2, 30);
         this.valor_parcela3 = this.valor_parcela1;
 
         var now = moment(this.data_pagamento_parcela3);
@@ -511,7 +511,7 @@ export class SimuladorCobrancaComponent implements OnInit {
       }
 
       if(this.parcelas >=4){
-        this.data_pagamento_parcela4 = this.calculaDataParcela(this.data_pagamento_parcela3, 29);
+        this.data_pagamento_parcela4 = this.calculaDataParcela(this.data_pagamento_parcela3, 30);
         this.valor_parcela4 = this.valor_parcela1;
 
         var now = moment(this.data_pagamento_parcela4);
@@ -523,7 +523,7 @@ export class SimuladorCobrancaComponent implements OnInit {
       }
 
       if(this.parcelas >=5){
-        this.data_pagamento_parcela5 = this.calculaDataParcela(this.data_pagamento_parcela4, 29);
+        this.data_pagamento_parcela5 = this.calculaDataParcela(this.data_pagamento_parcela4, 30);
         this.valor_parcela5 = this.valor_parcela1;
 
         var now = moment(this.data_pagamento_parcela5);
@@ -682,8 +682,8 @@ export class SimuladorCobrancaComponent implements OnInit {
     var dataSourceMap = this.dataSource;
 
 
-    myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
-    // myImage.src = './assets/img/revendedora-natura-cadastro.png';
+    // myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
+    myImage.src = './assets/img/revendedora-natura-cadastro.png';
 
     myImage.onload = function(){
 

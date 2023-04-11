@@ -5,7 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginFormDialogComponent } from './login-form-dialog/login-form-dialog.component';
 import { PainelService } from '../painel.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountService } from '../account.service';
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 
 export interface PeriodicElement {
   id: number;
@@ -14,8 +17,14 @@ export interface PeriodicElement {
   password: string;
 }
 
-
 var ELEMENT_DATA: PeriodicElement[] = [];
+
+export interface IAcessos {
+  user: number;
+  access_date: string;
+}
+
+var iAcessos: IAcessos[] = [];
 
 @Component({
   selector: 'app-login',
@@ -40,6 +49,7 @@ export class LoginComponent implements OnInit {
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     router: Router,
+    private _snackBar: MatSnackBar,
     private accountService: AccountService
     ) {
       this.router = router;
@@ -75,7 +85,22 @@ export class LoginComponent implements OnInit {
             this.accountService.set('user', user);
             this.accountService.set('id', this.dataSource[0].id.toString());
             var logado = this.isLoggedIn();
+            
+
+            var usuario = parseInt(this.accountService.get('user'));
+            var dataAcesso = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+
+            iAcessos = [{
+              user: usuario,
+              access_date: dataAcesso
+            }]
+
+            var jsonString = JSON.stringify(iAcessos);
+            jsonString = jsonString.replace('[','').replace(']','');
+            var json: JSON = JSON.parse(jsonString);
+            this.painelService.postAcessos(json);
             this.carregando = false;
+
             if (logado == true) {
               this.carregando = false;
               this.router.navigate(['../home'])
@@ -86,6 +111,12 @@ export class LoginComponent implements OnInit {
             this.carregando = false;
           }
 
+        },
+        err => {
+          var message = 'Erro durante a pesquisa. Tente novamente';     
+          var action = 'Fechar'     
+          this._snackBar.open(message, action);
+          this.carregando = false;
         }
       )
           
