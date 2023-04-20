@@ -86,5 +86,5 @@ Projeto de desenvolvimento de um Painel de Consulta para diversas situações, c
 ## ⚠️ Pontos Importantes ⚠️
 
 <p>A Microsoft Dynamics 365 API traz no máximo 5.000 registros por requisição.</p>
-<p>Desta forma, foi utulizado o recurso de paginação, possibilitando obtrer os demais registros.</p>
+<p>Desta forma, foi utulizado o recurso de paginação, possibilitando obrer os demais registros.</p>
 
