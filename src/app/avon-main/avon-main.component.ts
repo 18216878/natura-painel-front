@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { InfoDialogComponent } from '../home/info-dialog/info-dialog.component';
+import { ProcessProjetoWaveAvonComponent } from './process/process-projeto-wave-avon/process-projeto-wave-avon.component';
 
 @Component({
   selector: 'app-avon-main',
@@ -69,6 +70,10 @@ export class AvonMainComponent implements OnInit {
   openInfoDialog() {
     const dialogRef = this.dialog.open(InfoDialogComponent);
 
+  }
+
+  openProjetoWaveDialog() {
+    const dialogRef = this.dialog.open(ProcessProjetoWaveAvonComponent);
   }
 
 }

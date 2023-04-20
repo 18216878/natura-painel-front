@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
     this.carregando = true;
     var encrypt = Md5.hashStr(senha);   
     
-    if (user.length > 0) {      
+    if (user.length > 0) {  
       this.painelService.getUser(user).subscribe(
         data => {
           this.dataSource = data;

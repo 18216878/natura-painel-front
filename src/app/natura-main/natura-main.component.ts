@@ -8,6 +8,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { InfoDialogComponent } from '../home/info-dialog/info-dialog.component';
+import { ProcessProjetoWaveComponent } from './process/process-projeto-wave/process-projeto-wave.component';
+import { ProcessValePontosComponent } from './process/process-vale-pontos/process-vale-pontos.component';
+import { ProcessPlanoBTrocasComponent } from './process/process-plano-b-trocas/process-plano-b-trocas.component';
+import { ProcessPagamentosRejeitadosComponent } from './process/process-pagamentos-rejeitados/process-pagamentos-rejeitados.component';
+import { ProcessCadastrosIrregularesComponent } from './process/process-cadastros-irregulares/process-cadastros-irregulares.component';
+import { ProcessDynamicsHistoricoComponent } from './process/process-dynamics-historico/process-dynamics-historico.component';
+import { ProcessDestaquesComponent } from './process/process-destaques/process-destaques.component';
 
 
 @Component({
@@ -71,5 +78,34 @@ export class NaturaMainComponent implements OnInit {
     const dialogRef = this.dialog.open(InfoDialogComponent);
 
   }
+
+  openProjetoWaveDialog(){
+    const dialogRef = this.dialog.open(ProcessProjetoWaveComponent);
+  }
+
+  openValePontosDialog() {
+    const dialogRef = this.dialog.open(ProcessValePontosComponent);
+  }
+
+  openPlanosBeTrocasDialog() {
+    const dialogRef = this.dialog.open(ProcessPlanoBTrocasComponent);
+  }
+
+  openCadastrosIrregularesDialog() {
+    const dialogRef = this.dialog.open(ProcessCadastrosIrregularesComponent);
+  }
+
+  openPagamentosRejeitadosDialog() {
+    const dialogRef = this.dialog.open(ProcessPagamentosRejeitadosComponent);
+  }
+
+  openDynamicsHistoricoDialog() {
+    const dialogRef = this.dialog.open(ProcessDynamicsHistoricoComponent);
+  }
+
+  openDestaquesDialog() {
+    const dialogRef = this.dialog.open(ProcessDestaquesComponent);
+  }
+
 
 }

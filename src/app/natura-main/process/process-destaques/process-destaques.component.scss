@@ -1,0 +1,32 @@
+*:focus {
+    outline: none;
+}
+
+
+h2 {
+  color: #FF5722;
+}
+  
+
+a:link,  
+a:active,
+a:visited {
+  color: #FF5722;
+}
+
+a {
+    text-decoration: none;
+    padding: 0.2em;
+}
+
+a:hover {
+    background-color: #FF5722;
+    color: #FFF;
+    border-radius: 0.2em;
+}
+
+button {
+  background-color: #FF5722;
+  color: #FFF;
+}
+  

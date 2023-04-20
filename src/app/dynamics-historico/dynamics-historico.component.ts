@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, NgZone, OnInit, ViewChild, Input  } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -107,51 +108,57 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   pesquisarCodigo(codigo: string) {
     this.carregando = true;
-    this.pesquisa_efetuada = true;
     this.dataSrc = [];
     this.dataSource = [];
 
     this.dynamicsService.tokenGenerate();
 
-    this.dynamicsService.getContactCode(codigo).subscribe(
-      data => {
-        this.dataSrc = data;
-        if (this.dataSrc.value.length === 0) {
-          var message = 'Sem dados';
-          var action = 'Fechar';
-          this._snackBar.open(message, action);
-        }
-        else{
-          this.client_id = this.dataSrc.value[0].contactid;
-          this.dynamicsService.getDynamicsCode(this.client_id).subscribe(
-            data => {
-              this.dataSrc = data;
-              this.dataSource = this.dataSrc.value;
-              console.log(data['status']);
-              if (this.dataSource.length === 0) {
-                var message = 'Sem dados';
+    setTimeout(() =>{
+      this.dynamicsService.getContactCode(codigo).subscribe(
+        data => {
+          this.dataSrc = data;
+          if (this.dataSrc.value.length === 0) {
+            var message = 'Sem dados';
+            var action = 'Fechar';
+            this._snackBar.open(message, action);
+            this.carregando = false;
+          }
+          else{
+            this.client_id = this.dataSrc.value[0].contactid;
+            this.dynamicsService.getDynamicsCode(this.client_id).subscribe(
+              data => {
+                this.dataSrc = data;
+                this.dataSource = this.dataSrc.value;
+                this.pesquisa_efetuada = true;
+                this.carregando = false;
+                console.log(data['status']);
+                if (this.dataSource.length === 0) {
+                  var message = 'Sem dados';
+                  var action = 'Fechar'
+                  this._snackBar.open(message, action);
+                  this.carregando = false;
+                }          
+              },
+              err => {
+                var message = 'Erro durante a pesquisa. Tente novamente';
                 var action = 'Fechar'
                 this._snackBar.open(message, action);
-              }          
-            },
-            err => {
-              var message = 'Erro durante a pesquisa. Tente novamente';
-              var action = 'Fechar'
-              this._snackBar.open(message, action);
-            }
-  
-            );
+                this.carregando = false;
+              }
+    
+              );
+          }
+          
+        },
+        err => {
+          var message = 'Erro durante a pesquisa. Tente novamente';        
+          var action = 'Fechar'        
+          this._snackBar.open(message, action);
+          this.carregando = false;
         }
-        
-      },
-      err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';        
-        var action = 'Fechar'        
-        this._snackBar.open(message, action);
-      }
-    )
+      )
+    }, 2000)
 
-    this.carregando = false;
   }
 
   
@@ -161,42 +168,65 @@ export class DynamicsHistoricoComponent implements OnInit {
 
     this.dynamicsService.tokenGenerate();
 
-    this.pesquisa_efetuada = true;
-    this.dynamicsService.getDynamicsOrder(pedido).subscribe(
-      data => {
-        this.dataSrc = data;
-        this.dataSource = this.dataSrc.value;
-      }
-    );
+    setTimeout(() => {
+      this.dynamicsService.getDynamicsOrder(pedido).subscribe(
+        data => {
+          this.dataSrc = data;
+          this.dataSource = this.dataSrc.value;
+          this.carregando = false;
+          this.pesquisa_efetuada = true;
+        },
+        (err: HttpErrorResponse) => {
+          this.carregando = false;
+          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
+          var action = 'Fechar'     
+          this._snackBar.open(message, action);
+          this.carregando = false;
+        }
+      );
+    }, 2000)
 
-    this.carregando = false;
   }
 
   pesquisarCpf(cpf: string) {
 
     this.carregando = true;
-    this.pesquisa_efetuada = true;
 
     this.dynamicsService.tokenGenerate();
 
-    this.dynamicsService.getContactDocument(cpf).subscribe(
-      data => {
-        this.dataSrc = data;
-        this.client_id = this.dataSrc.value[0].contactid;
+    setTimeout(() =>{
+      this.dynamicsService.getContactDocument(cpf).subscribe(
+        data => {
+          this.dataSrc = data;
+          this.client_id = this.dataSrc.value[0].contactid;
+  
+          this.dynamicsService.getDynamicsDocument(this.client_id).subscribe(
+            data => {
+              this.dataSrc = data;
+              this.dataSource = this.dataSrc.value;
+              this.carregando = false;
+              this.pesquisa_efetuada = true;
+              this.carregando = false;
+            },
+            (err: HttpErrorResponse) => {
+              this.carregando = false;
+              var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
+              var action = 'Fechar'     
+              this._snackBar.open(message, action);
+            }
+      
+            );
+          
+        },
+        (err: HttpErrorResponse) => {
+          this.carregando = false;
+          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
+          var action = 'Fechar'     
+          this._snackBar.open(message, action);
+        }
+      )
+    }, 2000)
 
-        this.dynamicsService.getDynamicsDocument(this.client_id).subscribe(
-          data => {
-            this.dataSrc = data;
-            this.dataSource = this.dataSrc.value;
-            
-          }
-    
-          );
-        
-      }
-    )
-
-    this.carregando = false;
   }
 
   onSelectId(event: Event) {

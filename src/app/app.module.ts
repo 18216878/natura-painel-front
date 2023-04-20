@@ -64,6 +64,14 @@ import { MecanicaComponent } from './destaques/mecanica/mecanica.component';
 import { RejeicaoPagamentoComponent } from './rejeicao-pagamento/rejeicao-pagamento.component';
 import { Tag2hComponent } from './tag2h/tag2h.component';
 import { InfoDialogComponent } from './home/info-dialog/info-dialog.component';
+import { ProcessProjetoWaveComponent } from './natura-main/process/process-projeto-wave/process-projeto-wave.component';
+import { ProcessValePontosComponent } from './natura-main/process/process-vale-pontos/process-vale-pontos.component';
+import { ProcessPlanoBTrocasComponent } from './natura-main/process/process-plano-b-trocas/process-plano-b-trocas.component';
+import { ProcessPagamentosRejeitadosComponent } from './natura-main/process/process-pagamentos-rejeitados/process-pagamentos-rejeitados.component';
+import { ProcessCadastrosIrregularesComponent } from './natura-main/process/process-cadastros-irregulares/process-cadastros-irregulares.component';
+import { ProcessDynamicsHistoricoComponent } from './natura-main/process/process-dynamics-historico/process-dynamics-historico.component';
+import { ProcessProjetoWaveAvonComponent } from './avon-main/process/process-projeto-wave-avon/process-projeto-wave-avon.component';
+import { ProcessDestaquesComponent } from './natura-main/process/process-destaques/process-destaques.component';
 
 
 @NgModule({
@@ -97,7 +105,15 @@ import { InfoDialogComponent } from './home/info-dialog/info-dialog.component';
     MecanicaComponent,
     RejeicaoPagamentoComponent,
     Tag2hComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    ProcessProjetoWaveComponent,
+    ProcessValePontosComponent,
+    ProcessPlanoBTrocasComponent,
+    ProcessPagamentosRejeitadosComponent,
+    ProcessCadastrosIrregularesComponent,
+    ProcessDynamicsHistoricoComponent,
+    ProcessProjetoWaveAvonComponent,
+    ProcessDestaquesComponent
   ],
   imports: [
     BrowserModule,

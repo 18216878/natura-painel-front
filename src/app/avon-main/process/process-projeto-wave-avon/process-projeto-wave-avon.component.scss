@@ -1,0 +1,32 @@
+*:focus {
+    outline: none;
+  }
+  
+  
+  h2 {
+    color: #E91E63;
+  }
+  
+  
+  a:link,  
+  a:active,
+  a:visited {
+  color: #E91E63;
+  }
+  
+  a {
+    text-decoration: none;
+    padding: 0.2em;
+  }
+  
+  a:hover {
+    background-color: #E91E63;
+    color: #FFF;
+    border-radius: 0.2em;
+  }
+  
+  button {
+    background-color: #E91E63;
+    color: #FFF;
+  }
+  
