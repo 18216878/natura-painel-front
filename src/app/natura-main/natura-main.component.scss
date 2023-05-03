@@ -95,6 +95,14 @@ h4 {
   border-radius: 50%;
 }
 
+.simulador-lucro {
+  background-image: url('../../assets/img/lucro-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .pagamento-avatar {
   background-image: url('../../assets/img/pagamento-avatar.png');
   background-size: cover;
@@ -187,6 +195,12 @@ h4 {
 
 .imgSimulador {
   background-image: url('../../assets/img/simulador-home.jpg');
+  background-size: cover;
+
+}
+
+.imgLucro {
+  background-image: url('../../assets/img/lucro.jpg');
   background-size: cover;
 
 }

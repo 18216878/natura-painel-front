@@ -72,6 +72,11 @@ import { ProcessCadastrosIrregularesComponent } from './natura-main/process/proc
 import { ProcessDynamicsHistoricoComponent } from './natura-main/process/process-dynamics-historico/process-dynamics-historico.component';
 import { ProcessProjetoWaveAvonComponent } from './avon-main/process/process-projeto-wave-avon/process-projeto-wave-avon.component';
 import { ProcessDestaquesComponent } from './natura-main/process/process-destaques/process-destaques.component';
+import { ProcessSimuladorCobrancaComponent } from './natura-main/process/process-simulador-cobranca/process-simulador-cobranca.component';
+import { ProcessRejeicaoPagamentoComponent } from './avon-main/process/process-rejeicao-pagamento/process-rejeicao-pagamento.component';
+import { ProcessTag2hComponent } from './avon-main/process/process-tag2h/process-tag2h.component';
+import { SimuladorLucroDefaultComponent } from './simulador-lucro-default/simulador-lucro-default.component';
+import { ProcessSimuladorLucroDefaultComponent } from './natura-main/process/process-simulador-lucro-default/process-simulador-lucro-default.component';
 
 
 @NgModule({
@@ -113,7 +118,12 @@ import { ProcessDestaquesComponent } from './natura-main/process/process-destaqu
     ProcessCadastrosIrregularesComponent,
     ProcessDynamicsHistoricoComponent,
     ProcessProjetoWaveAvonComponent,
-    ProcessDestaquesComponent
+    ProcessDestaquesComponent,
+    ProcessSimuladorCobrancaComponent,
+    ProcessRejeicaoPagamentoComponent,
+    ProcessTag2hComponent,
+    SimuladorLucroDefaultComponent,
+    ProcessSimuladorLucroDefaultComponent
   ],
   imports: [
     BrowserModule,

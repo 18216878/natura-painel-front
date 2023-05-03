@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { InfoDialogComponent } from '../home/info-dialog/info-dialog.component';
 import { ProcessProjetoWaveAvonComponent } from './process/process-projeto-wave-avon/process-projeto-wave-avon.component';
+import { ProcessRejeicaoPagamentoComponent } from './process/process-rejeicao-pagamento/process-rejeicao-pagamento.component';
+import { ProcessTag2hComponent } from './process/process-tag2h/process-tag2h.component';
 
 @Component({
   selector: 'app-avon-main',
@@ -74,6 +76,14 @@ export class AvonMainComponent implements OnInit {
 
   openProjetoWaveDialog() {
     const dialogRef = this.dialog.open(ProcessProjetoWaveAvonComponent);
+  }
+
+  openRejeicaoPagamentoDialog() {
+    const dialogRef = this.dialog.open(ProcessRejeicaoPagamentoComponent);
+  }
+
+  openTag2hDialog() {
+    const dialogRef = this.dialog.open(ProcessTag2hComponent);
   }
 
 }

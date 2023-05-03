@@ -15,6 +15,8 @@ import { ProcessPagamentosRejeitadosComponent } from './process/process-pagament
 import { ProcessCadastrosIrregularesComponent } from './process/process-cadastros-irregulares/process-cadastros-irregulares.component';
 import { ProcessDynamicsHistoricoComponent } from './process/process-dynamics-historico/process-dynamics-historico.component';
 import { ProcessDestaquesComponent } from './process/process-destaques/process-destaques.component';
+import { ProcessSimuladorCobrancaComponent } from './process/process-simulador-cobranca/process-simulador-cobranca.component';
+import { ProcessSimuladorLucroDefaultComponent } from './process/process-simulador-lucro-default/process-simulador-lucro-default.component';
 
 
 @Component({
@@ -103,9 +105,19 @@ export class NaturaMainComponent implements OnInit {
     const dialogRef = this.dialog.open(ProcessDynamicsHistoricoComponent);
   }
 
+  openSimuladorCobrancaDialog() {
+    const dialogRef = this.dialog.open(ProcessSimuladorCobrancaComponent);
+  }
+
+  openSimuladorLucroDefaultDialog() {
+    const dialogRef = this.dialog.open(ProcessSimuladorLucroDefaultComponent);
+  }
+
   openDestaquesDialog() {
     const dialogRef = this.dialog.open(ProcessDestaquesComponent);
   }
+
+  
 
 
 }

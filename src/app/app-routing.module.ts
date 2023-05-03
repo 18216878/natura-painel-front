@@ -16,6 +16,7 @@ import { ProjetoWaveAvonComponent } from './projeto-wave-avon/projeto-wave-avon.
 import { DestaquesComponent } from './destaques/destaques.component';
 import { RejeicaoPagamentoComponent } from './rejeicao-pagamento/rejeicao-pagamento.component';
 import { Tag2hComponent } from './tag2h/tag2h.component';
+import { SimuladorLucroDefaultComponent } from './simulador-lucro-default/simulador-lucro-default.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'natura/pagamentos-rejeitados', component: PagamentosRejeitadosComponent, canActivate: [AccountGuard] },
   { path: 'natura/dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
+  { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
   { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },

@@ -150,7 +150,27 @@
                 </div>
                 <mat-card-content class="social">
                     <span
-                        
+                        (click)="openSimuladorCobrancaDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="simulador-lucro"></div>
+                    <mat-card-title>Simulador Lucro Default</mat-card-title>
+                    <mat-card-subtitle>Simular valores de lucro das consultoras</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgLucro"
+                    routerLink="/natura/simulador-lucro-default">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openSimuladorLucroDefaultDialog()"
                         #tooltip="matTooltip"
                         matTooltip="Visualizar os procedimentos">
                         <fa-icon [icon]="faCircleInfo"></fa-icon>

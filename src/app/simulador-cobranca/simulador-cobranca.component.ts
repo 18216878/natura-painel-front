@@ -459,6 +459,7 @@ export class SimuladorCobrancaComponent implements OnInit {
 
       this.juros_dia_aplicado = this.juros_mes_aplicado / 30
 
+      this.debito_atualizado = this.debito_atualizado > 0 ? 0 : this.debito_atualizado;
       this.dataSource.map(
         item => {
           item.juros = item.valor * this.juros_mes_aplicado * item.atraso;
@@ -682,8 +683,8 @@ export class SimuladorCobrancaComponent implements OnInit {
     var dataSourceMap = this.dataSource;
 
 
-    // myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
-    myImage.src = './assets/img/revendedora-natura-cadastro.png';
+    myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
+    // myImage.src = './assets/img/revendedora-natura-cadastro.png';
 
     myImage.onload = function(){
 
