@@ -291,7 +291,6 @@ export class SimuladorLucroDefaultComponent implements OnInit {
 
   gerarPdf() {
 
-    console.log(this.valorTotalPedidos)
     if (isNaN(this.valorTotalPedidos) || this.valorTotalPedidos === undefined || this.valorTotalPedidos === 0){
       var message = 'Sem dados para gerar o pdf. Favor efetuar a simulação.';
       var action = 'Fechar';
@@ -337,7 +336,7 @@ export class SimuladorLucroDefaultComponent implements OnInit {
         doc.line(185, 28, 185, 116);
     
         doc.setTextColor(255,87,34);
-        doc.text("CPF", 25, 40);
+        doc.text("CPF da Consultora", 25, 40);
         doc.setTextColor(100);
         doc.text(cpfResumo, 152, 40);
     
@@ -352,7 +351,7 @@ export class SimuladorLucroDefaultComponent implements OnInit {
         doc.setTextColor(100);
         doc.text(lucroNivelPercent, 152, 60);
         
-        var MDRtxPercent = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumSignificantDigits: 2,  maximumSignificantDigits: 2}).format(percentMdrResumo);
+        var MDRtxPercent = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumSignificantDigits: 2,  maximumSignificantDigits: 3}).format(percentMdrResumo);
         doc.setTextColor(255,87,34);
         doc.text("MDR", 25, 70);
         doc.setTextColor(100);
