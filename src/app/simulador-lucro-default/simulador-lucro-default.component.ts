@@ -124,7 +124,6 @@ export class SimuladorLucroDefaultComponent implements OnInit {
     }
     else {
       this.ativarSimulacao = true;
-      console.log(this.cpf);
     }
   }
 
@@ -292,7 +291,8 @@ export class SimuladorLucroDefaultComponent implements OnInit {
 
   gerarPdf() {
 
-    if (this.dataSource.length === 0 || this.valorTotalPedidos === undefined){
+    console.log(this.valorTotalPedidos)
+    if (isNaN(this.valorTotalPedidos) || this.valorTotalPedidos === undefined || this.valorTotalPedidos === 0){
       var message = 'Sem dados para gerar o pdf. Favor efetuar a simulação.';
       var action = 'Fechar';
       this._snackBar.open(message, action);
