@@ -78,6 +78,7 @@ import { ProcessTag2hComponent } from './avon-main/process/process-tag2h/process
 import { SimuladorLucroDefaultComponent } from './simulador-lucro-default/simulador-lucro-default.component';
 import { ProcessSimuladorLucroDefaultComponent } from './natura-main/process/process-simulador-lucro-default/process-simulador-lucro-default.component';
 import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei.component';
+import { ProcessRegularizacaoMeiComponent } from './avon-main/process/process-regularizacao-mei/process-regularizacao-mei.component';
 
 
 @NgModule({
@@ -125,7 +126,8 @@ import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei
     ProcessTag2hComponent,
     SimuladorLucroDefaultComponent,
     ProcessSimuladorLucroDefaultComponent,
-    RegularizacaoMeiComponent
+    RegularizacaoMeiComponent,
+    ProcessRegularizacaoMeiComponent
   ],
   imports: [
     BrowserModule,
