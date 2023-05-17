@@ -96,7 +96,7 @@ export class RejeicaoPagamentoComponent implements OnInit, AfterViewInit {
   formularioRejeicaoPagamento: FormGroup;
   user: string;
 
-  public title: string = "Avon Rejeição de Pagamento";
+  public title: string = "Pagamentos Rejeitados de Empresárias";
   public registro?: string = "";
   public status?: string = "";
   public data?: string = "";

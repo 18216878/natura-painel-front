@@ -10,36 +10,52 @@ import 'moment/locale/pt-br';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
+
 export interface PeriodicElement {
   id: number;
-  programa: string;
-  ano: number;
-  cp_inicial: string;
-  cp_final: string;
-  ln: string;
-  premio: string;
-  fscode: number;
-  acao_final: string;
+  regiao: string;
+  divisao: string;
+  setor: number;
+  equipe: string;
+  registro: number;
+  nome: string;
+  cps_bloqueadas: string;
+  valor_comissao_bloq: string;
+  status_dicas_mei: string;
+  status_credencial: string;
+  situacao_cnpj: string;
+  pagtos_retro_aeps: string;
+  data_aeps: string;
+  pagamento_bloqueado: string;
+  data_importacao: Date;
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
-  selector: 'app-tag2h',
-  templateUrl: './tag2h.component.html',
-  styleUrls: ['./tag2h.component.scss']
+  selector: 'app-regularizacao-mei',
+  templateUrl: './regularizacao-mei.component.html',
+  styleUrls: ['./regularizacao-mei.component.scss']
 })
-export class Tag2hComponent implements OnInit, AfterViewInit {
+export class RegularizacaoMeiComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'programa',
-    'ano',
-    'cp_inicial',
-    'cp_final',
-    'ln',
-    'premio',
-    'fscode',
-    'acao_final'
+    'id',
+    'regiao',
+    'divisao',
+    'setor',
+    'equipe',
+    'registro',
+    'nome',
+    'cps_bloqueadas',
+    'valor_comissao_bloq',
+    'status_dicas_mei',
+    'status_credencial',
+    'situacao_cnpj',
+    'pagtos_retro_aeps',
+    'data_aeps',
+    'pagamento_bloqueado',
+    'data_importacao'
   ];
 
   dataSource: any = ELEMENT_DATA;
@@ -67,24 +83,25 @@ export class Tag2hComponent implements OnInit, AfterViewInit {
 
   storage: Storage;
   router: Router;
-  formularioTag2h: FormGroup;
+  formularioRejeicaoPagamento: FormGroup;
   user: string;
 
-  public title: string = "Avon T2G";
-  public ano?: string = "";
-  public cpInicial?: string = "";
-  public premio?: string = "";
-  public carregando: boolean;
-  identificadores: string[] = ['Ano', 'CP Inicial', 'Prêmio' ];
+  public title: string = "Ação de Regularização MEI";
+  public registro?: string = "";
+  public nome?: string = "";
+
+  identificadores: string[] = ['Registro', 'Nome'];
   selecionado: string;
+  
+  public carregando: boolean;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
-    this.formularioTag2h = this.formBuilder.group({
+    this.formularioRejeicaoPagamento = this.formBuilder.group({
       selecionado:[''],
-      ano:[''],      
-      cpInicial:[''],      
-      premio:['']      
+      registro:[''],      
+      status:[''],      
+      data:['']      
     })
 
     this.pesquisa_efetuada = false;
@@ -95,13 +112,13 @@ export class Tag2hComponent implements OnInit, AfterViewInit {
     this.tableDataSource.paginator = this.paginator;
   }
 
-  pesquisarAno() {
+  pesquisarRegistro() {
 
     this.pesquisa_efetuada = false;
     this.carregando = true;
 
-    var year = parseInt(this.ano);
-    this.painelService.getAvonTag2hAno(year).subscribe(
+    var reg = parseInt(this.registro);
+    this.painelService.getAvonRejeicaoPagamentoRegistro(reg).subscribe(
       data => {
         this.dataSource = data;
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
@@ -125,59 +142,22 @@ export class Tag2hComponent implements OnInit, AfterViewInit {
 
   }
 
-  pesquisarCpInicial() {
+  pesquisarNome() {
 
-    this.pesquisa_efetuada = false;
-    this.carregando = true;
-
-    this.painelService.getAvonTag2hCpInicial(this.cpInicial).subscribe(
+    this.pesquisa_efetuada = true;
+    this.painelService.getDestaquesNome(this.nome).subscribe(
       data => {
         this.dataSource = data;
-        this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
-        this.tableDataSource.paginator = this.paginator;
         if (this.dataSource.length === 0) {
           var message = 'Sem dados';
           var action = 'Fechar';
           this._snackBar.open(message, action);
         }
-        this.carregando = false;
-        this.pesquisa_efetuada = true;
       },
       err => {
         var message = 'Erro durante a pesquisa. Tente novamente';     
         var action = 'Fechar'     
         this._snackBar.open(message, action);
-        this.carregando = false;
-        this.pesquisa_efetuada = true;
-      }
-    )
-
-  }
-
-  pesquisarPremio() {
-
-    this.pesquisa_efetuada = false;
-    this.carregando = true;
-
-    this.painelService.getAvonTag2hPremio(this.premio).subscribe(
-      data => {
-        this.dataSource = data;
-        this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
-        this.tableDataSource.paginator = this.paginator;
-        if (this.dataSource.length === 0) {
-          var message = 'Sem dados';
-          var action = 'Fechar';
-          this._snackBar.open(message, action);
-        }
-        this.carregando = false;
-        this.pesquisa_efetuada = true;
-      },
-      err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
-        this._snackBar.open(message, action);
-        this.carregando = false;
-        this.pesquisa_efetuada = true;
       }
     )
 
@@ -186,7 +166,7 @@ export class Tag2hComponent implements OnInit, AfterViewInit {
   limpar() {
     ELEMENT_DATA = [];
     this.dataSource = ELEMENT_DATA;
-    this.formularioTag2h.reset();
+    this.formularioRejeicaoPagamento.reset();
     this.pesquisa_efetuada = false;
     this.clickedRows.clear();
     this.tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
@@ -197,11 +177,8 @@ export class Tag2hComponent implements OnInit, AfterViewInit {
 
     var valor = event.toString();
     this.selecionado = valor;
-    this.ano = undefined;
-    this.cpInicial = undefined;   
-    this.premio = undefined;
-    this.tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    this.tableDataSource.paginator = this.paginator; 
+    this.registro = undefined;
+    this.nome = undefined;   
     
   }
 
