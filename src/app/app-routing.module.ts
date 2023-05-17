@@ -17,6 +17,7 @@ import { DestaquesComponent } from './destaques/destaques.component';
 import { RejeicaoPagamentoComponent } from './rejeicao-pagamento/rejeicao-pagamento.component';
 import { Tag2hComponent } from './tag2h/tag2h.component';
 import { SimuladorLucroDefaultComponent } from './simulador-lucro-default/simulador-lucro-default.component';
+import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
   { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },
   { path: 'avon/tag2h', component: Tag2hComponent, canActivate: [AccountGuard] },
+  { path: 'avon/acao-regularizacao-mei', component: RegularizacaoMeiComponent, canActivate: [AccountGuard] },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
