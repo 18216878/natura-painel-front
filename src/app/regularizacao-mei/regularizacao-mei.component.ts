@@ -100,8 +100,7 @@ export class RegularizacaoMeiComponent implements OnInit {
     this.formularioRejeicaoPagamento = this.formBuilder.group({
       selecionado:[''],
       registro:[''],      
-      status:[''],      
-      data:['']      
+      nome:['']     
     })
 
     this.pesquisa_efetuada = false;
@@ -118,7 +117,7 @@ export class RegularizacaoMeiComponent implements OnInit {
     this.carregando = true;
 
     var reg = parseInt(this.registro);
-    this.painelService.getAvonRejeicaoPagamentoRegistro(reg).subscribe(
+    this.painelService.getMeiRegistro(reg).subscribe(
       data => {
         this.dataSource = data;
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
@@ -145,19 +144,27 @@ export class RegularizacaoMeiComponent implements OnInit {
   pesquisarNome() {
 
     this.pesquisa_efetuada = true;
-    this.painelService.getDestaquesNome(this.nome).subscribe(
+    this.carregando = true;
+    
+    this.painelService.getMeiNome(this.nome).subscribe(
       data => {
         this.dataSource = data;
+        this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
+        this.tableDataSource.paginator = this.paginator;
         if (this.dataSource.length === 0) {
           var message = 'Sem dados';
           var action = 'Fechar';
           this._snackBar.open(message, action);
         }
+        this.carregando = false;
+        this.pesquisa_efetuada = true;
       },
       err => {
         var message = 'Erro durante a pesquisa. Tente novamente';     
         var action = 'Fechar'     
         this._snackBar.open(message, action);
+        this.carregando = false;
+        this.pesquisa_efetuada = true;
       }
     )
 
@@ -177,9 +184,11 @@ export class RegularizacaoMeiComponent implements OnInit {
 
     var valor = event.toString();
     this.selecionado = valor;
-    this.registro = undefined;
-    this.nome = undefined;   
-    
+    ELEMENT_DATA = [];
+    this.dataSource = ELEMENT_DATA;
+    this.tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    this.tableDataSource.paginator = this.paginator;
   }
+    
 
 }

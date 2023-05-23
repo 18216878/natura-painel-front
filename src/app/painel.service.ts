@@ -64,6 +64,17 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatDestaques/nome?nome=${nome}`)
   }
 
+  
+  public getMeiRegistro(registro: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonRegularizacaoMei/registro?registro=${registro}`)
+  }
+
+  public getMeiNome(nome: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/AvonRegularizacaoMei/nome?nome=${nome}`)
+  }
+
+
+
   public getAvonRejeicaoPagamentoRegistro(registro: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/AvonRejeicaoPagamento/registro?registro=${registro}`)
   }

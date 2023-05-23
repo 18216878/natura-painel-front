@@ -24,7 +24,7 @@
                 <mat-form-field
                   appearance="fill"
                   class="mopMatricula"
-                  color="accent">
+                  color="primary">
             
                   <mat-label>Selecione o Item de Pesquisa</mat-label>
                   <mat-select disableRipple ngDefaultControl
@@ -39,31 +39,6 @@
                 </mat-form-field>
                 
                 <mat-form-field *ngIf="selecionado==='Registro'"
-                class="codigoCn" appearance="fill" color="accent">
-                    <mat-label>Código</mat-label>
-                    <input
-                        matInput
-                        placeholder="Digite o Código da CN"
-                        ngDefaultControl
-                        formControlName="registro"
-                        [(ngModel)]="registro">
-                    <mat-icon matSuffix>account_circle</mat-icon>
-                    <mat-hint>Código CN</mat-hint>
-                  </mat-form-field>  
-
-                <mat-form-field *ngIf="selecionado==='Nome Completo'"
-                class="codigoCn" appearance="fill" color="accent">
-                    <mat-label>Nome Completo</mat-label>
-                    <input
-                        matInput
-                        placeholder="Digite o Nome (ou parte do nome)"
-                        ngDefaultControl
-                        formControlName="nome"
-                        [(ngModel)]="nome">
-                    <mat-icon matSuffix>account_circle</mat-icon>
-                    <mat-hint>Nome Completo</mat-hint>
-                  </mat-form-field>  
-                <mat-form-field 
                 class="codigoCn" appearance="fill" color="primary">
                     <mat-label>Registro</mat-label>
                     <input
@@ -74,7 +49,20 @@
                         [(ngModel)]="registro">
                     <mat-icon matSuffix>account_circle</mat-icon>
                     <mat-hint>Registro</mat-hint>
-                  </mat-form-field>
+                  </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Nome'"
+                class="codigoCn" appearance="fill" color="primary">
+                    <mat-label>Nome Completo</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Nome (ou parte do nome)"
+                        ngDefaultControl
+                        formControlName="nome"
+                        [(ngModel)]="nome">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Nome Completo</mat-hint>
+                  </mat-form-field>  
 
             </div>
 
@@ -84,9 +72,14 @@
                 <button
                     class="validar"
                     mat-raised-button
-                    [disabled]="registro === null || registro ===
+                    [disabled]="(registro === null || registro ===
                     undefined ||
-                    registro === ''"
+                    registro === '')
+                    &&
+                    (
+                      nome === null || nome ===
+                    undefined ||
+                    nome === '')"
                     (click)="limpar()"
                     color="warn"
                     aria-label="Example icon button with a home icon">
@@ -112,7 +105,7 @@
                     mat-raised-button
                     [disabled]="nome=== null || nome==
                     undefined ||
-                    registro=== ''"
+                    nome=== ''"
                     (click)="pesquisarNome()"
                     color="primary"
                     aria-label="Example icon button with a home icon">
@@ -257,6 +250,10 @@
             <table mat-table *ngIf="pesquisa_efetuada===true"
               [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
 
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+              </ng-container>
               
               <ng-container matColumnDef="regiao">
                 <th mat-header-cell *matHeaderCellDef> Região </th>
@@ -341,6 +338,11 @@
               <ng-container matColumnDef="pagamento_bloqueado">
                   <th mat-header-cell *matHeaderCellDef> Pagamento Bloqueado  </th>
                   <td mat-cell *matCellDef="let element"> {{element.pagamento_bloqueado}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="data_importacao">
+                <th mat-header-cell *matHeaderCellDef> Data da Importação  </th>
+                <td mat-cell *matCellDef="let element"> {{element.data_importacao}}</td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
