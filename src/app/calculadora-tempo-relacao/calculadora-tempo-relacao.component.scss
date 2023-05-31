@@ -1,0 +1,324 @@
+.tab {
+    width: 90em;
+}
+
+.titulo-form {
+    padding-bottom: 1em;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FF5722;
+    max-width: 90em;
+    width: 100%;
+
+}
+
+#logoavon {
+    width: 6em;
+    height: 6em;
+    background-size: cover;
+    display: flex;
+    background-image: url('../../assets/img/nat.png');
+  }
+
+  h1 {
+      
+    color: #fff;
+    margin: 1em;
+}
+
+h4 {
+      
+    color: #fff;
+    display: flex;
+    padding: 0.5em;
+    margin-left: 0.2em;
+}
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #FF5722;
+    
+  }
+
+.logout {
+    color: #fff;
+  }
+
+.space {
+    margin: 0.4em;
+
+}
+
+.menu {
+    vertical-align: middle;
+}
+
+.parcelas{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.parcelamento {
+  color: #FF5722;
+  font-weight: bold;
+}
+
+.simulador {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 2em;
+    margin-bottom: 5em;
+    max-width: 90em;
+    width: 100%;
+    max-height: 50em;
+    height: 100%;
+}
+
+.right-side {
+  margin-left: 0;
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-panel {
+    max-width: 90em;
+    width: 100%;
+}
+
+.datas {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+  
+}
+
+
+.box {
+  margin-top: 2em;
+}
+.simulador {
+  display: flex;
+  justify-content: space-between;
+}
+.start {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .side-card {
+    margin-bottom: 2em;
+    width: 90%;
+  }
+
+  .d-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .mopMatr {
+    max-width: 20em;
+    width: 100%;
+    color:#FF5722;
+  }
+
+  .mopMatricula {
+    max-width: 20em;
+    width: 100%;
+    color:#FF5722;
+  }
+
+  .insert-row {
+    max-width: 14em;
+    width: 100%;
+    color:#FF5722;
+    height: 100vh;
+  }
+
+  .painel {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .cardTempoRelacao {
+    color: #FF5722;
+    font-weight: bold;
+    margin-top: 2em;
+    margin-left: 2em;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+    max-width: 90em;
+    width: 100%;
+    max-height: 20em;
+    height: 100%;
+}
+
+.example-form {
+  margin-bottom: 2em;
+  max-width: 90em;
+  width: 20%;
+}
+
+.rodape {
+  margin-bottom: 1em;
+}
+
+.example-card {
+  margin-bottom: 1em;
+  height: 10em;
+}
+
+.titles-card {
+  margin-bottom: 1em;
+  height: 30em;
+}
+
+.tempo-relacao {
+  display: flex;
+  flex-direction: column;
+  max-width: 90em;
+  width: 70%;
+}
+
+.botoes button {
+  margin-bottom: 0.5em;
+}
+
+.content-main {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.carregando {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
+.ml-btn {
+  margin-left: 3em;
+}
+
+.main-card {
+  margin-bottom: 1em;
+  height: 10em;
+}
+
+  table {
+    display: block;
+    max-width: 90em;
+    width: 100%;
+    height: 20em;
+    position: sticky;
+    margin-bottom: 2em;
+
+}
+
+
+.mat-column-select {
+    overflow: visible;
+  }
+
+  .mat-elevation-z8 {    
+    overflow-x: visible;
+  }
+
+  .mat-table {
+    overflow-x: scroll;
+  }
+
+  .mat-cell {
+    padding: 8px 8px 8px 0;
+  }
+
+  .mat-column-pedido,
+  .mat-column-valor_total_pedido,
+  .mat-column-data_pedido,
+  .mat-column-lucro
+   {
+    width: 25% !important;
+  }
+
+
+.mat-cell,
+.mat-header-cell {
+  word-wrap: initial;
+  display: table-cell;
+  padding: 0px 10px;
+  line-break: unset;
+  width: 100%;
+  white-space: nowrap;
+  overflow:initial;
+  vertical-align: middle;
+}
+.mat-row {
+  height: 1.3em;
+}
+.mat-row,
+.mat-header-row {
+  display: table-row;
+  height: 1.5em;
+}
+
+
+
+.demo-row-is-clicked {
+    font-weight: bold;
+  }
+  
+    .mat-row:nth-child(even){
+      background-color: #F8CE9C;
+  }
+          
+  .mat-row:nth-child(odd){
+      background-color: #FBE7CE;
+  }
+  
+  .mat-header-cell, .mat-cell {
+      text-align: center !important;
+      
+  }
+  
+  th.mat-header-cell {
+      text-align: center !important;
+      background-color: #FF5722;
+      color: #FFF;
+  }
+  
+  td, th {
+      text-align: center !important;
+      vertical-align: middle !important;
+  }
+    
+ 

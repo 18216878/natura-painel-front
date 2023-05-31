@@ -1,0 +1,132 @@
+<div class="main">
+    <div class="title">
+        <div>
+          <div id="logoavon"></div>
+        </div>
+        <h1>{{title}}</h1>
+        <div class="menu">
+          <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}}
+          </h4>
+          <button
+            routerLink="/natura"
+            class="logout"
+            color="accent"
+            mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+      </div>
+
+      <p class="space"> </p>
+
+      <div class="simulador">
+        <div class="left-panel">
+          <mat-card class="titles-card">
+              <div class="painel">
+                <form [formGroup]="formularioDatasTempoDeRelacao" class="example-form">
+                    <p class="start datas">
+                        <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                            <mat-label>Data Início</mat-label>
+                            <input
+                            matInput
+                            [readonly]="true"
+                            [matDatepicker]="dataIniPicker"
+                            ngDefaultControl
+                            formControlName="data_ini"
+                            [(ngModel)]="data_ini"
+                            
+                            >
+                            <mat-datepicker-toggle matSuffix [for]="dataIniPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #dataIniPicker></mat-datepicker>
+                          </mat-form-field>
+
+                          <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                            <mat-label>Data Fim</mat-label>
+                            <input
+                            matInput
+                            [readonly]="true"
+                            [matDatepicker]="dataFimPicker"
+                            ngDefaultControl
+                            formControlName="data_fim"
+                            [(ngModel)]="data_fim"
+                            
+                            >
+                            <mat-datepicker-toggle matSuffix [for]="dataFimPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #dataFimPicker></mat-datepicker>
+                          </mat-form-field>
+                      </p>
+                      
+                      <p class="start datas botoes">
+                        <button
+                          class="validar"
+                          mat-raised-button
+                          (click)="inserir(formularioDatasTempoDeRelacao)"
+                          color="accent"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>add</mat-icon> Inserir Dados na Tabela
+                        </button>
+
+                        <button
+                          class="validar"
+                          mat-raised-button
+                          (click)="limpar()"
+                          color="warn"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>delete</mat-icon> Limpar Formulário
+                        </button>
+
+                        <button *ngIf="exibir_tabela===true"
+                          class="validar"
+                          mat-raised-button
+                          (click)="limparTabela()"
+                          color="warn"
+                          aria-label="Example icon button with a home icon">
+                          <mat-icon>delete</mat-icon> Limpar Tabela
+                        </button>
+                      </p>
+
+                        
+                </form>
+                <div class="tempo-relacao">
+                    <div class="container">
+                        <table mat-table
+                          [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+          
+                          <ng-container matColumnDef="tempo_relacao">
+                            <th mat-header-cell *matHeaderCellDef> Tempo de Relação </th>
+                            <td mat-cell *matCellDef="let element"> 🕑 {{element.tempo_relacao}}
+                            </td>
+                          </ng-container>
+    
+                          <ng-container matColumnDef="data_ini">
+                              <th mat-header-cell *matHeaderCellDef> Data Início </th>
+                              <td mat-cell *matCellDef="let element"> 📅 {{element.data_ini | date: 'dd/MM/yyyy'}} </td>
+                          </ng-container>
+          
+                          <ng-container matColumnDef="data_fim">
+                              <th mat-header-cell *matHeaderCellDef> Data Fim </th>
+                              <td mat-cell *matCellDef="let element"> 📅 {{element.data_fim | date: 'dd/MM/yyyy'}} </td>
+                          </ng-container>
+          
+                          <ng-container matColumnDef="dias">
+                            <th mat-header-cell *matHeaderCellDef> Dias </th>
+                            <td mat-cell *matCellDef="let element"> 🕑 {{element.dias}}
+                            </td>
+                          </ng-container>
+                  
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                      </div>
+                      <mat-card class="rodape">
+                        <mat-card-title>🕑 Tempo de Relação (Total)</mat-card-title>
+                        <mat-card-subtitle>
+                            <p class="cardTempoRelacao">{{tempoDeRelacao}}</p> 
+                        </mat-card-subtitle>
+                      </mat-card>
+                </div>
+              </div>
+            </mat-card>
+            
+        </div>
+      </div>
+</div>
+

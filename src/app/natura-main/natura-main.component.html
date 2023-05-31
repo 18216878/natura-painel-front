@@ -136,7 +136,7 @@
             </mat-card>
         </div>
 
-        <div class="home lastRow">
+        <div class="home">
             <mat-card class="example-card">
                 <mat-card-header>
                     <div mat-card-avatar class="simulador-avatar"></div>
@@ -191,6 +191,28 @@
                 <mat-card-content class="social">
                     <span
                         (click)="openDestaquesDialog()"
+                        #tooltip="matTooltip"
+                        matTooltip="Visualizar os procedimentos">
+                        <fa-icon [icon]="faCircleInfo"></fa-icon>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="home lastRow">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="tempo-avatar"></div>
+                    <mat-card-title>Calculadora Tempo de Relação</mat-card-title>
+                    <mat-card-subtitle>Calcular tempo total ativo da consultora</mat-card-subtitle>
+                </mat-card-header>
+                <div
+                    mat-card-image
+                    class="imgHome imgTempo"
+                    routerLink="/natura/calculadora-tempo-de-relacao">
+                </div>
+                <mat-card-content class="social">
+                    <span
+                        (click)="openSimuladorCobrancaDialog()"
                         #tooltip="matTooltip"
                         matTooltip="Visualizar os procedimentos">
                         <fa-icon [icon]="faCircleInfo"></fa-icon>

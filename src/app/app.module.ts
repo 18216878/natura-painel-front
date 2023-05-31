@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { NgxMaskModule } from 'ngx-mask';
 
-
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -79,6 +78,7 @@ import { SimuladorLucroDefaultComponent } from './simulador-lucro-default/simula
 import { ProcessSimuladorLucroDefaultComponent } from './natura-main/process/process-simulador-lucro-default/process-simulador-lucro-default.component';
 import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei.component';
 import { ProcessRegularizacaoMeiComponent } from './avon-main/process/process-regularizacao-mei/process-regularizacao-mei.component';
+import { CalculadoraTempoRelacaoComponent } from './calculadora-tempo-relacao/calculadora-tempo-relacao.component';
 
 
 @NgModule({
@@ -127,7 +127,8 @@ import { ProcessRegularizacaoMeiComponent } from './avon-main/process/process-re
     SimuladorLucroDefaultComponent,
     ProcessSimuladorLucroDefaultComponent,
     RegularizacaoMeiComponent,
-    ProcessRegularizacaoMeiComponent
+    ProcessRegularizacaoMeiComponent,
+    CalculadoraTempoRelacaoComponent
   ],
   imports: [
     BrowserModule,

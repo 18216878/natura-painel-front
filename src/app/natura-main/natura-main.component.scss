@@ -142,6 +142,14 @@ h4 {
   height: 4em;
   border-radius: 50%;
 }
+
+.tempo-avatar {
+  background-image: url('../../assets/img/tempoAvatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
     
 .menu {
   vertical-align: middle;
@@ -201,6 +209,12 @@ h4 {
 
 .imgLucro {
   background-image: url('../../assets/img/lucro.jpg');
+  background-size: cover;
+
+}
+
+.imgTempo {
+  background-image: url('../../assets/img/cardTempoDeRelacao.jpeg');
   background-size: cover;
 
 }

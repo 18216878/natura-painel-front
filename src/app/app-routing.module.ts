@@ -18,6 +18,7 @@ import { RejeicaoPagamentoComponent } from './rejeicao-pagamento/rejeicao-pagame
 import { Tag2hComponent } from './tag2h/tag2h.component';
 import { SimuladorLucroDefaultComponent } from './simulador-lucro-default/simulador-lucro-default.component';
 import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei.component';
+import { CalculadoraTempoRelacaoComponent } from './calculadora-tempo-relacao/calculadora-tempo-relacao.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/calculadora-tempo-de-relacao', component: CalculadoraTempoRelacaoComponent, canActivate: [AccountGuard] },
   { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
   { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },
   { path: 'avon/tag2h', component: Tag2hComponent, canActivate: [AccountGuard] },
