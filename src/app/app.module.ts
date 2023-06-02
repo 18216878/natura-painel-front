@@ -79,6 +79,7 @@ import { ProcessSimuladorLucroDefaultComponent } from './natura-main/process/pro
 import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei.component';
 import { ProcessRegularizacaoMeiComponent } from './avon-main/process/process-regularizacao-mei/process-regularizacao-mei.component';
 import { CalculadoraTempoRelacaoComponent } from './calculadora-tempo-relacao/calculadora-tempo-relacao.component';
+import { ProcessCalculadoraTempoRelacaoComponent } from './natura-main/process/process-calculadora-tempo-relacao/process-calculadora-tempo-relacao.component';
 
 
 @NgModule({
@@ -128,7 +129,8 @@ import { CalculadoraTempoRelacaoComponent } from './calculadora-tempo-relacao/ca
     ProcessSimuladorLucroDefaultComponent,
     RegularizacaoMeiComponent,
     ProcessRegularizacaoMeiComponent,
-    CalculadoraTempoRelacaoComponent
+    CalculadoraTempoRelacaoComponent,
+    ProcessCalculadoraTempoRelacaoComponent
   ],
   imports: [
     BrowserModule,

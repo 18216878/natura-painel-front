@@ -254,20 +254,22 @@ h4 {
     overflow-x: visible;
   }
 
-  .mat-table {
-    overflow-x: scroll;
-  }
+
 
   .mat-cell {
     padding: 8px 8px 8px 0;
   }
 
-  .mat-column-pedido,
-  .mat-column-valor_total_pedido,
-  .mat-column-data_pedido,
-  .mat-column-lucro
-   {
+  .mat-column-tempo_relacao{
+    width: 30% !important;
+  }
+  .mat-column-data_ini{
     width: 25% !important;
+  }
+  .mat-column-data_fim,
+  .mat-column-dias
+   {
+    width: 50% !important;
   }
 
 

@@ -17,6 +17,7 @@ import { ProcessDynamicsHistoricoComponent } from './process/process-dynamics-hi
 import { ProcessDestaquesComponent } from './process/process-destaques/process-destaques.component';
 import { ProcessSimuladorCobrancaComponent } from './process/process-simulador-cobranca/process-simulador-cobranca.component';
 import { ProcessSimuladorLucroDefaultComponent } from './process/process-simulador-lucro-default/process-simulador-lucro-default.component';
+import { ProcessCalculadoraTempoRelacaoComponent } from './process/process-calculadora-tempo-relacao/process-calculadora-tempo-relacao.component';
 
 
 @Component({
@@ -116,8 +117,9 @@ export class NaturaMainComponent implements OnInit {
   openDestaquesDialog() {
     const dialogRef = this.dialog.open(ProcessDestaquesComponent);
   }
-
   
-
+  openCalculadoraTempoDeRelacaoDialog() {
+    const dialogRef = this.dialog.open(ProcessCalculadoraTempoRelacaoComponent);
+  }
 
 }
