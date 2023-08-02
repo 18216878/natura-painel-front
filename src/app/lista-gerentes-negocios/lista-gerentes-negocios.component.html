@@ -1,0 +1,540 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="primary"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioListaGerentesNegocios" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                <mat-form-field
+                  appearance="fill"
+                  class="mopMatricula"
+                  color="primary">
+            
+                  <mat-label>Selecione o Item de Pesquisa</mat-label>
+                  <mat-select disableRipple ngDefaultControl
+                  formControlName="selecionado" [ngModel]="selecionado"
+                  (valueChange)="onSelectId($event)">
+                  <mat-option *ngFor="let id of identificadores" [value]="id">
+                    {{id}}</mat-option>
+                  </mat-select>
+                  <mat-icon matPrefix>search</mat-icon>  
+                  <mat-hint>Selecione uma opção</mat-hint>
+          
+                </mat-form-field>
+                
+                <mat-form-field *ngIf="selecionado==='Código da GV'"
+                class="codigoCn" appearance="fill" color="primary">
+                    <mat-label>Código da GV</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código da GV"
+                        ngDefaultControl
+                        formControlName="cd_gv"
+                        [(ngModel)]="cd_gv">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código da GV</mat-hint>
+                  </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Nome da GV'"
+                class="codigoCn" appearance="fill" color="primary">
+                    <mat-label>Nome da GV</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Nome da GV (ou parte do nome)"
+                        ngDefaultControl
+                        formControlName="nome_gv"
+                        [(ngModel)]="nome_gv">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Nome da GV</mat-hint>
+                  </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Código da GDN'"
+                class="codigoCn" appearance="fill" color="primary">
+                    <mat-label>Código da GDN</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código da GDN"
+                        ngDefaultControl
+                        formControlName="gdn"
+                        [(ngModel)]="gdn">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código da GDN</mat-hint>
+                  </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Nome da GDN'"
+                class="codigoCn" appearance="fill" color="primary">
+                    <mat-label>Nome da GDN</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Nome da GDN (ou parte do nome)"
+                        ngDefaultControl
+                        formControlName="nome_gdn"
+                        [(ngModel)]="nome_gdn">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Nome da GDN</mat-hint>
+                  </mat-form-field>  
+
+                  <mat-form-field *ngIf="selecionado==='Telefone da GDN'"
+                  class="codigoCn" appearance="fill" color="primary">
+                    <mat-label>Telefone da GDN</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Telefone"
+                        ngDefaultControl
+                        matTooltip="Formato do telefone deve ser: XX XXXXXXXXX"
+                        formControlName="tel_preferencial_gdn"
+                        [(ngModel)]="tel_preferencial_gdn">
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-hint>Telefone da GDN</mat-hint>
+                  </mat-form-field> 
+
+                <mat-form-field *ngIf="selecionado==='Código do Setor'"
+                class="codigoCn" appearance="fill" color="primary">
+                  <mat-label>Código do Setor</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite o Código do Setor"
+                      ngDefaultControl
+                      formControlName="cd_setor"
+                      [(ngModel)]="cd_setor">
+                  <mat-icon matSuffix>account_balance</mat-icon>
+                  <mat-hint>Código do Setor</mat-hint>
+                </mat-form-field>  
+
+                 
+
+            </div>
+
+
+            <div class="botoes">
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(cd_gv === null || cd_gv ===
+                    undefined ||
+                    cd_gv === '')
+                    &&
+                    (nome_gv === null || nome_gv ===
+                    undefined ||
+                    nome_gv === '')
+                    &&
+                    (tel_preferencial_gdn === null || tel_preferencial_gdn ===
+                    undefined ||
+                    tel_preferencial_gdn === '')
+                    &&
+                    (cd_setor === null || cd_setor ===
+                    undefined ||
+                    cd_setor === '')
+                    &&
+                    (gdn === null || gdn ===
+                    undefined ||
+                    gdn === '')
+                    &&
+                    (nome_gdn === null || nome_gdn ===
+                    undefined ||
+                    nome_gdn === '')"
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    *ngIf="selecionado==='Código da GV'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cd_gv=== null || cd_gv==
+                    undefined ||
+                    cd_gv=== ''"
+                    (click)="pesquisarCodigoGV()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+
+                <button
+                    *ngIf="selecionado==='Nome da GV'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="nome_gv=== null || nome_gv==
+                    undefined ||
+                    nome_gv=== ''"
+                    (click)="pesquisarNomeGv()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                <button
+                    *ngIf="selecionado==='Código da GDN'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="gdn=== null || gdn==
+                    undefined ||
+                    gdn=== ''"
+                    (click)="pesquisarCodigoGDN()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+
+                <button
+                    *ngIf="selecionado==='Nome da GDN'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="nome_gdn=== null || nome_gdn==
+                    undefined ||
+                    nome_gdn=== ''"
+                    (click)="pesquisarNomeGdn()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='Telefone da GDN'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="tel_preferencial_gdn=== null || tel_preferencial_gdn==
+                    undefined ||
+                    tel_preferencial_gdn=== ''"
+                    (click)="pesquisarTelefoneGdn()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='Código do Setor'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cd_setor=== null || cd_setor==
+                    undefined ||
+                    cd_setor=== ''"
+                    (click)="pesquisarCodigoSetor()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código RE</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome RE</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código GV</p>
+                <p>Clique eu uma linha da tabela para exibir.</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">GV</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da GV</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome da GV</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        
+          
+        </div>
+
+          
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código do Setor</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome do Setor</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código da GDN</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome da GDN</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">E-mail da GDN</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+              
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Telefone Preferencial da GDN</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+          
+        </div>
+      
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código RE</p>
+                <p>{{clickedRow.cd_re}}</p>
+                <p *ngIf="clickedRow.cd_re===null">---</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome RE</p>
+                <p>{{clickedRow.nome_re}}</p>
+                <p *ngIf="clickedRow.nome_re===null">---</p>   
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código GV</p>
+                <p>{{clickedRow.cd_gv}}</p>
+                <p *ngIf="clickedRow.cd_gv===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">GV</p>
+                <p>{{clickedRow.nome_gv}}</p>
+                <p *ngIf="clickedRow.nome_gv===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da GV</p>
+                <p>{{clickedRow.cod_do_gv}}</p>
+                <p *ngIf="clickedRow.cod_do_gv===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome da GV</p>
+                <p>{{clickedRow.nome_do_gv}}</p>
+                <p *ngIf="clickedRow.nome_do_gv===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+        
+          
+        </div>
+
+          
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código do Setor</p>
+                    <p>{{clickedRow.cd_setor}}</p>
+                    <p *ngIf="clickedRow.cd_setor===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome do Setor</p>
+                    <p>{{clickedRow.nome_setor}}</p>
+                    <p *ngIf="clickedRow.nome_setor===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código da GDN</p>
+                    <p>{{clickedRow.gdn}}</p>
+                    <p *ngIf="clickedRow.gdn===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome da GDN</p>
+                    <p>{{clickedRow.nome_gdn}}</p>
+                    <p *ngIf="clickedRow.nome_gdn===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">E-mail da GDN</p>
+                    <p>{{clickedRow.email_gdn}}</p>
+                    <p *ngIf="clickedRow.email_gdn===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+              
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Telefone Preferencial da GDN</p>
+                    <p>{{clickedRow.tel_preferencial_gdn}}</p>
+                    <p *ngIf="clickedRow.tel_preferencial_gdn===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+          
+        </div>
+      
+    </div>
+    
+    <div class="container">
+        <div class="tabela">
+
+          <div class="spinner" *ngIf="carregando===true">
+            <mat-spinner
+                [diameter]="40"
+                color="primary"
+                *ngIf="carregando===true"></mat-spinner>
+            <h3>Carregando...</h3>
+        </div>
+            <table mat-table *ngIf="pesquisa_efetuada===true"
+              [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+              </ng-container>
+              
+              <ng-container matColumnDef="cd_re">
+                <th mat-header-cell *matHeaderCellDef> Código RE </th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_re}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="nome_re">
+                <th mat-header-cell *matHeaderCellDef> Nome RE </th>
+                <td mat-cell *matCellDef="let element"> {{element.nome_re}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="cd_gv">
+                  <th mat-header-cell *matHeaderCellDef> Código GV </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cd_gv}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="nome_gv">
+                <th mat-header-cell *matHeaderCellDef> GV </th>
+                <td mat-cell *matCellDef="let element"> {{element.nome_gv}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="cod_do_gv">
+                  <th mat-header-cell *matHeaderCellDef> Código da GV </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cod_do_gv}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="nome_do_gv">
+                  <th mat-header-cell *matHeaderCellDef> Nome da GV </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nome_do_gv}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="cd_setor">
+                  <th mat-header-cell *matHeaderCellDef> Código do Setor </th>
+                  <td mat-cell *matCellDef="let element"> {{element.cd_setor}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="nome_setor">
+                  <th mat-header-cell *matHeaderCellDef> Nome do Setor </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nome_setor}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="gdn">
+                  <th mat-header-cell *matHeaderCellDef> Código da GDN </th>
+                  <td mat-cell *matCellDef="let element"> {{element.gdn}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="nome_gdn">
+                  <th mat-header-cell *matHeaderCellDef> Nome da GDN </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nome_gdn}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="email_gdn">
+                  <th mat-header-cell *matHeaderCellDef> E-mail da GDN </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email_gdn}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="tel_preferencial_gdn">
+                  <th mat-header-cell *matHeaderCellDef> Telefone Preferencial da GDN </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tel_preferencial_gdn}}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr
+                  mat-row
+                  (click)="clickedRows.clear()"
+                  (click)="clickedRows.add(row)"
+                  [class.demo-row-is-clicked]="clickedRows.has(row)"
+                  *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[10, 15, 20]"
+                showFirstLastButtons
+                aria-label="Select page of periodic elements"
+                color="primary">
+            </mat-paginator>
+        </div>
+        
+    </div>
+    
+    </div>

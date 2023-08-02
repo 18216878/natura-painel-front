@@ -16,7 +16,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #E91E63;
-  max-width: 90em;
+  max-width: 90vw;
   width: 100%;
 
 }
@@ -184,4 +184,16 @@ fa-icon:hover{
 .card-header {
   background-color: #E91E63;
   color: #fff;
+}
+
+.accordion {
+  max-width: 90vw;
+  width: 100%;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
 }

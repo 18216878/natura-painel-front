@@ -24,6 +24,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
@@ -80,6 +81,13 @@ import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei
 import { ProcessRegularizacaoMeiComponent } from './avon-main/process/process-regularizacao-mei/process-regularizacao-mei.component';
 import { CalculadoraTempoRelacaoComponent } from './calculadora-tempo-relacao/calculadora-tempo-relacao.component';
 import { ProcessCalculadoraTempoRelacaoComponent } from './natura-main/process/process-calculadora-tempo-relacao/process-calculadora-tempo-relacao.component';
+import { ListaGerentesNegociosComponent } from './lista-gerentes-negocios/lista-gerentes-negocios.component';
+import { ListaGerentesInterinasComponent } from './lista-gerentes-interinas/lista-gerentes-interinas.component';
+import { LideresDestaquesComponent } from './lideres-destaques/lideres-destaques.component';
+import { ProcessLideresDestaquesComponent } from './natura-main/process/process-lideres-destaques/process-lideres-destaques.component';
+import { ProcessGerentesInterinasComponent } from './natura-main/process/process-gerentes-interinas/process-gerentes-interinas.component';
+import { ProcessGerentesNegociosComponent } from './natura-main/process/process-gerentes-negocios/process-gerentes-negocios.component';
+import { MecanicaLideresComponent } from './lideres-destaques/mecanica-lideres/mecanica-lideres.component';
 
 
 @NgModule({
@@ -130,7 +138,14 @@ import { ProcessCalculadoraTempoRelacaoComponent } from './natura-main/process/p
     RegularizacaoMeiComponent,
     ProcessRegularizacaoMeiComponent,
     CalculadoraTempoRelacaoComponent,
-    ProcessCalculadoraTempoRelacaoComponent
+    ProcessCalculadoraTempoRelacaoComponent,
+    ListaGerentesNegociosComponent,
+    ListaGerentesInterinasComponent,
+    LideresDestaquesComponent,
+    ProcessLideresDestaquesComponent,
+    ProcessGerentesInterinasComponent,
+    ProcessGerentesNegociosComponent,
+    MecanicaLideresComponent
   ],
   imports: [
     BrowserModule,
@@ -158,6 +173,7 @@ import { ProcessCalculadoraTempoRelacaoComponent } from './natura-main/process/p
     MatRadioModule,
     MatSnackBarModule,
     MatPaginatorModule,
+    MatExpansionModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     CurrencyMaskModule

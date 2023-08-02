@@ -18,6 +18,9 @@ import { ProcessDestaquesComponent } from './process/process-destaques/process-d
 import { ProcessSimuladorCobrancaComponent } from './process/process-simulador-cobranca/process-simulador-cobranca.component';
 import { ProcessSimuladorLucroDefaultComponent } from './process/process-simulador-lucro-default/process-simulador-lucro-default.component';
 import { ProcessCalculadoraTempoRelacaoComponent } from './process/process-calculadora-tempo-relacao/process-calculadora-tempo-relacao.component';
+import { ProcessGerentesNegociosComponent } from './process/process-gerentes-negocios/process-gerentes-negocios.component';
+import { ProcessGerentesInterinasComponent } from './process/process-gerentes-interinas/process-gerentes-interinas.component';
+import { ProcessLideresDestaquesComponent } from './process/process-lideres-destaques/process-lideres-destaques.component';
 
 
 @Component({
@@ -121,5 +124,18 @@ export class NaturaMainComponent implements OnInit {
   openCalculadoraTempoDeRelacaoDialog() {
     const dialogRef = this.dialog.open(ProcessCalculadoraTempoRelacaoComponent);
   }
+
+  openListaGerentesNegocios() {
+    const dialogRef = this.dialog.open(ProcessGerentesNegociosComponent);
+  }
+
+  openListaGerentesInterinas() {
+    const dialogRef = this.dialog.open(ProcessGerentesInterinasComponent);
+  }
+
+  openLideresDestaques() {
+    const dialogRef = this.dialog.open(ProcessLideresDestaquesComponent);
+  }
+  
 
 }

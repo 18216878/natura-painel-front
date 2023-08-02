@@ -19,6 +19,9 @@ import { Tag2hComponent } from './tag2h/tag2h.component';
 import { SimuladorLucroDefaultComponent } from './simulador-lucro-default/simulador-lucro-default.component';
 import { RegularizacaoMeiComponent } from './regularizacao-mei/regularizacao-mei.component';
 import { CalculadoraTempoRelacaoComponent } from './calculadora-tempo-relacao/calculadora-tempo-relacao.component';
+import { ListaGerentesNegociosComponent } from './lista-gerentes-negocios/lista-gerentes-negocios.component';
+import { LideresDestaquesComponent } from './lideres-destaques/lideres-destaques.component';
+import { ListaGerentesInterinasComponent } from './lista-gerentes-interinas/lista-gerentes-interinas.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +38,10 @@ const routes: Routes = [
   { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/calculadora-tempo-de-relacao', component: CalculadoraTempoRelacaoComponent, canActivate: [AccountGuard] },
+  { path: 'natura/lista-gerentes-de-negocio', component: ListaGerentesNegociosComponent, canActivate: [AccountGuard] },
+  { path: 'natura/lista-gerentes-interinas', component: ListaGerentesInterinasComponent, canActivate: [AccountGuard] },
+  { path: 'natura/liders-destaques', component: LideresDestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
   { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },
   { path: 'avon/tag2h', component: Tag2hComponent, canActivate: [AccountGuard] },

@@ -1,0 +1,102 @@
+.mecanica {
+    width: 50em;
+      height: 28em;
+      background-size: cover;
+      display: flex;
+      background-image: url('../../../assets/img/lideres_destaques_mecanica.png');
+}
+
+.logo {
+    width: 30em;
+      height: 6em;
+      background-size: cover;
+      display: flex;
+      background-image: url('../../../assets/img/lideres_destaques_mecanica_logo.png');
+      margin-bottom: 2em;
+}
+
+h2 {
+    color: #FF5722;
+}
+
+button {
+    background-color: #FF5722;
+    color: #FFF;
+}
+
+.categorias {
+    width: 100%;
+    background-color: #FF5722;
+    color: #FFF;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.listCategorias {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pontosDestaques {
+    background-color: #7030A0;
+    color: #FFF;
+    align-items: center;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.cpv {
+    background-color: #724C5A;
+    color: #FFF;
+    align-items: center;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.listCategoriasItem {
+    max-width: 80;
+    width: 45%;
+    margin: 1em;
+    border-radius: 0.5em;
+    border: 1px solid #FF5722;
+    padding: 0.5em;
+    height: 16em;
+}
+
+.listCategoriasItemBonus {
+    max-width: 80;
+    width: 95%;
+    margin: 1em;
+    border-radius: 0.5em;
+    border: 1px solid #FF5722;
+    padding: 0.5em;
+    height: 10em;
+}
+
+.bonus {
+    background-color: #000;
+    color: #FFF;
+    align-items: center;
+    text-align: center;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.premiacao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.item {
+    color: #FF5722;
+    font-weight: bold;
+  }
+.calculo {
+    font-weight: bold;
+}

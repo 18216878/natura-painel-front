@@ -9,92 +9,104 @@
             </div>
         </header>
         <p class="space"> </p>
-        <div class="home">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="una-avatar"></div>
-                    <mat-card-title>Projeto Wave</mat-card-title>
-                    <mat-card-subtitle>Pesquisar as consultoras Natura e representantes Avon</mat-card-subtitle>
-                </mat-card-header>
-                <div
-                    mat-card-image
-                    class="imgHome imgWave"
-                    routerLink="/avon/projeto-wave"></div>
-                <mat-card-content class="social">
-                    <span
-                        (click)="openProjetoWaveDialog()"
-                        #tooltip="matTooltip"
-                        matTooltip="Visualizar os procedimentos">
-                        <fa-icon [icon]="faCircleInfo"></fa-icon>
-                    </span>
-                </mat-card-content>
-            </mat-card>
-
-            <mat-card  class="example-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="pagamento-avatar"></div>
-                    <mat-card-title>Pagamentos Rejeitados de Empresárias</mat-card-title>
-                    <mat-card-subtitle>Pesquisar representantes que tiveram pagamento rejeitado</mat-card-subtitle>
-                </mat-card-header>
-                <div
-                    mat-card-image
-                    class="imgHome imgPagamento"
-                    routerLink="/avon/rejeicao-pagamento">
+        <mat-accordion class="example-headers-align accordion">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Pesquisas
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Exibe as views de Pesquisa
+                        <mat-icon>search</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="home">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="una-avatar"></div>
+                            <mat-card-title>Projeto Wave</mat-card-title>
+                            <mat-card-subtitle>Pesquisar as consultoras Natura e representantes Avon</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgWave"
+                            routerLink="/avon/projeto-wave"></div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openProjetoWaveDialog()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+        
+                    <mat-card  class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="pagamento-avatar"></div>
+                            <mat-card-title>Pagamentos Rejeitados de Empresárias</mat-card-title>
+                            <mat-card-subtitle>Pesquisar representantes que tiveram pagamento rejeitado</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgPagamento"
+                            routerLink="/avon/rejeicao-pagamento">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openRejeicaoPagamentoDialog()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+            
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="tag-avatar"></div>
+                            <mat-card-title>T2G</mat-card-title>
+                            <mat-card-subtitle>Pesquisar consultoras nas bases de Vale Pontos</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgNordeste"
+                            routerLink="/avon/tag2h">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openTag2hDialog()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
                 </div>
-                <mat-card-content class="social">
-                    <span
-                        (click)="openRejeicaoPagamentoDialog()"
-                        #tooltip="matTooltip"
-                        matTooltip="Visualizar os procedimentos">
-                        <fa-icon [icon]="faCircleInfo"></fa-icon>
-                    </span>
-                </mat-card-content>
-            </mat-card>
-    
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="tag-avatar"></div>
-                    <mat-card-title>T2G</mat-card-title>
-                    <mat-card-subtitle>Pesquisar consultoras nas bases de Vale Pontos</mat-card-subtitle>
-                </mat-card-header>
-                <div
-                    mat-card-image
-                    class="imgHome imgNordeste"
-                    routerLink="/avon/tag2h">
+                <div class="home">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="mei-avatar"></div>
+                            <mat-card-title>Ação de Regularização MEI</mat-card-title>
+                            <mat-card-subtitle>Pesquisar as representantes na base de Ação de Regularização MEI</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgMei"
+                            routerLink="/avon/acao-regularizacao-mei"></div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openRegularizacaoMeiDialog()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
                 </div>
-                <mat-card-content class="social">
-                    <span
-                        (click)="openTag2hDialog()"
-                        #tooltip="matTooltip"
-                        matTooltip="Visualizar os procedimentos">
-                        <fa-icon [icon]="faCircleInfo"></fa-icon>
-                    </span>
-                </mat-card-content>
-            </mat-card>
-        </div>
-
-        <div class="home">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="mei-avatar"></div>
-                    <mat-card-title>Ação de Regularização MEI</mat-card-title>
-                    <mat-card-subtitle>Pesquisar as representantes na base de Ação de Regularização MEI</mat-card-subtitle>
-                </mat-card-header>
-                <div
-                    mat-card-image
-                    class="imgHome imgMei"
-                    routerLink="/avon/acao-regularizacao-mei"></div>
-                <mat-card-content class="social">
-                    <span
-                        (click)="openRegularizacaoMeiDialog()"
-                        #tooltip="matTooltip"
-                        matTooltip="Visualizar os procedimentos">
-                        <fa-icon [icon]="faCircleInfo"></fa-icon>
-                    </span>
-                </mat-card-content>
-            </mat-card>
-        </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <p class="space"> </p>
     </div>
-    <p class="space"> </p>
         
 </body>

@@ -107,5 +107,44 @@ export class PainelService {
     );
   }
 
+  public getNatListaGerentesInterinasSetor(setor: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesInterinas/setor?setor_interina=${setor}`)
+  }
+
+  public getNatListaGerentesInterinasNome(nome: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesInterinas/nome?nome_interina=${nome}`)
+  }
+
+  public getNatListaGerentesNegociosCodigoGv(cod_do_gv: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gvcodigo?cod_do_gv=${cod_do_gv}`)
+  }
+
+  public getNatListaGerentesNegociosNomeGv(nome_do_gv: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gvnome?nome_do_gv=${nome_do_gv}`)
+  }
+
+  public getNatListaGerentesNegociosGdn(gdn: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gncodigo?gdn=${gdn}`)
+  }
+
+  public getNatListaGerentesNegociosNomeGdn(nome_gdn: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gnnome?nome_gdn=${nome_gdn}`)
+  }
+
+  public getNatListaGerentesNegociosTelefoneGdn(tel_preferencial_gdn: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gntelefone?tel_preferencial_gdn=${tel_preferencial_gdn}`)
+  }
+
+  public getNatListaGerentesSetor(cd_setor: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/setor?cd_setor=${cd_setor}`)
+  }
+
+  public getNatDestaquesLideresCodigo(codigo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatDestaquesLideres/codigo?codigo=${codigo}`)
+  }
+
+  public getNatDestaquesLideresNome(nome: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatDestaquesLideres/nome?nome=${nome}`)
+  }
 
 }

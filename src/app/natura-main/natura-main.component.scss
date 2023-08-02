@@ -20,7 +20,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #FF5722;
-  max-width: 90em;
+  max-width: 90vw;
   width: 100%;
 
 }
@@ -51,7 +51,7 @@ h4 {
 }
     
 .example-card {
-    max-width: 25em;
+    max-width: 24em;
     margin: 2em;
     transition: transform .5s;
 }
@@ -69,10 +69,36 @@ h4 {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  max-width: 90vw;
+  width: 100%;
 }
     
 .dynamics-avatar {
   background-image: url('../../assets/img/dynamics-original.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.titulo-avatar {
+  background-image: url('../../assets/img/titulo_avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.interinas-avatar {
+  background-image: url('../../assets/img/interinas_avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.GNs-avatar {
+  background-image: url('../../assets/img/gn_avatar.png');
   background-size: cover;
   width: 4em;
   height: 4em;
@@ -161,7 +187,7 @@ h4 {
 }
 
 .imgHome {
-  width: 27em;
+  width: 25em;
   height: 14em;
   zoom: inherit;
 }
@@ -169,11 +195,25 @@ h4 {
 .imgWave {
   background-image: url('../../assets/img/projeto-wave-home.png');
   background-size: cover;
-
 }
 
 .imgDestaques {
   background-image: url('../../assets/img/destaques-podio.jpeg');
+  background-size: cover;
+}
+
+.imgInterinas {
+  background-image: url('../../assets/img/gerentes_interinas.png');
+  background-size: cover;
+}
+
+.imgTitulo {
+  background-image: url('../../assets/img/titulo_corrigido.png');
+  background-size: cover;
+}
+
+.imgGNs {
+  background-image: url('../../assets/img/gerentes_negocios.png');
   background-size: cover;
 }
 
@@ -248,5 +288,21 @@ fa-icon:hover{
   background-color: #FF5722;
   color: #fff;
 }
+
+.accordion {
+  max-width: 90vw;
+  width: 100%;
+}
+
+
+
+
+.example-headers-align .mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
 
 
