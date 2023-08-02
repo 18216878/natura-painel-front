@@ -22,6 +22,7 @@ import { CalculadoraTempoRelacaoComponent } from './calculadora-tempo-relacao/ca
 import { ListaGerentesNegociosComponent } from './lista-gerentes-negocios/lista-gerentes-negocios.component';
 import { LideresDestaquesComponent } from './lideres-destaques/lideres-destaques.component';
 import { ListaGerentesInterinasComponent } from './lista-gerentes-interinas/lista-gerentes-interinas.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'natura/lista-gerentes-de-negocio', component: ListaGerentesNegociosComponent, canActivate: [AccountGuard] },
   { path: 'natura/lista-gerentes-interinas', component: ListaGerentesInterinasComponent, canActivate: [AccountGuard] },
   { path: 'natura/liders-destaques', component: LideresDestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/checkout-pedido-cancelado', component: CheckoutComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
   { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },

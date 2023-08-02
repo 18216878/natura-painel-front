@@ -89,6 +89,7 @@ import { ProcessGerentesInterinasComponent } from './natura-main/process/process
 import { ProcessGerentesNegociosComponent } from './natura-main/process/process-gerentes-negocios/process-gerentes-negocios.component';
 import { MecanicaLideresComponent } from './lideres-destaques/mecanica-lideres/mecanica-lideres.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ProcessCheckoutComponent } from './natura-main/process/process-checkout/process-checkout.component';
 
 
 @NgModule({
@@ -147,7 +148,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProcessGerentesInterinasComponent,
     ProcessGerentesNegociosComponent,
     MecanicaLideresComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ProcessCheckoutComponent
   ],
   imports: [
     BrowserModule,

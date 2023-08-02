@@ -81,6 +81,14 @@ h4 {
   border-radius: 50%;
 }
 
+.checkout-avatar {
+  background-image: url('../../assets/img/checkout.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .titulo-avatar {
   background-image: url('../../assets/img/titulo_avatar.png');
   background-size: cover;
@@ -214,6 +222,11 @@ h4 {
 
 .imgGNs {
   background-image: url('../../assets/img/gerentes_negocios.png');
+  background-size: cover;
+}
+
+.imCheckout {
+  background-image: url('../../assets/img/carrinhoabandonado.png');
   background-size: cover;
 }
 

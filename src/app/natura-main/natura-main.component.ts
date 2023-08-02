@@ -21,6 +21,7 @@ import { ProcessCalculadoraTempoRelacaoComponent } from './process/process-calcu
 import { ProcessGerentesNegociosComponent } from './process/process-gerentes-negocios/process-gerentes-negocios.component';
 import { ProcessGerentesInterinasComponent } from './process/process-gerentes-interinas/process-gerentes-interinas.component';
 import { ProcessLideresDestaquesComponent } from './process/process-lideres-destaques/process-lideres-destaques.component';
+import { ProcessCheckoutComponent } from './process/process-checkout/process-checkout.component';
 
 
 @Component({
@@ -135,6 +136,10 @@ export class NaturaMainComponent implements OnInit {
 
   openLideresDestaques() {
     const dialogRef = this.dialog.open(ProcessLideresDestaquesComponent);
+  }
+
+  openCheckout() {
+    const dialogRef = this.dialog.open(ProcessCheckoutComponent);
   }
   
 

@@ -229,6 +229,26 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="checkout-avatar"></div>
+                            <mat-card-title>Checkout - Pedido Cancelado</mat-card-title>
+                            <mat-card-subtitle>Lista de pedidos onde a consultora não efetivou a compra</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imCheckout"
+                            routerLink="/natura/checkout-pedido-cancelado">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openCheckout()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
                 </div>
             </mat-expansion-panel>
             <p class="space"></p>
