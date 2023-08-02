@@ -147,4 +147,12 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatDestaquesLideres/nome?nome=${nome}`)
   }
 
+  public getNatCheckoutCodigo(codigo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCheckoutCapta/codigo?codigo=${codigo}`)
+  }
+
+  public getNatCheckoutPedido(pedido: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCheckoutCapta/pedido?pedido=${pedido}`)
+  }
+
 }
