@@ -23,6 +23,8 @@ import { ListaGerentesNegociosComponent } from './lista-gerentes-negocios/lista-
 import { LideresDestaquesComponent } from './lideres-destaques/lideres-destaques.component';
 import { ListaGerentesInterinasComponent } from './lista-gerentes-interinas/lista-gerentes-interinas.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { BaseAlocacaoComponent } from './base-alocacao/base-alocacao.component';
+import { MigradasAvonComponent } from './migradas-avon/migradas-avon.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -43,6 +45,8 @@ const routes: Routes = [
   { path: 'natura/lista-gerentes-interinas', component: ListaGerentesInterinasComponent, canActivate: [AccountGuard] },
   { path: 'natura/liders-destaques', component: LideresDestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/checkout-pedido-cancelado', component: CheckoutComponent, canActivate: [AccountGuard] },
+  { path: 'natura/migradas-avon', component: MigradasAvonComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/base-alocacao', component: BaseAlocacaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
   { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },

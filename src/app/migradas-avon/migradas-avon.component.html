@@ -1,0 +1,299 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioMigradasAvon" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                
+                <mat-form-field class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código da Consultora</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Pessoa"
+                        ngDefaultControl
+                        formControlName="cd_consultora"
+                        [(ngModel)]="cd_consultora">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código Pessoa</mat-hint>
+                </mat-form-field>  
+
+            </div>
+
+            <div class="botoes">
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(cd_consultora === null || cd_consultora === undefined || cd_consultora === '')"
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cd_consultora=== null || cd_consultora==
+                    undefined ||
+                    cd_consultora=== ''"
+                    (click)="pesquisaCodigoConsultora()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da Consultora</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome da Consultora</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Grupo Sugerido</p>
+                <p>Clique eu uma linha da tabela para exibir.</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Setor Final</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código GV Final</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código RE Final</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Fechamento Avon</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Início</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Diff</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+          
+        </div>
+      
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da Consultora</p>
+                <p>{{clickedRow.cd_consultora}}</p>
+                <p *ngIf="clickedRow.cd_consultora===null">---</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome da Consultora</p>
+                <p>{{clickedRow.nome_consultora}}</p>
+                <p *ngIf="clickedRow.nome_consultora===null">---</p>   
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Grupo Sugerido</p>
+                <p>{{clickedRow.cd_grupo_final}}</p>
+                <p *ngIf="clickedRow.cd_grupo_final===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Setor Final</p>
+                <p>{{clickedRow.cd_setor_final}}</p>
+                <p *ngIf="clickedRow.cd_setor_final===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código GV Final</p>
+                <p>{{clickedRow.cd_gv_final}}</p>
+                <p *ngIf="clickedRow.cd_gv_final===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+        </div>
+          
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código RE Final</p>
+                    <p>{{clickedRow.cd_re_final}}</p>
+                    <p *ngIf="clickedRow.cd_re_final===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Fechamento Avon</p>
+                    <p>{{clickedRow.fechamento_avon | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.fechamento_avon===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Início</p>
+                    <p>{{clickedRow.data_inicio | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.data_inicio===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Diff</p>
+                    <p>{{clickedRow.diff}}</p>
+                    <p *ngIf="clickedRow.diff===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+            
+        </div>
+      
+    </div>
+    
+    <div class="container">
+        <div class="tabela">
+
+          <div class="spinnerExcel" *ngIf="carregando===true">
+            <mat-spinner
+                [diameter]="40"
+                color="accent"
+                *ngIf="carregando===true"></mat-spinner>
+            <h3>Carregando...</h3>
+        </div>
+        <div>
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="cd_consultora">
+              <th mat-header-cell *matHeaderCellDef> Código da Consultora </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_consultora}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="nome_consultora">
+              <th mat-header-cell *matHeaderCellDef> Nome da Consultora </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_consultora}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_grupo_final">
+              <th mat-header-cell *matHeaderCellDef> Grupo Sugerido </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_grupo_final}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_setor_final">
+                <th mat-header-cell *matHeaderCellDef> Código Setor Final </th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_setor_final}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_gv_final">
+              <th mat-header-cell *matHeaderCellDef> Código GV Final </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_gv_final}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_re_final">
+                <th mat-header-cell *matHeaderCellDef> Código RE Final </th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_re_final}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechamento_avon">
+                <th mat-header-cell *matHeaderCellDef> Fechamento Avon </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechamento_avon | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="data_inicio">
+                <th mat-header-cell *matHeaderCellDef> Data Início </th>
+                <td mat-cell *matCellDef="let element"> {{element.data_inicio | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="diff">
+                <th mat-header-cell *matHeaderCellDef> Diff </th>
+                <td mat-cell *matCellDef="let element"> {{element.diff}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+
+        </div>
+        </div>
+
+    </div>
+
+  </div>

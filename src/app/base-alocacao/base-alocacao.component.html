@@ -1,0 +1,594 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioBaseAlocacao" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                <mat-form-field
+                  appearance="fill"
+                  class="mopMatricula"
+                  color="accent">
+            
+                  <mat-label>Selecione o Item de Pesquisa</mat-label>
+                  <mat-select disableRipple ngDefaultControl
+                  formControlName="selecionado" [ngModel]="selecionado"
+                  (valueChange)="onSelectId($event)">
+                  <mat-option *ngFor="let id of identificadores" [value]="id">
+                    {{id}}</mat-option>
+                  </mat-select>
+                  <mat-icon matPrefix>search</mat-icon>  
+                  <mat-hint>Selecione uma opção</mat-hint>
+          
+                </mat-form-field>
+                
+                <mat-form-field *ngIf="selecionado==='Código Pessoa'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código Pessoa</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Pessoa"
+                        ngDefaultControl
+                        formControlName="cod_pessoa"
+                        [(ngModel)]="cod_pessoa">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código Pessoa</mat-hint>
+                </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Código Gerência Venda'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código Gerência Venda</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Gerência Venda"
+                        ngDefaultControl
+                        formControlName="cod_gerencia_venda"
+                        [(ngModel)]="cod_gerencia_venda">
+                    <mat-icon matSuffix>shop_two</mat-icon>
+                    <mat-hint>Código Gerência Venda</mat-hint>
+                </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Código Setor'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código Setor</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Setor"
+                        ngDefaultControl
+                        formControlName="cod_setor"
+                        [(ngModel)]="cod_setor">
+                    <mat-icon matSuffix>business</mat-icon>
+                    <mat-hint>Código Setor</mat-hint>
+                </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='Código Grupo'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código Grupo</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Grupo"
+                        ngDefaultControl
+                        formControlName="cod_grupo"
+                        [(ngModel)]="cod_grupo">
+                    <mat-icon matSuffix>people</mat-icon>
+                    <mat-hint>Código Grupo</mat-hint>
+                </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='ELO - Código Gerência Venda'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código Gerência Venda</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Gerência Venda Elo"
+                        ngDefaultControl
+                        formControlName="cod_gerencia_venda_elo"
+                        [(ngModel)]="cod_gerencia_venda_elo">
+                    <mat-icon matSuffix>shop_two</mat-icon>
+                    <mat-hint>Código Gerência Venda</mat-hint>
+                </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='ELO - Código Setor'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>ELO - Código Setor</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Setor Elo"
+                        ngDefaultControl
+                        formControlName="cod_setor_elo"
+                        [(ngModel)]="cod_setor_elo">
+                    <mat-icon matSuffix>business</mat-icon>
+                    <mat-hint>Código Setor</mat-hint>
+                </mat-form-field>  
+
+                <mat-form-field *ngIf="selecionado==='ELO - Código Grupo'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>ELO - Código Grupo</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Grupo Elo"
+                        ngDefaultControl
+                        formControlName="cod_grupo_elo"
+                        [(ngModel)]="cod_grupo_elo">
+                    <mat-icon matSuffix>people</mat-icon>
+                    <mat-hint>Código Grupo</mat-hint>
+                </mat-form-field>  
+
+
+            </div>
+
+
+            <div class="botoes">
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(cod_pessoa === null || cod_pessoa === undefined || cod_pessoa === '') &&
+                    (cod_regiao_estrategica === null || cod_regiao_estrategica === undefined || cod_regiao_estrategica === '') &&
+                    (cod_gerencia_venda === null || cod_gerencia_venda === undefined || cod_gerencia_venda === '') &&
+                    (cod_setor === null || cod_setor === undefined || cod_setor === '') &&
+                    (cod_grupo === null || cod_grupo === undefined || cod_grupo === '') &&
+                    (cod_regiao_estrategica_elo === null || cod_regiao_estrategica_elo === undefined || cod_regiao_estrategica_elo === '') &&
+                    (cod_gerencia_venda_elo === null || cod_gerencia_venda_elo === undefined || cod_gerencia_venda_elo === '') &&
+                    (cod_setor_elo === null || cod_setor_elo === undefined || cod_setor_elo === '') &&
+                    (cod_grupo_elo === null || cod_grupo_elo === undefined || cod_grupo_elo === '')"
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    *ngIf="selecionado==='Código Pessoa'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_pessoa=== null || cod_pessoa==
+                    undefined ||
+                    cod_pessoa=== ''"
+                    (click)="pesquisaCodigoPessoa()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='Código Região Estratégica'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_regiao_estrategica=== null || cod_regiao_estrategica==
+                    undefined ||
+                    cod_regiao_estrategica=== ''"
+                    (click)="pesquisaCodigoRegiaoEstrategica()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='Código Gerência Venda'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_gerencia_venda=== null || cod_gerencia_venda==
+                    undefined ||
+                    cod_gerencia_venda=== ''"
+                    (click)="pesquisaCodigoGerenciaVenda()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='Código Setor'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_setor=== null || cod_setor==
+                    undefined ||
+                    cod_setor=== ''"
+                    (click)="pesquisarCodigoSetor()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='Código Grupo'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_grupo=== null || cod_grupo==
+                    undefined ||
+                    cod_grupo=== ''"
+                    (click)="pesquisaCodigoGrupo()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='ELO - Código Região Estratégica'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_regiao_estrategica_elo=== null || cod_regiao_estrategica_elo==
+                    undefined ||
+                    cod_regiao_estrategica_elo=== ''"
+                    (click)="pesquisaEloCodigoRegiaoEstrategica()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='ELO - Código Gerência Venda'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_gerencia_venda_elo=== null || cod_gerencia_venda_elo==
+                    undefined ||
+                    cod_gerencia_venda_elo=== ''"
+                    (click)="pesquisaCodigoGerenciaVendaElo()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='ELO - Código Setor'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_setor_elo=== null || cod_setor_elo==
+                    undefined ||
+                    cod_setor_elo=== ''"
+                    (click)="pesquisarCodigoSetorElo()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+                <button
+                    *ngIf="selecionado==='ELO - Código Grupo'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_grupo_elo=== null || cod_grupo_elo==
+                    undefined ||
+                    cod_grupo_elo=== ''"
+                    (click)="pesquisaCodigoGrupoElo()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Origem</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Pessoa</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome Completo</p>
+                <p>Clique eu uma linha da tabela para exibir.</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Região Estratégica</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Gerência Venda</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Setor</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Grupo</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        
+          
+        </div>
+
+          
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Região Estratégica Elo</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Gerência Venda Elo</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Setor Elo</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Grupo Elo</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+          
+        </div>
+      
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Origem</p>
+                <p>{{clickedRow.origem}}</p>
+                <p *ngIf="clickedRow.origem===null">---</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Pessoa</p>
+                <p>{{clickedRow.cod_pessoa}}</p>
+                <p *ngIf="clickedRow.cod_pessoa===null">---</p>   
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome Completo</p>
+                <p>{{clickedRow.nome_completo_pessoa}}</p>
+                <p *ngIf="clickedRow.nome_completo_pessoa===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Região Estratégica</p>
+                <p>{{clickedRow.cod_regiao_estrategica}}</p>
+                <p *ngIf="clickedRow.cod_regiao_estrategica===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Gerência Venda</p>
+                <p>{{clickedRow.cod_gerencia_venda}}</p>
+                <p *ngIf="clickedRow.cod_gerencia_venda===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Setor</p>
+                <p>{{clickedRow.cod_setor}}</p>
+                <p *ngIf="clickedRow.cod_setor===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Grupo</p>
+                <p>{{clickedRow.cod_grupo}}</p>
+                <p *ngIf="clickedRow.cod_grupo===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+        
+          
+        </div>
+          
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Região Estratégica Elo</p>
+                    <p>{{clickedRow.cod_regiao_estrategica_elo}}</p>
+                    <p *ngIf="clickedRow.cod_regiao_estrategica_elo===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Gerência Venda Elo</p>
+                    <p>{{clickedRow.cod_gerencia_venda_elo}}</p>
+                    <p *ngIf="clickedRow.cod_gerencia_venda_elo===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Setor Elo</p>
+                    <p>{{clickedRow.cod_setor_elo}}</p>
+                    <p *ngIf="clickedRow.cod_setor_elo===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Grupo Elo</p>
+                    <p>{{clickedRow.cod_grupo_elo}}</p>
+                    <p *ngIf="clickedRow.cod_grupo_elo===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+            
+        </div>
+      
+    </div>
+    
+    <div class="container">
+        <div class="tabela">
+
+          <div class="spinnerExcel" *ngIf="carregando===true">
+            <mat-spinner
+                [diameter]="40"
+                color="accent"
+                *ngIf="carregando===true"></mat-spinner>
+            <h3>Carregando...</h3>
+        </div>
+        <div>
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="origem">
+              <th mat-header-cell *matHeaderCellDef> Origem </th>
+              <td mat-cell *matCellDef="let element"> {{element.origem}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="cod_pessoa">
+              <th mat-header-cell *matHeaderCellDef> Código Pessoa </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_pessoa}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nome_completo_pessoa">
+              <th mat-header-cell *matHeaderCellDef> Nome Completo </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_completo_pessoa}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_regiao_estrategica">
+                <th mat-header-cell *matHeaderCellDef> Código Região Estratégica </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_regiao_estrategica}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_gerencia_venda">
+              <th mat-header-cell *matHeaderCellDef> Código Gerência Venda </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_gerencia_venda}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_setor">
+                <th mat-header-cell *matHeaderCellDef> Código Setor </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_setor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_grupo">
+                <th mat-header-cell *matHeaderCellDef> Código Grupo </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_grupo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_setor_grupo">
+                <th mat-header-cell *matHeaderCellDef> Código Setor Grupo </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_setor_grupo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_nivel_atual">
+                <th mat-header-cell *matHeaderCellDef> Código Nível Atual </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_nivel_atual}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="uf_municipio">
+                <th mat-header-cell *matHeaderCellDef> UF - Município </th>
+                <td mat-cell *matCellDef="let element"> {{element.uf_municipio}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="bairro">
+                <th mat-header-cell *matHeaderCellDef> Bairro </th>
+                <td mat-cell *matCellDef="let element"> {{element.bairro}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_regiao_estrategica_elo">
+                <th mat-header-cell *matHeaderCellDef> Código Região Estratégica Elo </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_regiao_estrategica_elo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_gerencia_venda_elo">
+                <th mat-header-cell *matHeaderCellDef> Código Gerência Venda Elo </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_gerencia_venda_elo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_setor_elo">
+                <th mat-header-cell *matHeaderCellDef> Código Setor Elo </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_setor_elo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_grupo_elo">
+                <th mat-header-cell *matHeaderCellDef> Código Grupo Elo </th>
+                <td mat-cell *matCellDef="let element"> {{element.cod_grupo_elo}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+
+        </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="pesquisa_efetuada===true" class="excel">
+      <div class="spinnerExcel" *ngIf="carregandoExcel===true">
+        <mat-spinner
+            [diameter]="40"
+            color="accent"
+            *ngIf="carregandoExcel===true"></mat-spinner>
+        <h3>Gerando Planilha...</h3>
+    </div>
+      <button
+          class="validar"
+          mat-raised-button
+          color="accent"
+          (click)="exportarBaseExcel()"
+          aria-label="Example icon button with a home icon">
+          <fa-icon [icon]="faFileExcel"></fa-icon>
+          Exportar para Excel
+      </button>
+    </div>
+
+    
+  </div>

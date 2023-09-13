@@ -249,6 +249,46 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="avon-avatar"></div>
+                            <mat-card-title>Blackout - Migradas Avon</mat-card-title>
+                            <mat-card-subtitle>Lista de consultoras que vieram da Avon</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgAvon"
+                            routerLink="/natura/migradas-avon">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openMigradasAvon()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+                    <!-- <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="alocacao-avatar"></div>
+                            <mat-card-title>Movimentação de Setor e Grupo (ELO)</mat-card-title>
+                            <mat-card-subtitle>Lista de consultoras mostrando a estrutura de origem e de destino</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgAlocacao"
+                            routerLink="/natura/base-alocacao">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openCheckout()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card> -->
                 </div>
             </mat-expansion-panel>
             <p class="space"></p>

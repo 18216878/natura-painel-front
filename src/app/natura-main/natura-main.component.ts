@@ -22,6 +22,7 @@ import { ProcessGerentesNegociosComponent } from './process/process-gerentes-neg
 import { ProcessGerentesInterinasComponent } from './process/process-gerentes-interinas/process-gerentes-interinas.component';
 import { ProcessLideresDestaquesComponent } from './process/process-lideres-destaques/process-lideres-destaques.component';
 import { ProcessCheckoutComponent } from './process/process-checkout/process-checkout.component';
+import { ProcessMigradasAvonComponent } from './process/process-migradas-avon/process-migradas-avon.component';
 
 
 @Component({
@@ -140,6 +141,10 @@ export class NaturaMainComponent implements OnInit {
 
   openCheckout() {
     const dialogRef = this.dialog.open(ProcessCheckoutComponent);
+  }
+  
+  openMigradasAvon() {
+    const dialogRef = this.dialog.open(ProcessMigradasAvonComponent);
   }
   
 

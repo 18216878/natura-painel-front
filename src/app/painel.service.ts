@@ -155,4 +155,45 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatCheckoutCapta/pedido?pedido=${pedido}`)
   }
 
+  public getNatBaseAlocacaoCodigoPessoa(cod_pessoa: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/codigo-pessoa?cod_pessoa=${cod_pessoa}`)
+  }
+
+  public getNatBaseAlocacaoCodigoRegiaoEstrategica(cod_regiao_estrategica: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/regiao-estrategica?cod_regiao_estrategica=${cod_regiao_estrategica}`)
+  }
+
+  public getNatBaseAlocacaoCodigoGerenciaVenda(cod_gerencia_venda: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/gerencia-venda?cod_gerencia_venda=${cod_gerencia_venda}`)
+  }
+
+  public getNatBaseAlocacaoCodigoSetor(cod_setor: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/setor?cod_setor=${cod_setor}`)
+  }
+
+  public getNatBaseAlocacaoCodigoGrupo(cod_grupo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/grupo?cod_grupo=${cod_grupo}`)
+  }
+
+  public getNatBaseAlocacaoEloCodigoRegiaoEstrategica(cod_regiao_estrategica_elo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-regiao-estrategica?cod_regiao_estrategica_elo=${cod_regiao_estrategica_elo}`)
+  }
+
+  public getNatBaseAlocacaoEloCodigoGerenciaVenda(cod_gerencia_venda_elo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-gerencia-venda?cod_gerencia_venda_elo=${cod_gerencia_venda_elo}`)
+  }
+
+  public getNatBaseAlocacaoEloCodigoSetor(cod_setor_elo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-setor?cod_setor_elo=${cod_setor_elo}`)
+  }
+
+  public getNatBaseAlocacaoEloCodigoGrupo(cod_grupo_elo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-grupo?cod_grupo_elo=${cod_grupo_elo}`)
+  }
+
+  public getNatMigradasAvonCodigoConsultora(cd_consultora: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatMigradasAvon/codigo-consultora?cd_consultora=${cd_consultora}`)
+  }
+
+
 }

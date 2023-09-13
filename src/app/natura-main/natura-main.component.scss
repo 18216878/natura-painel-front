@@ -72,6 +72,14 @@ h4 {
   max-width: 90vw;
   width: 100%;
 }
+
+.avon-avatar {
+  background-image: url('../../assets/img/avon_logo.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
     
 .dynamics-avatar {
   background-image: url('../../assets/img/dynamics-original.png');
@@ -115,6 +123,14 @@ h4 {
 
 .una-avatar {
   background-image: url('../../assets/img/una.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.alocacao-avatar {
+  background-image: url('../../assets/img/alocacao-avatar.png');
   background-size: cover;
   width: 4em;
   height: 4em;
@@ -200,6 +216,11 @@ h4 {
   zoom: inherit;
 }
 
+.imgAvon {
+  background-image: url('../../assets/img/avon-maes.jpg');
+  background-size: cover;
+}
+
 .imgWave {
   background-image: url('../../assets/img/projeto-wave-home.png');
   background-size: cover;
@@ -227,6 +248,11 @@ h4 {
 
 .imCheckout {
   background-image: url('../../assets/img/carrinhoabandonado.png');
+  background-size: cover;
+}
+
+.imgAlocacao {
+  background-image: url('../../assets/img/base-alocacao.png');
   background-size: cover;
 }
 
