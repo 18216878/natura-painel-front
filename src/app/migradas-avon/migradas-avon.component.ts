@@ -77,7 +77,7 @@ export class MigradasAvonComponent implements OnInit, AfterViewInit {
   formularioMigradasAvon: FormGroup;
   user: string;
 
-  public title: string = "Blackout - CB Migrada Avon";
+  public title: string = "Consultoras Migradas Avon";
   public cd_consultora?: string = "";
 
   public carregando: boolean;
