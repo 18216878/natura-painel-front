@@ -1,0 +1,386 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioMigradasAvon" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                
+                <mat-form-field class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código da Consultora</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Pessoa"
+                        ngDefaultControl
+                        formControlName="cd_pessoa"
+                        [(ngModel)]="cd_pessoa">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código Pessoa</mat-hint>
+                </mat-form-field>  
+
+            </div>
+
+            <div class="botoes">
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(cd_pessoa === null || cd_pessoa === undefined || cd_pessoa === '')"
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cd_pessoa=== null || cd_pessoa==
+                    undefined ||
+                    cd_pessoa=== ''"
+                    (click)="pesquisaCodigoConsultora()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Pessoa</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">UF - Município</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Estrutura</p>
+                <p>Clique eu uma linha da tabela para exibir.</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Fechamento Origem</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Fechamento Destino</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Migração No...</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Migração</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Setor</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Grupo Atual</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">CEP</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Grupo Para</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Setor Destino</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+          
+        </div>
+      
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Pessoa</p>
+                <p>{{clickedRow.cd_pessoa}}</p>
+                <p *ngIf="clickedRow.cd_pessoa===null">---</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">UF - Município</p>
+                <p>{{clickedRow.uf_municipio}}</p>
+                <p *ngIf="clickedRow.uf_municipio===null">---</p>   
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Estrutura</p>
+                <p>{{clickedRow.estrutura}}</p>
+                <p *ngIf="clickedRow.estrutura===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Fechamento Origem</p>
+                    <p>{{clickedRow.fechamento_origem | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.fechamento_origem===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Fechamento Destino</p>
+                    <p>{{clickedRow.fechamento_destino | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.fechamento_destino===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Migração No...</p>
+                <p>{{clickedRow.migracao_no}}</p>
+                <p *ngIf="clickedRow.migracao_no===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+        </div>
+          
+        <div class="card">
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Migração</p>
+                    <p>{{clickedRow.data_migracao | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.data_migracao===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Setor</p>
+                    <p>{{clickedRow.cd_setor}}</p>
+                    <p *ngIf="clickedRow.cd_setor===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Grupo Atual</p>
+                    <p>{{clickedRow.cd_grupo_atual}}</p>
+                    <p *ngIf="clickedRow.cd_grupo_atual===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">CEP</p>
+                    <p>{{clickedRow.nm_cep}}</p>
+                    <p *ngIf="clickedRow.nm_cep===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Grupo Para</p>
+                    <p>{{clickedRow.cd_grupo_para}}</p>
+                    <p *ngIf="clickedRow.cd_grupo_para===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código Setor Destino</p>
+                    <p>{{clickedRow.cd_setor_destino}}</p>
+                    <p *ngIf="clickedRow.cd_setor_destino===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+            
+        </div>
+      
+    </div>
+    
+    <div class="container">
+        <div class="tabela">
+
+          <div class="spinnerExcel" *ngIf="carregando===true">
+            <mat-spinner
+                [diameter]="40"
+                color="accent"
+                *ngIf="carregando===true"></mat-spinner>
+            <h3>Carregando...</h3>
+        </div>
+        <div>
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="cd_pessoa">
+              <th mat-header-cell *matHeaderCellDef> Código Pessoa </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_pessoa}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="uf_municipio">
+              <th mat-header-cell *matHeaderCellDef> UF - Município </th>
+              <td mat-cell *matCellDef="let element"> {{element.uf_municipio}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="estrutura">
+              <th mat-header-cell *matHeaderCellDef> Estrutura </th>
+              <td mat-cell *matCellDef="let element"> {{element.estrutura}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="agrup_origem">
+                <th mat-header-cell *matHeaderCellDef> Agrup. Origem </th>
+                <td mat-cell *matCellDef="let element"> {{element.agrup_origem}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechamento_origem">
+                <th mat-header-cell *matHeaderCellDef> Fechamento Origem </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechamento_origem | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="agrup_destino">
+                <th mat-header-cell *matHeaderCellDef> Agrup. Destino </th>
+                <td mat-cell *matCellDef="let element"> {{element.agrup_destino}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechamento_destino">
+                <th mat-header-cell *matHeaderCellDef> Fechamento Destino </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechamento_destino | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="referencia">
+              <th mat-header-cell *matHeaderCellDef> Referência </th>
+              <td mat-cell *matCellDef="let element"> {{element.referencia}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="migracao_no">
+                <th mat-header-cell *matHeaderCellDef> Migração No...</th>
+                <td mat-cell *matCellDef="let element"> {{element.migracao_no}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="data_migracao">
+                <th mat-header-cell *matHeaderCellDef> Data de Migração </th>
+                <td mat-cell *matCellDef="let element"> {{element.data_migracao | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_tipo_papel">
+                <th mat-header-cell *matHeaderCellDef> Cód. Tipo Papel </th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_tipo_papel}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_setor">
+                <th mat-header-cell *matHeaderCellDef> Cód. Setor </th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_setor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_grupo_atual">
+                <th mat-header-cell *matHeaderCellDef> Cód. Grupo Atual </th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_grupo_atual}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nm_cep">
+                <th mat-header-cell *matHeaderCellDef> CEP </th>
+                <td mat-cell *matCellDef="let element"> {{element.nm_cep}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="alocado">
+                <th mat-header-cell *matHeaderCellDef> Alocado </th>
+                <td mat-cell *matCellDef="let element"> {{element.alocado}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_grupo_para">
+                <th mat-header-cell *matHeaderCellDef> Cód. Grupo Para</th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_grupo_para}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_setor_destino">
+                <th mat-header-cell *matHeaderCellDef> Cód. Setor Destino</th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_setor_destino}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+
+        </div>
+        </div>
+
+    </div>
+
+  </div>

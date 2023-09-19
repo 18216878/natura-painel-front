@@ -5,43 +5,62 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { PainelService } from '../painel.service';
+import * as moment from 'moment';
 import 'moment/locale/pt-br';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ExcelService } from '../excel.service';
 
 export interface PeriodicElement {
-  cd_consultora: number;
-  nome_consultora: string;
-  cd_grupo_final: number;
-  cd_setor_final: number;
-  cd_gv_final: number;
-  cd_re_final: number;
-  fechamento_avon: string;
-  data_inicio: string;
-  diff: number;
+  cd_pessoa: number;
+  uf_municipio: string;
+  estrutura: string;
+  agrup_origem: string;
+  fechamento_origem: string;
+  agrup_destino: string;
+  fechamento_destino: string;
+  referencia: string;
+  migracao_no: string;
+  data_migracao: string;
+  cd_tipo_papel: number;
+  cd_setor: number;
+  cd_grupo_atual: number;
+  nm_cep: string;
+  alocado: string;
+  cd_grupo_para: number;
+  cd_setor_destino: number;
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
 
+
 @Component({
-  selector: 'app-migradas-avon',
-  templateUrl: './migradas-avon.component.html',
-  styleUrls: ['./migradas-avon.component.scss']
+  selector: 'app-movimentacao',
+  templateUrl: './movimentacao.component.html',
+  styleUrls: ['./movimentacao.component.scss']
 })
-export class MigradasAvonComponent implements OnInit, AfterViewInit {
+export class MovimentacaoComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = [
-    'cd_consultora',
-    'nome_consultora',
-    'cd_grupo_final',
-    'cd_setor_final',
-    'cd_gv_final',
-    'cd_re_final',
-    'fechamento_avon',
-    'data_inicio',
-    'diff'
+    'cd_pessoa',
+    'uf_municipio',
+    'estrutura',
+    'agrup_origem',
+    'fechamento_origem',
+    'agrup_destino',
+    'fechamento_destino',
+    'referencia',
+    'migracao_no',
+    'data_migracao',
+    'cd_tipo_papel',
+    'cd_setor',
+    'cd_grupo_atual',
+    'nm_cep',
+    'alocado',
+    'cd_grupo_para',
+    'cd_setor_destino'
   ];
+
 
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
@@ -66,6 +85,7 @@ export class MigradasAvonComponent implements OnInit, AfterViewInit {
     this.storage = window.localStorage;
     window.scroll(0, 0);
   }
+
   ngAfterViewInit(): void {
     this.tableDataSource.paginator = this.paginator;
   }
@@ -75,16 +95,15 @@ export class MigradasAvonComponent implements OnInit, AfterViewInit {
   formularioMigradasAvon: FormGroup;
   user: string;
 
-  public title: string = "Consultoras Migradas Avon";
-  public cd_consultora?: string = "";
+  public title: string = "Movimentação ELO";
+  public cd_pessoa?: string = "";
 
   public carregando: boolean;
 
   ngOnInit(): void {
-
     this.user = this.accountService.get('user')?.toString();
     this.formularioMigradasAvon = this.formBuilder.group({
-      cd_consultora:['']
+      cd_pessoa:['']
     })
 
     this.pesquisa_efetuada = false;
@@ -95,9 +114,9 @@ export class MigradasAvonComponent implements OnInit, AfterViewInit {
     this.pesquisa_efetuada = false;
     this.carregando = true;
 
-    var codigoConsultora = parseInt(this.cd_consultora);
+    var codigoPessoa = parseInt(this.cd_pessoa);
 
-    this.painelService.getNatMigradasAvonCodigoConsultora(codigoConsultora).subscribe(
+    this.painelService.getNatMovimentacaoCodigoConsultora(codigoPessoa).subscribe(
       data => {
         this.dataSource = data;
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);

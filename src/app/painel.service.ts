@@ -195,5 +195,9 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatMigradasAvon/codigo-consultora?cd_consultora=${cd_consultora}`)
   }
 
+  public getNatMovimentacaoCodigoConsultora(cd_pessoa: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatMovimentacao/movimentacao?cd_pessoa=${cd_pessoa}`)
+  }
+
 
 }

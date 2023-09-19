@@ -93,6 +93,7 @@ import { ProcessCheckoutComponent } from './natura-main/process/process-checkout
 import { BaseAlocacaoComponent } from './base-alocacao/base-alocacao.component';
 import { MigradasAvonComponent } from './migradas-avon/migradas-avon.component';
 import { ProcessMigradasAvonComponent } from './natura-main/process/process-migradas-avon/process-migradas-avon.component';
+import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 
 
 @NgModule({
@@ -155,7 +156,8 @@ import { ProcessMigradasAvonComponent } from './natura-main/process/process-migr
     ProcessCheckoutComponent,
     BaseAlocacaoComponent,
     MigradasAvonComponent,
-    ProcessMigradasAvonComponent
+    ProcessMigradasAvonComponent,
+    MovimentacaoComponent
   ],
   imports: [
     BrowserModule,
