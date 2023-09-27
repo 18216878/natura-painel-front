@@ -4,15 +4,15 @@ import { Router } from '@angular/router';
 import { AccountService } from '../../../account.service';
 
 @Component({
-  selector: 'app-process-migradas-avon',
-  templateUrl: './process-migradas-avon.component.html',
-  styleUrls: ['./process-migradas-avon.component.scss']
+  selector: 'app-process-recovery',
+  templateUrl: './process-recovery.component.html',
+  styleUrls: ['./process-recovery.component.scss']
 })
-export class ProcessMigradasAvonComponent implements OnInit {
+export class ProcessRecoveryComponent implements OnInit {
 
   router: Router;
   constructor(
-    public dialogRef: MatDialogRef<ProcessMigradasAvonComponent>,
+    public dialogRef: MatDialogRef<ProcessRecoveryComponent>,
     router: Router,
     private accountService: AccountService
   ) { 

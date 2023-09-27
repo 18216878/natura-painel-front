@@ -23,6 +23,7 @@ import { ProcessGerentesInterinasComponent } from './process/process-gerentes-in
 import { ProcessLideresDestaquesComponent } from './process/process-lideres-destaques/process-lideres-destaques.component';
 import { ProcessCheckoutComponent } from './process/process-checkout/process-checkout.component';
 import { ProcessMigradasAvonComponent } from './process/process-migradas-avon/process-migradas-avon.component';
+import { ProcessRecoveryComponent } from './process/process-recovery/process-recovery.component';
 
 
 @Component({
@@ -145,6 +146,10 @@ export class NaturaMainComponent implements OnInit {
   
   openMigradasAvon() {
     const dialogRef = this.dialog.open(ProcessMigradasAvonComponent);
+  }
+  
+  openRecovery() {
+    const dialogRef = this.dialog.open(ProcessRecoveryComponent);
   }
   
 

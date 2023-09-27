@@ -1,0 +1,318 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioRecovery" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                
+                <mat-form-field class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>CPF da Revendedora</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o CPF da Revendedora"
+                        ngDefaultControl
+                        formControlName="cpfrevendedora"
+                        [(ngModel)]="cpfrevendedora"
+                        mask="000.000.000-00">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>CPF da Revendedora</mat-hint>
+                </mat-form-field>  
+
+            </div>
+
+            <div class="botoes">
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(cpfrevendedora === null || cpfrevendedora === undefined || cpfrevendedora === '')"
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cpfrevendedora=== null || cpfrevendedora==
+                    undefined ||
+                    cpfrevendedora=== ''"
+                    (click)="pesquisaCpfRevendedora()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da Consultora</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome Completo</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">CPF Consultora</p>
+                <p>Clique eu uma linha da tabela para exibir.</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">DMACCT</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Valor do Título</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Ação Recovery</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Venda</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Status</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Liquidação</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Origem da Planilha</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+        </div>
+      
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da Consultora</p>
+                <p>{{clickedRow.dmssnum}}</p>
+                <p *ngIf="clickedRow.dmssnum===null">---</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome Completo</p>
+                <p>{{clickedRow.dmname}}</p>
+                <p *ngIf="clickedRow.dmname===null">---</p>   
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">CPF Consultora</p>
+                <p>{{clickedRow.cpfrevendedora | cpf}}</p>
+                <p *ngIf="clickedRow.cpfrevendedora===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">DMACCT</p>
+                <p>{{clickedRow.dmacct}}</p>
+                <p *ngIf="clickedRow.dmacct===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Valor do Título</p>
+                    <p>{{clickedRow.dmcurbal | currency : 'BRL'}}</p>
+                    <p *ngIf="clickedRow.dmcurbal===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+        </div>
+          
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Ação Recovery</p>
+                    <p>{{clickedRow.acao_rcvry}}</p>
+                    <p *ngIf="clickedRow.acao_rcvry===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Venda</p>
+                    <p>{{clickedRow.dt_venda}}</p>
+                    <p *ngIf="clickedRow.dt_venda===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Status</p>
+                    <p>{{clickedRow.liquidados}}</p>
+                    <p *ngIf="clickedRow.liquidados===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Liquidação</p>
+                    <p>{{clickedRow.dt_liquidacao | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.dt_liquidacao===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Origem da Planilha</p>
+                    <p>{{clickedRow.origem}}</p>
+                    <p *ngIf="clickedRow.origem===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+        </div>
+      
+    </div>
+    
+    <div class="container">
+        <div class="tabela">
+
+          <div class="spinnerExcel" *ngIf="carregando===true">
+            <mat-spinner
+                [diameter]="40"
+                color="accent"
+                *ngIf="carregando===true"></mat-spinner>
+            <h3>Carregando...</h3>
+        </div>
+        <div>
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="dmssnum">
+              <th mat-header-cell *matHeaderCellDef> Código da Consultora</th>
+              <td mat-cell *matCellDef="let element"> {{element.dmssnum}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="dmname">
+              <th mat-header-cell *matHeaderCellDef> Nome Completo </th>
+              <td mat-cell *matCellDef="let element"> {{element.dmname}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cpfrevendedora">
+              <th mat-header-cell *matHeaderCellDef> CPF Consultora </th>
+              <td mat-cell *matCellDef="let element"> {{element.cpfrevendedora | cpf}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dmacct">
+                <th mat-header-cell *matHeaderCellDef> DMACCT </th>
+                <td mat-cell *matCellDef="let element"> {{element.dmacct}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dmcurbal">
+                <th mat-header-cell *matHeaderCellDef> Valor do Título </th>
+                <td mat-cell *matCellDef="let element"> {{element.dmcurbal | currency : 'BRL'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="acao_rcvry">
+                <th mat-header-cell *matHeaderCellDef> Ação Recovery </th>
+                <td mat-cell *matCellDef="let element"> {{element.acao_rcvry}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dt_venda">
+                <th mat-header-cell *matHeaderCellDef> Data Venda </th>
+                <td mat-cell *matCellDef="let element"> {{element.dt_venda}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="liquidados">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.liquidados}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dt_liquidacao">
+                <th mat-header-cell *matHeaderCellDef> Data Liquidação </th>
+                <td mat-cell *matCellDef="let element"> {{element.dt_liquidacao | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="origem">
+                <th mat-header-cell *matHeaderCellDef> Origem da Planilha </th>
+                <td mat-cell *matCellDef="let element"> {{element.origem}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+
+        </div>
+        </div>
+
+    </div>
+
+  </div>

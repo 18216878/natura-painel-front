@@ -94,6 +94,8 @@ import { BaseAlocacaoComponent } from './base-alocacao/base-alocacao.component';
 import { MigradasAvonComponent } from './migradas-avon/migradas-avon.component';
 import { ProcessMigradasAvonComponent } from './natura-main/process/process-migradas-avon/process-migradas-avon.component';
 import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
+import { RecoveryComponent } from './recovery/recovery.component';
+import { ProcessRecoveryComponent } from './natura-main/process/process-recovery/process-recovery.component';
 
 
 @NgModule({
@@ -157,7 +159,9 @@ import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
     BaseAlocacaoComponent,
     MigradasAvonComponent,
     ProcessMigradasAvonComponent,
-    MovimentacaoComponent
+    MovimentacaoComponent,
+    RecoveryComponent,
+    ProcessRecoveryComponent
   ],
   imports: [
     BrowserModule,

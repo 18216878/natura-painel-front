@@ -12,55 +12,38 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ExcelService } from '../excel.service';
 
 export interface PeriodicElement {
-  cd_pessoa: number;
-  uf_municipio: string;
-  estrutura: string;
-  agrup_origem: string;
-  fechamento_origem: string;
-  agrup_destino: string;
-  fechamento_destino: string;
-  referencia: string;
-  migracao_no: string;
-  data_migracao: string;
-  cd_tipo_papel: number;
-  cd_setor: number;
-  cd_grupo_atual: number;
-  nm_cep: string;
-  alocado: string;
-  cd_grupo_para: number;
-  cd_setor_destino: number;
-  extra_column1: string;
+  dmssnum: number;
+  dmname: string;
+  cpfrevendedora: string;
+  dmacct: string;
+  dmcurbal: number;
+  acao_rcvry: string;
+  dt_venda: number;
+  liquidados: string;
+  dt_liquidacao: string;
+  origem: string;
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
 
-
 @Component({
-  selector: 'app-movimentacao',
-  templateUrl: './movimentacao.component.html',
-  styleUrls: ['./movimentacao.component.scss']
+  selector: 'app-recovery',
+  templateUrl: './recovery.component.html',
+  styleUrls: ['./recovery.component.scss']
 })
-export class MovimentacaoComponent implements OnInit, AfterViewInit {
+export class RecoveryComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = [
-    'cd_pessoa',
-    'uf_municipio',
-    'estrutura',
-    'agrup_origem',
-    'fechamento_origem',
-    'agrup_destino',
-    'fechamento_destino',
-    'referencia',
-    'migracao_no',
-    'data_migracao',
-    'cd_tipo_papel',
-    'cd_setor',
-    'cd_grupo_atual',
-    'nm_cep',
-    'alocado',
-    'cd_grupo_para',
-    'cd_setor_destino',
-    'extra_column1'
+    'dmssnum',
+    'dmname',
+    'cpfrevendedora',
+    'dmacct',
+    'dmcurbal',
+    'acao_rcvry',
+    'dt_venda',
+    'liquidados',
+    'dt_liquidacao',
+    'origem'
   ];
 
 
@@ -87,38 +70,35 @@ export class MovimentacaoComponent implements OnInit, AfterViewInit {
     this.storage = window.localStorage;
     window.scroll(0, 0);
   }
-
   ngAfterViewInit(): void {
     this.tableDataSource.paginator = this.paginator;
   }
 
   storage: Storage;
   router: Router;
-  formularioMigradasAvon: FormGroup;
+  formularioRecovery: FormGroup;
   user: string;
 
-  public title: string = "Movimentação ELO";
-  public cd_pessoa?: string = "";
+  public title: string = "Recovery";
+  public cpfrevendedora?: string = "";
 
   public carregando: boolean;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
-    this.formularioMigradasAvon = this.formBuilder.group({
-      cd_pessoa:['']
+    this.formularioRecovery = this.formBuilder.group({
+      cpfrevendedora:['']
     })
 
     this.pesquisa_efetuada = false;
     this.carregando = false;
   }
 
-  pesquisaCodigoConsultora(){
+  pesquisaCpfRevendedora(){
     this.pesquisa_efetuada = false;
     this.carregando = true;
 
-    var codigoPessoa = parseInt(this.cd_pessoa);
-
-    this.painelService.getNatMovimentacaoCodigoConsultora(codigoPessoa).subscribe(
+    this.painelService.getNatRecovery(this.cpfrevendedora).subscribe(
       data => {
         this.dataSource = data;
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
@@ -144,7 +124,7 @@ export class MovimentacaoComponent implements OnInit, AfterViewInit {
   limpar() {
     ELEMENT_DATA = [];
     this.dataSource = ELEMENT_DATA;
-    this.formularioMigradasAvon.reset();
+    this.formularioRecovery.reset();
     this.pesquisa_efetuada = false;
     this.clickedRows.clear();
     this.tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);

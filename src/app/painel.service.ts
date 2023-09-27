@@ -199,5 +199,9 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatMovimentacao/movimentacao?cd_pessoa=${cd_pessoa}`)
   }
 
+  public getNatRecovery(cpfrevendedora: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatRecovery/recovery?cpfrevendedora=${cpfrevendedora}`)
+  }
+
 
 }
