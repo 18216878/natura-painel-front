@@ -96,6 +96,9 @@ import { ProcessMigradasAvonComponent } from './natura-main/process/process-migr
 import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { ProcessRecoveryComponent } from './natura-main/process/process-recovery/process-recovery.component';
+import { LegadoMainComponent } from './legado-main/legado-main.component';
+import { VtexComponent } from './vtex/vtex.component';
+import { ProcessVtexComponent } from './legado-main/process/process-vtex/process-vtex.component';
 
 
 @NgModule({
@@ -161,7 +164,10 @@ import { ProcessRecoveryComponent } from './natura-main/process/process-recovery
     ProcessMigradasAvonComponent,
     MovimentacaoComponent,
     RecoveryComponent,
-    ProcessRecoveryComponent
+    ProcessRecoveryComponent,
+    LegadoMainComponent,
+    VtexComponent,
+    ProcessVtexComponent
   ],
   imports: [
     BrowserModule,

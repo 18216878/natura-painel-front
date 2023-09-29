@@ -1,0 +1,361 @@
+body {
+    background-color: #F4F4F3;
+
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F4F4F3;
+  }
+  
+.lastRow {
+  margin-bottom: 2em;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #D1020A;
+  max-width: 90vw;
+  width: 100%;
+
+}
+    
+#logonatura {
+  width: 12em;
+  height: 3em;
+  background-size: cover;
+  display: flex;
+  background-image: url('../../assets/img/consultoria.png');
+}
+    
+h1 {
+  color: #fff;
+}
+
+h4 {
+    
+  color: #fff;
+  display: flex;
+  padding: 0.5em;
+  margin-left: 0.2em;
+}
+    
+.space {
+  margin: 1em;
+
+}
+    
+.example-card {
+    max-width: 24em;
+    margin: 2em;
+    transition: transform .5s;
+}
+      
+.example-card:hover {
+  transform: scale(1.2);
+}
+    
+.example-header-image {
+  background-size: cover;
+}
+
+.home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  max-width: 90vw;
+  width: 100%;
+}
+
+.avon-avatar {
+  background-image: url('../../assets/img/avon_logo.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+    
+.dynamics-avatar {
+  background-image: url('../../assets/img/dynamics-original.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.checkout-avatar {
+  background-image: url('../../assets/img/checkout.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.titulo-avatar {
+  background-image: url('../../assets/img/titulo_avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.interinas-avatar {
+  background-image: url('../../assets/img/interinas_avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.GNs-avatar {
+  background-image: url('../../assets/img/gn_avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.una-avatar {
+  background-image: url('../../assets/img/una.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.alocacao-avatar {
+  background-image: url('../../assets/img/alocacao-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.simulador-avatar {
+  background-image: url('../../assets/img/fatura.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.simulador-lucro {
+  background-image: url('../../assets/img/lucro-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.pagamento-avatar {
+  background-image: url('../../assets/img/pagamento-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.cadastro-avatar {
+  background-image: url('../../assets/img/cadastro-irregular.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.pontos-avatar {
+  background-image: url('../../assets/img/pontos.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.troca-avatar {
+  background-image: url('../../assets/img/troca.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.trofeu-avatar {
+  background-image: url('../../assets/img/trofeu.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.tempo-avatar {
+  background-image: url('../../assets/img/tempoAvatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.recovery-avatar {
+  background-image: url('../../assets/img/recovery-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+    
+.menu {
+  vertical-align: middle;
+  color: #fff;
+}
+    
+.logout {
+  color: #fff;
+}
+
+.imgHome {
+  width: 25em;
+  height: 14em;
+  zoom: inherit;
+}
+
+.imgAvon {
+  background-image: url('../../assets/img/movimentacao-elo-main.jpg');
+  background-size: cover;
+}
+
+.imgVtex {
+  background-image: url('../../assets/img/vtex.png');
+  background-size: cover;
+}
+
+.imgDestaques {
+  background-image: url('../../assets/img/destaques-podio.jpeg');
+  background-size: cover;
+}
+
+.imgInterinas {
+  background-image: url('../../assets/img/gerentes_interinas.png');
+  background-size: cover;
+}
+
+.imgTitulo {
+  background-image: url('../../assets/img/titulo_corrigido.png');
+  background-size: cover;
+}
+
+.imgGNs {
+  background-image: url('../../assets/img/gerentes_negocios.png');
+  background-size: cover;
+}
+
+.imCheckout {
+  background-image: url('../../assets/img/carrinhoabandonado.png');
+  background-size: cover;
+}
+
+.imgAlocacao {
+  background-image: url('../../assets/img/base-alocacao.png');
+  background-size: cover;
+}
+
+.imgTroca {
+  background-image: url('../../assets/img/troca.jpg');
+  background-size: cover;
+
+}
+
+.imgRecovery {
+  background-image: url('../../assets/img/recovery.png');
+  background-size: cover;
+
+}
+
+.imgCadastro {
+  background-image: url('../../assets/img/cadasro.jpg');
+  background-size: cover;
+
+}
+
+.imgPagamento {
+  background-image: url('../../assets/img/pagamento.png');
+  background-size: cover;
+
+}
+
+.imgDynamics {
+  background-image: url('../../assets/img/dynamics-home.jpg');
+  background-size: cover;
+
+}
+
+.imgSimulador {
+  background-image: url('../../assets/img/simulador-home.jpg');
+  background-size: cover;
+
+}
+
+.imgLucro {
+  background-image: url('../../assets/img/lucro.jpg');
+  background-size: cover;
+
+}
+
+.imgTempo {
+  background-image: url('../../assets/img/cardTempoDeRelacao.jpeg');
+  background-size: cover;
+
+}
+
+
+
+.imgNordeste {
+  background-image: url('../../assets/img/dia-das-maes-natura-2021.png');
+  background-size: cover;
+}
+
+
+.imgHome:hover {
+  cursor: pointer;
+}
+
+fa-icon:hover{
+  cursor: pointer;
+}
+
+.social {
+  color: #D1020A;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+
+}
+
+.card-header {
+  background-color: #D1020A;
+  color: #fff;
+}
+
+.accordion {
+  max-width: 90vw;
+  width: 100%;
+}
+
+
+
+
+.example-headers-align .mat-expansion-panel-header-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+
+

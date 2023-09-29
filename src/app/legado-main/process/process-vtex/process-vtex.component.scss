@@ -1,0 +1,35 @@
+*:focus {
+    outline: none;
+}
+
+
+h2 {
+  color: #D1020A;
+}
+  
+.item {
+  font-weight: bold;
+}
+
+a:link,  
+a:active,
+a:visited {
+  color: #D1020A;
+}
+
+a {
+    text-decoration: none;
+    padding: 0.2em;
+}
+
+a:hover {
+    background-color: #D1020A;
+    color: #FFF;
+    border-radius: 0.2em;
+}
+
+button {
+  background-color: #D1020A;
+  color: #FFF;
+}
+  

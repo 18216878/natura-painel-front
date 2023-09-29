@@ -1,0 +1,47 @@
+<body>
+    <div class="main">
+        <header class="title">
+            <div id="logonatura"></div>
+            <h1>Painel Legado - Home</h1>
+            <div class="menu">
+                <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}} </h4>
+                <button routerLink="/home" class="logout" color="primary" mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+            </div>
+        </header>
+        <p class="space"> </p>
+        <mat-accordion class="example-headers-align accordion">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Pesquisas
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Exibe as views de Pesquisa
+                        <mat-icon>search</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="home">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="avon-avatar"></div>
+                            <mat-card-title>Histórico VTEX</mat-card-title>
+                            <mat-card-subtitle>Lista de pedidos na base histórica VTEX, de abr/23 à set/23</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgVtex"
+                            routerLink="/legado/vtex"></div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openVtexDialog()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</body>

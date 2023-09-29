@@ -1,0 +1,300 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/legado"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioVtex" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                
+                <mat-form-field class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Nº do Pedido</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Nº do Pedido"
+                        ngDefaultControl
+                        formControlName="nr_pedido"
+                        [(ngModel)]="nr_pedido">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Nº do Pedido</mat-hint>
+                </mat-form-field>  
+
+            </div>
+
+            <div class="botoes">
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(nr_pedido === null || nr_pedido === undefined || nr_pedido === '')"
+                    (click)="limpar()"
+                    color="primary"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="nr_pedido=== null || nr_pedido==
+                    undefined ||
+                    nr_pedido=== ''"
+                    (click)="pesquisaPedido()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nº do Pedido</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Data do Pedido</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome do Cliente</p>
+                <p>Clique eu uma linha da tabela para exibir.</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Telefone</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">E-mail</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Status do Pedido</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Valor Total</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Modalidade de Pagamento</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Itens do Pedido</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>  
+                </mat-card-content>
+            </mat-card>
+          
+        </div>
+      
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nº do Pedido</p>
+                <p>{{clickedRow.nr_pedido}}</p>
+                <p *ngIf="clickedRow.nr_pedido===null">---</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Data do Pedido</p>
+                <p>{{clickedRow.data_pedido | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+                    <p *ngIf="clickedRow.data_pedido===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Nome do Cliente</p>
+                <p>{{clickedRow.nome_completo}}</p>
+                <p *ngIf="clickedRow.nome_completo===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Telefone</p>
+                <p>{{clickedRow.telefone}}</p>
+                <p *ngIf="clickedRow.telefone===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">E-mail</p>
+                <p>{{clickedRow.email}}</p>
+                <p *ngIf="clickedRow.email===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+
+        </div>
+          
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Status do Pedido</p>
+                    <p>{{clickedRow.status_pedido}}</p>
+                    <p *ngIf="clickedRow.status_pedido===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Valor Total</p>
+                    <p>{{clickedRow.valor_total | currency : 'BRL'}}</p>
+                    <p *ngIf="clickedRow.valor_total===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Modalidade de Pagamento</p>
+                    <p>{{clickedRow.modalidade_pagamento}}</p>
+                    <p *ngIf="clickedRow.modalidade_pagamento===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+                
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Itens do Pedido</p>
+                    <p>{{clickedRow.itens_pedido}}</p>
+                    <p *ngIf="clickedRow.itens_pedido===null">---</p>  
+                </mat-card-content>
+            </mat-card>
+            
+        </div>
+      
+    </div>
+    
+    <div class="container">
+        <div class="tabela">
+
+          <div class="spinnerExcel" *ngIf="carregando===true">
+            <mat-spinner
+                [diameter]="40"
+                color="accent"
+                *ngIf="carregando===true"></mat-spinner>
+            <h3>Carregando...</h3>
+        </div>
+        <div>
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="nr_pedido">
+              <th mat-header-cell *matHeaderCellDef> N° do Pedido </th>
+              <td mat-cell *matCellDef="let element"> {{element.nr_pedido}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="data_pedido">
+                <th mat-header-cell *matHeaderCellDef> Data do Pedido </th>
+                <td mat-cell *matCellDef="let element"> {{element.data_pedido | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="nome_completo">
+              <th mat-header-cell *matHeaderCellDef> Nome do Cliente </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_completo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="telefone">
+              <th mat-header-cell *matHeaderCellDef> Telefone </th>
+              <td mat-cell *matCellDef="let element"> {{element.telefone}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status_pedido">
+                <th mat-header-cell *matHeaderCellDef> Status do Pedido </th>
+                <td mat-cell *matCellDef="let element"> {{element.status_pedido}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="valor_total">
+                <th mat-header-cell *matHeaderCellDef> Valor Total </th>
+                <td mat-cell *matCellDef="let element"> {{element.valor_total | currency : 'BRL'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="modalidade_pagamento">
+              <th mat-header-cell *matHeaderCellDef> Modalidade de Pagamento </th>
+              <td mat-cell *matCellDef="let element"> {{element.modalidade_pagamento}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="itens_pedido">
+                <th mat-header-cell *matHeaderCellDef> Itens do Pedido </th>
+                <td mat-cell *matCellDef="let element"> {{element.itens_pedido}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+
+        </div>
+        </div>
+
+    </div>
+
+  </div>

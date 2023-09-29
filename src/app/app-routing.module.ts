@@ -27,13 +27,16 @@ import { BaseAlocacaoComponent } from './base-alocacao/base-alocacao.component';
 import { MigradasAvonComponent } from './migradas-avon/migradas-avon.component';
 import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 import { RecoveryComponent } from './recovery/recovery.component';
+import { LegadoMainComponent } from './legado-main/legado-main.component';
+import { VtexComponent } from './vtex/vtex.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AccountGuard] },
   { path: 'natura', component: NaturaMainComponent, canActivate: [AccountGuard] },
   { path: 'avon', component: AvonMainComponent, canActivate: [AccountGuard] },
-  { path: 'natura/projeto-wave', component: ProjetoWaveComponent, canActivate: [AccountGuard] },
+  { path: 'legado', component: LegadoMainComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/projeto-wave', component: ProjetoWaveComponent, canActivate: [AccountGuard] },
   { path: 'natura/vale-pontos', component: PesquisaNordesteComponent, canActivate: [AccountGuard] },
   { path: 'natura/plano-b-trocas', component: PlanoBTrocasComponent, canActivate: [AccountGuard] },
   { path: 'natura/cadastros-irregulares', component: CadastrosIrregularesComponent, canActivate: [AccountGuard] },
@@ -52,7 +55,8 @@ const routes: Routes = [
   { path: 'natura/recovery', component: RecoveryComponent, canActivate: [AccountGuard] },
   // { path: 'natura/base-alocacao', component: BaseAlocacaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
-  { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
+  { path: 'legado/vtex', component: VtexComponent, canActivate: [AccountGuard] },
+  // { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
   { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },
   { path: 'avon/tag2h', component: Tag2hComponent, canActivate: [AccountGuard] },
   { path: 'avon/acao-regularizacao-mei', component: RegularizacaoMeiComponent, canActivate: [AccountGuard] },

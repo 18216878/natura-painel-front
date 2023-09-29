@@ -21,7 +21,7 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="home">
-                    <mat-card class="example-card">
+                    <!-- <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="una-avatar"></div>
                             <mat-card-title>Projeto Wave</mat-card-title>
@@ -39,8 +39,29 @@
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
                             </span>
                         </mat-card-content>
-                    </mat-card>
+                    </mat-card> -->
             
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="recovery-avatar"></div>
+                            <mat-card-title>Recovery</mat-card-title>
+                            <mat-card-subtitle>Consultoras com títulos cedidos para a Recovery</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgRecovery"
+                            routerLink="/natura/recovery">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openRecovery()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+
                     <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="pontos-avatar"></div>
@@ -290,7 +311,7 @@
                         </mat-card-content>
                     </mat-card> -->
                 </div>
-                <div class="home">
+                <!-- <div class="home">
                     <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="recovery-avatar"></div>
@@ -311,7 +332,7 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
-                </div>
+                </div> -->
             </mat-expansion-panel>
             <p class="space"></p>
             <mat-expansion-panel class="lastRow">

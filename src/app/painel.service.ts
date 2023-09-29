@@ -203,5 +203,9 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatRecovery/recovery?cpfrevendedora=${cpfrevendedora}`)
   }
 
+  public getVtex(nr_pedido: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatVtex/vtex?nr_pedido=${nr_pedido}`)
+  }
+
 
 }
