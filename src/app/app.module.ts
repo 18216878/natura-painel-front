@@ -99,6 +99,7 @@ import { ProcessRecoveryComponent } from './natura-main/process/process-recovery
 import { LegadoMainComponent } from './legado-main/legado-main.component';
 import { VtexComponent } from './vtex/vtex.component';
 import { ProcessVtexComponent } from './legado-main/process/process-vtex/process-vtex.component';
+import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.component';
 
 
 @NgModule({
@@ -167,7 +168,8 @@ import { ProcessVtexComponent } from './legado-main/process/process-vtex/process
     ProcessRecoveryComponent,
     LegadoMainComponent,
     VtexComponent,
-    ProcessVtexComponent
+    ProcessVtexComponent,
+    MigradasNivelComponent
   ],
   imports: [
     BrowserModule,

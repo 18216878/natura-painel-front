@@ -206,6 +206,10 @@ export class PainelService {
   public getVtex(nr_pedido: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatVtex/vtex?nr_pedido=${nr_pedido}`)
   }
+  
+  public getNatMigradasNivelCodigoConsultora(cd_consultora: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatMigradasNivel/codigo-consultora?cd_consultora=${cd_consultora}`)
+  }
 
 
 }
