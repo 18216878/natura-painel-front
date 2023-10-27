@@ -30,6 +30,7 @@ import { RecoveryComponent } from './recovery/recovery.component';
 import { LegadoMainComponent } from './legado-main/legado-main.component';
 import { VtexComponent } from './vtex/vtex.component';
 import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.component';
+import { AtrasoEntregaComponent } from './atraso-entrega/atraso-entrega.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'natura/recovery', component: RecoveryComponent, canActivate: [AccountGuard] },
   // { path: 'natura/base-alocacao', component: BaseAlocacaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/atraso-entrega', component: AtrasoEntregaComponent, canActivate: [AccountGuard] },
   { path: 'legado/vtex', component: VtexComponent, canActivate: [AccountGuard] },
   { path: 'legado/migradas-nivel', component: MigradasNivelComponent, canActivate: [AccountGuard] },
   // { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },

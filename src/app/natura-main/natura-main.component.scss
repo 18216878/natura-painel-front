@@ -161,6 +161,14 @@ h4 {
   border-radius: 50%;
 }
 
+.atrao-entrega-avatar {
+  background-image: url('../../assets/img/atrso-entrega-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .cadastro-avatar {
   background-image: url('../../assets/img/cadastro-irregular.png');
   background-size: cover;
@@ -236,6 +244,11 @@ h4 {
 
 .imgDestaques {
   background-image: url('../../assets/img/destaques-podio.jpeg');
+  background-size: cover;
+}
+
+.imgAtrasoEntrega {
+  background-image: url('../../assets/img/atraso-entrega.png');
   background-size: cover;
 }
 

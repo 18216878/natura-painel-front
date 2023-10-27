@@ -1,0 +1,275 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioAtrasoEntrega" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                
+                <mat-form-field class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código da Consultora</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código Pessoa"
+                        ngDefaultControl
+                        formControlName="cn"
+                        [(ngModel)]="cn">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código Pessoa</mat-hint>
+                </mat-form-field>  
+
+            </div>
+
+            <div class="botoes">
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(cn === null || cn === undefined || cn === '')"
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cn=== null || cn==
+                    undefined ||
+                    cn=== ''"
+                    (click)="pesquisaCodigoConsultora()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+                
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Título</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Setor</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>       
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Novo Vencimento</p>
+                <p>Clique eu uma linha da tabela para exibir.</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da Consultora</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Status</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Limite de Crédito Atualizado</p>
+                <p>Clique eu uma linha da tabela para exibir.</p>  
+              </mat-card-content>
+            </mat-card>
+        </div>
+
+      
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Título</p>
+                <p>{{clickedRow.cd_titulo}}</p>
+                <p *ngIf="clickedRow.cd_titulo===null">---</p>
+              </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código Setor</p>
+                <p>{{clickedRow.cd_setor}}</p>
+                <p *ngIf="clickedRow.cd_setor===null">---</p>   
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Novo Vencimento</p>
+                    <p>{{clickedRow.novo_vcto | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.novo_vcto===null">---</p>   
+                </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Código da Consultora</p>
+                <p>{{clickedRow.cn}}</p>
+                <p *ngIf="clickedRow.cn===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Status</p>
+                <p>{{clickedRow.status_titulo}}</p>
+                <p *ngIf="clickedRow.status_titulo===null">---</p> 
+              </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="card-width">
+              <mat-card-content>
+                <p class="title-card">Limite de Crédito Atualizado</p>
+                <p>{{clickedRow.limite_credito}}</p>
+                <p *ngIf="clickedRow.limite_credito===null">---</p>  
+              </mat-card-content>
+            </mat-card>
+            
+        </div>
+
+    </div>
+    
+    <div class="container">
+        <div class="tabela">
+
+          <div class="spinnerExcel" *ngIf="carregando===true">
+            <mat-spinner
+                [diameter]="40"
+                color="accent"
+                *ngIf="carregando===true"></mat-spinner>
+            <h3>Carregando...</h3>
+        </div>
+        <div>
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="cd_titulo">
+              <th mat-header-cell *matHeaderCellDef> Código Título </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_titulo}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="cd_ger_venda">
+              <th mat-header-cell *matHeaderCellDef> Código GV </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_ger_venda}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_setor">
+              <th mat-header-cell *matHeaderCellDef> Código Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_setor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nr_parc">
+                <th mat-header-cell *matHeaderCellDef> Nº da Parcela </th>
+                <td mat-cell *matCellDef="let element"> {{element.nr_parc}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dtvenc">
+                <th mat-header-cell *matHeaderCellDef> Data de Vencimento </th>
+                <td mat-cell *matCellDef="let element"> {{element.dtvenc | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="novo_vcto">
+                <th mat-header-cell *matHeaderCellDef> Novo Vencimento </th>
+                <td mat-cell *matCellDef="let element"> {{element.novo_vcto | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="chave">
+                <th mat-header-cell *matHeaderCellDef> Chave </th>
+                <td mat-cell *matCellDef="let element"> {{element.chave}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cn">
+                <th mat-header-cell *matHeaderCellDef> Código da Consultora </th>
+                <td mat-cell *matCellDef="let element"> {{element.cn}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="venc_or">
+                <th mat-header-cell *matHeaderCellDef> Vencimento Origem </th>
+                <td mat-cell *matCellDef="let element"> {{element.venc_or | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="bco_emp">
+              <th mat-header-cell *matHeaderCellDef> Banco </th>
+              <td mat-cell *matCellDef="let element"> {{element.bco_emp}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dif">
+                <th mat-header-cell *matHeaderCellDef> Dif </th>
+                <td mat-cell *matCellDef="let element"> {{element.dif}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cd_tipo_papel">
+                <th mat-header-cell *matHeaderCellDef> Cód. Tipo Papel </th>
+                <td mat-cell *matCellDef="let element"> {{element.cd_tipo_papel}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="status_titulo">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status_titulo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="limite_credito">
+                <th mat-header-cell *matHeaderCellDef> Limite de Crédito Atualizado </th>
+                <td mat-cell *matCellDef="let element"> {{element.limite_credito}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+
+        </div>
+        </div>
+
+    </div>
+
+  </div>

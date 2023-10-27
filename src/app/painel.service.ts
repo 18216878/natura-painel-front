@@ -211,5 +211,10 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatMigradasNivel/codigo-consultora?cd_consultora=${cd_consultora}`)
   }
 
+  public getAtrasoENtrega(cn: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatAtrasoEntrega/codigo-consultora?cn=${cn}`)
+  }
+  
+
 
 }

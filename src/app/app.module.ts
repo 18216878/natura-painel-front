@@ -100,6 +100,8 @@ import { LegadoMainComponent } from './legado-main/legado-main.component';
 import { VtexComponent } from './vtex/vtex.component';
 import { ProcessVtexComponent } from './legado-main/process/process-vtex/process-vtex.component';
 import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.component';
+import { AtrasoEntregaComponent } from './atraso-entrega/atraso-entrega.component';
+import { ProcessAtrasoEntregaComponent } from './natura-main/process/process-atraso-entrega/process-atraso-entrega.component';
 
 
 @NgModule({
@@ -169,7 +171,9 @@ import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.componen
     LegadoMainComponent,
     VtexComponent,
     ProcessVtexComponent,
-    MigradasNivelComponent
+    MigradasNivelComponent,
+    AtrasoEntregaComponent,
+    ProcessAtrasoEntregaComponent
   ],
   imports: [
     BrowserModule,

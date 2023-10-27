@@ -24,6 +24,7 @@ import { ProcessLideresDestaquesComponent } from './process/process-lideres-dest
 import { ProcessCheckoutComponent } from './process/process-checkout/process-checkout.component';
 import { ProcessMigradasAvonComponent } from './process/process-migradas-avon/process-migradas-avon.component';
 import { ProcessRecoveryComponent } from './process/process-recovery/process-recovery.component';
+import { ProcessAtrasoEntregaComponent } from './process/process-atraso-entrega/process-atraso-entrega.component';
 
 
 @Component({
@@ -150,6 +151,10 @@ export class NaturaMainComponent implements OnInit {
   
   openRecovery() {
     const dialogRef = this.dialog.open(ProcessRecoveryComponent);
+  }
+  
+  openAtrasoEntrega() {
+    const dialogRef = this.dialog.open(ProcessAtrasoEntregaComponent);
   }
   
 

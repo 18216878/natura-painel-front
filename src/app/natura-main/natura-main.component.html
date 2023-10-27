@@ -311,6 +311,28 @@
                         </mat-card-content>
                     </mat-card> -->
                 </div>
+                <div class="home">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="atrao-entrega-avatar"></div>
+                            <mat-card-title>Atraso na Entrega Pedidos Avon</mat-card-title>
+                            <mat-card-subtitle>Consultoras listadas na base de Atraso na Entrega e Limite de Crédito</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgAtrasoEntrega"
+                            routerLink="/natura/atraso-entrega">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openAtrasoEntrega()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
                 <!-- <div class="home">
                     <mat-card class="example-card">
                         <mat-card-header>
