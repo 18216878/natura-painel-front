@@ -102,6 +102,7 @@ import { ProcessVtexComponent } from './legado-main/process/process-vtex/process
 import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.component';
 import { AtrasoEntregaComponent } from './atraso-entrega/atraso-entrega.component';
 import { ProcessAtrasoEntregaComponent } from './natura-main/process/process-atraso-entrega/process-atraso-entrega.component';
+import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.component';
 
 
 @NgModule({
@@ -173,7 +174,8 @@ import { ProcessAtrasoEntregaComponent } from './natura-main/process/process-atr
     ProcessVtexComponent,
     MigradasNivelComponent,
     AtrasoEntregaComponent,
-    ProcessAtrasoEntregaComponent
+    ProcessAtrasoEntregaComponent,
+    MovimentacaoEloComponent
   ],
   imports: [
     BrowserModule,

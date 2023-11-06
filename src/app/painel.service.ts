@@ -199,6 +199,10 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatMovimentacao/movimentacao?cd_pessoa=${cd_pessoa}`)
   }
 
+  public getNatMovimentacaoEloCodigoConsultora(codigo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatMovimentacaoElo/movimentacao-elo?codigo=${codigo}`)
+  }
+
   public getNatRecovery(cpfrevendedora: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatRecovery/recovery?cpfrevendedora=${cpfrevendedora}`)
   }

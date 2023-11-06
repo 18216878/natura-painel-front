@@ -31,6 +31,7 @@ import { LegadoMainComponent } from './legado-main/legado-main.component';
 import { VtexComponent } from './vtex/vtex.component';
 import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.component';
 import { AtrasoEntregaComponent } from './atraso-entrega/atraso-entrega.component';
+import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'natura/checkout-pedido-cancelado', component: CheckoutComponent, canActivate: [AccountGuard] },
   // { path: 'natura/migradas-avon', component: MigradasAvonComponent, canActivate: [AccountGuard] },
   { path: 'natura/movimentacao', component: MovimentacaoComponent, canActivate: [AccountGuard] },
+  { path: 'natura/movimentacao-elo', component: MovimentacaoEloComponent, canActivate: [AccountGuard] },
   { path: 'natura/recovery', component: RecoveryComponent, canActivate: [AccountGuard] },
   // { path: 'natura/base-alocacao', component: BaseAlocacaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
