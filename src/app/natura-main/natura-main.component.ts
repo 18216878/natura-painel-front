@@ -25,6 +25,7 @@ import { ProcessCheckoutComponent } from './process/process-checkout/process-che
 import { ProcessMigradasAvonComponent } from './process/process-migradas-avon/process-migradas-avon.component';
 import { ProcessRecoveryComponent } from './process/process-recovery/process-recovery.component';
 import { ProcessAtrasoEntregaComponent } from './process/process-atraso-entrega/process-atraso-entrega.component';
+import { ProcessCalendarioCiclosComponent } from './process/process-calendario-ciclos/process-calendario-ciclos.component';
 
 
 @Component({
@@ -155,6 +156,10 @@ export class NaturaMainComponent implements OnInit {
   
   openAtrasoEntrega() {
     const dialogRef = this.dialog.open(ProcessAtrasoEntregaComponent);
+  }
+  
+  openCalendarioCiclos() {
+    const dialogRef = this.dialog.open(ProcessCalendarioCiclosComponent);
   }
   
 

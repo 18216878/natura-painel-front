@@ -169,6 +169,14 @@ h4 {
   border-radius: 50%;
 }
 
+.calendario-ciclos-avatar {
+  background-image: url('../../assets/img/calendario-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .cadastro-avatar {
   background-image: url('../../assets/img/cadastro-irregular.png');
   background-size: cover;
@@ -274,6 +282,11 @@ h4 {
 
 .imgAlocacao {
   background-image: url('../../assets/img/base-alocacao.png');
+  background-size: cover;
+}
+
+.imgCalendarioCiclos {
+  background-image: url('../../assets/img/calendario-ciclos.png');
   background-size: cover;
 }
 

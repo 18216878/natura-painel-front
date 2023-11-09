@@ -103,6 +103,8 @@ import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.componen
 import { AtrasoEntregaComponent } from './atraso-entrega/atraso-entrega.component';
 import { ProcessAtrasoEntregaComponent } from './natura-main/process/process-atraso-entrega/process-atraso-entrega.component';
 import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.component';
+import { CalendarioCiclosComponent } from './calendario-ciclos/calendario-ciclos.component';
+import { ProcessCalendarioCiclosComponent } from './natura-main/process/process-calendario-ciclos/process-calendario-ciclos.component';
 
 
 @NgModule({
@@ -175,7 +177,9 @@ import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.co
     MigradasNivelComponent,
     AtrasoEntregaComponent,
     ProcessAtrasoEntregaComponent,
-    MovimentacaoEloComponent
+    MovimentacaoEloComponent,
+    CalendarioCiclosComponent,
+    ProcessCalendarioCiclosComponent
   ],
   imports: [
     BrowserModule,

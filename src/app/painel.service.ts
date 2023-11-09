@@ -219,6 +219,14 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatAtrasoEntrega/codigo-consultora?cn=${cn}`)
   }
   
+  public getCalendarioCiclosCodSetor(cod_setor: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioCiclos/codigo-setor?cod_setor=${cod_setor}`)
+  }
+  
+  public getCalendarioCiclosNomeSetor(nome_setor: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioCiclos/nome-setor?nome_setor=${nome_setor}`)
+  }
+  
 
 
 }

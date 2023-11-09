@@ -1,0 +1,337 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioCalendarioCiclos" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                <mat-form-field
+                  appearance="fill"
+                  class="mopMatricula"
+                  color="accent">
+                  <mat-label>Selecione o Item de Pesquisa</mat-label>
+                  <mat-select disableRipple ngDefaultControl
+                  formControlName="selecionado" [ngModel]="selecionado"
+                  (valueChange)="onSelectId($event)">
+                  <mat-option *ngFor="let id of identificadores" [value]="id">
+                    {{id}}</mat-option>
+                  </mat-select>
+                  <mat-icon matPrefix>search</mat-icon>  
+                  <mat-hint>Selecione uma opção</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="selecionado==='Código do Setor'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Código do Setor</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código do Setor"
+                        ngDefaultControl
+                        formControlName="cod_setor"
+                        [(ngModel)]="cod_setor">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código do Setor</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="selecionado==='Nome do Setor'"
+                class="codigoCn" appearance="fill" color="accent">
+                    <mat-label>Nome do Setor</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Nome do Setor"
+                        ngDefaultControl
+                        formControlName="nome_setor"
+                        [(ngModel)]="nome_setor">
+                    <mat-icon matSuffix>add_shopping_cart</mat-icon>
+                    <mat-hint>Nome do Setor</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="botoes">
+                <button
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="(cod_setor === null || cod_setor ===
+                    undefined ||
+                    cod_setor === '')
+                    &&
+                    (nome_setor === null || nome_setor ===
+                    undefined ||
+                    nome_setor === '')"
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    *ngIf="selecionado==='Código do Setor'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_setor=== null || cod_setor==
+                    undefined ||
+                    cod_setor=== ''"
+                    (click)="pesquisarCodigoSetor()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+
+                <button
+                    *ngIf="selecionado==='Nome do Setor'"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="nome_setor=== null || nome_setor==
+                    undefined ||
+                    nome_setor=== ''"
+                    (click)="pesquisarNomeSetor()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome RE</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome GV</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome Setor</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">   
+                <mat-card-content>
+                    <p class="title-card">Ciclo</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data da Abertura</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data do Fechamento</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Estatística</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">   
+                <mat-card-content>
+                    <p class="title-card">Quantidade de Dias</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome RE</p>
+                    <p>{{clickedRow.nome_re}}</p>
+                    <p *ngIf="clickedRow.nome_re===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome GV</p>
+                    <p>{{clickedRow.nome_gv}}</p>
+                    <p *ngIf="clickedRow.nome_gv===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Nome Setor</p>
+                    <p>{{clickedRow.nome_setor}}</p>
+                    <p *ngIf="clickedRow.nome_setor===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Ciclo</p>
+                    <p>{{clickedRow.ciclos}}</p>
+                    <p *ngIf="clickedRow.ciclos===null">---</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data da Abertura</p>
+                    <p>{{clickedRow.dt_abertura | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.dt_abertura===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Fechamento</p>
+                    <p>{{clickedRow.dt_fechamento | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.dt_fechamento===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Estatística</p>
+                    <p>{{clickedRow.dt_estatistica | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.dt_estatistica===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Quantidade de Dias</p>
+                    <p>{{clickedRow.qtde_dias}}</p>
+                    <p *ngIf="clickedRow.qtde_dias===null">---</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <div class="container">
+        <div class="tabela">
+            <div class="spinner" *ngIf="carregando===true">
+                <mat-spinner
+                    [diameter]="40"
+                    color="accent"
+                    *ngIf="carregando===true"></mat-spinner>
+                <h3>Carregando...</h3>
+            </div>
+
+            <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="cod_re">
+              <th mat-header-cell *matHeaderCellDef> Cód. RE </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_re}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="nome_re">
+              <th mat-header-cell *matHeaderCellDef> Nome RE </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_re}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_gv">
+              <th mat-header-cell *matHeaderCellDef> Cód. GV </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_gv}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_setor">
+              <th mat-header-cell *matHeaderCellDef> Cód. Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_setor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nome_setor">
+              <th mat-header-cell *matHeaderCellDef> Nome Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_setor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nome_gv">
+              <th mat-header-cell *matHeaderCellDef> Nome GV </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_gv}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ciclos">
+              <th mat-header-cell *matHeaderCellDef> Ciclos </th>
+              <td mat-cell *matCellDef="let element"> {{element.ciclos}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dt_estatistica">
+              <th mat-header-cell *matHeaderCellDef> Data Estatística </th>
+              <td mat-cell *matCellDef="let element"> {{element.dt_estatistica  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ini_entrega_pedido_avon">
+                <th mat-header-cell *matHeaderCellDef> Início Entrega Pedido Avon </th>
+                <td mat-cell *matCellDef="let element"> {{element.ini_entrega_pedido_avon}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fim_entrega_pedido_avon">
+                <th mat-header-cell *matHeaderCellDef> Término Entrega Pedido Avon </th>
+                <td mat-cell *matCellDef="let element"> {{element.fim_entrega_pedido_avon}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="vazio">
+                <th mat-header-cell *matHeaderCellDef> Vazio </th>
+                <td mat-cell *matCellDef="let element"> {{element.vazio}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> # </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dt_abertura">
+                <th mat-header-cell *matHeaderCellDef> Data da Abertura </th>
+                <td mat-cell *matCellDef="let element"> {{element.dt_abertura | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dt_fechamento">
+                <th mat-header-cell *matHeaderCellDef> Data do Fechamento </th>
+                <td mat-cell *matCellDef="let element"> {{element.dt_fechamento | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="qtde_dias">
+                <th mat-header-cell *matHeaderCellDef> Qtde. Dias </th>
+                <td mat-cell *matCellDef="let element"> {{element.qtde_dias}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+        </div>
+    </div>
+    
+</div>
