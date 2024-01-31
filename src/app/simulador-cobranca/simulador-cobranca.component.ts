@@ -145,7 +145,7 @@ export class SimuladorCobrancaComponent implements OnInit {
 
   feriados = iFeriados;
   
-  public title: string = "Simulador Cobrança";
+  public title: string = "Simulador de Acordo Diferenciado";
 
   ngOnInit(): void {
 

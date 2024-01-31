@@ -8,7 +8,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../../assets/img/avon-natura.png');
+    background-image: url('../../assets/img/Consultoria\ de\ BEleza.png');
     background-size: cover;
     margin-bottom: 0;
     margin-left: auto;
@@ -42,13 +42,13 @@ input {
 }
 
 #logonatura {
-    width: 15em;
-    height: 2.1em;
+    width: 12.4em;
+    height: 3.2em;
     background-size: cover;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background-image: url('../../assets/img/naturaeco.png');
+    background-image: url('../../assets/img/consultoria_bk.png');
     margin-top: 2em;
     margin-bottom: 2em;
 }
@@ -62,6 +62,14 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  button {
+    background-color: #D1020A !important; 
+  }
+
+  input, mat-form-field, mat-label, mat-icon {
+    color: #D1020A !important;
   }
 
 

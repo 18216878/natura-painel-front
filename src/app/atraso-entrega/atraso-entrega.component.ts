@@ -16,11 +16,11 @@ export interface PeriodicElement {
   cd_setor: string;
   dtvenc: string;
   novo_vcto: string;
-  chave: number;
+  nova_data_entrega: string;
   cn: string;
   venc_or: string;
   bco_emp: string;
-  dif: number;
+  nr_pedido: number;
   status_titulo: string;
   limite_credito: string;
 }
@@ -41,11 +41,11 @@ export class AtrasoEntregaComponent implements OnInit, AfterViewInit {
     'nr_parc',
     'dtvenc',
     'novo_vcto',
-    'chave',
+    'nova_data_entrega',
     'cn',
     'venc_or',
     'bco_emp',
-    'dif',
+    'nr_pedido',
     'status_titulo',
     'limite_credito'
   ];

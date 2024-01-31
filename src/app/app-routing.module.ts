@@ -33,12 +33,13 @@ import { MigradasNivelComponent } from './migradas-nivel/migradas-nivel.componen
 import { AtrasoEntregaComponent } from './atraso-entrega/atraso-entrega.component';
 import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.component';
 import { CalendarioCiclosComponent } from './calendario-ciclos/calendario-ciclos.component';
+import { CalendarioRemuneracaoComponent } from './calendario-remuneracao/calendario-remuneracao.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AccountGuard] },
   { path: 'natura', component: NaturaMainComponent, canActivate: [AccountGuard] },
-  { path: 'avon', component: AvonMainComponent, canActivate: [AccountGuard] },
+  // { path: 'avon', component: AvonMainComponent, canActivate: [AccountGuard] },
   { path: 'legado', component: LegadoMainComponent, canActivate: [AccountGuard] },
   // { path: 'natura/projeto-wave', component: ProjetoWaveComponent, canActivate: [AccountGuard] },
   { path: 'natura/vale-pontos', component: PesquisaNordesteComponent, canActivate: [AccountGuard] },
@@ -56,18 +57,19 @@ const routes: Routes = [
   { path: 'natura/checkout-pedido-cancelado', component: CheckoutComponent, canActivate: [AccountGuard] },
   // { path: 'natura/migradas-avon', component: MigradasAvonComponent, canActivate: [AccountGuard] },
   { path: 'natura/movimentacao', component: MovimentacaoComponent, canActivate: [AccountGuard] },
-  { path: 'natura/movimentacao-elo', component: MovimentacaoEloComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/movimentacao-elo', component: MovimentacaoEloComponent, canActivate: [AccountGuard] },
   { path: 'natura/recovery', component: RecoveryComponent, canActivate: [AccountGuard] },
   { path: 'natura/calendario-ciclos', component: CalendarioCiclosComponent, canActivate: [AccountGuard] },
   // { path: 'natura/base-alocacao', component: BaseAlocacaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/atraso-entrega', component: AtrasoEntregaComponent, canActivate: [AccountGuard] },
+  { path: 'natura/calendario-remuneracao', component: CalendarioRemuneracaoComponent, canActivate: [AccountGuard] },
   { path: 'legado/vtex', component: VtexComponent, canActivate: [AccountGuard] },
   { path: 'legado/migradas-nivel', component: MigradasNivelComponent, canActivate: [AccountGuard] },
   // { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
-  { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },
-  { path: 'avon/tag2h', component: Tag2hComponent, canActivate: [AccountGuard] },
-  { path: 'avon/acao-regularizacao-mei', component: RegularizacaoMeiComponent, canActivate: [AccountGuard] },
+  // { path: 'avon/rejeicao-pagamento', component: RejeicaoPagamentoComponent, canActivate: [AccountGuard] },
+  // { path: 'avon/tag2h', component: Tag2hComponent, canActivate: [AccountGuard] },
+  // { path: 'avon/acao-regularizacao-mei', component: RegularizacaoMeiComponent, canActivate: [AccountGuard] },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 

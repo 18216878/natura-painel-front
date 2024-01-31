@@ -19,18 +19,18 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #FF5722;
+  background-color: #D1020A;
   max-width: 90vw;
   width: 100%;
 
 }
     
 #logonatura {
-  width: 6em;
-  height: 6em;
+  width: 12em;
+  height: 3.1em;
   background-size: cover;
   display: flex;
-  background-image: url('../../assets/img/nat.png');
+  background-image: url('../../assets/img/consultoria.png');
 }
     
 h1 {
@@ -177,6 +177,14 @@ h4 {
   border-radius: 50%;
 }
 
+.calendario-remuneracao-avatar {
+  background-image: url('../../assets/img/remuneracao_avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .cadastro-avatar {
   background-image: url('../../assets/img/cadastro-irregular.png');
   background-size: cover;
@@ -257,6 +265,11 @@ h4 {
 
 .imgAtrasoEntrega {
   background-image: url('../../assets/img/atraso-entrega.png');
+  background-size: cover;
+}
+
+.imgCalendarioRemuneracao {
+  background-image: url('../../assets/img/calendario-remuneracao.png');
   background-size: cover;
 }
 
@@ -355,7 +368,7 @@ fa-icon:hover{
 }
 
 .social {
-  color: #FF5722;
+  color: #D1020A;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -364,7 +377,7 @@ fa-icon:hover{
 }
 
 .card-header {
-  background-color: #FF5722;
+  background-color: #D1020A;
   color: #fff;
 }
 

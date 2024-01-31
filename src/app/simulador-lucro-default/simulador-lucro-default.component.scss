@@ -18,18 +18,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FF5722;
+    background-color: #D1020A;
     max-width: 90vw;
     width: 100%;
 
 }
 
 #logoavon {
-    width: 6em;
-    height: 6em;
+    width: 12em;
+    height: 3.1em;
     background-size: cover;
     display: flex;
-    background-image: url('../../assets/img/nat.png');
+    background-image: url('../../assets/img/consultoria.png');
   }
 
   h1 {
@@ -56,7 +56,7 @@ h4 {
     border-color: currentColor;
     cursor: pointer;
     color: #FFF;
-    background-color: #FF5722;
+    background-color: #D1020A;
     
   }
 
@@ -80,7 +80,7 @@ h4 {
 }
 
 .parcelamento {
-  color: #FF5722;
+  color: #D1020A;
   font-weight: bold;
 }
 
@@ -142,19 +142,19 @@ h4 {
   .mopMatr {
     max-width: 20em;
     width: 100%;
-    color:#FF5722;
+    color:#D1020A;
   }
 
   .mopMatricula {
     max-width: 20em;
     width: 100%;
-    color:#FF5722;
+    color:#D1020A;
   }
 
   .insert-row {
     max-width: 14em;
     width: 100%;
-    color:#FF5722;
+    color:#D1020A;
     height: 100vh;
   }
 
@@ -284,7 +284,7 @@ h4 {
   
   th.mat-header-cell {
       text-align: center !important;
-      background-color: #FF5722;
+      background-color: #D1020A;
       color: #FFF;
   }
   

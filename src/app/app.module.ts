@@ -105,6 +105,7 @@ import { ProcessAtrasoEntregaComponent } from './natura-main/process/process-atr
 import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.component';
 import { CalendarioCiclosComponent } from './calendario-ciclos/calendario-ciclos.component';
 import { ProcessCalendarioCiclosComponent } from './natura-main/process/process-calendario-ciclos/process-calendario-ciclos.component';
+import { CalendarioRemuneracaoComponent } from './calendario-remuneracao/calendario-remuneracao.component';
 
 
 @NgModule({
@@ -179,7 +180,8 @@ import { ProcessCalendarioCiclosComponent } from './natura-main/process/process-
     ProcessAtrasoEntregaComponent,
     MovimentacaoEloComponent,
     CalendarioCiclosComponent,
-    ProcessCalendarioCiclosComponent
+    ProcessCalendarioCiclosComponent,
+    CalendarioRemuneracaoComponent
   ],
   imports: [
     BrowserModule,

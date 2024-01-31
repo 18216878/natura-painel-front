@@ -226,6 +226,18 @@ export class PainelService {
   public getCalendarioCiclosNomeSetor(nome_setor: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioCiclos/nome-setor?nome_setor=${nome_setor}`)
   }
+
+  public getCalendarioRemuneracaoCiclos(): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracaoCiclos/ciclos`)
+  }
+
+  public getCalendarioRemuneracaoPublicoSetor(publico: string, cd_setor: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracao/publico-setor?publico=${publico}&cd_setor=${cd_setor}`)
+  }
+  
+  public getCalendarioRemuneracaoPublicoSetorCiclo(publico: string, cd_setor: number, ciclo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracao/publico-setor-ciclo?publico=${publico}&cd_setor=${cd_setor}&ciclo=${ciclo}`)
+  }
   
 
 

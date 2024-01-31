@@ -1,0 +1,342 @@
+<div class="main">
+    <div class="title">
+        <div>
+            <div id="logoavon"></div>
+        </div>
+        <h1>Pesquisa - {{title}}</h1>
+        <div class="menu">
+            <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+                {{user}}
+            </h4>
+            <button
+                routerLink="/natura"
+                class="logout"
+                color="accent"
+                mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <form [formGroup]="formularioCalendarioCiclos" class="example-form">
+        <div class="pesquisar">
+            <div class="search">
+                <mat-form-field
+                  appearance="fill"
+                  class="mopMatricula"
+                  color="accent">
+                  <mat-label>Público</mat-label>
+                  <mat-select disableRipple ngDefaultControl
+                  formControlName="selecionado" [ngModel]="selecionado"
+                  (valueChange)="onSelectPublico($event)">
+                  <mat-option *ngFor="let id of identificadores" [value]="id">
+                    {{id}}</mat-option>
+                  </mat-select>
+                  <mat-icon matPrefix>search</mat-icon>  
+                  <mat-hint>Selecione uma opção</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                    <mat-label>Código do Setor</mat-label>
+                    <input
+                        matInput
+                        placeholder="Digite o Código do Setor"
+                        ngDefaultControl
+                        formControlName="cod_setor"
+                        [(ngModel)]="cod_setor">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint>Código do Setor</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field
+                  appearance="fill"
+                  class="mopMatricula"
+                  color="accent">
+                  <mat-label>Ciclo</mat-label>
+                  <mat-select disableRipple ngDefaultControl formControlName="ciclos" [ngModel]="ciclos"
+                  (valueChange)="onSelectCiclo($event)">
+                  <mat-option *ngFor="let ciclos of ciclosDropDown" [value]="ciclos.ciclo">
+                    {{ciclos.ciclo}}</mat-option>
+                  </mat-select>
+                  <mat-icon matPrefix>search</mat-icon>  
+                  <mat-hint>Selecione uma opção</mat-hint>
+                </mat-form-field>
+
+            </div>
+            <div class="botoes">
+                <button
+                    class="validar"
+                    mat-raised-button
+                    (click)="limpar()"
+                    color="warn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>clear</mat-icon> Limpar
+                </button>
+
+                <button
+                    *ngIf="ciclo_selecionado=== undefined"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_setor===undefined || selecionado===undefined"
+                    (click)="pesquisarRemuneracaoPublicoSetor()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+
+                <button
+                    *ngIf="ciclo_selecionado!== undefined"
+                    class="validar"
+                    mat-raised-button
+                    [disabled]="cod_setor===undefined || selecionado===undefined"
+                    (click)="getCalendarioRemuneracaoPublicoSetorCiclo()"
+                    color="accent"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>search</mat-icon> Pesquisar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="!clickedRows.size">
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código do Setor</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Abertura</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Fechamento</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">       
+                <mat-card-content>
+                    <p class="title-card">Data de Fechamento Estatístico</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data da Processamento</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data Pagamento Prêmio</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Ciclo</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">   
+                <mat-card-content>
+                    <p class="title-card">Público</p>
+                    <p>Clique eu uma linha da tabela para exibir.</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngFor="let clickedRow of clickedRows">
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Código do Setor</p>
+                    <p>{{clickedRow.cd_setor}}</p>
+                    <p *ngIf="clickedRow.cd_setor===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Abertura</p>
+                    <p>{{clickedRow.abertura | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.abertura===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Fechamento</p>
+                    <p>{{clickedRow.fechamento | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.fechamento===null">---</p>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data de Fechamento Estatístico</p>
+                    <p>{{clickedRow.fechamento_estatistico | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.fechamento_estatistico===null">---</p>
+                </mat-card-content>
+            </mat-card>
+
+            
+        </div>
+        <div class="card">
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data do Processamento</p>
+                    <p>{{clickedRow.processamento | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.processamento===null">---</p>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Data do Pagamento Prêmio</p>
+                    <p>{{clickedRow.pagamento_premio | date: 'dd/MM/yyyy'}}</p>
+                    <p *ngIf="clickedRow.pagamento_premio===null">---</p>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Ciclo</p>
+                    <p>{{clickedRow.ciclo}}</p>
+                    <p *ngIf="clickedRow.ciclo===null">---</p>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="card-width">
+                <mat-card-content>
+                    <p class="title-card">Público</p>
+                    <p>{{clickedRow.publico}}</p>
+                    <p *ngIf="clickedRow.publico===null">---</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <div class="container">
+        <div class="tabela">
+            <div class="spinner" *ngIf="carregando===true">
+                <mat-spinner
+                    [diameter]="40"
+                    color="accent"
+                    *ngIf="carregando===true"></mat-spinner>
+                <h3>Carregando...</h3>
+            </div>
+
+            <table mat-table *ngIf="pesquisa_efetuada===true"
+            [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+            <ng-container matColumnDef="cd_setor">
+              <th mat-header-cell *matHeaderCellDef> Código o Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.cd_setor}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="nome_re">
+              <th mat-header-cell *matHeaderCellDef> Nome RE </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_re}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_gv">
+              <th mat-header-cell *matHeaderCellDef> Cód. GV </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_gv}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cod_setor">
+              <th mat-header-cell *matHeaderCellDef> Cód. Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_setor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nome_setor">
+              <th mat-header-cell *matHeaderCellDef> Nome Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_setor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nome_gv">
+              <th mat-header-cell *matHeaderCellDef> Nome GV </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_gv}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ciclos">
+              <th mat-header-cell *matHeaderCellDef> Ciclos </th>
+              <td mat-cell *matCellDef="let element"> {{element.ciclos}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="abertura">
+              <th mat-header-cell *matHeaderCellDef> Data de Abertura </th>
+              <td mat-cell *matCellDef="let element"> {{element.abertura  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechamento">
+              <th mat-header-cell *matHeaderCellDef> Data de Fechamento </th>
+              <td mat-cell *matCellDef="let element"> {{element.fechamento  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechamento_estatistico">
+              <th mat-header-cell *matHeaderCellDef> Data de Fechamento Estatístico </th>
+              <td mat-cell *matCellDef="let element"> {{element.fechamento_estatistico  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="processamento">
+              <th mat-header-cell *matHeaderCellDef> Data de Processamento </th>
+              <td mat-cell *matCellDef="let element"> {{element.processamento  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="entrega_folha">
+              <th mat-header-cell *matHeaderCellDef> Data de Entrega Folha </th>
+              <td mat-cell *matCellDef="let element"> {{element.entrega_folha  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pagamento_premio">
+              <th mat-header-cell *matHeaderCellDef> Data de Pagamento Prêmio </th>
+              <td mat-cell *matCellDef="let element"> {{element.pagamento_premio  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="data_divulgada_lideres">
+              <th mat-header-cell *matHeaderCellDef> Data Divulgada Líderes </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_divulgada_lideres  | date: 'dd/MM/yyyy'}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ciclo">
+                <th mat-header-cell *matHeaderCellDef> Ciclo </th>
+                <td mat-cell *matCellDef="let element"> {{element.ciclo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="bloco">
+                <th mat-header-cell *matHeaderCellDef> Bloco </th>
+                <td mat-cell *matCellDef="let element"> {{element.bloco}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="publico">
+                <th mat-header-cell *matHeaderCellDef> Público </th>
+                <td mat-cell *matCellDef="let element"> {{element.publico}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+          <mat-paginator
+              [pageSizeOptions]="[10, 15, 20]"
+              showFirstLastButtons
+              aria-label="Select page of periodic elements"
+              color="accent">
+          </mat-paginator>
+        </div>
+    </div>
+    
+</div>

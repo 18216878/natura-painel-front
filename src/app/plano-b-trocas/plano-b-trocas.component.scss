@@ -26,7 +26,7 @@
     border-color: currentColor;
     cursor: pointer;
     color: #FFF;
-    background-color: #388E3C;
+    background-color: #D1020A;
     
   }
   
@@ -37,7 +37,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.2em;
-    border: #388E3C 0.2em solid;
+    border: #D1020A 0.2em solid;
     border-radius: 0.8em;
     margin-bottom: 1em;
   }
@@ -74,7 +74,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #388E3C;
+      background-color: #D1020A;
       max-width: 90vw;
       width: 100%; 
       flex-direction: row; 
@@ -82,11 +82,11 @@
   }
   
   #logoavon {
-      width: 6em;
-      height: 6em;
+      width: 12em;
+      height: 3.1em;
       background-size: cover;
       display: flex;
-      background-image: url('../../assets/img/nat.png');
+      background-image: url('../../assets/img/consultoria.png');
     }
   
   .inputSearch {
@@ -117,7 +117,7 @@
   
   .example-full-width {
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
     .example-form {
@@ -134,43 +134,43 @@
     .inputPesquisa {
       max-width: 20em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
     .mopMatricula {
       max-width: 20em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
     .Rodape {
       max-width: 20em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
     .matricula {
       max-width: 20em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
     .codigoCn {
       max-width: 35em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
   }
   
     .waveLarge {
       max-width: 43em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
     .waveNome {
       max-width: 30em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
   
@@ -191,7 +191,7 @@
     .select {
       max-width: 28em;
       width: 100%;
-      color:#388E3C;
+      color:#D1020A;
     }
   
     .confirmar {
@@ -301,7 +301,7 @@
 }
   
   .title-card {
-    color: #388E3C;
+    color: #D1020A;
     font-weight: bold;
   }
   
@@ -324,7 +324,7 @@
   
   th.mat-header-cell {
       text-align: center !important;
-      background-color: #388E3C;
+      background-color: #D1020A;
       color: #FFF;
   }
   
