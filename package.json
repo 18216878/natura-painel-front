@@ -29,6 +29,7 @@
     "file-saver": "^2.0.5",
     "jspdf": "^2.5.1",
     "moment": "^2.29.4",
+    "moment-business": "^3.0.1",
     "ng2-currency-mask": "^13.0.3",
     "ngx-filesaver": "^16.0.0",
     "ngx-indexed-db": "^12.0.0",

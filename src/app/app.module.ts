@@ -106,6 +106,10 @@ import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.co
 import { CalendarioCiclosComponent } from './calendario-ciclos/calendario-ciclos.component';
 import { ProcessCalendarioCiclosComponent } from './natura-main/process/process-calendario-ciclos/process-calendario-ciclos.component';
 import { CalendarioRemuneracaoComponent } from './calendario-remuneracao/calendario-remuneracao.component';
+import { AjusteCreditoComponent } from './ajuste-credito/ajuste-credito.component';
+import { FebrabanComponent } from './febraban/febraban.component';
+import { SegurancaDadosComponent } from './seguranca-dados/seguranca-dados.component';
+import { RioGrandeDoSulComponent } from './rio-grande-do-sul/rio-grande-do-sul.component';
 
 
 @NgModule({
@@ -181,7 +185,11 @@ import { CalendarioRemuneracaoComponent } from './calendario-remuneracao/calenda
     MovimentacaoEloComponent,
     CalendarioCiclosComponent,
     ProcessCalendarioCiclosComponent,
-    CalendarioRemuneracaoComponent
+    CalendarioRemuneracaoComponent,
+    AjusteCreditoComponent,
+    FebrabanComponent,
+    SegurancaDadosComponent,
+    RioGrandeDoSulComponent
   ],
   imports: [
     BrowserModule,

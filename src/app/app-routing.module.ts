@@ -34,6 +34,10 @@ import { AtrasoEntregaComponent } from './atraso-entrega/atraso-entrega.componen
 import { MovimentacaoEloComponent } from './movimentacao-elo/movimentacao-elo.component';
 import { CalendarioCiclosComponent } from './calendario-ciclos/calendario-ciclos.component';
 import { CalendarioRemuneracaoComponent } from './calendario-remuneracao/calendario-remuneracao.component';
+import { AjusteCreditoComponent } from './ajuste-credito/ajuste-credito.component';
+import { FebrabanComponent } from './febraban/febraban.component';
+import { SegurancaDadosComponent } from './seguranca-dados/seguranca-dados.component';
+import { RioGrandeDoSulComponent } from './rio-grande-do-sul/rio-grande-do-sul.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -55,6 +59,9 @@ const routes: Routes = [
   { path: 'natura/lista-gerentes-interinas', component: ListaGerentesInterinasComponent, canActivate: [AccountGuard] },
   { path: 'natura/liders-destaques', component: LideresDestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/checkout-pedido-cancelado', component: CheckoutComponent, canActivate: [AccountGuard] },
+  { path: 'natura/ajuste-credito', component: AjusteCreditoComponent, canActivate: [AccountGuard] },
+  { path: 'natura/febraban', component: FebrabanComponent, canActivate: [AccountGuard] },
+  { path: 'natura/seguranca-dados', component: SegurancaDadosComponent, canActivate: [AccountGuard] },
   // { path: 'natura/migradas-avon', component: MigradasAvonComponent, canActivate: [AccountGuard] },
   { path: 'natura/movimentacao', component: MovimentacaoComponent, canActivate: [AccountGuard] },
   // { path: 'natura/movimentacao-elo', component: MovimentacaoEloComponent, canActivate: [AccountGuard] },
@@ -64,6 +71,7 @@ const routes: Routes = [
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/atraso-entrega', component: AtrasoEntregaComponent, canActivate: [AccountGuard] },
   { path: 'natura/calendario-remuneracao', component: CalendarioRemuneracaoComponent, canActivate: [AccountGuard] },
+  { path: 'natura/rio-grande-do-sul', component: RioGrandeDoSulComponent, canActivate: [AccountGuard] },
   { path: 'legado/vtex', component: VtexComponent, canActivate: [AccountGuard] },
   { path: 'legado/migradas-nivel', component: MigradasNivelComponent, canActivate: [AccountGuard] },
   // { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },

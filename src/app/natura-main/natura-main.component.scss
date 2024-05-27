@@ -10,7 +10,7 @@ body {
     flex-direction: column;
     background-color: #F4F4F3;
   }
-  
+
 .lastRow {
   margin-bottom: 2em;
 }
@@ -24,7 +24,7 @@ body {
   width: 100%;
 
 }
-    
+
 #logonatura {
   width: 12em;
   height: 3.1em;
@@ -32,34 +32,34 @@ body {
   display: flex;
   background-image: url('../../assets/img/consultoria.png');
 }
-    
+
 h1 {
   color: #fff;
 }
 
 h4 {
-    
+
   color: #fff;
   display: flex;
   padding: 0.5em;
   margin-left: 0.2em;
 }
-    
+
 .space {
   margin: 1em;
 
 }
-    
+
 .example-card {
     max-width: 24em;
     margin: 2em;
     transition: transform .5s;
 }
-      
+
 .example-card:hover {
   transform: scale(1.2);
 }
-    
+
 .example-header-image {
   background-size: cover;
 }
@@ -80,7 +80,7 @@ h4 {
   height: 4em;
   border-radius: 50%;
 }
-    
+
 .dynamics-avatar {
   background-image: url('../../assets/img/dynamics-original.png');
   background-size: cover;
@@ -95,10 +95,26 @@ h4 {
   width: 4em;
   height: 4em;
   border-radius: 50%;
+
+}
+.credito-avatar {
+  background-image: url('../../assets/img/credito-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
 }
 
 .titulo-avatar {
   background-image: url('../../assets/img/titulo_avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.rs-avatar {
+  background-image: url('../../assets/img/rs-avatar.png');
   background-size: cover;
   width: 4em;
   height: 4em;
@@ -225,6 +241,22 @@ h4 {
   border-radius: 50%;
 }
 
+.febraban-avatar {
+  background-image: url('../../assets/img/Untitled.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.seguranca-avatar {
+  background-image: url('../../assets/img/seguranca-dados-avatar.jpg');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .recovery-avatar {
   background-image: url('../../assets/img/recovery-avatar.png');
   background-size: cover;
@@ -232,12 +264,12 @@ h4 {
   height: 4em;
   border-radius: 50%;
 }
-    
+
 .menu {
   vertical-align: middle;
   color: #fff;
 }
-    
+
 .logout {
   color: #fff;
 }
@@ -263,9 +295,20 @@ h4 {
   background-size: cover;
 }
 
+.imgCredito {
+  background-image: url('../../assets/img/ajuste-limite.png');
+  background-size: cover;
+}
+
 .imgAtrasoEntrega {
   background-image: url('../../assets/img/atraso-entrega.png');
   background-size: cover;
+}
+
+.imgRs {
+  background-image: url('../../assets/img/rs.png');
+  background-size: cover;
+
 }
 
 .imgCalendarioRemuneracao {
@@ -290,6 +333,16 @@ h4 {
 
 .imCheckout {
   background-image: url('../../assets/img/carrinhoabandonado.png');
+  background-size: cover;
+}
+
+.imgFebraban {
+  background-image: url('../../assets/img/febraban_logo.png');
+  background-size: cover;
+}
+
+.imgSeguranca {
+  background-image: url('../../assets/img/seguranca_dados.png');
   background-size: cover;
 }
 
@@ -393,7 +446,7 @@ fa-icon:hover{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
 }
 
 

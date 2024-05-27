@@ -12,6 +12,7 @@ import { CondicaoNegociacaoComponent } from './condicao-negociacao/condicao-nego
 import { QuatroParcelasComponent } from './quatro-parcelas/quatro-parcelas.component';
 import { CincoParcelasComponent } from './cinco-parcelas/cinco-parcelas.component';
 import { SelecionarParcelasComponent } from './selecionar-parcelas/selecionar-parcelas.component';
+import business from 'moment-business';
 
 export interface IFeriados {
   feriado: Date;
@@ -31,7 +32,8 @@ export class SimuladorCobrancaComponent implements OnInit {
     const data = new Date();
     const day = new Date(data.getFullYear(), data.getMonth(), data.getDate());
     const semana = (d || new Date()).getDay();
-    const sevenDays = moment(data).add('days', 7);
+    // const sevenDays = moment(data).add('days', 7);
+    const sevenDays = business.addWeekDays(moment(data), 7);
     return d > day && d <= sevenDays && semana !== 0 && semana !== 6;
   };
 
@@ -40,9 +42,9 @@ export class SimuladorCobrancaComponent implements OnInit {
     const data = new Date();
     const day = new Date(data.getFullYear(), data.getMonth(), data.getDate());
     const semana = (d || new Date()).getDay();
-        
+
     const duration = moment(data).add(-187, 'days');
- 
+
     return d < day && d >= duration && semana !== 0 && semana !== 6;
   };
 
@@ -60,19 +62,19 @@ export class SimuladorCobrancaComponent implements OnInit {
   dataSource = [];
 
   exibir_tabela: boolean = false;
-  
+
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private dateAdapter: DateAdapter<Date>
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
-    this.dateAdapter.setLocale('pt-br'); 
+    this.dateAdapter.setLocale('pt-br');
     window.scroll(0, 0);
   }
 
@@ -144,13 +146,13 @@ export class SimuladorCobrancaComponent implements OnInit {
   data_vencimento_inicial: Date;
 
   feriados = iFeriados;
-  
+
   public title: string = "Simulador de Acordo Diferenciado";
 
   ngOnInit(): void {
 
     this.user = this.accountService.get('user')?.toString();
-    
+
     this.formularioDadosIniciais = this.formBuilder.group({
       cod_cn_form:[''],
       data_pagamento:[''],
@@ -167,7 +169,7 @@ export class SimuladorCobrancaComponent implements OnInit {
       multa_form:[''],
       juros_form:[''],
       valor_atualizado_form:['']
-   
+
     })
 
     this.formularioLateral = this.formBuilder.group({
@@ -181,14 +183,14 @@ export class SimuladorCobrancaComponent implements OnInit {
       juros_dia_aplicado:[''],
       total_juros_atraso:[''],
       total_juros_parcelas:['']
-   
+
     })
 
     this.painelService.getFeriados().subscribe(
       data => {
         this.feriados = data
       }
-    )  
+    )
 
   }
 
@@ -252,7 +254,7 @@ export class SimuladorCobrancaComponent implements OnInit {
 
     if (
       this.data_pagamento === null ||
-      this.data_pagamento === undefined      
+      this.data_pagamento === undefined
       )
 
       {
@@ -261,18 +263,18 @@ export class SimuladorCobrancaComponent implements OnInit {
 
       if (
         this.cod_cn_form === null ||
-        this.cod_cn_form === undefined      
+        this.cod_cn_form === undefined
         )
-  
+
         {
           i++
         }
 
         if (
           this.condicao_pagamento === null ||
-          this.condicao_pagamento === undefined      
+          this.condicao_pagamento === undefined
           )
-    
+
           {
             i++
           }
@@ -292,18 +294,18 @@ export class SimuladorCobrancaComponent implements OnInit {
         juros: 0,
         valor_atualizado: 0
       }
-  
+
       this.dataSource = [...this.dataSource, newRow];
 
       this.valor_original = this.valor_original + this.valor_form;
       this.total_multa = this.total_multa + this.multa_form;
-  
+
       this.exibir_tabela = true;
-      
-  
-      this.dados_adicionados++; 
+
+
+      this.dados_adicionados++;
       this.formularioSimuladorCobranca.reset();
-    }   
+    }
 
   }
 
@@ -314,7 +316,7 @@ export class SimuladorCobrancaComponent implements OnInit {
   limparTabela(){
     this.dataSource = [];
     this.exibir_tabela = false;
-    this.dados_adicionados = 0; 
+    this.dados_adicionados = 0;
   }
 
   calcularAtraso(){
@@ -323,7 +325,7 @@ export class SimuladorCobrancaComponent implements OnInit {
 
       const moment = require('moment');
       const now = moment(this.data_pagamento);
-      
+
       const past = this.data_vencimento_form;
       const duration = moment.duration(now.subtract(1, 'days').diff(past));
       const days = duration.asDays();
@@ -341,7 +343,7 @@ export class SimuladorCobrancaComponent implements OnInit {
 
 
 
-    }    
+    }
 
   }
 
@@ -387,7 +389,7 @@ export class SimuladorCobrancaComponent implements OnInit {
   }
 
 
-  
+
   simularAcordo(){
     if (this.dataSource.length === 0){
       const dialogRef = this.dialog.open(CondicaoNegociacaoComponent, {
@@ -418,16 +420,25 @@ export class SimuladorCobrancaComponent implements OnInit {
 
       var min = Math.min(...atrasos);
       var max = Math.max(...atrasos);
-      
+
       var grupo: string = undefined;
 
-      if (min >= 1 && max <= 90){
+      // if (min >= 1 && max <= 90){
+      //   grupo = "Grupo A"
+      // }
+      // else if (min >= 91 && max <= 120){
+      //   grupo = "Grupo B"
+      // }
+      // else if (min >= 121 && max <= 180){
+      //   grupo = "Grupo C"
+      // }
+      if (max >= 1 && max <= 90){
         grupo = "Grupo A"
       }
-      else if (min >= 91 && max <= 120){
+      else if (max >= 91 && max <= 120){
         grupo = "Grupo B"
       }
-      else if (min >= 121 && max <= 180){
+      else if (max >= 121 && max <= 180){
         grupo = "Grupo C"
       }
 
@@ -455,7 +466,7 @@ export class SimuladorCobrancaComponent implements OnInit {
           this.juros_mes_aplicado = 0;
         }
       }
-    
+
 
       this.juros_dia_aplicado = this.juros_mes_aplicado / 30
 
@@ -467,7 +478,7 @@ export class SimuladorCobrancaComponent implements OnInit {
           this.debito_atualizado = this.debito_atualizado + item.valor_atualizado;
         }
       )
-      
+
       const moment = require('moment');
 
       if (this.condicao_pagamento === 'A Vista'){
@@ -550,6 +561,11 @@ export class SimuladorCobrancaComponent implements OnInit {
       }
 
       this.valor_parcela1 = this.valor_corrigido / this.parcelas;
+      console.log(
+        'Valor Parcela ' + this.valor_parcela1 +
+        'Valor corrigido ' +this.valor_corrigido +
+        'Parcelas ' + this.parcelas
+      )
       if(this.parcelas >=2){
         this.valor_parcela2 = this.valor_corrigido / this.parcelas;
       }
@@ -561,26 +577,26 @@ export class SimuladorCobrancaComponent implements OnInit {
       }
       if(this.parcelas >=5){
         this.valor_parcela5 = this.valor_corrigido / this.parcelas;
-      }      
+      }
 
     }
 
   }
 
   calculaDataParcela(dataInicial: Date, totalDias: number): Date{
-    
+
     const moment = require('moment');
     var tempo_total = moment(dataInicial).add(totalDias, 'days');
-    
+
     this.data_vencimento_inicial = new Date(tempo_total.year(), tempo_total.month(), tempo_total.date());
-    
+
     var dataFinal = this.calculaFeriado(dataInicial, this.data_vencimento_inicial);
 
     dataFinal = this.calculaSabado(dataFinal);
     dataFinal = this.calculaDomingo(dataFinal);
     this.data_vencimento_inicial = dataFinal;
     return this.data_vencimento_inicial;
-        
+
   }
 
   calculaFeriado(dataInicial: Date, dataFinal: Date): Date{
@@ -618,9 +634,9 @@ export class SimuladorCobrancaComponent implements OnInit {
         }
       }
     }
-    
+
     return dataFinal;
-  
+
   }
 
   calculaSabado(sabado: Date): Date{
@@ -695,22 +711,22 @@ export class SimuladorCobrancaComponent implements OnInit {
 
       doc.setLineWidth(0.5);
       doc.line(20, 28, 185, 28);
-  
+
       doc.setLineWidth(0.5);
       doc.line(20, 28, 20, 96);
-  
+
       doc.setLineWidth(0.5);
       doc.line(20, 96, 185, 96);
 
       doc.setLineWidth(0.5);
       doc.line(185, 28, 185, 96);
-  
-  
+
+
       doc.setTextColor(255,87,34);
       doc.text("Código CN", 25, 40);
       doc.setTextColor(100);
       doc.text(codigoCn, 158, 40);
-  
+
       doc.setTextColor(255,87,34);
       doc.text("Condição de Pagamento", 25, 50);
       doc.setTextColor(100);
@@ -735,20 +751,20 @@ export class SimuladorCobrancaComponent implements OnInit {
         var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorParcela);
         doc.text(vlr, 158, 70);
       }
-      
-      
-      
+
+
+
       doc.setTextColor(255,87,34);
       doc.text("Data de Pagamento", 25, 80);
       doc.setTextColor(100);
-      
+
       doc.text(dataPagamento, 158, 80);
-      
+
       doc.setTextColor(255,87,34);
       doc.text("Alçada de Negociação", 25, 90);
       doc.setTextColor(100);
       const number = 0.7555;
-  
+
       var juros_percent = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumSignificantDigits: 2,  maximumSignificantDigits: 2}).format(jursMesAplicado);
       doc.text(juros_percent.toString(), 158, 90);
 
@@ -768,9 +784,9 @@ export class SimuladorCobrancaComponent implements OnInit {
               data_vencimento: dt,
               atraso: obj.atraso.toString()
             }
-  
+
             data.push(d);
-          
+
         }
       )
 
@@ -781,7 +797,7 @@ export class SimuladorCobrancaComponent implements OnInit {
         "data_vencimento",
         "atraso"
       ];
-      
+
       doc.table(40, 110, data, headers, { autoSize: true });
       doc.setTextColor(0, 0, 0);
       doc.setFontSize(10);
@@ -793,6 +809,6 @@ export class SimuladorCobrancaComponent implements OnInit {
 
   }
 
-  
+
 
 }

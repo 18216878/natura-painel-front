@@ -44,6 +44,24 @@
 
                     <mat-card class="example-card">
                         <mat-card-header>
+                            <div mat-card-avatar class="rs-avatar"></div>
+                            <mat-card-title>Pedidos Rio Grande do Sul</mat-card-title>
+                            <mat-card-subtitle>[Consultoria de Beleza]</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgRs"
+                            routerLink="/natura/rio-grande-do-sul">
+                        </div>
+                        <mat-card-content class="social">
+                            <span>
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="example-card">
+                        <mat-card-header>
                             <div mat-card-avatar class="atrao-entrega-avatar"></div>
                             <mat-card-title>Atraso na Entrega Pedidos Avon</mat-card-title>
                             <mat-card-subtitle>Consultoras listadas na base de Atraso na Entrega e Limite de Crédito</mat-card-subtitle>
@@ -62,28 +80,6 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
-
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="pagamento-avatar"></div>
-                            <mat-card-title>Pagamentos Rejeitados</mat-card-title>
-                            <mat-card-subtitle>Pesquisar consultoras com pagamentos não baixados</mat-card-subtitle>
-                        </mat-card-header>
-                        <div
-                            mat-card-image
-                            class="imgHome imgPagamento"
-                            routerLink="/natura/pagamentos-rejeitados">
-                        </div>
-                        <mat-card-content class="social">
-                            <span
-                                (click)="openPagamentosRejeitadosDialog()"
-                                #tooltip="matTooltip"
-                                matTooltip="Visualizar os procedimentos">
-                                <fa-icon [icon]="faCircleInfo"></fa-icon>
-                            </span>
-                        </mat-card-content>
-                    </mat-card>
-
 
                 </div>
 
@@ -134,30 +130,29 @@
                     </mat-card>
 
                     <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="cadastro-avatar"></div>
-                            <mat-card-title>Cadastros Irregulares</mat-card-title>
-                            <mat-card-subtitle>Pesquisar as consultoras com cadastros irregulares</mat-card-subtitle>
-                        </mat-card-header>
-                        <div
-                            mat-card-image
-                            class="imgHome imgCadastro"
-                            routerLink="/natura/cadastros-irregulares">
-                        </div>
-                        <mat-card-content class="social">
-                            <span
-                                (click)="openCadastrosIrregularesDialog()"
-                                #tooltip="matTooltip"
-                                matTooltip="Visualizar os procedimentos">
-                                <fa-icon [icon]="faCircleInfo"></fa-icon>
-                            </span>
-                        </mat-card-content>
-                    </mat-card>
-
+                      <mat-card-header>
+                          <div mat-card-avatar class="pagamento-avatar"></div>
+                          <mat-card-title>Pagamentos Rejeitados</mat-card-title>
+                          <mat-card-subtitle>Pesquisar consultoras com pagamentos não baixados</mat-card-subtitle>
+                      </mat-card-header>
+                      <div
+                          mat-card-image
+                          class="imgHome imgPagamento"
+                          routerLink="/natura/pagamentos-rejeitados">
+                      </div>
+                      <mat-card-content class="social">
+                          <span
+                              (click)="openPagamentosRejeitadosDialog()"
+                              #tooltip="matTooltip"
+                              matTooltip="Visualizar os procedimentos">
+                              <fa-icon [icon]="faCircleInfo"></fa-icon>
+                          </span>
+                      </mat-card-content>
+                  </mat-card>
                 </div>
 
                 <p class="space"> </p>
-                
+
                 <div class="home">
 
                     <mat-card class="example-card">
@@ -293,7 +288,7 @@
                         </mat-card-content>
                     </mat-card>
 
-                    
+
 
                 </div>
 
@@ -341,7 +336,7 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
-                    
+
                     <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="calendario-remuneracao-avatar"></div>
@@ -362,11 +357,32 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
-                    
+
+                    <mat-card class="example-card">
+                      <mat-card-header>
+                          <div mat-card-avatar class="credito-avatar"></div>
+                          <mat-card-title>Ajustes Crédito</mat-card-title>
+                          <mat-card-subtitle>Lista de Consultoras comm o Status do Limite de Crédito</mat-card-subtitle>
+                      </mat-card-header>
+                      <div
+                          mat-card-image
+                          class="imgHome imgCredito"
+                          routerLink="/natura/ajuste-credito">
+                      </div>
+                      <mat-card-content class="social">
+                          <span
+
+                              #tooltip="matTooltip"
+                              matTooltip="Visualizar os procedimentos">
+                              <fa-icon [icon]="faCircleInfo"></fa-icon>
+                          </span>
+                      </mat-card-content>
+                  </mat-card>
+
                 </div>
                 <div class="home">
-                    
-                    
+
+
                     <!-- <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="avon-avatar"></div>
@@ -409,7 +425,65 @@
                     </mat-card> -->
                 </div>
                 <div class="home">
-                    
+                  <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="febraban-avatar"></div>
+                        <mat-card-title>Título com erro (FEBRABAN)</mat-card-title>
+                        <mat-card-subtitle>Pesquisar consultoras que possuem títulos com erro (FEBRABAN)</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgFebraban"
+                        routerLink="/natura/febraban">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+                  <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="seguranca-avatar"></div>
+                        <mat-card-title>Piloto de Segurança de Atualização de Dados Cadastrais</mat-card-title>
+                        <mat-card-subtitle>Piloto de Segurança de Atualização de Dados Cadastrais GV Alecrim</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgSeguranca"
+                        routerLink="/natura/seguranca-dados">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="example-card">
+                  <mat-card-header>
+                      <div mat-card-avatar class="cadastro-avatar"></div>
+                      <mat-card-title>Cadastros Irregulares</mat-card-title>
+                      <mat-card-subtitle>Pesquisar as consultoras com cadastros irregulares</mat-card-subtitle>
+                  </mat-card-header>
+                  <div
+                      mat-card-image
+                      class="imgHome imgCadastro"
+                      routerLink="/natura/cadastros-irregulares">
+                  </div>
+                  <mat-card-content class="social">
+                      <span
+                          (click)="openCadastrosIrregularesDialog()"
+                          #tooltip="matTooltip"
+                          matTooltip="Visualizar os procedimentos">
+                          <fa-icon [icon]="faCircleInfo"></fa-icon>
+                      </span>
+                  </mat-card-content>
+              </mat-card>
                 </div>
                 <!-- <div class="home">
                     <mat-card class="example-card">
@@ -530,7 +604,7 @@
                     </mat-card>
                 </div> -->
             </mat-expansion-panel>
-        </mat-accordion>        
+        </mat-accordion>
     </div>
-    
+
 </body>

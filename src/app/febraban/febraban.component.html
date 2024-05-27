@@ -1,0 +1,298 @@
+<div class="main">
+  <div class="title">
+    <div>
+      <div id="logoavon"></div>
+    </div>
+    <h1>Pesquisa - {{title}}</h1>
+    <div class="menu">
+      <h4><mat-icon class="color" matSuffix>account_circle</mat-icon> {{user}}
+      </h4>
+      <button
+        routerLink="/natura"
+        class="logout"
+        color="accent"
+        mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+    </div>
+  </div>
+
+  <p class="space"> </p>
+
+  <form [formGroup]="formularioFebraban" class="example-form">
+    <div class="pesquisar">
+      <div class="search">
+
+        <mat-form-field
+          appearance="fill"
+          class="mopMatricula"
+          color="accent">
+          <mat-label>Selecione o Item de Pesquisa</mat-label>
+          <mat-select disableRipple ngDefaultControl
+            formControlName="selecionado" [ngModel]="selecionado"
+            (valueChange)="onSelectId($event)">
+            <mat-option *ngFor="let id of identificadores" [value]="id">
+              {{id}}</mat-option>
+          </mat-select>
+          <mat-icon matPrefix>search</mat-icon>
+          <mat-hint>Selecione uma opção</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="selecionado==='Código da Consultora'"
+          class="codigoCn" appearance="fill" color="accent">
+          <mat-label>Código da Consultora</mat-label>
+          <input
+            matInput
+            placeholder="Digite o Código da Consultora"
+            ngDefaultControl
+            formControlName="cod_cn"
+            [(ngModel)]="cod_cn">
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-hint>Código da Consultora</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="selecionado==='Título'"
+          class="codigoCn" appearance="fill" color="accent">
+          <mat-label>Nº do Título</mat-label>
+          <input
+            matInput
+            placeholder="Digite o Nº do Título"
+            ngDefaultControl
+            formControlName="titulo"
+            [(ngModel)]="titulo">
+          <mat-icon matSuffix>add_shopping_cart</mat-icon>
+          <mat-hint>Nº do Título</mat-hint>
+        </mat-form-field>
+
+      </div>
+
+      <div class="botoes">
+
+        <button
+          class="validar"
+          mat-raised-button
+          [disabled]="(cod_cn === null || cod_cn ===
+                    undefined ||
+                    cod_cn === '')
+                    &&
+                    (titulo === null || titulo ===
+                    undefined ||
+                    titulo === '')"
+          (click)="limpar()"
+          color="warn"
+          aria-label="Example icon button with a home icon">
+          <mat-icon>clear</mat-icon> Limpar
+        </button>
+
+        <button
+          *ngIf="selecionado==='Código da Consultora'"
+          class="validar"
+          mat-raised-button
+          [disabled]="cod_cn=== null || cod_cn==
+                    undefined ||
+                    cod_cn=== ''"
+          (click)="pesquisarTitulosFebrabanCodigoCn()"
+          color="accent"
+          aria-label="Example icon button with a home icon">
+          <mat-icon>search</mat-icon> Pesquisar
+        </button>
+
+        <button
+          *ngIf="selecionado==='Título'"
+          class="validar"
+          mat-raised-button
+          [disabled]="titulo=== null || titulo==
+                    undefined ||
+                    titulo=== ''"
+          (click)="pesquisarTitulosFebrabanTitulo()"
+          color="accent"
+          aria-label="Example icon button with a home icon">
+          <mat-icon>search</mat-icon> Pesquisar
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <div *ngIf="!clickedRows.size">
+    <div class="card">
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Código da Consultora</p>
+          <p>Clique eu uma linha da tabela para exibir.</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Nº do Título</p>
+          <p>Clique eu uma linha da tabela para exibir.</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Item</p>
+          <p>Clique eu uma linha da tabela para exibir.</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Vencimento</p>
+          <p>Clique eu uma linha da tabela para exibir.</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Status do Título</p>
+          <p>Clique eu uma linha da tabela para exibir.</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Valor</p>
+          <p>Clique eu uma linha da tabela para exibir.</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngFor="let clickedRow of clickedRows">
+    <div class="card">
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Código da CN</p>
+          <p>{{clickedRow.cod_cn}}</p>
+          <p *ngIf="clickedRow.cod_cn===null">---</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Nº do Título</p>
+          <p>{{clickedRow.titulo}}</p>
+          <p *ngIf="clickedRow.titulo===null">---</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Item</p>
+          <p>{{clickedRow.item}}</p>
+          <p *ngIf="clickedRow.item===null">---</p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card-width">
+        <mat-card-content>
+          <p class="title-card">Vencimento</p>
+          <p>{{clickedRow.vencimento | date: 'dd/MM/yyyy'}}</p>
+          <p *ngIf="clickedRow.vencimento===null">---</p>
+        </mat-card-content>
+      </mat-card>
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Status do Título</p>
+            <p>{{clickedRow.status_titulo}}</p>
+            <p *ngIf="clickedRow.status_titulo===null">---</p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Valor</p>
+            <p>{{clickedRow.valor | currency : 'BRL'}}</p>
+            <p *ngIf="clickedRow.valor===null">---</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <p class="space"> </p>
+
+    <div class="container">
+      <div class="tabela">
+        <div class="spinner" *ngIf="carregando===true">
+          <mat-spinner
+            [diameter]="40"
+            color="accent"
+            *ngIf="carregando===true"></mat-spinner>
+          <h3>Carregando...</h3>
+        </div>
+
+        <table mat-table *ngIf="pesquisa_efetuada===true"
+          [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table"
+          matPaginator #paginator>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="empresa">
+            <th mat-header-cell *matHeaderCellDef> Empresa </th>
+            <td mat-cell *matCellDef="let element"> {{element.empresa}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_cn">
+            <th mat-header-cell *matHeaderCellDef> Código da Consultora </th>
+            <td mat-cell *matCellDef="let element"> {{element.cod_cn}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef> Nº do Título </th>
+            <td mat-cell *matCellDef="let element"> {{element.titulo}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="exercicio">
+            <th mat-header-cell *matHeaderCellDef> Exercício </th>
+            <td mat-cell *matCellDef="let element"> {{element.exercicio}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef> Item </th>
+            <td mat-cell *matCellDef="let element"> {{element.item}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nosso_numero">
+            <th mat-header-cell *matHeaderCellDef> Nosso Número </th>
+            <td mat-cell *matCellDef="let element"> {{element.nosso_numero}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="chave">
+            <th mat-header-cell *matHeaderCellDef> Chave </th>
+            <td mat-cell *matCellDef="let element"> {{element.chave}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="vencimento">
+            <th mat-header-cell *matHeaderCellDef> Vencimento </th>
+            <td mat-cell *matCellDef="let element"> {{element.vencimento |
+              date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status_titulo">
+            <th mat-header-cell *matHeaderCellDef> Status do Título </th>
+            <td mat-cell *matCellDef="let element">{{element.status_titulo}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="bloqueio">
+            <th mat-header-cell *matHeaderCellDef> Bloqueio </th>
+            <td mat-cell *matCellDef="let element"> {{element.bloqueio}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef> Valor </th>
+            <td mat-cell *matCellDef="let element"> {{element.valor | currency : 'BRL'}} </td>
+          </ng-container>
+
+          <tr mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr
+            mat-row
+            (click)="clickedRows.clear()"
+            (click)="clickedRows.add(row)"
+            [class.demo-row-is-clicked]="clickedRows.has(row)"
+            *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[10, 15, 20]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+          color="accent">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>

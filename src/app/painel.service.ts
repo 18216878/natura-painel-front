@@ -30,7 +30,7 @@ export class PainelService {
 
   public getPlanosBeTrocasIO(item_original: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas/item-original?item_original=${item_original}`)
-  
+
   }
   public getPlanosBeTrocasIS(item_substituto: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas/item-substituto?item_substituto=${item_substituto}`)
@@ -64,7 +64,7 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatDestaques/nome?nome=${nome}`)
   }
 
-  
+
   public getMeiRegistro(registro: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/AvonRegularizacaoMei/registro?registro=${registro}`)
   }
@@ -210,7 +210,7 @@ export class PainelService {
   public getVtex(nr_pedido: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatVtex/vtex?nr_pedido=${nr_pedido}`)
   }
-  
+
   public getNatMigradasNivelCodigoConsultora(cd_consultora: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatMigradasNivel/codigo-consultora?cd_consultora=${cd_consultora}`)
   }
@@ -218,11 +218,15 @@ export class PainelService {
   public getAtrasoENtrega(cn: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatAtrasoEntrega/codigo-consultora?cn=${cn}`)
   }
-  
+
+  public getAjusteCredito(cod_cn: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatAjusteCredito?cod_cn=${cod_cn}`)
+  }
+
   public getCalendarioCiclosCodSetor(cod_setor: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioCiclos/codigo-setor?cod_setor=${cod_setor}`)
   }
-  
+
   public getCalendarioCiclosNomeSetor(nome_setor: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioCiclos/nome-setor?nome_setor=${nome_setor}`)
   }
@@ -234,11 +238,36 @@ export class PainelService {
   public getCalendarioRemuneracaoPublicoSetor(publico: string, cd_setor: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracao/publico-setor?publico=${publico}&cd_setor=${cd_setor}`)
   }
-  
+
   public getCalendarioRemuneracaoPublicoSetorCiclo(publico: string, cd_setor: number, ciclo: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracao/publico-setor-ciclo?publico=${publico}&cd_setor=${cd_setor}&ciclo=${ciclo}`)
   }
-  
+
+  public getTitulosFebrabanCodigoCn(codigo: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatFebraban/consultora?consultora=${codigo}`)
+  }
+
+  public getTitulosFebrabanTitulo(titulo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatFebraban/titulo?titulo=${titulo}`)
+  }
+
+  public getNatPilotoGvAlecrimCodigoPessoa(cod_pessoa: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatPilotoGvAlecrim/cod-pessoa?cod_pessoa=${cod_pessoa}`)
+  }
+
+  public getNatPilotoGvAlecrimCodigoSetor(cod_setor: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatPilotoGvAlecrim/cod-setor?cod_setor=${cod_setor}`)
+  }
+
+
+  public getNatRioGrandeDoSulCodigoConsultora(cod_cn: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatRioGrandeDoSul/codigo-consultora?cod_cn=${cod_cn}`)
+  }
+
+  public getNatRioGrandeDoSulNumeroPedido(pedido: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatRioGrandeDoSul/numero-pedido?pedido=${pedido}`)
+  }
+
 
 
 }
