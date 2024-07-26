@@ -37,29 +37,25 @@ export class SimuladorLucratividadeDigitalComponent implements OnInit {
 
   storage: Storage;
   router: Router;
-  formularioSimuladorCobranca: FormGroup;
-  formularioLateral: FormGroup;
-  formularioDadosIniciais: FormGroup;
+  formularioSimuladorEspacoDigital: FormGroup;
   user: string;
   nivelConsultora: string;
   cpf: string;
 
   ativarSimulacao: boolean;
 
-  cod_cn_form: number;
-  titulo_form: number;
-  pedido_form: number;
-  lucroApagar: number;
-  valorMdr: number;
-  percentMdr: number = 0.0399;
-  percentLucro: number;
-  lucroConsultora: number;
-  valor_pedido_form: number;
-  valor_lucro_form: number;
-  valorTotalPedidos: number;
-  data_pedido_form: Date;
-  atraso_form: number;
-  multa_form: number;
+  total_pedido: number;
+  taxa_natura_pay: number;
+  valor_menos_servicos: number;
+  valor_bruto: number;
+  crer_para_ver: number;
+  embalagens: number;
+  frete: number;
+  taxa_antecipacao: number;
+  lucro_cn: number;
+  cupom_desconto: number;
+  valor_parcelado: number;
+  parcelas: number;
   juros_form: number;
   valor_atualizado_form: number;
   valor_corrigido: number = 0;
@@ -70,31 +66,23 @@ export class SimuladorLucratividadeDigitalComponent implements OnInit {
 
     this.user = this.accountService.get('user')?.toString();
     this.carregando = false;
-    this.formularioDadosIniciais = this.formBuilder.group({
-      nivelConsultora:['']
-    })
 
-    this.formularioSimuladorCobranca = this.formBuilder.group({
-      pedido_form:[''],
-      valor_pedido_form:[''],
-      data_pedido_form:[''],
-      valor_lucro_form:['']
-
-    })
-
-    this.formularioLateral = this.formBuilder.group({
-      valor_original:[''],
-      debito_atualizado:[''],
-      multa_fixa_form:[''],
-      multa_aplicada_form:[''],
-      total_multa:[''],
-      juros_mes:[''],
-      juros_mes_aplicado:[''],
-      juros_dia_aplicado:[''],
-      total_juros_atraso:[''],
-      total_juros_parcelas:['']
+    this.formularioSimuladorEspacoDigital = this.formBuilder.group({
+      total_pedido:[''],
+      taxa_natura_pay:[''],
+      valor_menos_servicos:[''],
+      valor_bruto:[''],
+      crer_para_ver:[''],
+      embalagens:[''],
+      frete:[''],
+      taxa_antecipacao:[''],
+      lucro_cn:[''],
+      cupom_desconto:[''],
+      valor_parcelado:[''],
+      parcelas:['']
 
     })
+
 
     this.ativarSimulacao = false;
 
@@ -118,111 +106,13 @@ export class SimuladorLucratividadeDigitalComponent implements OnInit {
   onSelectId(event: Event) {
 
     var valor = event.toString();
-    switch(valor){
-      case 'Diamante':
-        this.percentLucro = 0.35;
-        break;
-      case 'Ouro':
-        this.percentLucro = 0.32;
-        break;
-      case 'Prata':
-        this.percentLucro = 0.3;
-        break;
-      case 'Bronze':
-        this.percentLucro = 0.3;
-        break;
-      case 'Semente':
-        this.percentLucro = 0.2;
-        break;
-      default:
-        this.percentLucro = 0;
-    }
 
   }
 
-  inserir(form: FormGroup){
 
-    var i: number = 0;
-
-    if (
-      form.controls['pedido_form'].value === "" ||
-      form.controls['pedido_form'].value === null ||
-      form.controls['pedido_form'].value === undefined
-    )
-    {
-      i++
-    }
-
-    if (
-      form.controls['valor_pedido_form'].value === "" ||
-      form.controls['valor_pedido_form'].value === null ||
-      form.controls['valor_pedido_form'].value === undefined
-    )
-    {
-      i++
-    }
-
-    if (
-      form.controls['data_pedido_form'].value === "" ||
-      form.controls['data_pedido_form'].value === null ||
-      form.controls['data_pedido_form'].value === undefined
-    )
-    {
-      i++
-    }
-
-    if (
-      form.controls['valor_lucro_form'].value === "" ||
-      form.controls['valor_lucro_form'].value === null ||
-      form.controls['valor_lucro_form'].value === undefined
-    )
-    {
-      i++
-    }
-
-
-    if (i > 0){
-      var message = 'Campos invalidos ou não preenchidos';
-      var action = 'Fechar';
-      this._snackBar.open(message, action);
-    }
-    else {
-      var newRow = {
-        pedido: this.pedido_form,
-        valor_total_pedido: this.valor_pedido_form,
-        data_pedido: this.data_pedido_form,
-        lucro: this.valor_lucro_form
-      }
-
-
-      this.valorTotalPedidos = this.valorTotalPedidos + this.valor_pedido_form;
-
-      this.dados_adicionados++;
-      this.formularioSimuladorCobranca.reset();
-    }
-
-  }
-
-  validarRegra(){
-    var dataPedido = moment(this.data_pedido_form);
-    var dataLimite = moment(dataPedido).add(30, 'days');
-    var dataAtual = moment(new Date());
-
-    if(dataLimite >= dataAtual){
-      this.valor_lucro_form = (this.valor_pedido_form * this.percentLucro) - (this.valor_pedido_form * this.percentMdr);
-    }
-    else{
-      this.data_pedido_form = undefined;
-      var message = 'Data do pedido superior a 30 dias';
-      var action = 'Fechar';
-      this._snackBar.open(message, action);
-    }
-
-
-  }
 
   limpar(){
-    this.formularioSimuladorCobranca.reset();
+    this.formularioSimuladorEspacoDigital.reset();
   }
 
   limparTabela(){
@@ -231,29 +121,18 @@ export class SimuladorLucratividadeDigitalComponent implements OnInit {
 
 
   limparTudo(){
-    this.formularioSimuladorCobranca.reset();
-    this.formularioLateral.reset();
-    this.formularioDadosIniciais.reset();
+    this.formularioSimuladorEspacoDigital.reset();
     this.valor_corrigido = 0;
     this.limparTabela();
     this.ativarSimulacao = false;
     this.nivelConsultora = undefined;
-    this.percentLucro = undefined;
-    this.lucroConsultora = undefined;
-    this.valorTotalPedidos = undefined;
-    this.valorMdr = undefined;
-    this.lucroApagar = undefined;
     this.cpf = undefined;
 
   }
 
   efetuarSimulacao() {
     this.carregando = true;
-      this.valorTotalPedidos = 0;
       setTimeout(() => {
-        this.lucroConsultora = this.valorTotalPedidos * this.percentLucro;
-        this.valorMdr = this.valorTotalPedidos * this.percentMdr;
-        this.lucroApagar = this.lucroConsultora - this.valorMdr;
         this.carregando = false;
       }, 1000)
   }

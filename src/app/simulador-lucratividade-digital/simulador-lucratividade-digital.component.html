@@ -15,10 +15,233 @@
       </div>
     </div>
 
-    <p class="space"> </p>
 
     <div class="simulador">
 
+      <div>
+        <mat-card class="example-card">
+          <form [formGroup]="formularioSimuladorEspacoDigital" class="example-form">
+
+            <div class="start">
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Total Pedido</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                formControlName="total_pedido"
+                [(ngModel)]="total_pedido"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="preencher">* Preencha este campo</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Taxa Natura Pay</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                [readonly]="true"
+                formControlName="taxa_natura_pay"
+                [(ngModel)]="taxa_natura_pay"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="calculado">Campo calculado automaticamente</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Valor Menos Serviços</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                [readonly]="true"
+                formControlName="valor_menos_servicos"
+                [(ngModel)]="valor_menos_servicos"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="calculado">Campo calculado automaticamente</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Valor Bruto</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                [readonly]="true"
+                formControlName="valor_bruto"
+                [(ngModel)]="valor_bruto"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="calculado">Campo calculado automaticamente</mat-hint>
+              </mat-form-field>
+
+            </div>
+            <p class="space"></p>
+            <div class="start">
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Crer Para Ver</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                formControlName="crer_para_ver"
+                [(ngModel)]="crer_para_ver"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="preencher">* Preencha este campo</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Embalagens</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                formControlName="embalagens"
+                [(ngModel)]="embalagens"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="preencher">* Preencha este campo</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Frete</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                formControlName="frete"
+                [(ngModel)]="frete"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="preencher">* Preencha este campo</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Taxa de Antecipação</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                [readonly]="true"
+                formControlName="taxa_antecipacao"
+                [(ngModel)]="taxa_antecipacao"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="calculado">Campo calculado automaticamente</mat-hint>
+              </mat-form-field>
+
+            </div>
+            <p class="space"></p>
+            <div class="start">
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>% Lucro CN</mat-label>
+                <mat-select
+                  disableRipple
+                  ngDefaultControl
+                  formControlName="parcelas"
+                  [(ngModel)]="parcelas"
+                  >
+                  <mat-option [value]="'20'">20</mat-option>
+                  <mat-option [value]="'30'">30</mat-option>
+                  <mat-option [value]="'32'">32</mat-option>
+                  <mat-option [value]="'35'">35</mat-option>
+                </mat-select>
+                <mat-icon matPrefix>credit_card</mat-icon>
+                <mat-hint class="preencher">* Selecione uma opção</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Cupom Desconto</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                formControlName="cupom_desconto"
+                [(ngModel)]="cupom_desconto"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="preencher">* Preencha este campo</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Valor Parcelado</mat-label>
+                <input
+                matInput
+                ngDefaultControl
+                formControlName="valor_parcelado"
+                [(ngModel)]="valor_parcelado"
+                currencyMask
+                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                >
+                <mat-icon matSuffix>attach_money</mat-icon>
+                <mat-hint class="preencher">* Preencha este campo</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                <mat-label>Nº de Parcelas</mat-label>
+                <mat-select
+                  disableRipple
+                  ngDefaultControl
+                  formControlName="parcelas"
+                  [(ngModel)]="parcelas"
+                  >
+                  <mat-option [value]="'1'">1</mat-option>
+                  <mat-option [value]="'2'">2</mat-option>
+                  <mat-option [value]="'3'">3</mat-option>
+                  <mat-option [value]="'4'">4</mat-option>
+                  <mat-option [value]="'5'">5</mat-option>
+                  <mat-option [value]="'6'">6</mat-option>
+                  <mat-option [value]="'7'">7</mat-option>
+                  <mat-option [value]="'8'">8</mat-option>
+                  <mat-option [value]="'9'">9</mat-option>
+                  <mat-option [value]="'10'">10</mat-option>
+                  <mat-option [value]="'11'">11</mat-option>
+                  <mat-option [value]="'12'">12</mat-option>
+                </mat-select>
+                <mat-icon matPrefix>credit_card</mat-icon>
+                <mat-hint class="preencher">* Selecione uma opção</mat-hint>
+              </mat-form-field>
+            </div>
+            <p class="space"></p>
+            <div class="start">
+
+              <div>
+                <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+                  <mat-label>Lucro Líquido Por Parcela</mat-label>
+                  <input
+                  matInput
+                  ngDefaultControl
+                  formControlName="valor_parcelado"
+                  [(ngModel)]="valor_parcelado"
+                  currencyMask
+                  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                  >
+                  <mat-icon matSuffix>attach_money</mat-icon>
+                  <mat-hint class="calculado">Campo calculado automaticamente</mat-hint>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-card class="lucro-card">
+                  <mat-card-title class="lucro-titulo">💲LUCRO LÍQUIDO💲</mat-card-title>
+                  <mat-card-subtitle class="lucro-titulo">(Valor total que a CN recebe)</mat-card-subtitle>
+                  <h2 class="lucro-titulo">R$ 100,00</h2>
+                </mat-card>
+              </div>
+            </div>
+          </form>
+        </mat-card>
+      </div>
 
 
     </div>
