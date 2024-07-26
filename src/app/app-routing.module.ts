@@ -38,6 +38,7 @@ import { AjusteCreditoComponent } from './ajuste-credito/ajuste-credito.componen
 import { FebrabanComponent } from './febraban/febraban.component';
 import { SegurancaDadosComponent } from './seguranca-dados/seguranca-dados.component';
 import { RioGrandeDoSulComponent } from './rio-grande-do-sul/rio-grande-do-sul.component';
+import { SimuladorLucratividadeDigitalComponent } from './simulador-lucratividade-digital/simulador-lucratividade-digital.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'natura/dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
+  { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/calculadora-tempo-de-relacao', component: CalculadoraTempoRelacaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/lista-gerentes-de-negocio', component: ListaGerentesNegociosComponent, canActivate: [AccountGuard] },

@@ -110,6 +110,7 @@ import { AjusteCreditoComponent } from './ajuste-credito/ajuste-credito.componen
 import { FebrabanComponent } from './febraban/febraban.component';
 import { SegurancaDadosComponent } from './seguranca-dados/seguranca-dados.component';
 import { RioGrandeDoSulComponent } from './rio-grande-do-sul/rio-grande-do-sul.component';
+import { SimuladorLucratividadeDigitalComponent } from './simulador-lucratividade-digital/simulador-lucratividade-digital.component';
 
 
 @NgModule({
@@ -189,7 +190,8 @@ import { RioGrandeDoSulComponent } from './rio-grande-do-sul/rio-grande-do-sul.c
     AjusteCreditoComponent,
     FebrabanComponent,
     SegurancaDadosComponent,
-    RioGrandeDoSulComponent
+    RioGrandeDoSulComponent,
+    SimuladorLucratividadeDigitalComponent
   ],
   imports: [
     BrowserModule,

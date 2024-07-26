@@ -169,6 +169,14 @@ h4 {
   border-radius: 50%;
 }
 
+.simulador-digital {
+  background-image: url('../../assets/img/dinheiro_avatar.jpg');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .pagamento-avatar {
   background-image: url('../../assets/img/pagamento-avatar.png');
   background-size: cover;
@@ -394,6 +402,12 @@ h4 {
 
 .imgLucro {
   background-image: url('../../assets/img/lucro.jpg');
+  background-size: cover;
+
+}
+
+.imgLucratividadeDigital {
+  background-image: url('../../assets/img/lucratividade_espaco_digital.png');
   background-size: cover;
 
 }
