@@ -113,19 +113,6 @@ display: flex;
 justify-content: space-between;
 }
 
-.left-panel {
-  max-width: 90vw;
-  width: 70%;
-}
-
-.right-panel {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  max-width: 90vw;
-  width: 28%;
-}
-
 .start {
   display: flex;
   justify-content: space-between;
@@ -134,14 +121,18 @@ justify-content: space-between;
 .lucro-titulo {
   color:#FFF !important;
   font-weight: bold !important;
+  width: 35vw;
+  text-align: center;
 }
 
 .lucro-card {
   background-color: #097e30;
+  width: 35vw;
 }
 
 .side-card {
   margin-bottom: 2em;
+  ;
 }
 
 .mopMatricula {
