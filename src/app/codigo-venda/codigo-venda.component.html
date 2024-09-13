@@ -1,1 +1,327 @@
-<p>codigo-venda works!</p>
+<div class="main">
+  <div class="title">
+      <div>
+          <div id="logoavon"></div>
+      </div>
+      <h1>Pesquisa - {{title}}</h1>
+      <div class="menu">
+          <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+              {{user}}
+          </h4>
+          <button
+              routerLink="/natura"
+              class="logout"
+              color="accent"
+              mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+      </div>
+  </div>
+
+  <p class="space"> </p>
+
+  <form [formGroup]="formularioCalendarioCiclos" class="example-form">
+      <div class="pesquisar">
+          <div class="search">
+              <mat-form-field
+                appearance="fill"
+                class="mopMatricula"
+                color="accent">
+                <mat-label>Selecione o Item de Pesquisa</mat-label>
+                <mat-select disableRipple ngDefaultControl
+                formControlName="selecionado" [ngModel]="selecionado"
+                (valueChange)="onSelectId($event)">
+                <mat-option *ngFor="let id of identificadores" [value]="id">
+                  {{id}}</mat-option>
+                </mat-select>
+                <mat-icon matPrefix>search</mat-icon>
+                <mat-hint>Selecione uma opção</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="selecionado==='Marca'"
+              class="codigoCn" appearance="fill" color="accent">
+                  <mat-label>Marca</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite a Marca"
+                      ngDefaultControl
+                      formControlName="marca"
+                      [(ngModel)]="marca">
+                  <mat-icon matSuffix>account_circle</mat-icon>
+                  <mat-hint>Marca</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="selecionado==='Descrição'"
+              class="codigoCn" appearance="fill" color="accent">
+                  <mat-label>Descrição</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite a Descrição ou parte dela"
+                      ngDefaultControl
+                      formControlName="descricao"
+                      [(ngModel)]="descricao">
+                  <mat-icon matSuffix>add_shopping_cart</mat-icon>
+                  <mat-hint>Descrição</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="selecionado==='Linha de Produto'"
+              class="codigoCn" appearance="fill" color="accent">
+                  <mat-label>Linha de Produto</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite a Linha de Produto"
+                      ngDefaultControl
+                      formControlName="linha_produto"
+                      [(ngModel)]="linha_produto">
+                  <mat-icon matSuffix>add_shopping_cart</mat-icon>
+                  <mat-hint>Linha de Produto</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="selecionado==='Categorização'"
+              class="codigoCn" appearance="fill" color="accent">
+                  <mat-label>Categorização</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite a Categorização"
+                      ngDefaultControl
+                      formControlName="categorizacao"
+                      [(ngModel)]="categorizacao">
+                  <mat-icon matSuffix>add_shopping_cart</mat-icon>
+                  <mat-hint>Linha de Produto</mat-hint>
+              </mat-form-field>
+          </div>
+          <div class="botoes">
+              <button
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="(marca === null || marca ===
+                  undefined ||
+                  marca === '')
+                  &&
+                  (descricao === null || descricao ===
+                  undefined ||
+                  descricao === '')
+                  &&
+                  (linha_produto === null || linha_produto ===
+                  undefined ||
+                  linha_produto === '')
+                  &&
+                  (categorizacao === null || categorizacao ===
+                  undefined ||
+                  categorizacao === '')"
+                  (click)="limpar()"
+                  color="warn"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>clear</mat-icon> Limpar
+              </button>
+
+              <button
+                  *ngIf="selecionado==='Marca'"
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="marca=== null || marca==
+                  undefined ||
+                  marca=== ''"
+                  (click)="codigoVendaMarca()"
+                  color="accent"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>search</mat-icon> Pesquisar
+              </button>
+
+              <button
+                  *ngIf="selecionado==='Descrição'"
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="descricao=== null || descricao==
+                  undefined ||
+                  descricao=== ''"
+                  (click)="codigoVendaDescricao()"
+                  color="accent"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>search</mat-icon> Pesquisar
+              </button>
+
+              <button
+                  *ngIf="selecionado==='Linha de Produto'"
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="linha_produto=== null || linha_produto==
+                  undefined ||
+                  linha_produto=== ''"
+                  (click)="codigoVendaLinhaProduto()"
+                  color="accent"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>search</mat-icon> Pesquisar
+              </button>
+
+              <button
+                  *ngIf="selecionado==='Categorização'"
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="categorizacao=== null || categorizacao==
+                  undefined ||
+                  categorizacao=== ''"
+                  (click)="codigoVendaCategorizacao()"
+                  color="accent"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>search</mat-icon> Pesquisar
+              </button>
+          </div>
+      </div>
+  </form>
+
+  <div *ngIf="!clickedRows.size">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Marca</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Descrição</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Linha de Produto</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Categorização</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Status</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Código de Venda</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+      </div>
+  </div>
+
+  <div *ngFor="let clickedRow of clickedRows">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Marca</p>
+              <p>{{clickedRow.marca}}</p>
+              <p *ngIf="clickedRow.marca===null">---</p>
+          </mat-card-content>
+      </mat-card>
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Descrição</p>
+              <p>{{clickedRow.descricao}}</p>
+              <p *ngIf="clickedRow.descricao===null">---</p>
+          </mat-card-content>
+      </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Linha de Produto</p>
+                  <p>{{clickedRow.linha_produto}}</p>
+                  <p *ngIf="clickedRow.linha_produto===null">---</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Categorização</p>
+                  <p>{{clickedRow.categorizacao}}</p>
+                  <p *ngIf="clickedRow.categorizacao===null">---</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Status</p>
+                  <p>{{clickedRow.status}}</p>
+                  <p *ngIf="clickedRow.status===null">---</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Código de Venda</p>
+                  <p>{{clickedRow.codigo_venda}}</p>
+                  <p *ngIf="clickedRow.codigo_venda===null">---</p>
+              </mat-card-content>
+          </mat-card>
+      </div>
+  </div>
+
+  <p class="space"> </p>
+
+  <div class="container">
+      <div class="tabela">
+          <div class="spinner" *ngIf="carregando===true">
+              <mat-spinner
+                  [diameter]="40"
+                  color="accent"
+                  *ngIf="carregando===true"></mat-spinner>
+              <h3>Carregando...</h3>
+          </div>
+
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+          [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef> Marca </th>
+            <td mat-cell *matCellDef="let element"> {{element.marca}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="descricao">
+            <th mat-header-cell *matHeaderCellDef> Descrição </th>
+            <td mat-cell *matCellDef="let element"> {{element.descricao}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="linha_produto">
+            <th mat-header-cell *matHeaderCellDef> Linha de Produto </th>
+            <td mat-cell *matCellDef="let element"> {{element.linha_produto}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="categorizacao">
+            <th mat-header-cell *matHeaderCellDef> Categorização </th>
+            <td mat-cell *matCellDef="let element"> {{element.categorizacao}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="codigo_venda">
+            <th mat-header-cell *matHeaderCellDef> Código de Venda </th>
+            <td mat-cell *matCellDef="let element"> {{element.codigo_venda}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr
+              mat-row
+              (click)="clickedRows.clear()"
+              (click)="clickedRows.add(row)"
+              [class.demo-row-is-clicked]="clickedRows.has(row)"
+              *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+        <mat-paginator
+            [pageSizeOptions]="[10, 15, 20]"
+            showFirstLastButtons
+            aria-label="Select page of periodic elements"
+            color="accent">
+        </mat-paginator>
+      </div>
+  </div>
+
+</div>
