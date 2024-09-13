@@ -137,4 +137,18 @@ export class SimuladorLucratividadeDigitalComponent implements OnInit {
       }, 1000)
   }
 
+  taxaNaturaPay(){
+    this.taxa_natura_pay = this.total_pedido * 0.0399;
+  }
+
+  valorMenosServicos(){
+    this.valor_menos_servicos = this.total_pedido - this.crer_para_ver - this.embalagens - this.frete;
+  }
+
+  valoBruto(){
+    this.valor_bruto = this.valor_menos_servicos * ((this.lucro_cn / 100) - (this.cupom_desconto / 100))
+  }
+
+
+
 }

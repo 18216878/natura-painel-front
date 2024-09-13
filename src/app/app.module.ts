@@ -111,6 +111,9 @@ import { FebrabanComponent } from './febraban/febraban.component';
 import { SegurancaDadosComponent } from './seguranca-dados/seguranca-dados.component';
 import { RioGrandeDoSulComponent } from './rio-grande-do-sul/rio-grande-do-sul.component';
 import { SimuladorLucratividadeDigitalComponent } from './simulador-lucratividade-digital/simulador-lucratividade-digital.component';
+import { EmanaPayComponent } from './emana-pay/emana-pay.component';
+import { PosCompraComponent } from './pos-compra/pos-compra.component';
+import { CodigoVendaComponent } from './codigo-venda/codigo-venda.component';
 
 
 @NgModule({
@@ -191,7 +194,10 @@ import { SimuladorLucratividadeDigitalComponent } from './simulador-lucratividad
     FebrabanComponent,
     SegurancaDadosComponent,
     RioGrandeDoSulComponent,
-    SimuladorLucratividadeDigitalComponent
+    SimuladorLucratividadeDigitalComponent,
+    EmanaPayComponent,
+    PosCompraComponent,
+    CodigoVendaComponent
   ],
   imports: [
     BrowserModule,

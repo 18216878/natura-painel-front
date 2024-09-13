@@ -39,6 +39,9 @@ import { FebrabanComponent } from './febraban/febraban.component';
 import { SegurancaDadosComponent } from './seguranca-dados/seguranca-dados.component';
 import { RioGrandeDoSulComponent } from './rio-grande-do-sul/rio-grande-do-sul.component';
 import { SimuladorLucratividadeDigitalComponent } from './simulador-lucratividade-digital/simulador-lucratividade-digital.component';
+import { EmanaPayComponent } from './emana-pay/emana-pay.component';
+import { PosCompraComponent } from './pos-compra/pos-compra.component';
+import { CodigoVendaComponent } from './codigo-venda/codigo-venda.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -54,14 +57,17 @@ const routes: Routes = [
   { path: 'natura/dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
-  { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/emana-pay', component: EmanaPayComponent, canActivate: [AccountGuard] },
+  { path: 'natura/pos-compra', component: PosCompraComponent, canActivate: [AccountGuard] },
+  { path: 'natura/codigo-venda', component: CodigoVendaComponent, canActivate: [AccountGuard] },
   { path: 'natura/calculadora-tempo-de-relacao', component: CalculadoraTempoRelacaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/lista-gerentes-de-negocio', component: ListaGerentesNegociosComponent, canActivate: [AccountGuard] },
   { path: 'natura/lista-gerentes-interinas', component: ListaGerentesInterinasComponent, canActivate: [AccountGuard] },
   { path: 'natura/liders-destaques', component: LideresDestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/checkout-pedido-cancelado', component: CheckoutComponent, canActivate: [AccountGuard] },
-  { path: 'natura/ajuste-credito', component: AjusteCreditoComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/ajuste-credito', component: AjusteCreditoComponent, canActivate: [AccountGuard] },
   { path: 'natura/febraban', component: FebrabanComponent, canActivate: [AccountGuard] },
   { path: 'natura/seguranca-dados', component: SegurancaDadosComponent, canActivate: [AccountGuard] },
   // { path: 'natura/migradas-avon', component: MigradasAvonComponent, canActivate: [AccountGuard] },

@@ -145,6 +145,14 @@ h4 {
   border-radius: 50%;
 }
 
+.emana-pay-avatar {
+  background-image: url('../../assets/img/emana-pay.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .alocacao-avatar {
   background-image: url('../../assets/img/alocacao-avatar.png');
   background-size: cover;
@@ -396,6 +404,12 @@ h4 {
 
 .imgSimulador {
   background-image: url('../../assets/img/simulador-home.jpg');
+  background-size: cover;
+
+}
+
+.imgEmanaPay {
+  background-image: url('../../assets/img/emana_pay.jpeg');
   background-size: cover;
 
 }

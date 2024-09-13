@@ -268,6 +268,30 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatRioGrandeDoSul/numero-pedido?pedido=${pedido}`)
   }
 
+  public getNatEmanaPayCodigoCn(cod_cn: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatEmanaPay/codcn?cod_cn=${cod_cn}`)
+  }
+
+  public getNatEmanaPayCpf(cpf: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatEmanaPay/cpf?cpf=${cpf}`)
+  }
+
+  public getCodigoVendaMarca(marca: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/marca?marca=${marca}`)
+  }
+
+  public getCodigoVendaDescricao(descricao: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/descricao?descricao=${descricao}`)
+  }
+
+  public getCodigoVendaLinhaProduto(linha_produto: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/linha-produto?linha_produto=${linha_produto}`)
+  }
+
+  public getCodigoVendaCategorizacao(categorizacao: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/categorizacao?categorizacao=${categorizacao}`)
+  }
+
 
 
 }

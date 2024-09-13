@@ -315,6 +315,24 @@
                             </span>
                         </mat-card-content>
                     </mat-card> -->
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="emana-pay-avatar"></div>
+                            <mat-card-title>Emana Pay</mat-card-title>
+                            <mat-card-subtitle>Pesquisar as consultoras que estão habilitadas com ou sem conta</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgEmanaPay"
+                            routerLink="/natura/emana-pay"></div>
+                        <mat-card-content class="social">
+                            <span
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
 
                     <mat-card class="example-card">
                         <mat-card-header>
@@ -358,7 +376,7 @@
                         </mat-card-content>
                     </mat-card>
 
-                    <mat-card class="example-card">
+                    <!-- <mat-card class="example-card">
                       <mat-card-header>
                           <div mat-card-avatar class="credito-avatar"></div>
                           <mat-card-title>Ajustes Crédito</mat-card-title>
@@ -377,7 +395,7 @@
                               <fa-icon [icon]="faCircleInfo"></fa-icon>
                           </span>
                       </mat-card-content>
-                  </mat-card>
+                  </mat-card> -->
 
                 </div>
                 <div class="home">
@@ -485,6 +503,32 @@
                   </mat-card-content>
               </mat-card>
                 </div>
+
+                <div class="home">
+                  <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="cadastro-avatar"></div>
+                        <mat-card-title>Pós Compra</mat-card-title>
+                        <mat-card-subtitle>Pesquisa de Itens como Código de Venda</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgCadastro"
+                        routerLink="/natura/pos-compra">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            (click)="openCadastrosIrregularesDialog()"
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+                </div>
+
+
+
                 <!-- <div class="home">
                     <mat-card class="example-card">
                         <mat-card-header>
@@ -581,7 +625,7 @@
                         </mat-card-content>
                     </mat-card>
                 </div>
-                <div class="home">
+                <!-- <div class="home">
                     <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="simulador-digital"></div>
@@ -602,7 +646,7 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
-                </div>
+                </div> -->
             </mat-expansion-panel>
         </mat-accordion>
     </div>
