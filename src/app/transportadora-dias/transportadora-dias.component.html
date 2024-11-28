@@ -1,0 +1,639 @@
+<div class="main">
+  <div class="title">
+      <div>
+          <div id="logoavon"></div>
+      </div>
+      <h1>Pesquisa - {{title}}</h1>
+      <div class="menu">
+          <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+              {{user}}
+          </h4>
+          <button
+              routerLink="/natura"
+              class="logout"
+              color="primary"
+              mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+      </div>
+  </div>
+
+  <p class="space"> </p>
+
+  <form [formGroup]="formularioTransportadoraDias" class="example-form">
+      <div class="pesquisar">
+          <div class="search">
+              <mat-form-field
+                appearance="fill"
+                class="mopMatricula"
+                color="primary">
+
+                <mat-label>Selecione o Item de Pesquisa</mat-label>
+                <mat-select disableRipple ngDefaultControl
+                formControlName="selecionado" [ngModel]="selecionado"
+                (valueChange)="onSelectId($event)">
+                <mat-option *ngFor="let id of identificadores" [value]="id">
+                  {{id}}</mat-option>
+                </mat-select>
+                <mat-icon matPrefix>search</mat-icon>
+                <mat-hint>Selecione uma opção</mat-hint>
+
+              </mat-form-field>
+
+              <mat-form-field *ngIf="selecionado==='Código da CN'"
+              class="codigoCn" appearance="fill" color="primary">
+                  <mat-label>Código da CN</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite o Código da Consultora"
+                      ngDefaultControl
+                      formControlName="codigo_cn"
+                      [(ngModel)]="codigo_cn">
+                  <mat-icon matSuffix>account_circle</mat-icon>
+                  <mat-hint>Código da CN</mat-hint>
+                </mat-form-field>
+
+
+              <mat-form-field *ngIf="selecionado==='Nº do Pedido'"
+              class="codigoCn" appearance="fill" color="primary">
+                  <mat-label>Nº do Pedido</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite o Nº do Pedido"
+                      ngDefaultControl
+                      formControlName="pedido"
+                      [(ngModel)]="pedido">
+                  <mat-icon matSuffix>account_circle</mat-icon>
+                  <mat-hint>Nº do Pedido</mat-hint>
+                </mat-form-field>
+          </div>
+
+          <div class="botoes">
+
+              <button
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="(codigo_cn === null || codigo_cn ===
+                  undefined ||
+                  codigo_cn === '')
+                  &&
+                  (pedido === null || pedido ===
+                  undefined ||
+                  pedido === '')"
+                  (click)="limpar()"
+                  color="warn"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>clear</mat-icon> Limpar
+              </button>
+
+              <button
+                  *ngIf="selecionado==='Código da CN'"
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="codigo_cn=== null || codigo_cn==
+                  undefined ||
+                  codigo_cn=== ''"
+                  (click)="pesquisarCodigoCn()"
+                  color="primary"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>search</mat-icon> Pesquisar
+              </button>
+
+              <button
+                  *ngIf="selecionado==='Nº do Pedido'"
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="pedido=== null || pedido==
+                  undefined ||
+                  pedido=== ''"
+                  (click)="pesquisarPedido()"
+                  color="primary"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>search</mat-icon> Pesquisar
+              </button>
+
+          </div>
+      </div>
+
+  </form>
+
+  <div *ngIf="!clickedRows.size">
+      <div class="card">
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Código da Consultora</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Nome da Consultora</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Nº do Pedido</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Ciclo</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+            </mat-card-content>
+          </mat-card>
+
+      </div>
+
+
+      <div class="card">
+
+        <mat-card class="card-width">
+          <mat-card-content>
+            <p class="title-card">Cidade</p>
+            <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">UF</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">RE</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">GV</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Setor</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+      </div>
+
+      <div class="card">
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Situação</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Data do Pedido</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Data Prevista Entrega</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Transportadora</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Telefone Transportadora</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+            </mat-card-content>
+          </mat-card>
+      </div>
+
+  </div>
+
+  <div *ngFor="let clickedRow of clickedRows">
+      <div class="card">
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Código da Consultora</p>
+              <p>{{clickedRow.codigo_cn}}</p>
+              <p *ngIf="clickedRow.codigo_cn===null">---</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Nome da Consultora</p>
+              <p>{{clickedRow.nome_cn}}</p>
+              <p *ngIf="clickedRow.nome_cn===null">---</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Nº do Pedido</p>
+              <p>{{clickedRow.pedido}}</p>
+              <p *ngIf="clickedRow.pedido===null">---</p>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+            <mat-card-content>
+              <p class="title-card">Ciclo</p>
+              <p>{{clickedRow.ciclo}}</p>
+              <p *ngIf="clickedRow.ciclo===null">---</p>
+            </mat-card-content>
+          </mat-card>
+
+      </div>
+
+
+      <div class="card">
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Cidade</p>
+                  <p>{{clickedRow.cidade}}</p>
+                  <p *ngIf="clickedRow.cidade===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">UF</p>
+                  <p>{{clickedRow.uf}}</p>
+                  <p *ngIf="clickedRow.uf===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">RE</p>
+                  <p>{{clickedRow.nome_re}}</p>
+                  <p *ngIf="clickedRow.nome_re===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">GV</p>
+                  <p>{{clickedRow.nome_gv}}</p>
+                  <p *ngIf="clickedRow.nome_gv===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Setor</p>
+                  <p>{{clickedRow.nome_setor}}</p>
+                  <p *ngIf="clickedRow.nome_setor===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+      </div>
+
+
+      <div class="card">
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Situação</p>
+                  <p>{{clickedRow.situacao}}</p>
+                  <p *ngIf="clickedRow.situacao===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Data do Pedido</p>
+                  <p>{{clickedRow.data_pedido |  date: 'dd/MM/yyyy'}}</p>
+                  <p *ngIf="clickedRow.data_pedido===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Data Prevista Entrega</p>
+                  <p>{{clickedRow.data_prevista_entrega |  date: 'dd/MM/yyyy'}}</p>
+                  <p *ngIf="clickedRow.data_prevista_entrega===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Transportadora</p>
+                  <p>{{clickedRow.trp}}</p>
+                  <p *ngIf="clickedRow.trp===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Telefone Transportadora</p>
+                  <p>{{clickedRow.telefone}}</p>
+                  <p *ngIf="clickedRow.telefone===null">---</p>
+              </mat-card-content>
+          </mat-card>
+
+      </div>
+
+  </div>
+
+  <div class="container">
+      <div class="tabela">
+
+        <div class="spinner" *ngIf="carregando===true">
+          <mat-spinner
+              [diameter]="40"
+              color="primary"
+              *ngIf="carregando===true"></mat-spinner>
+          <h3>Carregando...</h3>
+      </div>
+      <div *ngIf="pesquisa_efetuada===true">
+        <table mat-table
+          [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+          <ng-container matColumnDef="cod_pedido">
+            <th mat-header-cell *matHeaderCellDef> CD+PEDIDO </th>
+            <td mat-cell *matCellDef="let element"> {{element.cod_pedido}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="centro_dist">
+            <th mat-header-cell *matHeaderCellDef> Centro Distrib. </th>
+            <td mat-cell *matCellDef="let element"> {{element.centro_dist}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_re">
+            <th mat-header-cell *matHeaderCellDef> Cod. RE </th>
+            <td mat-cell *matCellDef="let element"> {{element.cod_re}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome_re">
+              <th mat-header-cell *matHeaderCellDef> Nome RE </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_re}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_gv">
+            <th mat-header-cell *matHeaderCellDef> Cod. GV </th>
+            <td mat-cell *matCellDef="let element"> {{element.cod_gv}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome_gv">
+              <th mat-header-cell *matHeaderCellDef> Nome GV </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_gv}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_setor">
+              <th mat-header-cell *matHeaderCellDef> Cod. Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_setor}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome_setor">
+              <th mat-header-cell *matHeaderCellDef> Nome Setor </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_setor}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="transp">
+              <th mat-header-cell *matHeaderCellDef> Transp. </th>
+              <td mat-cell *matCellDef="let element"> {{element.transp}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="rota">
+              <th mat-header-cell *matHeaderCellDef> Rota </th>
+              <td mat-cell *matCellDef="let element"> {{element.rota}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cidade">
+              <th mat-header-cell *matHeaderCellDef> Cidade </th>
+              <td mat-cell *matCellDef="let element"> {{element.cidade}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="uf">
+              <th mat-header-cell *matHeaderCellDef> UF </th>
+              <td mat-cell *matCellDef="let element"> {{element.uf}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="pedido">
+              <th mat-header-cell *matHeaderCellDef> Pedido </th>
+              <td mat-cell *matCellDef="let element"> {{element.pedido}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="doc_vendas">
+              <th mat-header-cell *matHeaderCellDef> Doc. Vendas </th>
+              <td mat-cell *matCellDef="let element"> {{element.doc_vendas}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipo_pedido">
+              <th mat-header-cell *matHeaderCellDef> Tipo de Pedido </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipo_pedido}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cond_expedicao">
+              <th mat-header-cell *matHeaderCellDef> Cond. Expedição </th>
+              <td mat-cell *matCellDef="let element"> {{element.cond_expedicao}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="presente">
+              <th mat-header-cell *matHeaderCellDef> Presente </th>
+              <td mat-cell *matCellDef="let element"> {{element.presente}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status_crm">
+              <th mat-header-cell *matHeaderCellDef> Status CRM </th>
+              <td mat-cell *matCellDef="let element"> {{element.status_crm}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="remessa">
+              <th mat-header-cell *matHeaderCellDef> Remessa </th>
+              <td mat-cell *matCellDef="let element"> {{element.remessa}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="fatura">
+              <th mat-header-cell *matHeaderCellDef> Fatura </th>
+              <td mat-cell *matCellDef="let element"> {{element.fatura}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_grupo">
+              <th mat-header-cell *matHeaderCellDef> Código do Grupo </th>
+              <td mat-cell *matCellDef="let element"> {{element.cod_grupo}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hora_faturamento">
+              <th mat-header-cell *matHeaderCellDef> Hora de faturamento </th>
+              <td mat-cell *matCellDef="let element"> {{element.hora_faturamento}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="prioridade">
+              <th mat-header-cell *matHeaderCellDef> Prioridade </th>
+              <td mat-cell *matCellDef="let element"> {{element.prioridade}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="item_transito">
+              <th mat-header-cell *matHeaderCellDef> Item Trânsito </th>
+              <td mat-cell *matCellDef="let element"> {{element.item_transito}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="ciclo">
+              <th mat-header-cell *matHeaderCellDef> Ciclo </th>
+              <td mat-cell *matCellDef="let element"> {{element.ciclo}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="num_emb">
+              <th mat-header-cell *matHeaderCellDef> Num. Emb. </th>
+              <td mat-cell *matCellDef="let element"> {{element.num_emb}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="meio_captacao">
+              <th mat-header-cell *matHeaderCellDef> Meio de Captação </th>
+              <td mat-cell *matCellDef="let element"> {{element.meio_captacao}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="situacao">
+              <th mat-header-cell *matHeaderCellDef> Situação </th>
+              <td mat-cell *matCellDef="let element"> {{element.situacao}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="linha">
+              <th mat-header-cell *matHeaderCellDef> Linha </th>
+              <td mat-cell *matCellDef="let element"> {{element.linha}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nr_palete">
+              <th mat-header-cell *matHeaderCellDef> Nº Palete </th>
+              <td mat-cell *matCellDef="let element"> {{element.nr_palete}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="horario_envio_linha">
+              <th mat-header-cell *matHeaderCellDef> Hora Envio Linha </th>
+              <td mat-cell *matCellDef="let element"> {{element.horario_envio_linha}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hora_separacao">
+              <th mat-header-cell *matHeaderCellDef> Hora Separação </th>
+              <td mat-cell *matCellDef="let element"> {{element.hora_separacao}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="codigo_cn">
+              <th mat-header-cell *matHeaderCellDef> Código CN </th>
+              <td mat-cell *matCellDef="let element"> {{element.codigo_cn}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome_cn">
+              <th mat-header-cell *matHeaderCellDef> Nome CN </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome_cn}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hora_criacao_remessa">
+              <th mat-header-cell *matHeaderCellDef> Hora Criação Remessa </th>
+              <td mat-cell *matCellDef="let element"> {{element.hora_criacao_remessa}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="hora_plano_separacao">
+              <th mat-header-cell *matHeaderCellDef> Hora Plano Separação(FIM) </th>
+              <td mat-cell *matCellDef="let element"> {{element.hora_plano_separacao}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_faturamento">
+              <th mat-header-cell *matHeaderCellDef> Data de faturamento </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_faturamento | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_envio_linha">
+              <th mat-header-cell *matHeaderCellDef> Data Envio Linha </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_envio_linha | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_separacao">
+              <th mat-header-cell *matHeaderCellDef> Data Separação </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_separacao | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_digitacao">
+              <th mat-header-cell *matHeaderCellDef> Data Digitação </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_digitacao | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_pedido">
+              <th mat-header-cell *matHeaderCellDef> Data Pedido </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_pedido | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_liberacao_credito">
+              <th mat-header-cell *matHeaderCellDef> Data Liberação Crédito </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_liberacao_credito | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_limite_lib_credito">
+              <th mat-header-cell *matHeaderCellDef> Data Limite Lib. Credito </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_limite_lib_credito | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_criacao_remessa">
+              <th mat-header-cell *matHeaderCellDef> Data Criação Remessa </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_criacao_remessa | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_plano_separacao">
+              <th mat-header-cell *matHeaderCellDef> Data Plano Separação(FIM) </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_plano_separacao | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_prevista_entrega">
+              <th mat-header-cell *matHeaderCellDef> Data Prevista Entrega </th>
+              <td mat-cell *matCellDef="let element"> {{element.data_prevista_entrega | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="zona_transporte">
+              <th mat-header-cell *matHeaderCellDef> Zona de transporteo </th>
+              <td mat-cell *matCellDef="let element"> {{element.zona_transporte}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="trp">
+              <th mat-header-cell *matHeaderCellDef> Trp </th>
+              <td mat-cell *matCellDef="let element"> {{element.trp}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="trp2">
+              <th mat-header-cell *matHeaderCellDef> trp2 </th>
+              <td mat-cell *matCellDef="let element"> {{element.trp2}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefone">
+              <th mat-header-cell *matHeaderCellDef> telefone </th>
+              <td mat-cell *matCellDef="let element"> {{element.telefone}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr
+              mat-row
+              (click)="clickedRows.clear()"
+              (click)="clickedRows.add(row)"
+              [class.demo-row-is-clicked]="clickedRows.has(row)"
+              *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+        <mat-paginator
+            [pageSizeOptions]="[10, 15, 20]"
+            showFirstLastButtons
+            aria-label="Select page of periodic elements"
+            color="primary">
+        </mat-paginator>
+      </div>
+      </div>
+
+  </div>
+
+  </div>

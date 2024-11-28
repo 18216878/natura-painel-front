@@ -42,6 +42,9 @@ import { SimuladorLucratividadeDigitalComponent } from './simulador-lucratividad
 import { EmanaPayComponent } from './emana-pay/emana-pay.component';
 import { PosCompraComponent } from './pos-compra/pos-compra.component';
 import { CodigoVendaComponent } from './codigo-venda/codigo-venda.component';
+import { SimuladorMainfestacoesComponent } from './simulador-mainfestacoes/simulador-mainfestacoes.component';
+import { ErrosBoletosComponent } from './erros-boletos/erros-boletos.component';
+import { TransportadoraDiasComponent } from './transportadora-dias/transportadora-dias.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -57,8 +60,11 @@ const routes: Routes = [
   { path: 'natura/dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/simulador-manifestacoes', component: SimuladorMainfestacoesComponent, canActivate: [AccountGuard] },
   // { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/erros-boletos', component: ErrosBoletosComponent, canActivate: [AccountGuard] },
+  { path: 'natura/transportadora-dias', component: TransportadoraDiasComponent, canActivate: [AccountGuard] },
   { path: 'natura/emana-pay', component: EmanaPayComponent, canActivate: [AccountGuard] },
   { path: 'natura/pos-compra', component: PosCompraComponent, canActivate: [AccountGuard] },
   { path: 'natura/codigo-venda', component: CodigoVendaComponent, canActivate: [AccountGuard] },

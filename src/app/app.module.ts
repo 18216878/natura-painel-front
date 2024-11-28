@@ -114,6 +114,9 @@ import { SimuladorLucratividadeDigitalComponent } from './simulador-lucratividad
 import { EmanaPayComponent } from './emana-pay/emana-pay.component';
 import { PosCompraComponent } from './pos-compra/pos-compra.component';
 import { CodigoVendaComponent } from './codigo-venda/codigo-venda.component';
+import { SimuladorMainfestacoesComponent } from './simulador-mainfestacoes/simulador-mainfestacoes.component';
+import { ErrosBoletosComponent } from './erros-boletos/erros-boletos.component';
+import { TransportadoraDiasComponent } from './transportadora-dias/transportadora-dias.component';
 
 
 @NgModule({
@@ -197,7 +200,10 @@ import { CodigoVendaComponent } from './codigo-venda/codigo-venda.component';
     SimuladorLucratividadeDigitalComponent,
     EmanaPayComponent,
     PosCompraComponent,
-    CodigoVendaComponent
+    CodigoVendaComponent,
+    SimuladorMainfestacoesComponent,
+    ErrosBoletosComponent,
+    TransportadoraDiasComponent
   ],
   imports: [
     BrowserModule,

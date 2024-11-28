@@ -292,6 +292,41 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/categorizacao?categorizacao=${categorizacao}`)
   }
 
+  public GetErroBoletosCliente(cliente: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatErrosBoletos?cliente=${cliente}`)
+  }
+
+  public getNatSimuladorManifestacaoCategoria(): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoCategoria`)
+  }
+
+  public getNatSimuladorManifestacaoLocalDefeito(id_categoria: Event): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoLocalDefeito?id_categoria=${id_categoria}`)
+  }
+
+  public getNatSimuladorManifestacaoTipoDefeito(id_categoria: number, id_local_defeito: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoTipoDefeito?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}`)
+  }
+
+  public getNatSimuladorManifestacaoCorreta(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoCorreta?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
+  }
+
+  public getNatSimuladorManifestacaoDescricao(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoDescricao?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
+  }
+
+  public getNatSimuladorManifestacaoSondagem(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoSondagem?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
+  }
+
+  public getDiasCodigoCn(codigo_cn: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatTansportadoraDias/codigo-cn?codigo_cn=${codigo_cn}`)
+  }
+
+  public getDiasPedido(pedido: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatTansportadoraDias/pedido?pedido=${pedido}`)
+  }
 
 
 }
