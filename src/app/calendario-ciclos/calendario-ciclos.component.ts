@@ -46,8 +46,8 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
     'nome_gv',
     'ciclos',
     'dt_estatistica',
-    'ini_entrega_pedido_avon',
-    'fim_entrega_pedido_avon',
+    'bloco',
+    'sub_bloco',
     'vazio',
     'id',
     'dt_abertura',
@@ -57,7 +57,7 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
 
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  
+
   tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -65,14 +65,14 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
   public pesquisa_efetuada: boolean = false;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -92,14 +92,14 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
 
   identificadores: string[] = ['Código do Setor', 'Nome do Setor'];
   selecionado: string;
-  
+
   public carregando: boolean;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
     this.formularioCalendarioCiclos = this.formBuilder.group({
       selecionado:[''],
-      cod_setor:[''],      
+      cod_setor:[''],
       nome_setor:['']
     })
 
@@ -128,8 +128,8 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -157,8 +157,8 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
