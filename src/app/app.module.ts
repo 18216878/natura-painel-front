@@ -25,6 +25,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
@@ -117,6 +119,7 @@ import { CodigoVendaComponent } from './codigo-venda/codigo-venda.component';
 import { SimuladorMainfestacoesComponent } from './simulador-mainfestacoes/simulador-mainfestacoes.component';
 import { ErrosBoletosComponent } from './erros-boletos/erros-boletos.component';
 import { TransportadoraDiasComponent } from './transportadora-dias/transportadora-dias.component';
+import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclusao.component';
 
 
 @NgModule({
@@ -203,7 +206,8 @@ import { TransportadoraDiasComponent } from './transportadora-dias/transportador
     CodigoVendaComponent,
     SimuladorMainfestacoesComponent,
     ErrosBoletosComponent,
-    TransportadoraDiasComponent
+    TransportadoraDiasComponent,
+    ReembolsoInclusaoComponent
   ],
   imports: [
     BrowserModule,
@@ -232,6 +236,7 @@ import { TransportadoraDiasComponent } from './transportadora-dias/transportador
     MatSnackBarModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatAutocompleteModule,
     FontAwesomeModule,
     NgxMaskModule.forRoot(),
     CurrencyMaskModule

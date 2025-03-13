@@ -1,0 +1,363 @@
+<div class="main">
+  <div class="title">
+    <div>
+        <div id="logoavon"></div>
+    </div>
+    <h1>Efetuar Registro - {{title}}</h1>
+    <div class="menu">
+        <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+            {{user}}
+        </h4>
+        <button
+            routerLink="/home"
+            class="logout"
+            color="accent"
+            mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+    </div>
+</div>
+<p class="space"> </p>
+
+<div>
+  <form [formGroup]="formularioReembolso" class="example-form">
+    <p class="start">
+        <mat-form-field class="mop" appearance="fill" color="accent">
+          <mat-label>Cliente</mat-label>
+          <input
+          matInput
+          ngDefaultControl
+          placeholder="Digite o Nome do Cliente"
+          formControlName="cliente"
+          [(ngModel)]="cliente"
+          >
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-hint>Cliente</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+          <mat-label>Nº Documento</mat-label>
+          <input
+          matInput
+          ngDefaultControl
+          placeholder="Digite o Nº Documento"
+          formControlName="nr_documento"
+          [(ngModel)]="nr_documento"
+          >
+          <mat-icon matSuffix>assignment</mat-icon>
+          <mat-hint>Nº Documento</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+          <mat-label>Nº Ocorrência</mat-label>
+          <input
+          matInput
+          ngDefaultControl
+          placeholder="Digite o Nº Documento"
+          formControlName="nr_ocorrencia"
+          [(ngModel)]="nr_ocorrencia"
+          >
+          <mat-icon matSuffix>assignment_late</mat-icon>
+          <mat-hint>Nº Ocorrência</mat-hint>
+        </mat-form-field>
+    </p>
+    <p class="start">
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Data de Criação</mat-label>
+        <input
+        matInput
+        [readonly]="true"
+        [matDatepicker]="picker"
+        ngDefaultControl
+        formControlName="data_criacao"
+        [(ngModel)]="data_criacao"
+        >
+        <mat-hint>Data de Criação</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Origem</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite a Origem"
+        formControlName="origem"
+        [(ngModel)]="origem"
+        >
+        <mat-icon matSuffix>description</mat-icon>
+        <mat-hint>Origem</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Data do SLA</mat-label>
+        <input
+        matInput
+        [readonly]="true"
+        [matDatepicker]="pickerDataSla"
+        ngDefaultControl
+        formControlName="data_criacao"
+        [(ngModel)]="data_criacao"
+        >
+        <mat-hint>Data do SLA</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="pickerDataSla"></mat-datepicker-toggle>
+        <mat-datepicker #pickerDataSla></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Status da Atividade</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Status da Atividade"
+        formControlName="status_atividade"
+        [(ngModel)]="status_atividade"
+        >
+        <mat-icon matSuffix>check_circle</mat-icon>
+        <mat-hint>Status da Atividade</mat-hint>
+      </mat-form-field>
+
+    </p>
+
+    <p class="start">
+      <mat-form-field class="mop" appearance="fill" color="accent">
+        <mat-label>Nome do Favorecido</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Nome do Favorecido"
+        formControlName="nome_favorecido"
+        [(ngModel)]="nome_favorecido"
+        >
+        <mat-icon matSuffix>account_circle</mat-icon>
+        <mat-hint>Nome do Favorecido</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>CPF do Favorecido</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o CPF do Favorecido"
+        formControlName="cpf_favorecido"
+        [(ngModel)]="cpf_favorecido"
+        >
+        <mat-icon matSuffix>assignment</mat-icon>
+        <mat-hint>CPF do Favorecido</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Endereço - CEP</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o CPF do Favorecido"
+        formControlName="endereco_favorecido_cep"
+        [(ngModel)]="endereco_favorecido_cep"
+        >
+        <mat-icon matSuffix>add_location</mat-icon>
+        <mat-hint>Endereço - CEP</mat-hint>
+      </mat-form-field>
+
+
+    </p>
+
+    <p class="start">
+
+      <mat-form-field class="mop" appearance="fill" color="accent">
+        <mat-label>Endereço - Logradouro</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Nome do Favorecido"
+        formControlName="endereco_favorecido_rua"
+        [(ngModel)]="endereco_favorecido_rua"
+        >
+        <mat-icon matSuffix>add_location</mat-icon>
+        <mat-hint>Endereço - Logradouro</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mop" appearance="fill" color="accent">
+        <mat-label>Endereço - Cidade</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Nome do Favorecido"
+        formControlName="endereco_favorecido_cidade"
+        [(ngModel)]="endereco_favorecido_cidade"
+        >
+        <mat-icon matSuffix>add_location</mat-icon>
+        <mat-hint>Endereço - Cidade</mat-hint>
+      </mat-form-field>
+    </p>
+
+    <div *ngIf="!clickedRows.size">
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Código do Banco</mat-label>
+        <input
+        matInput
+        [readonly]="true"
+        ngDefaultControl
+        formControlName="codigo_banco"
+        [(ngModel)]="codigo_banco"
+        >---
+        <mat-icon matSuffix>domain</mat-icon>
+        <mat-hint>Código do Banco</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopBk" appearance="fill" color="accent">
+        <mat-label>Nome do Banco</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        [readonly]="true"
+        formControlName="nome_banco"
+        [(ngModel)]="nome_banco"
+        >---
+        <mat-icon matSuffix>domain</mat-icon>
+        <mat-hint>Nome do Banco</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="start" *ngFor="let clickedRow of clickedRows">
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Código do Banco</mat-label>
+        <input
+        matInput
+        [readonly]="true"
+        ngDefaultControl
+        formControlName="codigo_banco"
+        [(ngModel)]="codigo_banco"
+        >{{clickedRow.code}}
+        <mat-icon matSuffix>domain</mat-icon>
+        <mat-hint>Código do Banco</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopBk" appearance="fill" color="accent">
+        <mat-label>Nome do Banco</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        [readonly]="true"
+        formControlName="nome_banco"
+        [(ngModel)]="nome_banco"
+        >{{clickedRow.name}}
+        <mat-icon matSuffix>domain</mat-icon>
+        <mat-hint>Nome do Banco</mat-hint>
+      </mat-form-field>
+
+
+    </div>
+
+<div class="space">
+  <mat-accordion class="example-headers-align accordion">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+      <mat-panel-description>
+          Clique para selecionar o banco na lista
+          <mat-icon>search</mat-icon>
+      </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="container">
+        <div class="tabela">
+        <div>
+
+          <mat-form-field appearance="standard" class="mop">
+            <mat-label>Digite o nome ou o código do banco</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Digite o nome ou o código do banco" #input>
+          </mat-form-field>
+
+          <table mat-table
+            [dataSource]="tableDataSource">
+
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef> Código do Banco</th>
+              <td mat-cell *matCellDef="let element"> {{element.code}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nome do Banco </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr
+                mat-row
+                (click)="clickedRows.clear()"
+                (click)="clickedRows.add(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+
+        </div>
+        </div>
+
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+    <div class="space"></div>
+      <p class="start">
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Agência</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Nº da Agência"
+        formControlName="agencia_numero"
+        [(ngModel)]="agencia_numero"
+        >
+        <mat-icon matSuffix>monetization_on</mat-icon>
+        <mat-hint>Agência</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Dígito Agência</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Dígito da Agência"
+        formControlName="agencia_digito"
+        [(ngModel)]="agencia_digito"
+        >
+        <mat-icon matSuffix>monetization_on</mat-icon>
+        <mat-hint>Dígito Agência</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Conta</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Nº da Conta"
+        formControlName="conta_numero"
+        [(ngModel)]="conta_numero"
+        >
+        <mat-icon matSuffix>monetization_on</mat-icon>
+        <mat-hint>Conta</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Dígito Conta</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Dígito da Conta"
+        formControlName="conta_digito"
+        [(ngModel)]="conta_digito"
+        >
+        <mat-icon matSuffix>monetization_on</mat-icon>
+        <mat-hint>Dígito Conta</mat-hint>
+      </mat-form-field>
+
+    </p>
+
+
+  </form>
+</div>
+<p class="space"></p>
+
+</div>

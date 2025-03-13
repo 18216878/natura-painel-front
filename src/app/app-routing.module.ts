@@ -45,6 +45,7 @@ import { CodigoVendaComponent } from './codigo-venda/codigo-venda.component';
 import { SimuladorMainfestacoesComponent } from './simulador-mainfestacoes/simulador-mainfestacoes.component';
 import { ErrosBoletosComponent } from './erros-boletos/erros-boletos.component';
 import { TransportadoraDiasComponent } from './transportadora-dias/transportadora-dias.component';
+import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclusao.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -63,6 +64,7 @@ const routes: Routes = [
   // { path: 'natura/simulador-manifestacoes', component: SimuladorMainfestacoesComponent, canActivate: [AccountGuard] },
   // { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/reembolso-inclusao', component: ReembolsoInclusaoComponent, canActivate: [AccountGuard] },
   { path: 'natura/erros-boletos', component: ErrosBoletosComponent, canActivate: [AccountGuard] },
   { path: 'natura/transportadora-dias', component: TransportadoraDiasComponent, canActivate: [AccountGuard] },
   { path: 'natura/emana-pay', component: EmanaPayComponent, canActivate: [AccountGuard] },

@@ -81,7 +81,7 @@
               </mat-card-header>
                 <form [formGroup]="formularioSimuladorCobranca" class="example-form">
                     <p class="start">
-                        
+
                         <mat-form-field *ngIf="ativarSimulacao===true" class="mopMatricula" appearance="fill" color="accent">
                           <mat-label>Nº do Pedido</mat-label>
                           <input
@@ -109,8 +109,8 @@
                           <mat-hint>Valor Total do Pedido</mat-hint>
                         </mat-form-field>
 
-                        
-                        
+
+
                       </p>
 
                       <p class="start">
@@ -130,7 +130,7 @@
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                           </mat-form-field>
-  
+
                           <mat-form-field class="mopMatricula" appearance="fill" color="accent">
                               <mat-label>Valor do Lucro</mat-label>
                               <input
@@ -147,7 +147,7 @@
                             </mat-form-field>
                       </p>
 
-                      
+
                       <p class="start">
                         <button
                           class="validar"
@@ -166,7 +166,7 @@
                           aria-label="Example icon button with a home icon">
                           <mat-icon>delete</mat-icon> Limpar Tabela
                         </button>
-    
+
 
                         <button
                           class="validar"
@@ -177,7 +177,7 @@
                           <mat-icon>add</mat-icon> Inserir Dados na Tabela
                         </button>
 
-                        
+
                 </form>
             </mat-card>
             <div class="container">
@@ -188,28 +188,28 @@
                   <td mat-cell *matCellDef="let element"> {{element.pedido}}
                   </td>
                 </ng-container>
-        
+
                 <ng-container matColumnDef="valor_total_pedido">
                   <th mat-header-cell *matHeaderCellDef> Valor Total do Pedido </th>
-                  <td mat-cell *matCellDef="let element"> {{element.valor_total_pedido | currency: 'BRL'}} 
+                  <td mat-cell *matCellDef="let element"> {{element.valor_total_pedido | currency: 'BRL'}}
                   </td>
                 </ng-container>
-        
+
                 <ng-container matColumnDef="data_pedido">
                   <th mat-header-cell *matHeaderCellDef> Data do Pedido </th>
                   <td mat-cell *matCellDef="let element"> {{element.data_pedido | date: 'dd/MM/yyyy'}} </td>
                 </ng-container>
-        
+
                 <ng-container matColumnDef="lucro">
                   <th mat-header-cell *matHeaderCellDef> Valor do Lucro </th>
                   <td mat-cell *matCellDef="let element"> {{element.lucro | currency: 'BRL'}} </td>
                 </ng-container>
-        
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
             </div>
-       
+
         </div>
         <div class="right-panel">
           <div *ngIf="carregando===true" class="carregando">
@@ -219,33 +219,33 @@
             <mat-card-header>
               <mat-card-title>Dados do lucro</mat-card-title>
             </mat-card-header>
-            <mat-card-content class="box"> 
+            <mat-card-content class="box">
 
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">Nível da Consultora</h5>
                     <h5>🏆 {{nivelConsultora}}</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">% Lucro</h5>
                     <h5>🪙 {{percentLucro | percent: '1.0-0'}}</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">MDR</h5>
                     <h5>🪙 {{percentMdr | percent: '1.2-2'}}</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">Valor Total dos Pedidos</h5>
                     <h5>💵 {{valorTotalPedidos | currency: 'BRL'}}</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">Lucro Consultora</h5>
                     <h5>💵 {{lucroConsultora | currency: 'BRL'}}</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">(-) MDR (3,99%)</h5>
                     <h5>💵 {{valorMdr | currency: 'BRL'}}</h5>
@@ -297,33 +297,33 @@
             <mat-card-header>
               <mat-card-title>Lucro Por Nível</mat-card-title>
             </mat-card-header>
-            <mat-card-content class="box"> 
+            <mat-card-content class="box">
 
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">💎 Diamante</h5>
                     <h5>🪙 35%</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">🥇 Ouro</h5>
                     <h5>🪙 32%</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">🥈 Prata</h5>
                     <h5>🪙 30%</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">🥉 Bronze</h5>
                     <h5>🪙 30%</h5>
                 </div>
-                
+
                 <div class="parcelas">
                     <h5 class="parcelamento" color="accent">🪴 Semente</h5>
                     <h5>🪙 20%</h5>
                 </div>
-                
+
             </mat-card-content>
           </mat-card>
 

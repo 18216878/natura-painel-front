@@ -328,5 +328,21 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatTansportadoraDias/pedido?pedido=${pedido}`)
   }
 
+  public postReembolsoCriarRegistro(jsonTab: JSON) {
+    this.httpClient.post(`${this.SERVER_URL}/NatReembolso/criar-registro`, jsonTab, {observe: 'response'}).subscribe(
+      data => {
+        return data;
+      }
+    );
+  }
+
+  public getReembolsoCpfSolicitante(nr_documento: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/cpf-solicitante?nr_documento=${nr_documento}`)
+  }
+
+  public getReembolsoCpfFavorecido(cpf_favorecido: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/cpf-favorecido?cpf_favorecido=${cpf_favorecido}`)
+  }
+
 
 }

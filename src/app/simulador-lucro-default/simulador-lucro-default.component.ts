@@ -8,6 +8,7 @@ import jsPDF from 'jspdf';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatAutocomplete } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-simulador-lucro-default',
@@ -32,7 +33,7 @@ export class SimuladorLucroDefaultComponent implements OnInit {
 
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -40,10 +41,10 @@ export class SimuladorLucroDefaultComponent implements OnInit {
     private accountService: AccountService,
     private _snackBar: MatSnackBar,
     private dateAdapter: DateAdapter<Date>
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
-    this.dateAdapter.setLocale('pt-br'); 
+    this.dateAdapter.setLocale('pt-br');
     window.scroll(0, 0);
   }
 
@@ -75,8 +76,8 @@ export class SimuladorLucroDefaultComponent implements OnInit {
   juros_form: number;
   valor_atualizado_form: number;
   valor_corrigido: number = 0;
-
   dados_adicionados: number = 0;
+
   ngOnInit(): void {
 
     this.user = this.accountService.get('user')?.toString();
@@ -84,15 +85,15 @@ export class SimuladorLucroDefaultComponent implements OnInit {
     this.formularioDadosIniciais = this.formBuilder.group({
       nivelConsultora:['']
     })
-    
+
     this.formularioSimuladorCobranca = this.formBuilder.group({
       pedido_form:[''],
       valor_pedido_form:[''],
       data_pedido_form:[''],
       valor_lucro_form:['']
-      
+
     })
-    
+
     this.formularioLateral = this.formBuilder.group({
       valor_original:[''],
       debito_atualizado:[''],
@@ -104,11 +105,11 @@ export class SimuladorLucroDefaultComponent implements OnInit {
       juros_dia_aplicado:[''],
       total_juros_atraso:[''],
       total_juros_parcelas:['']
-      
+
     })
-    
+
     this.ativarSimulacao = false;
-     
+
 
   }
 
@@ -148,8 +149,8 @@ export class SimuladorLucroDefaultComponent implements OnInit {
         break;
       default:
         this.percentLucro = 0;
-    } 
-    
+    }
+
   }
 
   inserir(form: FormGroup){
@@ -191,7 +192,7 @@ export class SimuladorLucroDefaultComponent implements OnInit {
     {
       i++
     }
-    
+
 
     if (i > 0){
       var message = 'Campos invalidos ou não preenchidos';
@@ -205,17 +206,17 @@ export class SimuladorLucroDefaultComponent implements OnInit {
         data_pedido: this.data_pedido_form,
         lucro: this.valor_lucro_form
       }
-  
+
       this.dataSource = [...this.dataSource, newRow];
 
       this.valorTotalPedidos = this.valorTotalPedidos + this.valor_pedido_form;
-  
+
       this.exibir_tabela = true;
-      
-  
-      this.dados_adicionados++; 
+
+
+      this.dados_adicionados++;
       this.formularioSimuladorCobranca.reset();
-    }   
+    }
 
   }
 
@@ -244,7 +245,7 @@ export class SimuladorLucroDefaultComponent implements OnInit {
   limparTabela(){
     this.dataSource = [];
     this.exibir_tabela = false;
-    this.dados_adicionados = 0; 
+    this.dados_adicionados = 0;
   }
 
 
@@ -300,9 +301,9 @@ export class SimuladorLucroDefaultComponent implements OnInit {
       const moment = require('moment');
       var arquivo = "Lucro_Default_" + this.cpf + '_' + moment(new Date()).format('YYYYMMDD') + ".pdf"
       var mensagem = "Extrato gerado em " + moment(new Date()).format('DD/MM/YYYY') + " às " + moment(new Date()).format('HH:mm:ss');
-  
+
       var doc = new jsPDF();
-  
+
       var myImage = new Image();
       var cpfResumo = this.cpf.substring(0,3) + '.' + this.cpf.substring(3,6) + '.' + this.cpf.substring(6,9) + '-' + this.cpf.substring(9);
       var nivelConsultoraResumo = this.nivelConsultora;
@@ -313,78 +314,78 @@ export class SimuladorLucroDefaultComponent implements OnInit {
       var valorMdrResumo = this.valorMdr;
       var lucroApagarResumo = this.lucroApagar;
       var dataSourceMap = this.dataSource;
-  
-  
+
+
       myImage.src = 'https://tabulador.csu.com.br/natura/painel/front/assets/img/revendedora-natura-cadastro.png';
       // myImage.src = './assets/img/revendedora-natura-cadastro.png';
-  
+
       myImage.onload = function(){
-  
+
         doc.addImage(myImage, "PNG", 50, 2, 90, 20);
         doc.setFontSize(12);
-  
+
         doc.setLineWidth(0.5);
         doc.line(20, 28, 185, 28);
-    
+
         doc.setLineWidth(0.5);
         doc.line(20, 28, 20, 116);
-    
+
         doc.setLineWidth(0.5);
         doc.line(20, 116, 185, 116);
-  
+
         doc.setLineWidth(0.5);
         doc.line(185, 28, 185, 116);
-    
+
         doc.setTextColor(255,87,34);
         doc.text("CPF da Consultora", 25, 40);
         doc.setTextColor(100);
         doc.text(cpfResumo, 152, 40);
-    
+
         doc.setTextColor(255,87,34);
         doc.text("Nível da Consultora", 25, 50);
         doc.setTextColor(100);
         doc.text(nivelConsultoraResumo, 152, 50);
-    
+
         var lucroNivelPercent = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumSignificantDigits: 2,  maximumSignificantDigits: 2}).format(percentLucroResumo);
         doc.setTextColor(255,87,34);
         doc.text("Condição de Pagamento", 25, 60);
         doc.setTextColor(100);
         doc.text(lucroNivelPercent, 152, 60);
-        
+
         var MDRtxPercent = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumSignificantDigits: 2,  maximumSignificantDigits: 3}).format(percentMdrResumo);
         doc.setTextColor(255,87,34);
         doc.text("MDR", 25, 70);
         doc.setTextColor(100);
         doc.text(MDRtxPercent, 152, 70);
-  
+
         doc.setTextColor(255,87,34);
         doc.text("Valor Total dos Pedidos", 25, 80);
         doc.setTextColor(100);
         var vlr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorTotalPedidosResumo);
         doc.text(vlr, 152, 80);
-        
+
         doc.setTextColor(255,87,34);
         doc.text("Lucro Consultora", 25, 90);
         doc.setTextColor(100);
         var vlrLucro = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(lucroConsultoraResumo);
         doc.text(vlrLucro, 152, 90);
-        
+
         doc.setTextColor(255,87,34);
         doc.text("(-) MDR (3,99%)", 25, 100);
         doc.setTextColor(100);
         var vlrMdr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorMdrResumo);
         doc.text(vlrMdr, 152, 100);
-  
+
         doc.setTextColor(255,87,34);
         doc.text("(=)Lucro a pagar", 25, 110);
         doc.setTextColor(100);
         var vlrMdr = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(lucroApagarResumo);
         doc.text(vlrMdr, 152, 110);
-  
+
         var data = [];
-  
-  
-  
+
+
+
         dataSourceMap.map(
           obj => {
             var valorTotalPedidoTabela = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(obj.valor_total_pedido);
@@ -397,31 +398,31 @@ export class SimuladorLucroDefaultComponent implements OnInit {
                 data_pedido: dt.toString(),
                 lucro: valorTotalLucroTabela.toString()
               }
-    
+
               data.push(d);
-            
+
           }
         )
-  
+
         var headers = [
           'pedido',
           'valor_total_pedido',
           'data_pedido',
           'lucro'
         ];
-        
-  
+
+
         doc.table(40, 130, data, headers, { autoSize: true });
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(10);
         doc.text(mensagem, 20, 280);
         doc.save(arquivo);
-  
+
       };
     }
 
 
-    
+
   }
 
   validarCpf() {
@@ -431,7 +432,7 @@ export class SimuladorLucroDefaultComponent implements OnInit {
       var action = 'Fechar';
       this._snackBar.open(message, action);
       this.cpf = undefined;
-    } 
+    }
   }
 
 }
