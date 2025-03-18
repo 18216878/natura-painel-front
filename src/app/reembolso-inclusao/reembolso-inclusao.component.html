@@ -32,7 +32,8 @@
         (click)="openDialog()"><mat-icon>search</mat-icon>Pesquisar</button>
         <button
         color="accent"
-        mat-raised-button><mat-icon>save</mat-icon>Salvar</button>
+        mat-raised-button
+        (click)="reembolsoCriarRegistro(formularioReembolso)"><mat-icon>save</mat-icon>Salvar</button>
       </div>
     </div>
     <p class="space"></p>
@@ -118,8 +119,8 @@
         [readonly]="true"
         [matDatepicker]="pickerDataSla"
         ngDefaultControl
-        formControlName="data_criacao"
-        [(ngModel)]="data_criacao"
+        formControlName="data_sla"
+        [(ngModel)]="data_sla"
         >
         <mat-hint>Data do SLA</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="pickerDataSla"></mat-datepicker-toggle>
@@ -137,19 +138,6 @@
             <mat-icon matPrefix>check_circle</mat-icon>
             <mat-hint>Selecione uma opção</mat-hint>
           </mat-form-field>
-
-      <!-- <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-        <mat-label>Status da Atividade</mat-label>
-        <input
-        matInput
-        ngDefaultControl
-        placeholder="Digite o Status da Atividade"
-        formControlName="status_atividade"
-        [(ngModel)]="status_atividade"
-        >
-        <mat-icon matSuffix>check_circle</mat-icon>
-        <mat-hint>Status da Atividade</mat-hint>
-      </mat-form-field> -->
 
     </p>
 
@@ -247,64 +235,30 @@
       </mat-form-field>
     </p>
 
-    <div *ngIf="!clickedRows.size">
-      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-        <mat-label>Código do Banco</mat-label>
-        <input
-        matInput
-        [readonly]="true"
-        ngDefaultControl
-        formControlName="codigo_banco_empty"
-        [(ngModel)]="codigo_banco_empty"
-        >---
-        <mat-icon matSuffix>domain</mat-icon>
-        <mat-hint>Código do Banco</mat-hint>
-      </mat-form-field>
+    <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+      <mat-label>Código do Banco</mat-label>
+      <input
+      matInput
+      [readonly]="true"
+      formControlName="codigo_banco"
+      [(ngModel)]="codigo_banco"
+      >
+      <mat-icon matSuffix>domain</mat-icon>
+      <mat-hint>Código do Banco</mat-hint>
+    </mat-form-field>
 
-      <mat-form-field class="mopBk" appearance="fill" color="accent">
-        <mat-label>Nome do Banco</mat-label>
-        <input
-        matInput
-        ngDefaultControl
-        [readonly]="true"
-        formControlName="nome_banco_empty"
-        [(ngModel)]="nome_banco_empty"
-        >---
-        <mat-icon matSuffix>domain</mat-icon>
-        <mat-hint>Nome do Banco</mat-hint>
-      </mat-form-field>
-    </div>
-
-    <div class="start" *ngFor="let clickedRow of clickedRows">
-
-      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-        <mat-label>Código do Banco</mat-label>
-        <input
-        matInput
-        [readonly]="true"
-        ngDefaultControl
-        formControlName="codigo_banco"
-        [(ngModel)]="codigo_banco"
-        >{{clickedRow.code}}
-        <mat-icon matSuffix>domain</mat-icon>
-        <mat-hint>Código do Banco</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field class="mopBk" appearance="fill" color="accent">
-        <mat-label>Nome do Banco</mat-label>
-        <input
-        matInput
-        ngDefaultControl
-        [readonly]="true"
-        formControlName="nome_banco"
-        [(ngModel)]="nome_banco"
-        >{{clickedRow.name}}
-        <mat-icon matSuffix>domain</mat-icon>
-        <mat-hint>Nome do Banco</mat-hint>
-      </mat-form-field>
-
-
-    </div>
+    <mat-form-field class="mopBk" appearance="fill" color="accent">
+      <mat-label>Nome do Banco</mat-label>
+      <input
+      matInput
+      ngDefaultControl
+      [readonly]="true"
+      formControlName="nome_banco"
+      [(ngModel)]="nome_banco"
+      >
+      <mat-icon matSuffix>domain</mat-icon>
+      <mat-hint>Nome do Banco</mat-hint>
+    </mat-form-field>
 
 <div class="space">
   <mat-accordion class="example-headers-align accordion">
@@ -321,11 +275,15 @@
 
           <mat-form-field appearance="standard" class="mop">
             <mat-label>Digite o nome ou o código do banco</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Digite o nome ou o código do banco" #input>
+            <input
+                matInput
+                (keyup)="applyFilter($event)"
+                placeholder="Digite o nome ou o código do banco"
+                [(ngModel)]="banco_pesquisa"
+                #input>
           </mat-form-field>
 
-          <table mat-table
-            [dataSource]="tableDataSource">
+          <table mat-table [dataSource]="tableDataSource">
 
             <ng-container matColumnDef="code">
               <th mat-header-cell *matHeaderCellDef> Código do Banco</th>
@@ -342,6 +300,7 @@
                 mat-row
                 (click)="clickedRows.clear()"
                 (click)="clickedRows.add(row)"
+                (click)="getBankData()"
                 [class.demo-row-is-clicked]="clickedRows.has(row)"
                 *matRowDef="let row; columns: displayedColumns;">
             </tr>

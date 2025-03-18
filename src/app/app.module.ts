@@ -121,6 +121,8 @@ import { ErrosBoletosComponent } from './erros-boletos/erros-boletos.component';
 import { TransportadoraDiasComponent } from './transportadora-dias/transportadora-dias.component';
 import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclusao.component';
 import { ReembolsoPesquisaComponent } from './reembolso-inclusao/reembolso-pesquisa/reembolso-pesquisa.component';
+import { ReembolsoFormDialogComponent } from './reembolso-inclusao/reembolso-form-dialog/reembolso-form-dialog.component';
+import { ReembolsoStopDialogComponent } from './reembolso-inclusao/reembolso-stop-dialog/reembolso-stop-dialog.component';
 
 
 @NgModule({
@@ -209,7 +211,9 @@ import { ReembolsoPesquisaComponent } from './reembolso-inclusao/reembolso-pesqu
     ErrosBoletosComponent,
     TransportadoraDiasComponent,
     ReembolsoInclusaoComponent,
-    ReembolsoPesquisaComponent
+    ReembolsoPesquisaComponent,
+    ReembolsoFormDialogComponent,
+    ReembolsoStopDialogComponent
   ],
   imports: [
     BrowserModule,
