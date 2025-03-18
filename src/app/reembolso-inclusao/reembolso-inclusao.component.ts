@@ -9,6 +9,11 @@ import { ReembolsoPesquisaComponent } from './reembolso-pesquisa/reembolso-pesqu
 import { PainelService } from '../painel.service';
 import { ReembolsoFormDialogComponent } from './reembolso-form-dialog/reembolso-form-dialog.component';
 import { ReembolsoStopDialogComponent } from './reembolso-stop-dialog/reembolso-stop-dialog.component';
+import { DynamicsService } from '../dynamics.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
+import * as momentTimeZone from 'moment-timezone';
+import * as moment from 'moment';
 
 export interface iBankCodes {
   code: number;
@@ -64,8 +69,10 @@ constructor(
     private _ngZone: NgZone,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
     router: Router,
     private accountService: AccountService,
+    private dynamicsService: DynamicsService,
     private painelService: PainelService,
     private febrabanService: FebrabanService
   ) {
@@ -78,6 +85,7 @@ constructor(
     router: Router;
     user: string;
 
+    public carregando: Boolean = false;
 
     // Campos da tela
     cliente: string;
@@ -104,6 +112,8 @@ constructor(
     base_origem: string;
 
     banco_pesquisa: string;
+
+    public returnDynamicsArray = [];
 
   public title: string = 'Reembolso';
 
@@ -148,7 +158,58 @@ constructor(
   }
 
   getDynamicsData(nr_ocorrencia: string){
-    console.log(nr_ocorrencia);
+    this.carregando = true;
+    const expression: RegExp = /NAT-[0-9]{8}-[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]/i;
+    const result: boolean = expression.test(nr_ocorrencia);
+    var json = [];
+    if(result===true) {
+      this.dynamicsService.tokenGenerate();
+      this.returnDynamicsArray = [];
+      setTimeout(() => {
+        this.dynamicsService.getDynamicsData(nr_ocorrencia).subscribe(
+          data => {
+            this.returnDynamicsArray = data['value'];
+            if(this.returnDynamicsArray.length===0){
+              var message = `Sem dados`;
+              var action = 'Fechar'
+              this._snackBar.open(message, action);
+              this.carregando = false;
+            }
+            else {
+
+              var dataCriacaoDisplay = momentTimeZone.utc(this.returnDynamicsArray[0]["createdon"]).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm:ss");
+              var dataSlaDisplay = momentTimeZone.utc(this.returnDynamicsArray[0]["nat_sladate"]).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm:ss");
+
+              this.cliente = this.returnDynamicsArray[0]["ah.customerid@OData.Community.Display.V1.FormattedValue"];
+              this.nr_documento = this.returnDynamicsArray[0]["a_93650777f846e811a83d000d3ac085f9.nat_documentnumber"];
+              this.data_criacao = dataCriacaoDisplay;
+              this.origem = this.returnDynamicsArray[0]["ah.caseorigincode@OData.Community.Display.V1.FormattedValue"];
+              this.data_sla = dataSlaDisplay;
+              this.status_atividade = this.returnDynamicsArray[0]["statecode@OData.Community.Display.V1.FormattedValue"];
+              this.nome_favorecido = this.returnDynamicsArray[0]["ah.nat_favoredname"];
+              this.agencia_numero = this.returnDynamicsArray[0]["ah.nat_numberagency"];
+              this.conta_numero = this.returnDynamicsArray[0]["ah.nat_currentaccount"];
+              this.endereco_favorecido_rua = this.returnDynamicsArray[0]["a_93650777f846e811a83d000d3ac085f9.address1_line1"]
+              this.endereco_favorecido_cidade = this.returnDynamicsArray[0]["a_93650777f846e811a83d000d3ac085f9.address1_city"]
+              this.endereco_favorecido_cep = this.returnDynamicsArray[0]["a_93650777f846e811a83d000d3ac085f9.address1_postalcode"]
+              this.cpf_favorecido = this.returnDynamicsArray[0]["ah.nat_clientdocument"];
+              this.carregando = false;
+            }
+          },
+          (err: HttpErrorResponse) => {
+            var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;
+            var action = 'Fechar'
+            this._snackBar.open(message, action);
+            this.carregando = false;
+          }
+        )
+      }, 2000);
+    }
+    else {
+      var message = 'Número da ocorrência fora do padrão Dynamics (NAT-0000000-A0A0A0)';
+      var action = 'Fechar'
+      this._snackBar.open(message, action);
+    }
   }
 
 
@@ -359,12 +420,13 @@ constructor(
       this.openStopDialog();
     }
     else {
+
       var cliente = form.controls['cliente'].value;
       var nr_documento = form.controls['nr_documento'].value;
       var nr_ocorrencia = form.controls['nr_ocorrencia'].value;
-      var data_criacao = form.controls['data_criacao'].value;
+      var data_criacao = moment.utc(form.controls['data_criacao'].value, "DD/MM/YYYY HH:mm:ss", true).format('YYYY-MM-DD HH:mm:ss');
       var origem = form.controls['origem'].value;
-      var data_sla = form.controls['data_sla'].value;
+      var data_sla = moment.utc(form.controls['data_sla'].value, "DD/MM/YYYY HH:mm:ss", true).format('YYYY-MM-DD HH:mm:ss');
       var status_atividade = form.controls['status_atividade'].value;
       var nome_favorecido = form.controls['nome_favorecido'].value;
       var endereco_favorecido_rua = form.controls['endereco_favorecido_rua'].value;
@@ -403,7 +465,6 @@ constructor(
         base_origem: base_origem
       }];
 
-      console.log(Reembolso);
       var jsonString = JSON.stringify(Reembolso);
       jsonString = jsonString.replace('[','').replace(']','');
       var json: JSON = JSON.parse(jsonString);
@@ -425,8 +486,6 @@ constructor(
   getBankData(){
     this.codigo_banco = this.clickedRows.values().next().value.code;
     this.nome_banco = this.clickedRows.values().next().value.name;
-    console.log(this.codigo_banco);
-    console.log(this.nome_banco);
   }
 
   openStopDialog(){

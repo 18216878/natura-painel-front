@@ -332,6 +332,23 @@ h5 {
   margin: 1em;
 }
 
+span {
+  color: #D1020A;
+  font-weight: bold;
+}
+
+.loading {
+  display: flex;
+  justify-content: left;
+
+}
+
+.labelDynamics {
+  color: #D1020A;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-left: 0.6em;
+}
 
 .mat-column-select {
   overflow: visible;

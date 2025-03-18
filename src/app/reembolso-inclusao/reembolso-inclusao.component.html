@@ -20,7 +20,17 @@
 <div>
   <form [formGroup]="formularioReembolso" class="example-form">
     <div class="start">
-      <div></div>
+      <div>
+        <div *ngIf="carregando===true" class="loading">
+          <span>
+            <mat-spinner
+            [diameter]="40"
+            color="accent"
+            *ngIf="carregando===true"></mat-spinner>
+          </span>
+          <span class="labelDynamics">Carregando dados do Dynamics...</span>
+        </div>
+      </div>
       <div class="buttons">
         <button
         color="warn"
@@ -38,6 +48,22 @@
     </div>
     <p class="space"></p>
     <p class="start">
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Nº Ocorrência</mat-label>
+        <input
+        matInput
+        ngDefaultControl
+        placeholder="Digite o Nº da Ocorrência"
+        formControlName="nr_ocorrencia"
+        [(ngModel)]="nr_ocorrencia"
+        maxlength="19"
+        pattern="NAT-[0-9]{8}-[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]"
+        (change)="getDynamicsData(nr_ocorrencia)"
+        >
+        <mat-icon matSuffix>assignment_late</mat-icon>
+        <mat-hint>Nº Ocorrência</mat-hint>
+      </mat-form-field>
+
         <mat-form-field class="mop" appearance="fill" color="accent">
           <mat-label>Cliente</mat-label>
           <input
@@ -64,22 +90,6 @@
           <mat-icon matSuffix>assignment</mat-icon>
           <mat-hint>Nº Documento</mat-hint>
         </mat-form-field>
-
-        <mat-form-field class="mopMatricula" appearance="fill" color="accent">
-          <mat-label>Nº Ocorrência</mat-label>
-          <input
-          matInput
-          ngDefaultControl
-          placeholder="Digite o Nº da Ocorrência"
-          formControlName="nr_ocorrencia"
-          [(ngModel)]="nr_ocorrencia"
-          maxlength="19"
-          pattern="NAT-[0-9]{8}-[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]"
-          (change)="getDynamicsData(nr_ocorrencia)"
-          >
-          <mat-icon matSuffix>assignment_late</mat-icon>
-          <mat-hint>Nº Ocorrência</mat-hint>
-        </mat-form-field>
     </p>
     <p class="start">
       <mat-form-field class="mopMatricula" appearance="fill" color="accent">
@@ -87,47 +97,55 @@
         <input
         matInput
         [readonly]="true"
-        [matDatepicker]="picker"
         ngDefaultControl
         formControlName="data_criacao"
         [(ngModel)]="data_criacao"
         >
+        <mat-icon matPrefix>event</mat-icon>
         <mat-hint>Data de Criação</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="mopMatricula"
-            color="accent">
-            <mat-label>Origem</mat-label>
-            <mat-select disableRipple ngDefaultControl
-              formControlName="origem" [ngModel]="origem">
-              <mat-option value="Telefone">📞Telefone </mat-option>
-              <mat-option value="Chat">📜Chat </mat-option>
-              <mat-option value="Email">📧Email </mat-option>
-              <mat-option value="Mídias">📱Mídias </mat-option>
-              <mat-option value="Outros">✅Outros </mat-option>
-            </mat-select>
-            <mat-icon matPrefix>description</mat-icon>
-            <mat-hint>Selecione uma opção</mat-hint>
-          </mat-form-field>
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Origem</mat-label>
+        <input
+        matInput
+        [readonly]="true"
+        ngDefaultControl
+        formControlName="origem"
+        [(ngModel)]="origem"
+        >
+        <mat-icon matPrefix>description</mat-icon>
+        <mat-hint>Origem</mat-hint>
+      </mat-form-field>
+
 
       <mat-form-field class="mopMatricula" appearance="fill" color="accent">
         <mat-label>Data do SLA</mat-label>
         <input
         matInput
         [readonly]="true"
-        [matDatepicker]="pickerDataSla"
         ngDefaultControl
         formControlName="data_sla"
         [(ngModel)]="data_sla"
         >
+        <mat-icon matPrefix>event</mat-icon>
         <mat-hint>Data do SLA</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="pickerDataSla"></mat-datepicker-toggle>
-        <mat-datepicker #pickerDataSla></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="mopMatricula"
+      <mat-form-field class="mopMatricula" appearance="fill" color="accent">
+        <mat-label>Status da Atividade</mat-label>
+        <input
+        matInput
+        [readonly]="true"
+        ngDefaultControl
+        formControlName="status_atividade"
+        [(ngModel)]="status_atividade"
+        >
+        <mat-icon matPrefix>check_circle</mat-icon>
+        <mat-hint>Status da Atividade</mat-hint>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="fill" class="mopMatricula"
             color="accent">
             <mat-label>Status da Atividade</mat-label>
             <mat-select disableRipple ngDefaultControl
@@ -137,7 +155,7 @@
             </mat-select>
             <mat-icon matPrefix>check_circle</mat-icon>
             <mat-hint>Selecione uma opção</mat-hint>
-          </mat-form-field>
+          </mat-form-field> -->
 
     </p>
 
