@@ -120,6 +120,7 @@ import { SimuladorMainfestacoesComponent } from './simulador-mainfestacoes/simul
 import { ErrosBoletosComponent } from './erros-boletos/erros-boletos.component';
 import { TransportadoraDiasComponent } from './transportadora-dias/transportadora-dias.component';
 import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclusao.component';
+import { ReembolsoPesquisaComponent } from './reembolso-inclusao/reembolso-pesquisa/reembolso-pesquisa.component';
 
 
 @NgModule({
@@ -207,7 +208,8 @@ import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclu
     SimuladorMainfestacoesComponent,
     ErrosBoletosComponent,
     TransportadoraDiasComponent,
-    ReembolsoInclusaoComponent
+    ReembolsoInclusaoComponent,
+    ReembolsoPesquisaComponent
   ],
   imports: [
     BrowserModule,
