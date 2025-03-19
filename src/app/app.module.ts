@@ -123,6 +123,8 @@ import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclu
 import { ReembolsoPesquisaComponent } from './reembolso-inclusao/reembolso-pesquisa/reembolso-pesquisa.component';
 import { ReembolsoFormDialogComponent } from './reembolso-inclusao/reembolso-form-dialog/reembolso-form-dialog.component';
 import { ReembolsoStopDialogComponent } from './reembolso-inclusao/reembolso-stop-dialog/reembolso-stop-dialog.component';
+import { ReembolsoExportaDadosComponent } from './reembolso-inclusao/reembolso-exporta-dados/reembolso-exporta-dados.component';
+import { ReembolsoAutenticacaoComponent } from './reembolso-inclusao/reembolso-autenticacao/reembolso-autenticacao.component';
 
 
 @NgModule({
@@ -213,7 +215,9 @@ import { ReembolsoStopDialogComponent } from './reembolso-inclusao/reembolso-sto
     ReembolsoInclusaoComponent,
     ReembolsoPesquisaComponent,
     ReembolsoFormDialogComponent,
-    ReembolsoStopDialogComponent
+    ReembolsoStopDialogComponent,
+    ReembolsoExportaDadosComponent,
+    ReembolsoAutenticacaoComponent
   ],
   imports: [
     BrowserModule,

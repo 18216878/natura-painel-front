@@ -344,5 +344,13 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/cpf-favorecido?cpf_favorecido=${cpf_favorecido}`)
   }
 
+  public getReembolsoExportaDados(dataInicial: string, dataFinal: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/exporta-dados?dataInicial=${dataInicial}&dataFinal=${dataFinal}`)
+  }
+
+  public getObterSenha(): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/obter-senha`)
+  }
+
 
 }

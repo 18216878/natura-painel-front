@@ -14,6 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as momentTimeZone from 'moment-timezone';
 import * as moment from 'moment';
+import { ReembolsoExportaDadosComponent } from './reembolso-exporta-dados/reembolso-exporta-dados.component';
+import { ReembolsoAutenticacaoComponent } from './reembolso-autenticacao/reembolso-autenticacao.component';
 
 export interface iBankCodes {
   code: number;
@@ -43,6 +45,8 @@ export interface iRembolso {
   cpf_favorecido: string;
   valor: number;
   base_origem: string;
+  data_registro: string;
+  usuario: string;
 }
 
 var Reembolso: iRembolso[] = [];
@@ -85,6 +89,8 @@ constructor(
     router: Router;
     user: string;
 
+    autenticado: boolean = false;
+
     public carregando: Boolean = false;
 
     // Campos da tela
@@ -110,7 +116,6 @@ constructor(
     cpf_favorecido: string;
     valor: number;
     base_origem: string;
-
     banco_pesquisa: string;
 
     public returnDynamicsArray = [];
@@ -148,6 +153,8 @@ constructor(
       valor:[''],
       base_origem:['']
     });
+
+    this.autenticarOpenDialog();
 
 
   }
@@ -441,6 +448,11 @@ constructor(
       var cpf_favorecido = form.controls['cpf_favorecido'].value;
       var valor = form.controls['valor'].value;
       var base_origem = 'Tabulador Reembolso';
+      var data_registro = moment().format('YYYY-MM-DD HH:mm:ss');
+      var usuario = this.user;
+
+
+
 
       Reembolso = [{
         cliente: cliente,
@@ -462,7 +474,9 @@ constructor(
         conta_digito: conta_digito,
         cpf_favorecido: cpf_favorecido,
         valor: valor,
-        base_origem: base_origem
+        base_origem: base_origem,
+        data_registro: data_registro,
+        usuario: usuario
       }];
 
       var jsonString = JSON.stringify(Reembolso);
@@ -495,5 +509,19 @@ constructor(
   }
 
 
+  exportaDadosOpenDialog(){
+    const dialogRef = this.dialog.open(ReembolsoExportaDadosComponent, {
+      width: '98vw',
+      height: '80vh'
+    });
+  }
+
+  autenticarOpenDialog(){
+    const dialogRef = this.dialog.open(ReembolsoAutenticacaoComponent, {
+      width: '40vw',
+      height: '80vh',
+      disableClose: true
+    });
+  }
 
 }
