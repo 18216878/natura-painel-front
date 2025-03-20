@@ -157,6 +157,7 @@ export class ExcelService {
         'conta_digito': element.conta_digito,
         'cpf_favorecido': element.cpf_favorecido,
         'valor': element.valor,
+        'base_origem': element.base_origem,
         'data_registro': prDtRegistro,
         'matricula': element.matricula,
         'nome': element.nome

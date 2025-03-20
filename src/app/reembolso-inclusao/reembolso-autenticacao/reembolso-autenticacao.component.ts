@@ -27,18 +27,31 @@ export class ReembolsoAutenticacaoComponent implements OnInit {
   }
 
   autenticar(senha: string) {
-    var encrypt = Md5.hashStr(senha);
+    console.log(senha)
 
-    if (senha.length > 0){
+    if(senha === undefined || senha === ''){
+      var message = 'Informe a senha';
+      var action = 'Fechar'
+      this._snackBar.open(message
+        , action);
+
+    }
+
+    else {
+      var encrypt = Md5.hashStr(senha);
       this.painelService.getObterSenha().subscribe(
         data => {
-          console.log(data);
+          console.log('Senha do banco: ' + data[0].pass);
+          console.log('Senha digitada: ' + encrypt);
+
           if (data[0].pass === encrypt) {
             this.accountService.set('autenticado', 'sim');
+            this.dialog.closeAll();
           } else {
-            var message = 'Erro durante a pesquisa. Tente novamente';
+            var message = '🚫 Senha incorreta';
             var action = 'Fechar'
             this._snackBar.open(message, action);
+            this.senha = undefined;
           }
         },
         err => {
@@ -48,13 +61,6 @@ export class ReembolsoAutenticacaoComponent implements OnInit {
         }
       )
     }
-    else {
-      var message = 'Informe a senha';
-      var action = 'Fechar'
-      this._snackBar.open(message, action);
-    }
-
-
 
     this.accountService.set('autenticado', 'sim');
 

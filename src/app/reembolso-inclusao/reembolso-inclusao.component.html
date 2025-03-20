@@ -1,3 +1,5 @@
+
+
 <div class="main">
   <div class="title">
     <div>
@@ -17,7 +19,7 @@
 </div>
 <p class="space"> </p>
 
-<div>
+<div *ngIf="autenticado==='sim'">
   <form [formGroup]="formularioReembolso" class="example-form">
     <div class="start">
       <div>
@@ -301,6 +303,7 @@
                 matInput
                 (keyup)="applyFilter($event)"
                 placeholder="Digite o nome ou o código do banco"
+                formControlName="banco_pesquisa"
                 [(ngModel)]="banco_pesquisa"
                 #input>
           </mat-form-field>

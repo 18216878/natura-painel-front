@@ -89,7 +89,7 @@ constructor(
     router: Router;
     user: string;
 
-    autenticado: boolean = false;
+    autenticado: string;
 
     public carregando: Boolean = false;
 
@@ -151,7 +151,8 @@ constructor(
       conta_digito:[''],
       cpf_favorecido:[''],
       valor:[''],
-      base_origem:['']
+      base_origem:[''],
+      banco_pesquisa:['']
     });
 
     this.autenticarOpenDialog();
@@ -159,9 +160,20 @@ constructor(
 
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.tableDataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(event: Event | string) {
+    // const filterValue = (event.target as HTMLInputElement).value;
+    // this.tableDataSource.filter = filterValue.trim().toLowerCase();
+
+    let filterValue: string;
+
+  if (typeof event === 'string') {
+    filterValue = event; // Caso chamemos a função diretamente
+  } else {
+    const inputElement = event.target as HTMLInputElement;
+    filterValue = inputElement.value; // Caso seja disparado por um evento do input
+  }
+
+  this.tableDataSource.filter = filterValue.trim().toLowerCase();
   }
 
   getDynamicsData(nr_ocorrencia: string){
@@ -239,6 +251,7 @@ constructor(
   limpar() {
     this.formularioReembolso.reset();
     this.clickedRows.clear();
+    this.applyFilter('');
 
     setTimeout(() => {
       this.banco_pesquisa = '';
@@ -517,10 +530,16 @@ constructor(
   }
 
   autenticarOpenDialog(){
+    this.autenticado = undefined;
+    this.accountService.remove('autenticado');
     const dialogRef = this.dialog.open(ReembolsoAutenticacaoComponent, {
-      width: '40vw',
-      height: '80vh',
+      width: '25vw',
+      height: '40vh',
       disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.autenticado = this.accountService.get('autenticado');
     });
   }
 

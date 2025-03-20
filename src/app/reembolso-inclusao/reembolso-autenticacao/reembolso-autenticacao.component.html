@@ -1,24 +1,23 @@
 <div class="main">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        <h1>Autenticação</h1>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div>
-        <mat-form-field>
-          <mat-label>🔒 Digite a Senha</mat-label>
-          <input
-              matInput
-              placeholder="Senha"
-              [(ngModel)]="senha"
-              type="password">
-        </mat-form-field>
-      </div>
-        <div>
-          <button mat-raised-button color="primary">Autenticar</button>
-        </div>
-    </mat-card-content>
-  </mat-card>
+  <div class="container">
+    <h1>Autenticação</h1>
+    <div>
+      <mat-form-field>
+        <mat-label>Digite a Senha</mat-label>
+        <input
+            matInput
+            placeholder="Senha"
+            [(ngModel)]="senha"
+            type="password">
+            <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="autenticar(senha)"
+          >Autenticar</button>
+    </div>
+  </div>
 </div>
