@@ -167,7 +167,7 @@ constructor(
     let filterValue: string;
 
   if (typeof event === 'string') {
-    filterValue = event; // Caso chamemos a função diretamente
+    filterValue = event;
   } else {
     const inputElement = event.target as HTMLInputElement;
     filterValue = inputElement.value; // Caso seja disparado por um evento do input
