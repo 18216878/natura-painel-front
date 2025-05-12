@@ -352,5 +352,17 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/obter-senha`)
   }
 
+  public getReparacaoCodigo(codigo: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/codigo?codigo=${codigo}`)
+  }
+
+  public getReparacaoNome(nome_completo: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/nome?nome_completo=${nome_completo}`)
+  }
+
+  public getReparacaoPedido(pedido: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/pedido?pedido=${pedido}`)
+  }
+
 
 }
