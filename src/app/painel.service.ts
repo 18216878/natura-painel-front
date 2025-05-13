@@ -352,7 +352,7 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/obter-senha`)
   }
 
-  public getReparacaoCodigo(codigo: string): Observable<any>{
+  public getReparacaoCodigo(codigo: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/codigo?codigo=${codigo}`)
   }
 
