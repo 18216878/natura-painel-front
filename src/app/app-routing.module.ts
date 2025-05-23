@@ -62,7 +62,7 @@ const routes: Routes = [
   { path: 'natura/dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
-  // { path: 'natura/simulador-manifestacoes', component: SimuladorMainfestacoesComponent, canActivate: [AccountGuard] },
+  { path: 'natura/simulador-manifestacoes', component: SimuladorMainfestacoesComponent, canActivate: [AccountGuard] },
   // { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
   { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/reembolso-inclusao', component: ReembolsoInclusaoComponent, canActivate: [AccountGuard] },

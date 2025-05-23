@@ -120,6 +120,19 @@ h4 {
     color:#D1020A;
   }
 
+mat-card {
+  width: 100% !important;
+  cursor: pointer !important;
+}
+
+mat-card:hover {
+  background-color: #D1020A !important;
+  color: #fff !important;
+}
+
+
+
+
   .example-form {
     min-width: 30em;
     max-width: 90vw;

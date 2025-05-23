@@ -114,8 +114,15 @@ export class SimuladorMainfestacoesComponent implements OnInit {
     this.painelService.getNatSimuladorManifestacaoLocalDefeito(event).subscribe(
       data => {
         this.localDefeitoDropDown = data;
+        this.selectedLocalDefeitoIndex = null; // Reset the selected index when a new category is selected
       }
     )
   }
+
+  selectedLocalDefeitoIndex: number | null = null;
+
+onToggleLocalDefeito(index: number) {
+  this.selectedLocalDefeitoIndex = index;
+}
 
 }
