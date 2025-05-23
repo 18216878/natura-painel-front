@@ -377,5 +377,17 @@ export class PainelService {
   public getSimuladorManifestacaoSondagem(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoSondagem?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
   }
+  public getReparacaoCodigo(codigo: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/codigo?codigo=${codigo}`)
+  }
+
+  public getReparacaoNome(nome_completo: string): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/nome?nome_completo=${nome_completo}`)
+  }
+
+  public getReparacaoPedido(pedido: number): Observable<any>{
+    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/pedido?pedido=${pedido}`)
+  }
+
 
 }

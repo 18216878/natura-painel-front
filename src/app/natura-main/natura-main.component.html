@@ -568,7 +568,25 @@
                 </div>
 
                 <div class="home">
-
+                  <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="febraban-avatar"></div>
+                        <mat-card-title>Reparação</mat-card-title>
+                        <mat-card-subtitle>Pesquisar consultoras com reparação de produto</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgReparacao"
+                        routerLink="/natura/reparacao">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
                 </div>
 
 

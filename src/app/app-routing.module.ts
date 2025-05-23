@@ -46,6 +46,7 @@ import { SimuladorMainfestacoesComponent } from './simulador-mainfestacoes/simul
 import { ErrosBoletosComponent } from './erros-boletos/erros-boletos.component';
 import { TransportadoraDiasComponent } from './transportadora-dias/transportadora-dias.component';
 import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclusao.component';
+import { ReparacaoComponent } from './reparacao/reparacao.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -80,6 +81,7 @@ const routes: Routes = [
   { path: 'natura/seguranca-dados', component: SegurancaDadosComponent, canActivate: [AccountGuard] },
   // { path: 'natura/migradas-avon', component: MigradasAvonComponent, canActivate: [AccountGuard] },
   { path: 'natura/movimentacao', component: MovimentacaoComponent, canActivate: [AccountGuard] },
+  { path: 'natura/reparacao', component: ReparacaoComponent, canActivate: [AccountGuard] },
   // { path: 'natura/movimentacao-elo', component: MovimentacaoEloComponent, canActivate: [AccountGuard] },
   { path: 'natura/recovery', component: RecoveryComponent, canActivate: [AccountGuard] },
   { path: 'natura/calendario-ciclos', component: CalendarioCiclosComponent, canActivate: [AccountGuard] },
