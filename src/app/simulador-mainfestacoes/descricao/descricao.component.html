@@ -1,1 +1,17 @@
-<p>descricao works!</p>
+<div class="ajustar">
+  <div *ngFor="let descricao of descricaoDropDown;index as i">
+    <mat-card (click)="onToggleDescricao(i)" [class.selected]="selectedDescricaoIndex === i" style="cursor:pointer;">
+      <mat-card-content>
+        {{descricao.descricao}}
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-slide-toggle
+          [checked]="selectedDescricaoIndex === i"
+          (change)="onToggleDescricao(i)">
+          Selecionar
+        </mat-slide-toggle>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

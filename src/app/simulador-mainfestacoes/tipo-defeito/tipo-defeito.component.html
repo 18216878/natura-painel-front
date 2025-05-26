@@ -1,1 +1,17 @@
-<p>tipo-defeito works!</p>
+<div class="ajustar">
+  <div *ngFor="let tipo_defeito of tipoDefeitoDropDown;index as i">
+    <mat-card (click)="onToggleTipoDefeito(i)" [class.selected]="selectedTipoDefeitoIndex === i" style="cursor:pointer;">
+      <mat-card-content>
+        {{tipo_defeito.tipo_defeito}}
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-slide-toggle
+          [checked]="selectedTipoDefeitoIndex === i"
+          (change)="onToggleTipoDefeito(i)">
+          Selecionar
+        </mat-slide-toggle>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

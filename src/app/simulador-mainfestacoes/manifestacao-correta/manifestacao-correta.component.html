@@ -1,1 +1,17 @@
-<p>manifestacao-correta works!</p>
+<div class="ajustar">
+  <div *ngFor="let manifestacao_correta of manifestacaoCorretaDropDown;index as i">
+    <mat-card (click)="onToggleManifestacaoCorreta(i)" [class.selected]="selectedManifestacaoCorretaIndex === i" style="cursor:pointer;">
+      <mat-card-content>
+        {{manifestacao_correta.manifestacao_correta}}
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-slide-toggle
+          [checked]="selectedManifestacaoCorretaIndex === i"
+          (change)="onToggleManifestacaoCorreta(i)">
+          Selecionar
+        </mat-slide-toggle>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

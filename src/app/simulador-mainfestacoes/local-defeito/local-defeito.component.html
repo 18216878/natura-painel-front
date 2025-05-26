@@ -1,14 +1,17 @@
-<div class="start ajustar" *ngFor="let local_defeito of localDefeitoDropDown;index as i">
-      <mat-card (click)="onToggleLocalDefeito(i)" [class.selected]="selectedLocalDefeitoIndex === i" style="cursor:pointer;">
-        <mat-card-content>
-          {{local_defeito.local_defeito}}
-        </mat-card-content>
-        <mat-card-actions>
-          <mat-slide-toggle
-        [checked]="selectedLocalDefeitoIndex === i"
-        (change)="onToggleLocalDefeito(i)">
-        Selecionar
-      </mat-slide-toggle>
-          </mat-card-actions>
-      </mat-card>
-    </div>
+<div class="ajustar">
+  <div *ngFor="let local_defeito of localDefeitoDropDown;index as i">
+    <mat-card (click)="onToggleLocalDefeito(i)" [class.selected]="selectedLocalDefeitoIndex === i" style="cursor:pointer;">
+      <mat-card-content>
+        {{local_defeito.local_defeito}}
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-slide-toggle
+          [checked]="selectedLocalDefeitoIndex === i"
+          (change)="onToggleLocalDefeito(i)">
+          Selecionar
+        </mat-slide-toggle>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

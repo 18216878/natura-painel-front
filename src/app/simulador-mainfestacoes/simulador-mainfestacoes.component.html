@@ -22,6 +22,7 @@
 
     <p class="start">
 
+      <!-- categoria -->
       <mat-form-field appearance="fill" class="example-full-width"  color="warn">
         <mat-label>Categoria</mat-label>
         <mat-select
@@ -39,6 +40,7 @@
     </p>
 
     <p>
+      <!-- Local Defeito -->
       <mat-card>
         <mat-card-header>
           <div mat-card-avatar>
@@ -53,14 +55,131 @@
         </mat-card-content>
         <mat-card-actions>
           <button
+              [disabled]="id_categoria === undefined || id_categoria === null"
               mat-fab
               color="primary"
-              (click)="abrirDialogLocalDefeito()"
+              (click)="pesquisarLocalDefeito()"
               [matTooltip]="'Pesquisar Local Defeito'">
             <mat-icon>search</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>
+    </p>
+
+    <p>
+      <!-- Tipo Defeito -->
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon matPrefix>warning</mat-icon>
+          </div>
+          <mat-card-title>Desvio (Tipo de Defeito)</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{tipo_defeito}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+              [disabled]="id_local_defeito === undefined || id_local_defeito === null"
+              mat-fab
+              color="primary"
+              (click)="pesquisarTipoDefeito()"
+              [matTooltip]="'Pesquisar Local Defeito'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </p>
+
+    <p>
+      <!-- Manifestação Correta -->
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon matPrefix>done_all</mat-icon>
+          </div>
+          <mat-card-title>Manifestação Correta</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{manifestacao_correta}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+              [disabled]="id_tipo_defeito === undefined || id_tipo_defeito === null"
+              mat-fab
+              color="primary"
+              (click)="pesquisarManifestacaoCorreta()"
+              [matTooltip]="'Pesquisar Local Defeito'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </p>
+
+    <p>
+      <!-- Descrição -->
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon matPrefix>description</mat-icon>
+          </div>
+          <mat-card-title>Descrição</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{descricao}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+              [disabled]="id_tipo_defeito === undefined || id_tipo_defeito === null"
+              mat-fab
+              color="primary"
+              (click)="pesquisarDescricao()"
+              [matTooltip]="'Pesquisar Local Defeito'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </p>
+
+    <p>
+      <!-- Sondagem Direcionadora -->
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon matPrefix>location_searching</mat-icon>
+          </div>
+          <mat-card-title>Sondagem Direcionadora</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{sondagem}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+              [disabled]="id_tipo_defeito === undefined || id_tipo_defeito === null"
+              mat-fab
+              color="primary"
+              (click)="pesquisarSondagem()"
+              [matTooltip]="'Pesquisar Local Defeito'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </p>
+
+    <p>
+      <button
+          mat-fab
+          (click)="limpar()">
+
+      </button>
     </p>
 
 

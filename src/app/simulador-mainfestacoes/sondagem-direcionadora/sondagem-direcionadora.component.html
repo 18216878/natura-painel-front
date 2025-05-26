@@ -1,1 +1,17 @@
-<p>sondagem-direcionadora works!</p>
+<div class="ajustar">
+  <div *ngFor="let sondagem of sondagemDropDOwn;index as i">
+    <mat-card (click)="onToggleSondagemDirecionadora(i)" [class.selected]="selectedSondagemDirecionadoraIndex === i" style="cursor:pointer;">
+      <mat-card-content>
+        {{sondagem.sondagem_direcionadora}}
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-slide-toggle
+          [checked]="selectedSondagemDirecionadoraIndex === i"
+          (change)="onToggleSondagemDirecionadora(i)">
+          Selecionar
+        </mat-slide-toggle>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

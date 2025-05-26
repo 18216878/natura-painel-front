@@ -9,7 +9,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class LocalDefeitoComponent implements OnInit {
 
   localDefeitoDropDown: any[] = [];
-  @Input() local_defeito: string;
+  @Input() local_defeito : string;
+  @Input() id_local_defeito: number;
 
   constructor(
     public dialogRef: MatDialogRef<LocalDefeitoComponent>,
@@ -25,7 +26,10 @@ export class LocalDefeitoComponent implements OnInit {
 
   onToggleLocalDefeito(index: number) {
     this.selectedLocalDefeitoIndex = index;
-    this.dialogRef.close(this.localDefeitoDropDown[index].local_defeito);
+    this.dialogRef.close({
+      local_defeito: this.localDefeitoDropDown[index].local_defeito,
+      id_local_defeito: this.localDefeitoDropDown[index].id
+    });
   }
 
   selecionar(localDefeito: string) {
