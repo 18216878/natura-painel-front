@@ -13,6 +13,8 @@ export class TipoDefeitoComponent implements OnInit {
   @Input() tipo_defeito : string;
   @Input() id_tipo_defeito: number;
 
+  filtroTipoDefeito: string = '';
+
   constructor(
   public dialogRef: MatDialogRef<TipoDefeitoComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any)
@@ -21,6 +23,15 @@ export class TipoDefeitoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get tipoDefeitoFiltrado() {
+    if (!this.filtroTipoDefeito) {
+      return this.tipoDefeitoDropDown;
+    }
+    return this.tipoDefeitoDropDown.filter(td =>
+      td.tipo_defeito && td.tipo_defeito.toLowerCase().includes(this.filtroTipoDefeito.toLowerCase())
+    );
   }
 
   selectedTipoDefeitoIndex: number | null = null;

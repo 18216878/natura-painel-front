@@ -121,7 +121,7 @@ h4 {
   }
 
 mat-card {
-  width: 100% !important;
+  width: 97% !important;
   cursor: pointer !important;
 }
 
@@ -353,4 +353,21 @@ td, th {
     vertical-align: middle !important;
 }
 
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+mat-card button {
+  background-color: #D1020A;
+}
+mat-card button:hover {
+  background-color: #FFF;
+  color: #D1020A;;
+}
 

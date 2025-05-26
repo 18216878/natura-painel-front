@@ -1,5 +1,14 @@
 <div class="ajustar">
-  <div *ngFor="let sondagem of sondagemDropDOwn;index as i">
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>Filtrar Opções</mat-label>
+    <input
+    matInput
+    type="text"
+    placeholder="Digite os dados a filtrar..."
+    [(ngModel)]="filtroSondagem"
+    style="width: 100%; margin-bottom: 10px;" />
+  </mat-form-field>
+  <div *ngFor="let sondagem of sondagemFiltrada;index as i">
     <mat-card (click)="onToggleSondagemDirecionadora(i)" [class.selected]="selectedSondagemDirecionadoraIndex === i" style="cursor:pointer;">
       <mat-card-content>
         {{sondagem.sondagem_direcionadora}}

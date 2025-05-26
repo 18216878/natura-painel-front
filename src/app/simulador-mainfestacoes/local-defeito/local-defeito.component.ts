@@ -12,6 +12,8 @@ export class LocalDefeitoComponent implements OnInit {
   @Input() local_defeito : string;
   @Input() id_local_defeito: number;
 
+  filtroLocalDefeito: string = '';
+
   constructor(
     public dialogRef: MatDialogRef<LocalDefeitoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any)
@@ -20,6 +22,15 @@ export class LocalDefeitoComponent implements OnInit {
     }
 
   ngOnInit(): void {
+  }
+
+  get localDefeitoFiltrado() {
+    if (!this.filtroLocalDefeito) {
+      return this.localDefeitoDropDown;
+    }
+    return this.localDefeitoDropDown.filter(ld =>
+      ld.local_defeito && ld.local_defeito.toLowerCase().includes(this.filtroLocalDefeito.toLowerCase())
+    );
   }
 
   selectedLocalDefeitoIndex: number | null = null;

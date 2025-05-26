@@ -2,6 +2,11 @@
   width: 90vw;
 }
 
+.titulo {
+  display: flex;
+  justify-content: space-between;
+}
+
 .codigoCn {
   max-width: 35em;
   width: 100%;
@@ -21,20 +26,6 @@ margin-right: 0.3em;
   border: #D1020A 0.2em solid;
   border-radius: 0.8em;
   margin-bottom: 1em;
-}
-
-.mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-}
-
-.mat-row:hover .mat-cell {
-  border-color: currentColor;
-  cursor: pointer;
-  color: #FFF;
-  background-color: #D1020A;
-
 }
 
 .search {
@@ -83,11 +74,6 @@ margin-right: 0.3em;
 
 }
 
-.inputSearch {
-    margin-left: 10em;
-    margin-right: 3em;
-    margin-bottom: 2em;
-}
 h1 {
 
     color: #fff;
@@ -123,232 +109,21 @@ mat-card:hover {
 }
 
 
-
-
-  .example-form {
-    min-width: 30em;
-    max-width: 90vw;
-    width: 100%;
-  }
-
-  .mop {
-    max-width: 38em;
-    width: 100%;
-  }
-
-  .inputPesquisa {
-    max-width: 20em;
-    width: 100%;
-    color:#D1020A;
-  }
-
-  .mopMatricula {
-    max-width: 20em;
-    width: 100%;
-    color:#D1020A;
-  }
-
-  .Rodape {
-    max-width: 20em;
-    width: 100%;
-    color:#D1020A;
-  }
-
-  .matricula {
-    max-width: 20em;
-    width: 100%;
-    color:#D1020A;
-  }
-
-  .waveLarge {
-    max-width: 43em;
-    width: 100%;
-    color:#D1020A;
-  }
-
-  .waveNome {
-    max-width: 30em;
-    width: 100%;
-    color:#D1020A;
-  }
-
-
-  .pesquisa {
-    max-width: 10em;
-    width: 100%;
-  }
-  .start {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .ocorrencia {
-    max-width: 60em;
-    width: 100%;
-  }
-
-  .select {
-    max-width: 28em;
-    width: 100%;
-    color:#D1020A;
-  }
-
-  .confirmar {
-    display: flex;
-    justify-content: space-between;
-    color: #fff;
-  }
-  .botoes {
-    max-width: 28em;
-    width: 100%;
-    max-height: 3em;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-  }
-
-  .example-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-    align-items: flex-start;
-  }
-
-  .example-radio-button {
-    margin: 5px;
-  }
-
-  .validar {
-    margin: 1em;
-    max-height: 3em;
-    height: 100%;
-    color: #fff;
-  }
-
-  .color {
-    color: #fff;
-    vertical-align: middle;
-    margin-right: 0.3em;
-  }
-
-  .menu {
-    vertical-align: middle;
-  }
-
-  .logout {
-    color: #fff;
-  }
-
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2em;
-    margin-bottom: 5em;
-    max-width: 90vw;
-    width: 100%;
-    max-height: 20em;
-    height: 100%;
-}
-
-  table {
-    display: block;
-    max-width: 90vw;
-    width: 100%;
-    height: 20em;
-    position: sticky;
-
-}
-
-.carregando{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 1em;
-}
-h5 {
-  margin: 1em;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-
-.mat-column-select {
-  overflow: visible;
-}
-
-.mat-elevation-z8 {
-  overflow-x: visible;
-}
-
-.mat-table {
-  overflow-x: scroll;
-}
-
-.mat-cell {
-  padding: 8px 8px 8px 0;
-}
-
-.mat-cell,
-.mat-header-cell {
-word-wrap: initial;
-display: table-cell;
-padding: 0px 10px;
-line-break: unset;
-width: 100%;
-white-space: nowrap;
-overflow:initial;
-vertical-align: middle;
-}
-.mat-row {
-height: 1.3em;
-}
-.mat-row,
-.mat-header-row {
-display: table-row;
-}
-
-
 .title-card {
   color: #D1020A;
   font-weight: bold;
 }
 
-.demo-row-is-clicked {
-  font-weight: bold;
-}
-
-  .mat-row:nth-child(even){
-    background-color: #F8CE9C;
-}
-
-.mat-row:nth-child(odd){
-    background-color: #FBE7CE;
-}
-
-.mat-header-cell, .mat-cell {
-    text-align: center !important;
-
-}
-
-th.mat-header-cell {
-    text-align: center !important;
-    background-color: #D1020A;
-    color: #FFF;
-}
-
-td, th {
-    text-align: center !important;
-    vertical-align: middle !important;
-}
-
 .ajustar {
-  max-height: 80vh !important;
+  max-height: 85vh !important;
   height: 100% !important;
   overflow-y: auto !important;
+}
+
+mat-form-field {
+  width: 99% !important;
+  max-width: 90vw;
+  margin-bottom: 1em;
 }
 
 

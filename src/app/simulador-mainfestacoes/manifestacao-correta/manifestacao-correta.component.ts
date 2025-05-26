@@ -12,6 +12,8 @@ export class ManifestacaoCorretaComponent implements OnInit {
   @Input() manifestacao_correta : string;
   @Input() id_manifestacao_correta: number;
 
+  filtroManifestacaoCorreta: string = '';
+
   constructor(
   public dialogRef: MatDialogRef<ManifestacaoCorretaComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any)
@@ -20,6 +22,15 @@ export class ManifestacaoCorretaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get manifestacaoCorretaFiltrada() {
+    if (!this.filtroManifestacaoCorreta) {
+      return this.manifestacaoCorretaDropDown;
+    }
+    return this.manifestacaoCorretaDropDown.filter(mc =>
+      mc.manifestacao_correta && mc.manifestacao_correta.toLowerCase().includes(this.filtroManifestacaoCorreta.toLowerCase())
+    );
   }
 
   selectedManifestacaoCorretaIndex: number | null = null;

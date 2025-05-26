@@ -12,6 +12,8 @@ export class SondagemDirecionadoraComponent implements OnInit {
   @Input() sondagem_direcionadora : string;
   @Input() id_sondagem_direcionadora: number;
 
+  filtroSondagem: string = '';
+
   constructor(
   public dialogRef: MatDialogRef<SondagemDirecionadoraComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any)
@@ -20,6 +22,15 @@ export class SondagemDirecionadoraComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get sondagemFiltrada() {
+    if (!this.filtroSondagem) {
+      return this.sondagemDropDOwn;
+    }
+    return this.sondagemDropDOwn.filter(s =>
+      s.sondagem_direcionadora && s.sondagem_direcionadora.toLowerCase().includes(this.filtroSondagem.toLowerCase())
+    );
   }
 
   selectedSondagemDirecionadoraIndex: number | null = null;

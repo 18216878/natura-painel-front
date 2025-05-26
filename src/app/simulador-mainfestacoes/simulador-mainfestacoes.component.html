@@ -86,7 +86,7 @@
               mat-fab
               color="primary"
               (click)="pesquisarTipoDefeito()"
-              [matTooltip]="'Pesquisar Local Defeito'">
+              [matTooltip]="'Pesquisar Tipo Defeito'">
             <mat-icon>search</mat-icon>
           </button>
         </mat-card-actions>
@@ -113,7 +113,7 @@
               mat-fab
               color="primary"
               (click)="pesquisarManifestacaoCorreta()"
-              [matTooltip]="'Pesquisar Local Defeito'">
+              [matTooltip]="'Pesquisar Manifestação Correta'">
             <mat-icon>search</mat-icon>
           </button>
         </mat-card-actions>
@@ -140,7 +140,7 @@
               mat-fab
               color="primary"
               (click)="pesquisarDescricao()"
-              [matTooltip]="'Pesquisar Local Defeito'">
+              [matTooltip]="'Pesquisar Descrição'">
             <mat-icon>search</mat-icon>
           </button>
         </mat-card-actions>
@@ -167,22 +167,24 @@
               mat-fab
               color="primary"
               (click)="pesquisarSondagem()"
-              [matTooltip]="'Pesquisar Local Defeito'">
+              [matTooltip]="'Pesquisar Sondagem Direcionadora'">
             <mat-icon>search</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>
     </p>
 
-    <p>
+    <div class="button-group">
       <button
           mat-fab
-          (click)="limpar()">
+          (click)="limpar()"
+          [matTooltip]="'Limpar Campos'"
+          color="warn"
+          >
+          <mat-icon>delete</mat-icon>
 
       </button>
-    </p>
-
-
+    </div>
   </form>
 
 </div>

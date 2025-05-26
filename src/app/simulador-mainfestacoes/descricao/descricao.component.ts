@@ -12,6 +12,8 @@ export class DescricaoComponent implements OnInit {
   @Input() descricao : string;
   @Input() id_descricao: number;
 
+  filtroDescricao: string = '';
+
   constructor(
   public dialogRef: MatDialogRef<DescricaoComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any)
@@ -20,6 +22,15 @@ export class DescricaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get descricaoFiltrada() {
+    if (!this.filtroDescricao) {
+      return this.descricaoDropDown;
+    }
+    return this.descricaoDropDown.filter(d =>
+      d.descricao && d.descricao.toLowerCase().includes(this.filtroDescricao.toLowerCase())
+    );
   }
 
   selectedDescricaoIndex: number | null = null;
