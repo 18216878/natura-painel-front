@@ -1,10 +1,12 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { PainelService } from '../painel.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
 import { AccountService } from '../account.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LocalDefeitoComponent } from './local-defeito/local-defeito.component';
 
 export interface ICategoria {
   id: number;
@@ -76,13 +78,14 @@ export class SimuladorMainfestacoesComponent implements OnInit {
   user: string;
 
   categoriaDropDown = iCategoria;
-  localDefeitoDropDown = iLocalDefeito;
-  tipoDefeitoDropDown = iTIpoDefeito;
-  manifestacaoCorretaDropDown = iManifestacaoCorreta;
-  descricaoDropDown = iDescricao;
-  sondagemDropDOwn = iSondagem;
+  @Input() localDefeitoDropDown = iLocalDefeito;
+  @Input() tipoDefeitoDropDown = iTIpoDefeito;
+  @Input() manifestacaoCorretaDropDown = iManifestacaoCorreta;
+  @Input() descricaoDropDown = iDescricao;
+  @Input() sondagemDropDOwn = iSondagem;
 
   categoria: string;
+  id_categoria: number;
   local_defeito: string;
   tipo_defeito: string;
   manifestacao_correta: string;
@@ -111,18 +114,39 @@ export class SimuladorMainfestacoesComponent implements OnInit {
   }
 
   onSelect(event: Event) {
-    this.painelService.getNatSimuladorManifestacaoLocalDefeito(event).subscribe(
+    this.id_categoria = parseInt((event.target as HTMLSelectElement).value);
+
+  }
+
+  pesquisarLocalDefeito(){
+    this.painelService.getNatSimuladorManifestacaoLocalDefeito(this.id_categoria).subscribe(
       data => {
         this.localDefeitoDropDown = data;
-        this.selectedLocalDefeitoIndex = null; // Reset the selected index when a new category is selected
+        this.selectedLocalDefeitoIndex = null; // Reset the selected index when a new local_defeito is searched
+        this.abrirDialogLocalDefeito();
       }
     )
+
   }
 
   selectedLocalDefeitoIndex: number | null = null;
 
 onToggleLocalDefeito(index: number) {
   this.selectedLocalDefeitoIndex = index;
+}
+
+abrirDialogLocalDefeito() {
+  const dialogRef = this.dialog.open(LocalDefeitoComponent, {
+    data: {
+      localDefeitoDropDown: this.localDefeitoDropDown
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.local_defeito = result;
+    }
+  });
 }
 
 }
