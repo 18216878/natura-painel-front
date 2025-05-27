@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class TipoDefeitoComponent implements OnInit {
 
   tipoDefeitoDropDown: any[] = [];
+  tipoDefeitoOriginal: any[] = [];
   @Input() tipo_defeito : string;
   @Input() id_tipo_defeito: number;
 
@@ -20,6 +21,7 @@ export class TipoDefeitoComponent implements OnInit {
   @Inject(MAT_DIALOG_DATA) public data: any)
   {
     this.tipoDefeitoDropDown = data.tipoDefeitoDropDown;
+    this.tipoDefeitoOriginal = [...data.tipoDefeitoDropDown];
   }
 
   ngOnInit(): void {
@@ -38,9 +40,11 @@ export class TipoDefeitoComponent implements OnInit {
 
   onToggleTipoDefeito(index: number) {
     this.selectedTipoDefeitoIndex = index;
+    const itemFiltrado = this.tipoDefeitoFiltrado[index];
+    const itemOriginal = this.tipoDefeitoOriginal.find(td => td.id === itemFiltrado.id);
     this.dialogRef.close({
-      tipo_defeito: this.tipoDefeitoDropDown[index].tipo_defeito,
-      id_tipo_defeito: this.tipoDefeitoDropDown[index].id
+      tipo_defeito: itemOriginal?.tipo_defeito,
+      id_tipo_defeito: itemOriginal?.id
     });
   }
 

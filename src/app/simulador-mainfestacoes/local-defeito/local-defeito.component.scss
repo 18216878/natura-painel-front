@@ -4,7 +4,8 @@
 
 .titulo {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  color: #D1020A;
 }
 
 .codigoCn {
@@ -14,7 +15,7 @@
 }
 
 .fab-button {
-margin-right: 0.3em;
+  margin-right: 0.3em;
 }
 
 .pesquisar {
@@ -46,7 +47,6 @@ margin-right: 0.3em;
   margin-right: 2em;
 }
 
-
 .card {
   display: flex;
   align-items: center;
@@ -65,38 +65,34 @@ margin-right: 0.3em;
 }
 
 .title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #D1020A;
-    max-width: 90vw;
-    width: 100%;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #D1020A;
+  max-width: 90vw;
+  width: 100%;
 }
 
 h1 {
-
-    color: #fff;
-    margin: 1em;
+  color: #fff;
+  margin: 1em;
 }
 
 h4 {
-
-    color: #fff;
-    display: flex;
-    padding: 0.5em;
-    margin-left: 0.2em;
+  color: #fff;
+  display: flex;
+  padding: 0.5em;
+  margin-left: 0.2em;
 }
 
 .space {
-    margin: 1em;
-
+  margin: 1em;
 }
 
 .example-full-width {
-    width: 100%;
-    color:#D1020A;
-  }
+  width: 100%;
+  color:#D1020A;
+}
 
 mat-card {
   width: 100% !important;
@@ -125,5 +121,3 @@ mat-form-field {
   max-width: 90vw;
   margin-bottom: 1em;
 }
-
-

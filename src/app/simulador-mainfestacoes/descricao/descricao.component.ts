@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class DescricaoComponent implements OnInit {
 
   descricaoDropDown: any[] = [];
+  descricaoOriginal: any[] = [];
   @Input() descricao : string;
   @Input() id_descricao: number;
 
@@ -19,6 +20,7 @@ export class DescricaoComponent implements OnInit {
   @Inject(MAT_DIALOG_DATA) public data: any)
   {
     this.descricaoDropDown = data.descricaoDropDown;
+    this.descricaoOriginal = [...data.descricaoDropDown];
   }
 
   ngOnInit(): void {
@@ -37,9 +39,11 @@ export class DescricaoComponent implements OnInit {
 
   onToggleDescricao(index: number) {
     this.selectedDescricaoIndex = index;
+    const itemFiltrado = this.descricaoFiltrada[index];
+    const itemOriginal = this.descricaoOriginal.find(d => d.id === itemFiltrado.id);
     this.dialogRef.close({
-      descricao: this.descricaoDropDown[index].descricao,
-      id_descricao: this.descricaoDropDown[index].id
+      descricao: itemOriginal?.descricao,
+      id_descricao: itemOriginal?.id
     });
   }
 

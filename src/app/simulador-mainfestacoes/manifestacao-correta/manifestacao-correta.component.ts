@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class ManifestacaoCorretaComponent implements OnInit {
 
   manifestacaoCorretaDropDown: any[] = [];
+  manifestacaoCorretaOriginal: any[] = [];
   @Input() manifestacao_correta : string;
   @Input() id_manifestacao_correta: number;
 
@@ -19,6 +20,7 @@ export class ManifestacaoCorretaComponent implements OnInit {
   @Inject(MAT_DIALOG_DATA) public data: any)
   {
     this.manifestacaoCorretaDropDown = data.manifestacaoCorretaDropDown;
+    this.manifestacaoCorretaOriginal = [...data.manifestacaoCorretaDropDown];
   }
 
   ngOnInit(): void {
@@ -37,9 +39,11 @@ export class ManifestacaoCorretaComponent implements OnInit {
 
   onToggleManifestacaoCorreta(index: number) {
     this.selectedManifestacaoCorretaIndex = index;
+    const itemFiltrado = this.manifestacaoCorretaFiltrada[index];
+    const itemOriginal = this.manifestacaoCorretaOriginal.find(mc => mc.id === itemFiltrado.id);
     this.dialogRef.close({
-      manifestacao_correta: this.manifestacaoCorretaDropDown[index].manifestacao_correta,
-      id_manifestacao_correta: this.manifestacaoCorretaDropDown[index].id
+      manifestacao_correta: itemOriginal?.manifestacao_correta,
+      id_manifestacao_correta: itemOriginal?.id
     });
   }
 
