@@ -56,7 +56,7 @@ export class CalendarioRemuneracaoComponent implements OnInit {
 
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  
+
   tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -64,14 +64,14 @@ export class CalendarioRemuneracaoComponent implements OnInit {
   public pesquisa_efetuada: boolean = false;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -94,7 +94,7 @@ export class CalendarioRemuneracaoComponent implements OnInit {
   identificadores: string[] = ['Gerentes', 'Líderes'];
   selecionado: string;
   ciclo_selecionado: string;
-  
+
   public carregando: boolean;
 
   ngOnInit(): void {
@@ -110,7 +110,7 @@ export class CalendarioRemuneracaoComponent implements OnInit {
         this.ciclosDropDown = data;
       }
     )
-    
+
 
     this.pesquisa_efetuada = false;
     this.carregando = false;
@@ -126,7 +126,6 @@ export class CalendarioRemuneracaoComponent implements OnInit {
     this.painelService.getCalendarioRemuneracaoPublicoSetor(this.selecionado, codigoSetor).subscribe(
       data => {
         this.dataSource = data;
-        console.log('Pegou errado');
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
         this.tableDataSource.paginator = this.paginator;
         if (this.dataSource.length === 0) {
@@ -138,8 +137,8 @@ export class CalendarioRemuneracaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -159,7 +158,6 @@ export class CalendarioRemuneracaoComponent implements OnInit {
     this.painelService.getCalendarioRemuneracaoPublicoSetorCiclo(this.selecionado, codigoSetor, ciclo).subscribe(
       data => {
         this.dataSource = data;
-        console.log('Pegou certo');
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
         this.tableDataSource.paginator = this.paginator;
         if (this.dataSource.length === 0) {
@@ -171,8 +169,8 @@ export class CalendarioRemuneracaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -198,7 +196,7 @@ export class CalendarioRemuneracaoComponent implements OnInit {
     this.tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     this.tableDataSource.paginator = this.paginator;
     this.selecionado = undefined;
-    this.cod_setor = undefined;  
+    this.cod_setor = undefined;
     this.ciclo_selecionado = undefined;
   }
 

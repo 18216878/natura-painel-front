@@ -130,7 +130,6 @@ export class SimuladorMainfestacoesComponent implements OnInit {
 
   onSelect(event: Event) {
     this.id_categoria = parseInt(event.toString());
-    console.log(this.id_categoria);
 
   }
 
@@ -189,7 +188,6 @@ export class SimuladorMainfestacoesComponent implements OnInit {
 pesquisarTipoDefeito(){
   this.painelService.getNatSimuladorManifestacaoTipoDefeito(this.id_categoria, this.id_local_defeito).subscribe(
     data => {
-      console.log(data);
       this.tipoDefeitoDropDown = data;
       this.abrirDialogTipoDefeito();
     }

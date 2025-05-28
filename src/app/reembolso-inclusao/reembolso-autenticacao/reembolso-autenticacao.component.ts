@@ -27,7 +27,6 @@ export class ReembolsoAutenticacaoComponent implements OnInit {
   }
 
   autenticar(senha: string) {
-    console.log(senha)
 
     if(senha === undefined || senha === ''){
       var message = 'Informe a senha';
@@ -41,8 +40,6 @@ export class ReembolsoAutenticacaoComponent implements OnInit {
       var encrypt = Md5.hashStr(senha);
       this.painelService.getObterSenha().subscribe(
         data => {
-          console.log('Senha do banco: ' + data[0].pass);
-          console.log('Senha digitada: ' + encrypt);
 
           if (data[0].pass === encrypt) {
             this.accountService.set('autenticado', 'sim');

@@ -57,23 +57,23 @@ export class DynamicsHistoricoComponent implements OnInit {
     '_ownerid_valueODataCommunityDisplayV1FormattedValue',
     'description'
   ];
-  
+
   dataSrc: any = iOData;
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  
+
   public pesquisa_efetuada: boolean = false;
   public token: string;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private dynamicsService: DynamicsService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -88,7 +88,7 @@ export class DynamicsHistoricoComponent implements OnInit {
   checked = false;
   public title: string = "Dynamiics Histórico";
   identificadores: string[] = ['Código', 'Pedido', 'CPF'];
-  selecionado: string;  
+  selecionado: string;
 
   public codigo?: string = undefined;
   public pedido?: string = undefined;
@@ -100,8 +100,8 @@ export class DynamicsHistoricoComponent implements OnInit {
     this.formularioDynamics = this.formBuilder.group({
       selecionado:[''],
       codigo:[''],
-      pedido:[''], 
-      cpf:['']   
+      pedido:[''],
+      cpf:['']
     })
   }
 
@@ -131,13 +131,6 @@ export class DynamicsHistoricoComponent implements OnInit {
                 this.dataSource = this.dataSrc.value;
                 this.pesquisa_efetuada = true;
                 this.carregando = false;
-                console.log(data['status']);
-                if (this.dataSource.length === 0) {
-                  var message = 'Sem dados';
-                  var action = 'Fechar'
-                  this._snackBar.open(message, action);
-                  this.carregando = false;
-                }          
               },
               err => {
                 var message = 'Erro durante a pesquisa. Tente novamente';
@@ -145,14 +138,14 @@ export class DynamicsHistoricoComponent implements OnInit {
                 this._snackBar.open(message, action);
                 this.carregando = false;
               }
-    
+
               );
           }
-          
+
         },
         err => {
-          var message = 'Erro durante a pesquisa. Tente novamente';        
-          var action = 'Fechar'        
+          var message = 'Erro durante a pesquisa. Tente novamente';
+          var action = 'Fechar'
           this._snackBar.open(message, action);
           this.carregando = false;
         }
@@ -161,7 +154,7 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   }
 
-  
+
   pesquisarPedido(pedido: string) {
 
     this.carregando = true;
@@ -178,8 +171,8 @@ export class DynamicsHistoricoComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.carregando = false;
-          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
-          var action = 'Fechar'     
+          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;
+          var action = 'Fechar'
           this._snackBar.open(message, action);
           this.carregando = false;
         }
@@ -199,7 +192,7 @@ export class DynamicsHistoricoComponent implements OnInit {
         data => {
           this.dataSrc = data;
           this.client_id = this.dataSrc.value[0].contactid;
-  
+
           this.dynamicsService.getDynamicsDocument(this.client_id).subscribe(
             data => {
               this.dataSrc = data;
@@ -210,18 +203,18 @@ export class DynamicsHistoricoComponent implements OnInit {
             },
             (err: HttpErrorResponse) => {
               this.carregando = false;
-              var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
-              var action = 'Fechar'     
+              var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;
+              var action = 'Fechar'
               this._snackBar.open(message, action);
             }
-      
+
             );
-          
+
         },
         (err: HttpErrorResponse) => {
           this.carregando = false;
-          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
-          var action = 'Fechar'     
+          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;
+          var action = 'Fechar'
           this._snackBar.open(message, action);
         }
       )
@@ -232,8 +225,8 @@ export class DynamicsHistoricoComponent implements OnInit {
   onSelectId(event: Event) {
 
     var valor = event.toString();
-    this.selecionado = valor;    
-    
+    this.selecionado = valor;
+
   }
 
 
