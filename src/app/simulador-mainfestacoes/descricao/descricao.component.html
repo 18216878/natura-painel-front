@@ -15,7 +15,7 @@
   <div *ngFor="let descricao of descricaoFiltrada;index as i">
     <mat-card (click)="onToggleDescricao(i)" [class.selected]="selectedDescricaoIndex === i" style="cursor:pointer;">
       <mat-card-content>
-        {{descricao.descricao}}
+        <span [innerHTML]="getDescricaoFormatada(descricao)"></span>
       </mat-card-content>
       <mat-card-actions>
         <mat-slide-toggle

@@ -52,4 +52,9 @@ export class TipoDefeitoComponent implements OnInit {
     this.tipo_defeito = tipoDefeito;
   }
 
+  getTipoDefeitoFormatado(tipoDefeito: any): string {
+    if (!tipoDefeito || !tipoDefeito.tipo_defeito) return '';
+    return tipoDefeito.tipo_defeito.replace(/\n/g, '<br>');
+  }
+
 }

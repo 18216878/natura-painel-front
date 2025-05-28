@@ -15,7 +15,7 @@
   <div *ngFor="let tipo_defeito of tipoDefeitoFiltrado;index as i">
     <mat-card (click)="onToggleTipoDefeito(i)" [class.selected]="selectedTipoDefeitoIndex === i" style="cursor:pointer;">
       <mat-card-content>
-        {{tipo_defeito.tipo_defeito}}
+        <span [innerHTML]="getTipoDefeitoFormatado(tipo_defeito)"></span>
       </mat-card-content>
       <mat-card-actions>
         <mat-slide-toggle

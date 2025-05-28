@@ -50,6 +50,7 @@ var iDescricao: IDescricao[];
 export interface ISondagem {
   id: number;
   sondagem_direcionadora: string;
+  observacoes: string;
 }
 
 var iSondagem: ISondagem[];
@@ -162,6 +163,7 @@ export class SimuladorMainfestacoesComponent implements OnInit {
 pesquisarTipoDefeito(){
   this.painelService.getNatSimuladorManifestacaoTipoDefeito(this.id_categoria, this.id_local_defeito).subscribe(
     data => {
+      console.log(data);
       this.tipoDefeitoDropDown = data;
       this.abrirDialogTipoDefeito();
     }
@@ -179,6 +181,30 @@ abrirDialogTipoDefeito() {
     if (result) {
       this.tipo_defeito = result.tipo_defeito;
       this.id_tipo_defeito = result.id_tipo_defeito;
+
+      // Após selecionar o tipo de defeito, buscar as manifestações corretas
+      this.painelService.getNatSimuladorManifestacaoCorreta(this.id_categoria, this.id_local_defeito, this.id_tipo_defeito).subscribe(
+        data => {
+          this.manifestacaoCorretaDropDown = data;
+          this.manifestacao_correta = data[0]?.manifestacao_correta || '';
+        }
+      );
+
+      // Após selecionar o tipo de defeito, buscar as descrições
+      this.painelService.getNatSimuladorManifestacaoDescricao(this.id_categoria, this.id_local_defeito, this.id_tipo_defeito).subscribe(
+        data => {
+          this.descricaoDropDown = data;
+          this.descricao = data[0]?.descricao || '';
+
+        }
+      );
+
+      // Após selecionar o tipo de defeito, buscar as sondagens
+      this.painelService.getNatSimuladorManifestacaoSondagem(this.id_categoria, this.id_local_defeito, this.id_tipo_defeito).subscribe(
+        data => {
+          this.sondagemDropDOwn = data;
+        }
+      );
     }
   });
 }
@@ -291,6 +317,22 @@ limpar() {
     this.sondagem = undefined;
     this.id_sondagem = undefined;
 
+  }
+
+  getTipoDefeitoFormatado(): string {
+    return this.tipo_defeito ? this.tipo_defeito.replace(/\n/g, '<br>') : '';
+  }
+  getManifestacaoCorretaFormatada(): string {
+    return this.manifestacao_correta ? this.manifestacao_correta.replace(/\n/g, '<br>') : '';
+  }
+  getDescricaoFormatada(): string {
+    return this.descricao ? this.descricao.replace(/\n/g, '<br>') : '';
+  }
+  getSondagemFormatada(): string {
+    return this.sondagem ? this.sondagem.replace(/\n/g, '<br>') : '';
+  }
+  getObservacoesFormatada(obs: string): string {
+    return obs ? obs.replace(/\n/g, '<br>') : '';
   }
 
 }

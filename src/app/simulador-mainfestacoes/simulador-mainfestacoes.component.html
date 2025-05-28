@@ -50,7 +50,7 @@
         </mat-card-header>
         <mat-card-content>
           <p>
-            {{local_defeito}}
+            <span [innerHTML]="local_defeito"></span>
           </p>
         </mat-card-content>
         <mat-card-actions>
@@ -77,7 +77,7 @@
         </mat-card-header>
         <mat-card-content>
           <p>
-            {{tipo_defeito}}
+            <span [innerHTML]="getTipoDefeitoFormatado()"></span>
           </p>
         </mat-card-content>
         <mat-card-actions>
@@ -104,19 +104,9 @@
         </mat-card-header>
         <mat-card-content>
           <p>
-            {{manifestacao_correta}}
+            <span [innerHTML]="getManifestacaoCorretaFormatada()"></span>
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <button
-              [disabled]="id_tipo_defeito === undefined || id_tipo_defeito === null"
-              mat-fab
-              color="primary"
-              (click)="pesquisarManifestacaoCorreta()"
-              [matTooltip]="'Pesquisar Manifestação Correta'">
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-card-actions>
       </mat-card>
     </p>
 
@@ -131,19 +121,9 @@
         </mat-card-header>
         <mat-card-content>
           <p>
-            {{descricao}}
+            <span [innerHTML]="getDescricaoFormatada()"></span>
           </p>
         </mat-card-content>
-        <mat-card-actions>
-          <button
-              [disabled]="id_tipo_defeito === undefined || id_tipo_defeito === null"
-              mat-fab
-              color="primary"
-              (click)="pesquisarDescricao()"
-              [matTooltip]="'Pesquisar Descrição'">
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-card-actions>
       </mat-card>
     </p>
 
@@ -157,20 +137,15 @@
           <mat-card-title>Sondagem Direcionadora</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>
-            {{sondagem}}
-          </p>
+          <div *ngFor="let sondagem of sondagemDropDOwn;index as i">
+            <mat-card>
+              <mat-card-content>
+                {{sondagem.sondagem_direcionadora}}
+                <p class="obs"><span [innerHTML]="getObservacoesFormatada(sondagem.observacoes)"></span></p>
+              </mat-card-content>
+            </mat-card>
+          </div>
         </mat-card-content>
-        <mat-card-actions>
-          <button
-              [disabled]="id_tipo_defeito === undefined || id_tipo_defeito === null"
-              mat-fab
-              color="primary"
-              (click)="pesquisarSondagem()"
-              [matTooltip]="'Pesquisar Sondagem Direcionadora'">
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-card-actions>
       </mat-card>
     </p>
 

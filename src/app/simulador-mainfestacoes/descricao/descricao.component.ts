@@ -51,4 +51,9 @@ export class DescricaoComponent implements OnInit {
     this.descricao = descricao;
   }
 
+  getDescricaoFormatada(descricao: any): string {
+    if (!descricao || !descricao.descricao) return '';
+    return descricao.descricao.replace(/\n/g, '<br>');
+  }
+
 }
