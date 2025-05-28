@@ -23,37 +23,38 @@
     <p class="start">
 
       <!-- categoria -->
-      <mat-form-field appearance="fill" class="example-full-width"  color="warn">
-        <mat-label>Categoria</mat-label>
-        <mat-select
-            disableRipple
-            ngDefaultControl
-            formControlName="categoria"
-            (valueChange)="onSelect($event)">
-          <mat-option *ngFor="let categoria of categoriaDropDown;index as i" [value]="categoria.id">
-            {{categoria.categoria}}</mat-option>
-        </mat-select>
-        <mat-icon matPrefix>assignment</mat-icon>
-        <mat-hint>Selecione uma opção</mat-hint>
-      </mat-form-field>
-
+      <mat-card>
+        <mat-card-header class="header-com-botao">
+          <div mat-card-avatar>
+            <mat-icon matPrefix>category</mat-icon>
+          </div>
+          <mat-card-title>Categoria</mat-card-title>
+          <span class="spacer"></span>
+          <button
+              mat-fab
+              color="primary"
+              (click)="pesquisarCategoria()"
+              [matTooltip]="'Pesquisar Categoria'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="categoria"></span>
+          </p>
+        </mat-card-content>
+      </mat-card>
     </p>
 
     <p>
       <!-- Local Defeito -->
       <mat-card>
-        <mat-card-header>
+        <mat-card-header class="header-com-botao">
           <div mat-card-avatar>
             <mat-icon matPrefix>location_on</mat-icon>
           </div>
           <mat-card-title>Local do Defeito</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            <span [innerHTML]="local_defeito"></span>
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
+          <span class="spacer"></span>
           <button
               [disabled]="id_categoria === undefined || id_categoria === null"
               mat-fab
@@ -62,25 +63,24 @@
               [matTooltip]="'Pesquisar Local Defeito'">
             <mat-icon>search</mat-icon>
           </button>
-        </mat-card-actions>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="local_defeito"></span>
+          </p>
+        </mat-card-content>
       </mat-card>
     </p>
 
     <p>
       <!-- Tipo Defeito -->
       <mat-card>
-        <mat-card-header>
+        <mat-card-header class="header-com-botao">
           <div mat-card-avatar>
             <mat-icon matPrefix>warning</mat-icon>
           </div>
           <mat-card-title>Desvio (Tipo de Defeito)</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            <span [innerHTML]="getTipoDefeitoFormatado()"></span>
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
+          <span class="spacer"></span>
           <button
               [disabled]="id_local_defeito === undefined || id_local_defeito === null"
               mat-fab
@@ -89,7 +89,12 @@
               [matTooltip]="'Pesquisar Tipo Defeito'">
             <mat-icon>search</mat-icon>
           </button>
-        </mat-card-actions>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="getTipoDefeitoFormatado()"></span>
+          </p>
+        </mat-card-content>
       </mat-card>
     </p>
 
@@ -138,7 +143,7 @@
         </mat-card-header>
         <mat-card-content>
           <div *ngFor="let sondagem of sondagemDropDOwn;index as i">
-            <mat-card>
+            <mat-card class="sondagem">
               <mat-card-content>
                 {{sondagem.sondagem_direcionadora}}
                 <p class="obs"><span [innerHTML]="getObservacoesFormatada(sondagem.observacoes)"></span></p>

@@ -11,6 +11,7 @@ import { TipoDefeitoComponent } from './tipo-defeito/tipo-defeito.component';
 import { ManifestacaoCorretaComponent } from './manifestacao-correta/manifestacao-correta.component';
 import { DescricaoComponent } from './descricao/descricao.component';
 import { SondagemDirecionadoraComponent } from './sondagem-direcionadora/sondagem-direcionadora.component';
+import { CategoriaComponent } from './categoria/categoria.component';
 
 export interface ICategoria {
   id: number;
@@ -131,6 +132,31 @@ export class SimuladorMainfestacoesComponent implements OnInit {
     this.id_categoria = parseInt(event.toString());
     console.log(this.id_categoria);
 
+  }
+
+  // Método para pesquisar Categoria
+  pesquisarCategoria() {
+    this.painelService.getNatSimuladorManifestacaoCategoria().subscribe(
+      data => {
+        this.categoriaDropDown = data;
+        this.abrirDialogCategoria();
+      }
+    )
+  }
+
+  abrirDialogCategoria() {
+    const dialogRef = this.dialog.open(CategoriaComponent, {
+      data: {
+        categoriaDropDown: this.categoriaDropDown
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.categoria = result.categoria;
+        this.id_categoria = result.id_categoria;
+      }
+    });
   }
 
   // Método para pesquisar Local de Defeito

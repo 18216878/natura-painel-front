@@ -131,6 +131,7 @@ import { TipoDefeitoComponent } from './simulador-mainfestacoes/tipo-defeito/tip
 import { DescricaoComponent } from './simulador-mainfestacoes/descricao/descricao.component';
 import { ManifestacaoCorretaComponent } from './simulador-mainfestacoes/manifestacao-correta/manifestacao-correta.component';
 import { SondagemDirecionadoraComponent } from './simulador-mainfestacoes/sondagem-direcionadora/sondagem-direcionadora.component';
+import { CategoriaComponent } from './simulador-mainfestacoes/categoria/categoria.component';
 
 
 @NgModule({
@@ -229,7 +230,8 @@ import { SondagemDirecionadoraComponent } from './simulador-mainfestacoes/sondag
     TipoDefeitoComponent,
     DescricaoComponent,
     ManifestacaoCorretaComponent,
-    SondagemDirecionadoraComponent
+    SondagemDirecionadoraComponent,
+    CategoriaComponent
   ],
   imports: [
     BrowserModule,

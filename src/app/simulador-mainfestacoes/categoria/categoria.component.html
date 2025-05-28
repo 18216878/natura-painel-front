@@ -1,0 +1,29 @@
+<div class="titulo">
+  <mat-icon mat-card-avatar>category</mat-icon>
+  <h2>Categoria</h2>
+</div>
+<div class="ajustar">
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>Filtrar Opções</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="Digite os dados a filtrar..."
+      [(ngModel)]="filtroCategoria"
+      style="width: 100%; margin-bottom: 10px;" />
+  </mat-form-field>
+  <div *ngFor="let categoria of categoriaFiltrada;index as i">
+    <mat-card (click)="onToggleCategoria(i)" [class.selected]="selectedCategoriaIndex === i" style="cursor:pointer;">
+      <mat-card-content>
+        {{categoria.categoria}}
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-slide-toggle
+          [checked]="selectedCategoriaIndex === i"
+          (change)="onToggleCategoria(i)">
+          Selecionar
+        </mat-slide-toggle>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
