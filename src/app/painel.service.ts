@@ -89,41 +89,52 @@ export class PainelService {
     return valido;
   }
 
-  public getUser(user : string): Observable<any> {
-    // return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWaveUsers?user=${user}`)
-    return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWaveUsers?user=${user}`)
-  }
-
   public getNaturaCode(naturaCode: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/codigo-natura?codigo_natura=${naturaCode}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/codigo-natura?codigo_natura=${naturaCode}`, { headers })
   }
 
   public getAvonCode(avonCode: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/codigo-avon?codigo_avon=${avonCode}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/codigo-avon?codigo_avon=${avonCode}`, { headers })
   }
 
   public getCpf(cpf: string){
-    return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/cpf?cpf=${cpf}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/cpf?cpf=${cpf}`, { headers })
   }
 
   public getPlanosBeTrocasIO(item_original: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas/item-original?item_original=${item_original}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/planos-be-trocas/item-original?item_original=${item_original}`, { headers })
 
   }
   public getPlanosBeTrocasIS(item_substituto: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatPlanosBeTrocas/item-substituto?item_substituto=${item_substituto}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/planos-be-trocas/item-substituto?item_substituto=${item_substituto}`, { headers })
   }
 
   public getCadastrosIrregulares(codigo: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCadastrosIrregulares?codigo=${codigo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/cadastros-irregulares?codigo=${codigo}`, { headers })
   }
 
   public getPagamentosRejeitados(codigo: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatPagamentosRejeitados?consultora=${codigo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pagamentos-rejeitados/consultora?consultora=${codigo}`, { headers })
   }
 
   public getFeriados(): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatFeriados`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/feriados`, { headers })
   }
 
 
@@ -155,18 +166,25 @@ export class PainelService {
     }
 
   public getValePontos(codigo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatValePontos?codigo=${codigo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/vale-pontos/consultora?cod_consultora=${codigo}`, { headers })
   }
 
   public getDestaquesCodigo(codigo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatDestaques/codigo?codigo=${codigo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/natdestaques/codigo?codigo=${codigo}`, { headers })
   }
 
   public getDestaquesNome(nome: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatDestaques/nome?nome=${nome}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/natdestaques/nome?nome=${nome}`, { headers })
   }
 
 
+  // Verificar em outro mommento *****
   public getMeiRegistro(registro: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/AvonRegularizacaoMei/registro?registro=${registro}`)
   }
@@ -174,8 +192,6 @@ export class PainelService {
   public getMeiNome(nome: string): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/AvonRegularizacaoMei/nome?nome=${nome}`)
   }
-
-
 
   public getAvonRejeicaoPagamentoRegistro(registro: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/AvonRejeicaoPagamento/registro?registro=${registro}`)
@@ -201,6 +217,10 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/AvonTag2h/premio?premio=${premio}`)
   }
 
+  // *****
+
+
+
   /**
    * Registra acesso do usuário no backend (tabela nat_tb_projeto_wave_acessos)
    * Espera objeto: { user: string, access_date: string }
@@ -212,111 +232,165 @@ export class PainelService {
   }
 
   public getNatListaGerentesInterinasSetor(setor: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesInterinas/setor?setor_interina=${setor}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-interinas/setor?setor_interina=${setor}`, { headers })
   }
 
   public getNatListaGerentesInterinasNome(nome: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesInterinas/nome?nome_interina=${nome}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-interinas/nome?nome_interina=${nome}`, { headers })
   }
 
   public getNatListaGerentesNegociosCodigoGv(cod_do_gv: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gvcodigo?cod_do_gv=${cod_do_gv}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-negocios/gvcodigo?cod_do_gv=${cod_do_gv}`, { headers })
   }
 
   public getNatListaGerentesNegociosNomeGv(nome_do_gv: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gvnome?nome_do_gv=${nome_do_gv}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-negocios/gvnome?nome_do_gv=${nome_do_gv}`, { headers })
   }
 
   public getNatListaGerentesNegociosGdn(gdn: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gncodigo?gdn=${gdn}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-negocios/gncodigo?gdn=${gdn}`, { headers })
   }
 
   public getNatListaGerentesNegociosNomeGdn(nome_gdn: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gnnome?nome_gdn=${nome_gdn}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-negocios/gnnome?nome_gdn=${nome_gdn}`, { headers })
   }
 
   public getNatListaGerentesNegociosTelefoneGdn(tel_preferencial_gdn: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/gntelefone?tel_preferencial_gdn=${tel_preferencial_gdn}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-negocios/gntelefone?tel_preferencial_gdn=${tel_preferencial_gdn}`, { headers })
   }
 
   public getNatListaGerentesSetor(cd_setor: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatListaGerentesNegocios/setor?cd_setor=${cd_setor}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/gerentes-negocios/setor?cd_setor=${cd_setor}`, { headers })
   }
 
   public getNatDestaquesLideresCodigo(codigo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatDestaquesLideres/codigo?codigo=${codigo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/natdestaqueslideres/codigo?codigo=${codigo}`, { headers })
   }
 
   public getNatDestaquesLideresNome(nome: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatDestaquesLideres/nome?nome=${nome}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/natdestaqueslideres/nome?nome=${nome}`, { headers })
   }
 
   public getNatCheckoutCodigo(codigo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCheckoutCapta/codigo?codigo=${codigo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/checkout-capta/codigo?codigo=${codigo}`, { headers })
   }
 
   public getNatCheckoutPedido(pedido: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCheckoutCapta/pedido?pedido=${pedido}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/checkout-capta/pedido?pedido=${pedido}`, { headers })
   }
 
   public getNatBaseAlocacaoCodigoPessoa(cod_pessoa: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/codigo-pessoa?cod_pessoa=${cod_pessoa}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/codigo-pessoa?cod_pessoa=${cod_pessoa}`, { headers })
   }
 
   public getNatBaseAlocacaoCodigoRegiaoEstrategica(cod_regiao_estrategica: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/regiao-estrategica?cod_regiao_estrategica=${cod_regiao_estrategica}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/regiao-estrategica?cod_regiao_estrategica=${cod_regiao_estrategica}`, { headers })
   }
 
   public getNatBaseAlocacaoCodigoGerenciaVenda(cod_gerencia_venda: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/gerencia-venda?cod_gerencia_venda=${cod_gerencia_venda}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/gerencia-venda?cod_gerencia_venda=${cod_gerencia_venda}`, { headers })
   }
 
   public getNatBaseAlocacaoCodigoSetor(cod_setor: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/setor?cod_setor=${cod_setor}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/setor?cod_setor=${cod_setor}`, { headers })
   }
 
   public getNatBaseAlocacaoCodigoGrupo(cod_grupo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/grupo?cod_grupo=${cod_grupo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/grupo?cod_grupo=${cod_grupo}`, { headers })
   }
 
   public getNatBaseAlocacaoEloCodigoRegiaoEstrategica(cod_regiao_estrategica_elo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-regiao-estrategica?cod_regiao_estrategica_elo=${cod_regiao_estrategica_elo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/elo-regiao-estrategica?cod_regiao_estrategica_elo=${cod_regiao_estrategica_elo}`, { headers })
   }
 
   public getNatBaseAlocacaoEloCodigoGerenciaVenda(cod_gerencia_venda_elo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-gerencia-venda?cod_gerencia_venda_elo=${cod_gerencia_venda_elo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/elo-gerencia-venda?cod_gerencia_venda_elo=${cod_gerencia_venda_elo}`, { headers })
   }
 
   public getNatBaseAlocacaoEloCodigoSetor(cod_setor_elo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-setor?cod_setor_elo=${cod_setor_elo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/elo-setor?cod_setor_elo=${cod_setor_elo}`, { headers })
   }
 
   public getNatBaseAlocacaoEloCodigoGrupo(cod_grupo_elo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatBaseAlocacao/elo-grupo?cod_grupo_elo=${cod_grupo_elo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/base-alocacao/elo-grupo?cod_grupo_elo=${cod_grupo_elo}`, { headers })
   }
 
   public getNatMigradasAvonCodigoConsultora(cd_consultora: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatMigradasAvon/codigo-consultora?cd_consultora=${cd_consultora}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/migradas-avon/codigo-consultora?cd_consultora=${cd_consultora}`, { headers })
   }
 
   public getNatMovimentacaoCodigoConsultora(cd_pessoa: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatMovimentacao/movimentacao?cd_pessoa=${cd_pessoa}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/movimentacao/codigo-pessoa?cd_pessoa=${cd_pessoa}`, { headers })
   }
 
   public getNatMovimentacaoEloCodigoConsultora(codigo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatMovimentacaoElo/movimentacao-elo?codigo=${codigo}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/movimentacao-elo/codigo?codigo=${codigo}`, { headers })
   }
 
   public getNatRecovery(cpfrevendedora: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatRecovery/recovery?cpfrevendedora=${cpfrevendedora}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/recovery/cpfrevendedora?cpfrevendedora=${cpfrevendedora}`, { headers })
   }
 
   public getVtex(nr_pedido: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatVtex/vtex?nr_pedido=${nr_pedido}`)
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/vtex/pedido?nr_pedido=${nr_pedido}`, { headers })
   }
 
   public getNatMigradasNivelCodigoConsultora(cd_consultora: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatMigradasNivel/codigo-consultora?cd_consultora=${cd_consultora}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/migradas-nivel/codigo-consultora?cd_consultora=${cd_consultora}`, { headers })
   }
 
   public getAtrasoENtrega(cn: string): Observable<any>{
@@ -326,43 +400,63 @@ export class PainelService {
   }
 
   public getAjusteCredito(cod_cn: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatAjusteCredito?cod_cn=${cod_cn}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/ajuste-credito?cod_cn=${cod_cn}`, { headers })
   }
 
   public getCalendarioCiclosCodSetor(cod_setor: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioCiclos/codigo-setor?cod_setor=${cod_setor}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/calendario-ciclos/codigo-setor?cod_setor=${cod_setor}`, { headers })
   }
 
   public getCalendarioCiclosNomeSetor(nome_setor: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioCiclos/nome-setor?nome_setor=${nome_setor}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/calendario-ciclos/nome-setor?nome_setor=${nome_setor}`, { headers })
   }
 
   public getCalendarioRemuneracaoCiclos(): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracaoCiclos/ciclos`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/calendario-remuneracao/ciclos`, { headers })
   }
 
   public getCalendarioRemuneracaoPublicoSetor(publico: string, cd_setor: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracao/publico-setor?publico=${publico}&cd_setor=${cd_setor}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/calendario-remuneracao/publico-setor?publico=${publico}&cd_setor=${cd_setor}`, { headers })
   }
 
   public getCalendarioRemuneracaoPublicoSetorCiclo(publico: string, cd_setor: number, ciclo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCalendarioRemuneracao/publico-setor-ciclo?publico=${publico}&cd_setor=${cd_setor}&ciclo=${ciclo}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/calendario-remuneracao/publico-setor-ciclo?publico=${publico}&cd_setor=${cd_setor}&ciclo=${ciclo}`, { headers })
   }
 
   public getTitulosFebrabanCodigoCn(codigo: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatFebraban/consultora?consultora=${codigo}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/febraban/consultora?consultora=${codigo}`, { headers })
   }
 
   public getTitulosFebrabanTitulo(titulo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatFebraban/titulo?titulo=${titulo}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/febraban/titulo?titulo=${titulo}`, { headers })
   }
 
   public getNatPilotoGvAlecrimCodigoPessoa(cod_pessoa: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatPilotoGvAlecrim/cod-pessoa?cod_pessoa=${cod_pessoa}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/piloto-gv-alecrim/cod-pessoa?cod_pessoa=${cod_pessoa}`, { headers })
   }
 
   public getNatPilotoGvAlecrimCodigoSetor(cod_setor: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatPilotoGvAlecrim/cod-setor?cod_setor=${cod_setor}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/piloto-gv-alecrim/cod-setor?cod_setor=${cod_setor}`, { headers })
   }
 
 
@@ -379,67 +473,99 @@ export class PainelService {
   }
 
   public getNatEmanaPayCodigoCn(cod_cn: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatEmanaPay/codcn?cod_cn=${cod_cn}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/emanapay/codcn?cod_cn=${cod_cn}`, { headers })
   }
 
   public getNatEmanaPayCpf(cpf: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatEmanaPay/cpf?cpf=${cpf}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/emanapay/cpf?cpf=${cpf}`, { headers })
   }
 
   public getCodigoVendaMarca(marca: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/marca?marca=${marca}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/codigo-venda/marca?marca=${marca}`, { headers })
   }
 
   public getCodigoVendaDescricao(descricao: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/descricao?descricao=${descricao}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/codigo-venda/descricao?descricao=${descricao}`, { headers })
   }
 
   public getCodigoVendaLinhaProduto(linha_produto: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/linha-produto?linha_produto=${linha_produto}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/codigo-venda/linha-produto?linha_produto=${linha_produto}`, { headers })
   }
 
   public getCodigoVendaCategorizacao(categorizacao: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatCodigoVenda/categorizacao?categorizacao=${categorizacao}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/codigo-venda/categorizacao?categorizacao=${categorizacao}`, { headers })
   }
 
   public GetErroBoletosCliente(cliente: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatErrosBoletos?cliente=${cliente}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/erros-boletos/cliente?cliente=${cliente}`, { headers })
   }
 
   public getNatSimuladorManifestacaoCategoria(): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoCategoria`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/simulador-manifestacao/categorias`, { headers })
   }
 
   public getNatSimuladorManifestacaoLocalDefeito(id_categoria: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoLocalDefeito?id_categoria=${id_categoria}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/simulador-manifestacao/local-defeito?id_categoria=${id_categoria}`, { headers })
   }
 
   public getNatSimuladorManifestacaoTipoDefeito(id_categoria: number, id_local_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoTipoDefeito?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/simulador-manifestacao/tipo-defeito?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}`, { headers })
   }
 
   public getNatSimuladorManifestacaoCorreta(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoCorreta?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/simulador-manifestacao/correta?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`, { headers })
   }
 
   public getNatSimuladorManifestacaoDescricao(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoDescricao?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/simulador-manifestacao/descricao?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`, { headers })
   }
 
   public getNatSimuladorManifestacaoSondagem(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoSondagem?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/simulador-manifestacao/sondagem?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`, { headers })
   }
 
   public getDiasCodigoCn(codigo_cn: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatTansportadoraDias/codigo-cn?codigo_cn=${codigo_cn}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/transportadora-dias/codigo-cn?codigo_cn=${codigo_cn}`, { headers })
   }
 
   public getDiasPedido(pedido: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatTansportadoraDias/pedido?pedido=${pedido}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/transportadora-dias/pedido?pedido=${pedido}`, { headers })
   }
 
   public postReembolsoCriarRegistro(jsonTab: JSON) {
-    this.httpClient.post(`${this.SERVER_URL}/NatReembolso/criar-registro`, jsonTab, {observe: 'response'}).subscribe(
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    this.httpClient.post(`${this.SERVER_URL}/api/reembolso/criar-registro`, jsonTab, { headers, observe: 'response' }).subscribe(
       data => {
         return data;
       }
@@ -447,31 +573,45 @@ export class PainelService {
   }
 
   public getReembolsoCpfSolicitante(nr_documento: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/cpf-solicitante?nr_documento=${nr_documento}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/reembolso/cpf-solicitante?nr_documento=${nr_documento}`, { headers })
   }
 
   public getReembolsoCpfFavorecido(cpf_favorecido: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/cpf-favorecido?cpf_favorecido=${cpf_favorecido}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/reembolso/cpf-favorecido?cpf_favorecido=${cpf_favorecido}`, { headers })
   }
 
   public getReembolsoExportaDados(dataInicial: string, dataFinal: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/exporta-dados?dataInicial=${dataInicial}&dataFinal=${dataFinal}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/reembolso/exporta-dados?dataInicial=${dataInicial}&dataFinal=${dataFinal}`, { headers })
   }
 
   public getObterSenha(): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/obter-senha`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/reembolso/obter-senha`, { headers })
   }
 
   public getReparacaoCodigo(codigo: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/codigo?codigo=${codigo}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/reparacao/codigo?codigo=${codigo}`, { headers })
   }
 
   public getReparacaoNome(nome_completo: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/nome?nome_completo=${nome_completo}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/reparacao/nome?nome_completo=${nome_completo}`, { headers })
   }
 
   public getReparacaoPedido(pedido: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/pedido?pedido=${pedido}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.get(`${this.SERVER_URL}/api/reparacao/pedido?nr_pedido=${pedido}`, { headers })
   }
 
     /**

@@ -405,6 +405,53 @@ abrirDialogTipoDefeito() {
       // Após selecionar o tipo de defeito, buscar as manifestações corretas
       this.painelService.getNatSimuladorManifestacaoCorreta(this.id_categoria, this.id_local_defeito, this.id_tipo_defeito).subscribe(
         data => {
+          // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Efetuou pesquisa - Manifestação Correta'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
           this.manifestacaoCorretaDropDown = data;
           this.manifestacao_correta = data[0]?.manifestacao_correta || '';
         }
@@ -413,6 +460,54 @@ abrirDialogTipoDefeito() {
       // Após selecionar o tipo de defeito, buscar as descrições
       this.painelService.getNatSimuladorManifestacaoDescricao(this.id_categoria, this.id_local_defeito, this.id_tipo_defeito).subscribe(
         data => {
+
+          // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Efetuou pesquisa - Descrição'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
           this.descricaoDropDown = data;
           this.descricao = data[0]?.descricao || '';
 
@@ -422,6 +517,53 @@ abrirDialogTipoDefeito() {
       // Após selecionar o tipo de defeito, buscar as sondagens
       this.painelService.getNatSimuladorManifestacaoSondagem(this.id_categoria, this.id_local_defeito, this.id_tipo_defeito).subscribe(
         data => {
+          // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Efetuou pesquisa - Sondagem Direcionadora'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
           this.sondagemDropDOwn = data;
         }
       );

@@ -33,12 +33,39 @@ export interface PeriodicElement {
 
 var ELEMENT_DATA: PeriodicElement[] = [];
 
+
 @Component({
   selector: 'app-plano-b-trocas',
   templateUrl: './plano-b-trocas.component.html',
   styleUrls: ['./plano-b-trocas.component.scss']
 })
 export class PlanoBTrocasComponent implements OnInit {
+
+  private mapApiDataToTable(data: any[]): any[] {
+    return data.map(item => ({
+      cd_mensagem: item.CD_MENSAGEM,
+      dc_mensagem: item.DC_MENSAGEM,
+      tipo_estrutura: item.TIPO_ESTRUTURA,
+      cd_estrutura_comercial: item.CD_ESTRUTURA_COMERCIAL,
+      nome_estrutura: item.NOME_ESTRUTURA,
+      nm_ciclo_operacional_inicio: item.NM_CICLO_OPERACIONAL_INICIO,
+      nm_ciclo_operacional_termino: item.NM_CICLO_OPERACIONAL_TERMINO,
+      dt_inicio: item.DT_INICIO,
+      dt_termino: item.DT_TERMINO,
+      tipo_mensagem: item.TIPO_MENSAGEM,
+      tipo_item_original: item.TIPO_ITEM_ORIGINAL,
+      item_original: item.ITEM_ORIGINAL,
+      composicao_item_original: item.COMPOSICAO_ITEM_ORIGINAL,
+      nome_composicao_item_original: item.NOME_COMPOSICAO_ITEM_ORIGINAL,
+      tipo_item_original_2: item.TIPO_ITEM_ORIGINAL_2,
+      item_substituto: item.ITEM_SUBSTITUTO,
+      composicao_item_substituto: item.COMPOSICAO_ITEM_SUBSTITUTO,
+      nome_composicao_item_substitut: item.NOME_COMPOSICAO_ITEM_SUBSTITUT,
+      exibe_box_troca_informa: item.EXIBE_BOX_TROCA_INFORMA,
+      qtde_registros_por_mensagem: item.QTDE_REGISTROS_POR_MENSAGEM,
+      data_execucao_da_query: item.DATA_EXECUCAO_DA_QUERY
+    }));
+  }
 
   displayedColumns: string[] = [
     'cd_mensagem',
@@ -207,7 +234,7 @@ export class PlanoBTrocasComponent implements OnInit {
     this.pesquisa_efetuada = true;
     this.painelService.getPlanosBeTrocasIO(this.item_original).subscribe(
       data => {
-        this.dataSource = data;
+        this.dataSource = this.mapApiDataToTable(data);
         if (this.dataSource.length === 0) {
           var message = 'Sem dados';
           var action = 'Fechar';
@@ -276,7 +303,7 @@ export class PlanoBTrocasComponent implements OnInit {
     this.pesquisa_efetuada = true;
     this.painelService.getPlanosBeTrocasIS(this.item_substituto).subscribe(
       data => {
-        this.dataSource = data;
+        this.dataSource = this.mapApiDataToTable(data);
         if (this.dataSource.length === 0) {
           var message = 'Sem dados';
           var action = 'Fechar';
