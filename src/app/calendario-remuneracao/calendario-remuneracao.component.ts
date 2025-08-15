@@ -222,7 +222,6 @@ export class CalendarioRemuneracaoComponent implements OnInit {
     this.painelService.getCalendarioRemuneracaoPublicoSetor(this.selecionado, codigoSetor).subscribe(
       data => {
         this.dataSource = data;
-        console.log('Pegou errado');
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
         this.tableDataSource.paginator = this.paginator;
         if (this.dataSource.length === 0) {
@@ -304,7 +303,6 @@ export class CalendarioRemuneracaoComponent implements OnInit {
     this.painelService.getCalendarioRemuneracaoPublicoSetorCiclo(this.selecionado, codigoSetor, ciclo).subscribe(
       data => {
         this.dataSource = data;
-        console.log('Pegou certo');
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
         this.tableDataSource.paginator = this.paginator;
         if (this.dataSource.length === 0) {

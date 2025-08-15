@@ -67,7 +67,7 @@ Projeto de desenvolvimento de um Painel de Consulta para diversas situações, c
 #### Interno
 
 <div style="display: inline-block">
-  <img align="center" alt="Hugo-CSharp" height="30" width="40" src="https://github.com/18216878/18216878/blob/master/csharp-original.svg?raw=true">
+  <img align="center" alt="Hugo-NodeJs" height="30" width="40" src="https://github.com/18216878/18216878/blob/master/node-js.svg">
   API Painel Wave 2
 </div>
 <br>

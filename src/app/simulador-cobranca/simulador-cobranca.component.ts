@@ -662,11 +662,6 @@ export class SimuladorCobrancaComponent implements OnInit {
       }
 
       this.valor_parcela1 = this.valor_corrigido / this.parcelas;
-      console.log(
-        'Valor Parcela ' + this.valor_parcela1 +
-        'Valor corrigido ' +this.valor_corrigido +
-        'Parcelas ' + this.parcelas
-      )
       if(this.parcelas >=2){
         this.valor_parcela2 = this.valor_corrigido / this.parcelas;
       }
