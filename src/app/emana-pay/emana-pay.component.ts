@@ -78,6 +78,53 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
     this.formularioCalendarioCiclos = this.formBuilder.group({
       selecionado:[''],
       cpf:[''],
@@ -91,6 +138,55 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
   emanaPayCpf() {
 
     this.pesquisa_efetuada = false;
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cpf',
+        valorPesquisa: this.cpf,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
     this.carregando = true;
 
 
@@ -125,6 +221,55 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
   emanaPayCodCn() {
 
     this.pesquisa_efetuada = false;
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_cn',
+        valorPesquisa: this.cod_cn,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
     this.carregando = true;
 
     var codigo = parseInt(this.cod_cn);

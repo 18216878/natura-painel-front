@@ -1,0 +1,29 @@
+<div class="ajustar">
+  <div class="titulo">
+    <mat-icon mat-card-avatar>location_on</mat-icon>
+    <h2>Tipo de Defeito</h2>
+  </div>
+  <mat-form-field appearance="fill" color="accent">
+    <mat-label>Filtrar Opções</mat-label>
+    <input
+    matInput
+    type="text"
+    placeholder="Digite os dados a filtrar..."
+    [(ngModel)]="filtroTipoDefeito"
+    style="width: 100%; margin-bottom: 10px;" />
+  </mat-form-field>
+  <div *ngFor="let tipo_defeito of tipoDefeitoFiltrado;index as i">
+    <mat-card (click)="onToggleTipoDefeito(i)" [class.selected]="selectedTipoDefeitoIndex === i" style="cursor:pointer;">
+      <mat-card-content>
+        <span [innerHTML]="getTipoDefeitoFormatado(tipo_defeito)"></span>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-slide-toggle
+          [checked]="selectedTipoDefeitoIndex === i"
+          (change)="onToggleTipoDefeito(i)">
+          Selecionar
+        </mat-slide-toggle>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

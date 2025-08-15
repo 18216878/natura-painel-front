@@ -22,38 +22,149 @@
 
     <p class="start">
 
-      <mat-form-field appearance="fill" class="example-full-width"  color="warn">
-        <mat-label>Categoria</mat-label>
-        <mat-select
-            disableRipple
-            ngDefaultControl
-            formControlName="categoria"
-            (valueChange)="onSelect($event)">
-          <mat-option *ngFor="let categoria of categoriaDropDown;index as i" [value]="categoria.id">
-            {{categoria.categoria}}</mat-option>
-        </mat-select>
-        <mat-icon matPrefix>assignment</mat-icon>
-        <mat-hint>Selecione uma opção</mat-hint>
-      </mat-form-field>
-
+      <!-- categoria -->
+      <mat-card>
+        <mat-card-header class="header-com-botao">
+          <div mat-card-avatar>
+            <mat-icon matPrefix>category</mat-icon>
+          </div>
+          <mat-card-title>Categoria</mat-card-title>
+          <span class="spacer"></span>
+          <button
+              mat-fab
+              color="primary"
+              (click)="pesquisarCategoria()"
+              [matTooltip]="'Pesquisar Categoria'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="categoria"></span>
+          </p>
+        </mat-card-content>
+      </mat-card>
     </p>
 
-
-    <p class="start">
-      <mat-form-field appearance="fill" class="example-full-width"  color="warn">
-        <mat-label>Local do Defeito</mat-label>
-        <mat-select
-            disableRipple
-            ngDefaultControl
-            formControlName="local_defeito">
-          <mat-option *ngFor="let local_defeito of localDefeitoDropDown;index as i" [value]="local_defeito.id">
-            {{local_defeito.local_defeito}}</mat-option>
-        </mat-select>
-        <mat-icon matPrefix>location_on</mat-icon>
-        <mat-hint>Selecione uma opção</mat-hint>
-      </mat-form-field>
+    <p>
+      <!-- Local Defeito -->
+      <mat-card>
+        <mat-card-header class="header-com-botao">
+          <div mat-card-avatar>
+            <mat-icon matPrefix>location_on</mat-icon>
+          </div>
+          <mat-card-title>Local do Defeito</mat-card-title>
+          <span class="spacer"></span>
+          <button
+              [disabled]="id_categoria === undefined || id_categoria === null"
+              mat-fab
+              color="primary"
+              (click)="pesquisarLocalDefeito()"
+              [matTooltip]="'Pesquisar Local Defeito'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="local_defeito"></span>
+          </p>
+        </mat-card-content>
+      </mat-card>
     </p>
 
+    <p>
+      <!-- Tipo Defeito -->
+      <mat-card>
+        <mat-card-header class="header-com-botao">
+          <div mat-card-avatar>
+            <mat-icon matPrefix>warning</mat-icon>
+          </div>
+          <mat-card-title>Desvio (Tipo de Defeito)</mat-card-title>
+          <span class="spacer"></span>
+          <button
+              [disabled]="id_local_defeito === undefined || id_local_defeito === null"
+              mat-fab
+              color="primary"
+              (click)="pesquisarTipoDefeito()"
+              [matTooltip]="'Pesquisar Tipo Defeito'">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="getTipoDefeitoFormatado()"></span>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </p>
+
+    <p>
+      <!-- Manifestação Correta -->
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon matPrefix>done_all</mat-icon>
+          </div>
+          <mat-card-title>Manifestação Correta</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="getManifestacaoCorretaFormatada()"></span>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </p>
+
+    <p>
+      <!-- Descrição -->
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon matPrefix>description</mat-icon>
+          </div>
+          <mat-card-title>Descrição</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span [innerHTML]="getDescricaoFormatada()"></span>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </p>
+
+    <p>
+      <!-- Sondagem Direcionadora -->
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar>
+            <mat-icon matPrefix>location_searching</mat-icon>
+          </div>
+          <mat-card-title>Sondagem Direcionadora</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngFor="let sondagem of sondagemDropDOwn;index as i">
+            <mat-card class="sondagem">
+              <mat-card-content>
+                {{sondagem.sondagem_direcionadora}}
+                <p class="obs"><span [innerHTML]="getObservacoesFormatada(sondagem.observacoes)"></span></p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </p>
+
+    <div class="button-group">
+      <button
+          mat-fab
+          (click)="limpar()"
+          [matTooltip]="'Limpar Campos'"
+          color="warn"
+          >
+          <mat-icon>delete</mat-icon>
+
+      </button>
+    </div>
   </form>
 
 </div>

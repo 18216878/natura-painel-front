@@ -35,6 +35,50 @@ var ELEMENT_DATA: PeriodicElement[] = [];
 })
 export class ListaGerentesNegociosComponent implements OnInit {
 
+  private registrarTracking(trackingData: any) {
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const callTracking = () => {
+      this.painelService.registrarWaveTracking(trackingData);
+    };
+    if (isTokenValid(accessToken)) {
+      callTracking();
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            callTracking();
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
   displayedColumns: string[] = [
     'id',
     'cd_re',
@@ -53,7 +97,7 @@ export class ListaGerentesNegociosComponent implements OnInit {
 
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  
+
   tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,14 +105,14 @@ export class ListaGerentesNegociosComponent implements OnInit {
   public pesquisa_efetuada: boolean = false;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -89,16 +133,63 @@ export class ListaGerentesNegociosComponent implements OnInit {
 
   identificadores: string[] = ['Código da GV', 'Nome da GV', 'Código da GDN', 'Nome da GDN', 'Telefone da GDN', 'Código do Setor'];
   selecionado: string;
-  
+
   public carregando: boolean;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
     this.formularioListaGerentesNegocios = this.formBuilder.group({
       selecionado:[''],
-      cd_gv:[''],      
-      nome_gv:[''],      
-      gdn:[''],      
+      cd_gv:[''],
+      nome_gv:[''],
+      gdn:[''],
       nome_gdn:[''],
       tel_preferencial_gdn:[''],
       cd_setor:['']
@@ -113,6 +204,55 @@ export class ListaGerentesNegociosComponent implements OnInit {
   }
 
   pesquisarCodigoGV() {
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cd_gv',
+        valorPesquisa: this.cd_gv,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.pesquisa_efetuada = false;
     this.carregando = true;
@@ -133,8 +273,8 @@ export class ListaGerentesNegociosComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -144,10 +284,59 @@ export class ListaGerentesNegociosComponent implements OnInit {
   }
 
   pesquisarNomeGv() {
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'nome_gv',
+        valorPesquisa: this.nome_gv,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.pesquisa_efetuada = true;
     this.carregando = true;
-    
+
     this.painelService.getNatListaGerentesNegociosNomeGv(this.nome_gv).subscribe(
       data => {
         this.dataSource = data;
@@ -162,8 +351,8 @@ export class ListaGerentesNegociosComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -173,6 +362,55 @@ export class ListaGerentesNegociosComponent implements OnInit {
   }
 
   pesquisarCodigoGDN() {
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'gdn',
+        valorPesquisa: this.gdn,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.pesquisa_efetuada = false;
     this.carregando = true;
@@ -193,8 +431,8 @@ export class ListaGerentesNegociosComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -204,10 +442,59 @@ export class ListaGerentesNegociosComponent implements OnInit {
   }
 
   pesquisarNomeGdn() {
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'nome_gdn',
+        valorPesquisa: this.nome_gdn,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.pesquisa_efetuada = true;
     this.carregando = true;
-    
+
     this.painelService.getNatListaGerentesNegociosNomeGdn(this.nome_gdn).subscribe(
       data => {
         this.dataSource = data;
@@ -222,8 +509,8 @@ export class ListaGerentesNegociosComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -233,10 +520,59 @@ export class ListaGerentesNegociosComponent implements OnInit {
   }
 
   pesquisarTelefoneGdn() {
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'tel_preferencial_gdn',
+        valorPesquisa: this.tel_preferencial_gdn,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.pesquisa_efetuada = true;
     this.carregando = true;
-    
+
     this.painelService.getNatListaGerentesNegociosTelefoneGdn(this.tel_preferencial_gdn).subscribe(
       data => {
         this.dataSource = data;
@@ -251,8 +587,8 @@ export class ListaGerentesNegociosComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -262,6 +598,55 @@ export class ListaGerentesNegociosComponent implements OnInit {
   }
 
   pesquisarCodigoSetor() {
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cd_setor',
+        valorPesquisa: this.cd_setor,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.pesquisa_efetuada = false;
     this.carregando = true;
@@ -282,8 +667,8 @@ export class ListaGerentesNegociosComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;

@@ -105,6 +105,53 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
 
     this.pesquisa_efetuada = false;
     this.carregando = false;
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   pesquisarCodigoSetor() {
@@ -113,6 +160,56 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
     this.carregando = true;
 
     var codigoSetor = parseInt(this.cod_setor);
+
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_setor',
+        valorPesquisa: this.cod_setor,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getCalendarioCiclosCodSetor(codigoSetor).subscribe(
       data => {
@@ -142,6 +239,56 @@ export class CalendarioCiclosComponent implements OnInit, AfterViewInit {
 
     this.pesquisa_efetuada = false;
     this.carregando = true;
+
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'nome_setor',
+        valorPesquisa: this.nome_setor,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getCalendarioCiclosNomeSetor(this.nome_setor).subscribe(
       data => {

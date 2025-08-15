@@ -63,7 +63,7 @@ export class CheckoutComponent implements OnInit {
 
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  
+
   tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -71,14 +71,14 @@ export class CheckoutComponent implements OnInit {
   public pesquisa_efetuada: boolean = false;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -95,19 +95,66 @@ export class CheckoutComponent implements OnInit {
 
   identificadores: string[] = ['Código da Consultora', 'Número do Pedido'];
   selecionado: string;
-  
+
   public carregando: boolean;
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
     this.formularioCheckout = this.formBuilder.group({
       selecionado:[''],
-      cod_consultora:[''],      
+      cod_consultora:[''],
       nr_pedido:['']
     })
 
     this.pesquisa_efetuada = false;
     this.carregando = false;
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -120,6 +167,56 @@ export class CheckoutComponent implements OnInit {
     this.carregando = true;
 
     var codigoConsultora = parseInt(this.cod_consultora);
+
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_consultora',
+        valorPesquisa: this.cod_consultora,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatCheckoutCodigo(codigoConsultora).subscribe(
       data => {
@@ -135,8 +232,8 @@ export class CheckoutComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -152,6 +249,56 @@ export class CheckoutComponent implements OnInit {
 
     var numeroPedido = parseInt(this.nr_pedido);
 
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'nr_pedido',
+        valorPesquisa: this.nr_pedido,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
+
     this.painelService.getNatCheckoutPedido(numeroPedido).subscribe(
       data => {
         this.dataSource = data;
@@ -166,8 +313,8 @@ export class CheckoutComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;

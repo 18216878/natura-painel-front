@@ -32,16 +32,16 @@ export class ProjetoWaveComponent implements OnInit {
   displayedColumns: string[] = ['codigo_natura', 'codigo_avon', 'nome', 'cpf', 'cep', 'nivel', 'estrutura_comercial', 'data_cadastro_wave2_natura', 'data_cadastro_wave2_avon', 'email'];
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  
+
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -72,11 +72,60 @@ export class ProjetoWaveComponent implements OnInit {
   public data_cadastro_wave2_avon_mailing: string;
   public email_mailing: string;
 
-  
+
 
   ngOnInit(): void {
 
     this.user = this.accountService.get('user')?.toString();
+
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
+
       this.formularioProjetoWave = this.formBuilder.group({
         selecionado:[''],
         codigo_natura:[''],
@@ -98,6 +147,67 @@ export class ProjetoWaveComponent implements OnInit {
   }
 
   pesquisar() {
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      let campoPesquisa = '';
+      let valorPesquisa = '';
+      if (this.selecionado === 'Código Natura') {
+        campoPesquisa = 'codigo_natura';
+        valorPesquisa = this.codigo_natura || '';
+      } else if (this.selecionado === 'Código Avon') {
+        campoPesquisa = 'codigo_avon';
+        valorPesquisa = this.codigo_avon || '';
+      } else if (this.selecionado === 'CPF') {
+        campoPesquisa = 'cpf';
+        valorPesquisa = this.cpf_cn_rep || '';
+      }
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa,
+        valorPesquisa,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.pesquisa_efetuada = true;
     if (this.selecionado=='Código Natura'){
@@ -111,8 +221,8 @@ export class ProjetoWaveComponent implements OnInit {
           }
         },
         err => {
-          var message = 'Erro durante a pesquisa. Tente novamente';     
-          var action = 'Fechar'     
+          var message = 'Erro durante a pesquisa. Tente novamente';
+          var action = 'Fechar'
           this._snackBar.open(message, action);
         }
       )
@@ -147,8 +257,8 @@ export class ProjetoWaveComponent implements OnInit {
   onSelectId(event: Event) {
 
     var valor = event.toString();
-    this.selecionado = valor;    
-    
+    this.selecionado = valor;
+
   }
-  
+
 }

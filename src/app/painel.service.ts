@@ -1,31 +1,109 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PainelService {
 
-  // SERVER_URL = 'https://localhost:44366';
-  SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
+  SERVER_URL = 'http://localhost:51412';
+  // SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
 
-  constructor(private httpClient: HttpClient) {}
+  /**
+   * Busca atraso de entrega, apenas envia o token no header. Validação de token deve ser feita no componente.
+   */
+  public getAtrasoEntregaComToken(cn: string, accessToken: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    return this.httpClient.get(`${this.SERVER_URL}/api/atraso-entrega?cn=${cn}`, { headers });
+  }
+  /**
+   * Realiza login no endpoint /api/login
+   * @param user usuário
+   * @param passwordMd5 senha já em md5
+   */
+  public login(user: string, passwordMd5: string): Observable<any> {
+    return this.httpClient.post(`${this.SERVER_URL}/api/login`, {
+      user: user,
+      password: passwordMd5
+    });
+  }
+
+
+
+  constructor(private httpClient: HttpClient, private router: Router) {}
+
+  /**
+   * Verifica se o refreshToken existe e está válido ao carregar a página.
+   * Se não existir ou estiver expirado, redireciona para /login.
+   * Para ser chamada no início do app (ex: AppComponent).
+   */
+  public verificaRefreshTokenOuRedireciona(): void {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    if (!this.isTokenValid(refreshToken)) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    // Se chegou aqui, o refreshToken existe e está válido.
+    // O fluxo segue normalmente, o AccountGuard fará a verificação do accessToken.
+  }
+
+  public refreshToken(refreshToken: string): Observable<any> {
+    return this.httpClient.post(
+      `${this.SERVER_URL}/api/refresh-token`,
+      { refreshToken: refreshToken }
+    );
+  }
+
+  private decodeJwt(token: string): any {
+    try {
+      const payload = token.split('.')[1];
+      // Converter base64url para base64
+      let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+      // Adicionar padding se necessário
+      while (base64.length % 4) {
+        base64 += '=';
+      }
+      return JSON.parse(atob(base64));
+    } catch {
+      return null;
+    }
+  }
+
+  private isTokenValid(token: string): boolean {
+    if (!token) {
+      return false;
+    }
+    const decoded = this.decodeJwt(token);
+    if (!decoded || !decoded.exp) {
+      return false;
+    }
+    const now = Math.floor(Date.now() / 1000);
+    const valido = decoded.exp > now;
+    return valido;
+  }
 
   public getUser(user : string): Observable<any> {
+    // return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWaveUsers?user=${user}`)
     return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWaveUsers?user=${user}`)
   }
 
   public getNaturaCode(naturaCode: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/codigo-natura?codigo_natura=${naturaCode}`)
+    return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/codigo-natura?codigo_natura=${naturaCode}`)
   }
 
   public getAvonCode(avonCode: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/codigo-avon?codigo_avon=${avonCode}`)
+    return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/codigo-avon?codigo_avon=${avonCode}`)
   }
 
   public getCpf(cpf: string){
-    return this.httpClient.get(`${this.SERVER_URL}/NatProjetoWave/cpf?cpf=${cpf}`)
+    return this.httpClient.get(`${this.SERVER_URL}/api/projeto-wave/cpf?cpf=${cpf}`)
   }
 
   public getPlanosBeTrocasIO(item_original: string): Observable<any>{
@@ -48,9 +126,33 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatFeriados`)
   }
 
-  public getDynamicsToken(): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatDynamics`)
-  }
+
+    public getDynamicsToken(): Observable<any> {
+      // return this.httpClient.get(`${this.SERVER_URL}/NatDynamics`)
+      const accessToken = localStorage.getItem('accessToken') || '';
+      const refreshToken = localStorage.getItem('refreshToken') || '';
+
+
+      if (this.isTokenValid(accessToken)) {
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+        return this.httpClient.get(`${this.SERVER_URL}/api/dynamics/token`, { headers });
+      } else if (this.isTokenValid(refreshToken)) {
+        return this.refreshToken(refreshToken).pipe(
+          switchMap(res => {
+            localStorage.setItem('accessToken', res.accessToken);
+            const headers = new HttpHeaders().set('Authorization', `Bearer ${res.accessToken}`);
+            return this.httpClient.get(`${this.SERVER_URL}/api/dynamics/token`, { headers });
+          }),
+          catchError((err) => {
+            this.router.navigate(['/login']);
+            return of(null);
+          })
+        );
+      } else {
+        this.router.navigate(['/login']);
+        return of(null);
+      }
+    }
 
   public getValePontos(codigo: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatValePontos?codigo=${codigo}`)
@@ -99,12 +201,14 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/AvonTag2h/premio?premio=${premio}`)
   }
 
-  public postAcessos(jsonTab: JSON) {
-    this.httpClient.post(`${this.SERVER_URL}/Acessos`, jsonTab, {observe: 'response'}).subscribe(
-      data => {
-        return data;
-      }
-    );
+  /**
+   * Registra acesso do usuário no backend (tabela nat_tb_projeto_wave_acessos)
+   * Espera objeto: { user: string, access_date: string }
+   * Envia accessToken no header Authorization
+   */
+  public postAcessos(acesso: { user: number }, accessToken: string) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    this.httpClient.post(`${this.SERVER_URL}/api/acessos`, acesso, { headers, observe: 'response' }).subscribe();
   }
 
   public getNatListaGerentesInterinasSetor(setor: string): Observable<any>{
@@ -216,7 +320,9 @@ export class PainelService {
   }
 
   public getAtrasoENtrega(cn: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatAtrasoEntrega/codigo-consultora?cn=${cn}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    return this.httpClient.get(`${this.SERVER_URL}/api/atraso-entrega?cn=${cn}`, { headers });
   }
 
   public getAjusteCredito(cod_cn: string): Observable<any>{
@@ -261,11 +367,15 @@ export class PainelService {
 
 
   public getNatRioGrandeDoSulCodigoConsultora(cod_cn: string): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatRioGrandeDoSul/codigo-consultora?cod_cn=${cod_cn}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    return this.httpClient.get(`${this.SERVER_URL}/api/riograndedosul/codigo-consultora?cod_cn=${cod_cn}`, { headers });
   }
 
   public getNatRioGrandeDoSulNumeroPedido(pedido: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatRioGrandeDoSul/numero-pedido?pedido=${pedido}`)
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    return this.httpClient.get(`${this.SERVER_URL}/api/riograndedosul/numero-pedido?pedido=${pedido}`, { headers });
   }
 
   public getNatEmanaPayCodigoCn(cod_cn: number): Observable<any>{
@@ -300,7 +410,7 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoCategoria`)
   }
 
-  public getNatSimuladorManifestacaoLocalDefeito(id_categoria: Event): Observable<any>{
+  public getNatSimuladorManifestacaoLocalDefeito(id_categoria: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoLocalDefeito?id_categoria=${id_categoria}`)
   }
 
@@ -352,31 +462,6 @@ export class PainelService {
     return this.httpClient.get(`${this.SERVER_URL}/NatReembolso/obter-senha`)
   }
 
-  // API Endpoints do Simulador de Manifestação
-
-  public getSimuladorManifestacaoCategoria(): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoCategoria`)
-  }
-
-  public getSimuladorManifestacaoLocalDefeito(id_categoria: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoLocalDefeito?id_categoria=${id_categoria}`)
-  }
-
-  public getSimuladorManifestacaoTipoDefeito(id_categoria: number, id_local_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoTipoDefeito?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}`)
-  }
-
-  public getSimuladorManifestacaoCorreta(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoCorreta?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
-  }
-
-  public getSimuladorManifestacaoDescricao(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoDescricao?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
-  }
-
-  public getSimuladorManifestacaoSondagem(id_categoria: number, id_local_defeito: number, id_tipo_defeito: number): Observable<any>{
-    return this.httpClient.get(`${this.SERVER_URL}/NatSimuladorManifestacaoSondagem?id_categoria=${id_categoria}&id_local_defeito=${id_local_defeito}&id_tipo_defeito=${id_tipo_defeito}`)
-  }
   public getReparacaoCodigo(codigo: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/codigo?codigo=${codigo}`)
   }
@@ -387,6 +472,22 @@ export class PainelService {
 
   public getReparacaoPedido(pedido: number): Observable<any>{
     return this.httpClient.get(`${this.SERVER_URL}/NatReparacao/pedido?pedido=${pedido}`)
+  }
+
+    /**
+   * Registra acesso ou pesquisa em página para o projeto Wave (tracking).
+   */
+  public registrarWaveTracking(dados: {
+    pagina: string;
+    url: string;
+    campoPesquisa?: string;
+    valorPesquisa?: string;
+    usuario: string;
+    acao: string;
+  }) {
+    const accessToken = localStorage.getItem('accessToken');
+    const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+    return this.httpClient.post(`${this.SERVER_URL}/api/wave-tracking/criar-registro`, dados, { headers }).subscribe();
   }
 
 

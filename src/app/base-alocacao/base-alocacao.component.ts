@@ -54,14 +54,14 @@ export class BaseAlocacaoComponent implements OnInit {
     'cod_regiao_estrategica_elo',
     'cod_gerencia_venda_elo',
     'cod_setor_elo',
-    'cod_grupo_elo'  
+    'cod_grupo_elo'
   ];
 
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
 
   faFileExcel = faFileExcel;
-  
+
   tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -69,7 +69,7 @@ export class BaseAlocacaoComponent implements OnInit {
   public pesquisa_efetuada: boolean = false;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -77,7 +77,7 @@ export class BaseAlocacaoComponent implements OnInit {
     private excelService: ExcelService,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -109,7 +109,7 @@ export class BaseAlocacaoComponent implements OnInit {
           'ELO - Código Grupo'
   ];
   selecionado: string;
-  
+
   public carregando: boolean;
   public carregandoExcel: boolean;
 
@@ -117,19 +117,69 @@ export class BaseAlocacaoComponent implements OnInit {
     this.user = this.accountService.get('user')?.toString();
     this.formularioBaseAlocacao = this.formBuilder.group({
       selecionado:[''],
-      cod_pessoa:[''],      
-      cod_regiao_estrategica:[''],      
-      cod_gerencia_venda:[''],      
+      cod_pessoa:[''],
+      cod_regiao_estrategica:[''],
+      cod_gerencia_venda:[''],
       cod_setor:[''],
       cod_grupo:[''],
-      cod_regiao_estrategica_elo:[''],      
-      cod_gerencia_venda_elo:[''],      
+      cod_regiao_estrategica_elo:[''],
+      cod_gerencia_venda_elo:[''],
       cod_setor_elo:[''],
       cod_grupo_elo:['']
     })
 
     this.pesquisa_efetuada = false;
     this.carregando = false;
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -141,6 +191,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoPessoa = parseInt(this.cod_pessoa);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_pessoa',
+        valorPesquisa: this.cod_pessoa,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoCodigoPessoa(codigoPessoa).subscribe(
       data => {
@@ -156,8 +256,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -170,6 +270,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoRegiaoEstrategica = parseInt(this.cod_regiao_estrategica);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_regiao_estrategica',
+        valorPesquisa: this.cod_regiao_estrategica,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoCodigoRegiaoEstrategica(codigoRegiaoEstrategica).subscribe(
       data => {
@@ -185,8 +335,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -199,6 +349,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoGerenciaVenda = parseInt(this.cod_gerencia_venda);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_gerencia_venda',
+        valorPesquisa: this.cod_gerencia_venda,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoCodigoGerenciaVenda(codigoGerenciaVenda).subscribe(
       data => {
@@ -214,8 +414,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -228,6 +428,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoSetor = parseInt(this.cod_setor);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_setor',
+        valorPesquisa: this.cod_setor,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoCodigoSetor(codigoSetor).subscribe(
       data => {
@@ -243,8 +493,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -257,6 +507,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoGrupo = parseInt(this.cod_grupo);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_grupo',
+        valorPesquisa: this.cod_grupo,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoCodigoGrupo(codigoGrupo).subscribe(
       data => {
@@ -272,8 +572,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -286,6 +586,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoRegiaoEstrategicaElo = parseInt(this.cod_regiao_estrategica_elo);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_regiao_estrategica_elo',
+        valorPesquisa: this.cod_regiao_estrategica_elo,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoEloCodigoRegiaoEstrategica(codigoRegiaoEstrategicaElo).subscribe(
       data => {
@@ -301,8 +651,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -315,6 +665,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoGerenciaVendaElo = parseInt(this.cod_gerencia_venda_elo);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_gerencia_venda_elo',
+        valorPesquisa: this.cod_gerencia_venda_elo,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoEloCodigoGerenciaVenda(codigoGerenciaVendaElo).subscribe(
       data => {
@@ -330,8 +730,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -344,6 +744,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoSetorElo = parseInt(this.cod_setor_elo);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_setor_elo',
+        valorPesquisa: this.cod_setor_elo,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoEloCodigoSetor(codigoSetorElo).subscribe(
       data => {
@@ -359,8 +809,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -373,6 +823,56 @@ export class BaseAlocacaoComponent implements OnInit {
     this.carregando = true;
 
     var codigoGrupoElo = parseInt(this.cod_grupo_elo);
+
+    // Verificação de token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cod_grupo_elo',
+        valorPesquisa: this.cod_grupo_elo,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.painelService.getNatBaseAlocacaoEloCodigoGrupo(codigoGrupoElo).subscribe(
       data => {
@@ -388,8 +888,8 @@ export class BaseAlocacaoComponent implements OnInit {
         this.pesquisa_efetuada = true;
       },
       err => {
-        var message = 'Erro durante a pesquisa. Tente novamente';     
-        var action = 'Fechar'     
+        var message = 'Erro durante a pesquisa. Tente novamente';
+        var action = 'Fechar'
         this._snackBar.open(message, action);
         this.carregando = false;
         this.pesquisa_efetuada = true;
@@ -423,14 +923,14 @@ export class BaseAlocacaoComponent implements OnInit {
     if(this.dataSource.length === 0){
       var message = 'Sem dados a serem exportados';
       var action = '❌'
-      this._snackBar.open(message, action); 
+      this._snackBar.open(message, action);
       this.carregandoExcel = false;
     }
     else {
-      
+
       this.excelService.generateExcel(this.dataSource);
       this.carregandoExcel = false;
-      
+
     }
   }
 

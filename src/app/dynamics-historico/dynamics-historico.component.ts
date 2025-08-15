@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { DynamicsService } from '../dynamics.service';
+import { PainelService } from '../painel.service';
 
 export interface OData {
   odatacontext: string;
@@ -57,23 +58,24 @@ export class DynamicsHistoricoComponent implements OnInit {
     '_ownerid_valueODataCommunityDisplayV1FormattedValue',
     'description'
   ];
-  
+
   dataSrc: any = iOData;
   dataSource: any = ELEMENT_DATA;
   clickedRows = new Set<PeriodicElement>();
-  
+
   public pesquisa_efetuada: boolean = false;
   public token: string;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private dynamicsService: DynamicsService,
+    private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     router: Router,
     private accountService: AccountService,
     private _snackBar: MatSnackBar
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
     window.scroll(0, 0);
@@ -88,7 +90,7 @@ export class DynamicsHistoricoComponent implements OnInit {
   checked = false;
   public title: string = "Dynamiics Histórico";
   identificadores: string[] = ['Código', 'Pedido', 'CPF'];
-  selecionado: string;  
+  selecionado: string;
 
   public codigo?: string = undefined;
   public pedido?: string = undefined;
@@ -97,17 +99,113 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
     this.formularioDynamics = this.formBuilder.group({
       selecionado:[''],
       codigo:[''],
-      pedido:[''], 
-      cpf:['']   
+      pedido:[''],
+      cpf:['']
     })
   }
 
 
   pesquisarCodigo(codigo: string) {
     this.carregando = true;
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'codigo',
+        valorPesquisa: codigo,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
     this.dataSrc = [];
     this.dataSource = [];
 
@@ -120,7 +218,7 @@ export class DynamicsHistoricoComponent implements OnInit {
           if (this.dataSrc.value.length === 0) {
             var message = 'Sem dados';
             var action = 'Fechar';
-            this._snackBar.open(message, action);
+            this._snackBar.open(message, action, { duration: 3000 });
             this.carregando = false;
           }
           else{
@@ -135,25 +233,25 @@ export class DynamicsHistoricoComponent implements OnInit {
                 if (this.dataSource.length === 0) {
                   var message = 'Sem dados';
                   var action = 'Fechar'
-                  this._snackBar.open(message, action);
+                  this._snackBar.open(message, action, { duration: 3000 });
                   this.carregando = false;
-                }          
+                }
               },
               err => {
                 var message = 'Erro durante a pesquisa. Tente novamente';
                 var action = 'Fechar'
-                this._snackBar.open(message, action);
+                this._snackBar.open(message, action, { duration: 3000 });
                 this.carregando = false;
               }
-    
+
               );
           }
-          
+
         },
         err => {
-          var message = 'Erro durante a pesquisa. Tente novamente';        
-          var action = 'Fechar'        
-          this._snackBar.open(message, action);
+          var message = 'Erro durante a pesquisa. Tente novamente';
+          var action = 'Fechar'
+          this._snackBar.open(message, action, { duration: 3000 });
           this.carregando = false;
         }
       )
@@ -161,10 +259,59 @@ export class DynamicsHistoricoComponent implements OnInit {
 
   }
 
-  
+
   pesquisarPedido(pedido: string) {
 
     this.carregando = true;
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'pedido',
+        valorPesquisa: pedido,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.dynamicsService.tokenGenerate();
 
@@ -178,9 +325,9 @@ export class DynamicsHistoricoComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.carregando = false;
-          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
-          var action = 'Fechar'     
-          this._snackBar.open(message, action);
+          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;
+          var action = 'Fechar'
+          this._snackBar.open(message, action, { duration: 3000 });
           this.carregando = false;
         }
       );
@@ -191,6 +338,55 @@ export class DynamicsHistoricoComponent implements OnInit {
   pesquisarCpf(cpf: string) {
 
     this.carregando = true;
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'cpf',
+        valorPesquisa: cpf,
+        acao: 'Efetuou pesquisa'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
     this.dynamicsService.tokenGenerate();
 
@@ -199,7 +395,7 @@ export class DynamicsHistoricoComponent implements OnInit {
         data => {
           this.dataSrc = data;
           this.client_id = this.dataSrc.value[0].contactid;
-  
+
           this.dynamicsService.getDynamicsDocument(this.client_id).subscribe(
             data => {
               this.dataSrc = data;
@@ -210,19 +406,19 @@ export class DynamicsHistoricoComponent implements OnInit {
             },
             (err: HttpErrorResponse) => {
               this.carregando = false;
-              var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
-              var action = 'Fechar'     
-              this._snackBar.open(message, action);
+              var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;
+              var action = 'Fechar'
+              this._snackBar.open(message, action, { duration: 3000 });
             }
-      
+
             );
-          
+
         },
         (err: HttpErrorResponse) => {
           this.carregando = false;
-          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;     
-          var action = 'Fechar'     
-          this._snackBar.open(message, action);
+          var message = `Erro ${err.status}: ${err.statusText}. Tente novamente`;
+          var action = 'Fechar'
+          this._snackBar.open(message, action, { duration: 3000 });
         }
       )
     }, 2000)
@@ -232,8 +428,8 @@ export class DynamicsHistoricoComponent implements OnInit {
   onSelectId(event: Event) {
 
     var valor = event.toString();
-    this.selecionado = valor;    
-    
+    this.selecionado = valor;
+
   }
 
 

@@ -30,7 +30,7 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
   carregando: boolean;
 
   constructor(
-    private _ngZone: NgZone, 
+    private _ngZone: NgZone,
     private painelService: PainelService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -38,10 +38,10 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
     private accountService: AccountService,
     private _snackBar: MatSnackBar,
     private dateAdapter: DateAdapter<Date>
-  ) { 
+  ) {
     this.router = router;
     this.storage = window.localStorage;
-    this.dateAdapter.setLocale('pt-br'); 
+    this.dateAdapter.setLocale('pt-br');
     window.scroll(0, 0);
   }
 
@@ -57,7 +57,7 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
   tempoDeRelacao: string;
 
   ativarSimulacao: boolean;
-  
+
   data_ini: Date;
   data_fim: Date;
 
@@ -65,19 +65,69 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.accountService.get('user')?.toString();
+
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        acao: 'Acessou a página'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
+
+
     this.carregando = false;
     this.formularioDadosIniciais = this.formBuilder.group({
       nivelConsultora:['']
     })
-    
+
     this.formularioDatasTempoDeRelacao = this.formBuilder.group({
       data_ini:[''],
       data_fim:[''],
       dias:[''],
       tempo_relacao:['']
-      
+
     })
-    
+
     this.formularioLateral = this.formBuilder.group({
       valor_original:[''],
       debito_atualizado:[''],
@@ -89,15 +139,67 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
       juros_dia_aplicado:[''],
       total_juros_atraso:[''],
       total_juros_parcelas:['']
-      
+
     })
-    
+
     this.diasTotais = 0;
     this.ativarSimulacao = false;
     this.tempoDeRelacao = '';
   }
 
   inserir(form: FormGroup){
+
+    // Validação do token antes de registrarWaveTracking
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const refreshToken = localStorage.getItem('refreshToken') || '';
+    const decodeJwt = (token: string): any => {
+      try {
+        const payload = token.split('.')[1];
+        let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        return JSON.parse(atob(base64));
+      } catch {
+        return null;
+      }
+    };
+    const isTokenValid = (token: string): boolean => {
+      if (!token) return false;
+      const decoded = decodeJwt(token);
+      if (!decoded || !decoded.exp) return false;
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp > now;
+    };
+    const registrarTracking = (token: string) => {
+      this.painelService.registrarWaveTracking({
+        pagina: this.title,
+        url: this.router.url,
+        usuario: this.user,
+        campoPesquisa: 'data_ini' + ' - ' + 'data_fim',
+        valorPesquisa: moment(this.data_ini).format('DD/MM/YYYY') + ' - ' + moment(this.data_fim).format('DD/MM/YYYY'),
+        acao: 'Efetuou simulação de Tempo de Relação'
+      });
+    };
+    if (isTokenValid(accessToken)) {
+      registrarTracking(accessToken);
+    } else if (isTokenValid(refreshToken)) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        res => {
+          if (res && res.accessToken) {
+            localStorage.setItem('accessToken', res.accessToken);
+            registrarTracking(res.accessToken);
+          } else {
+            this.router.navigate(['/login']);
+          }
+        },
+        err => {
+          this.router.navigate(['/login']);
+        }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
+
+
 
     var i: number = 0;
 
@@ -143,7 +245,7 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
       }
 
       this.dataSource = [...this.dataSource, newRow];
-  
+
       this.exibir_tabela = true;
 
       this.diasTotais = this.diasTotais + newRow.dias;
@@ -151,15 +253,15 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
       var duracao = moment.duration(this.diasTotais, 'days');
       var dMeses = duracao.months();
       var dAnos = duracao.years();
-      var dDias = duracao.days(); 
-      
+      var dDias = duracao.days();
+
       var dTempo = `${dAnos} ano${dAnos > 1 ? 's' : ''}, ${dMeses} ${dMeses > 1 ? 'meses' : 'mês'}, ${dDias} dia${dDias > 1 ? 's' : ''}`
-      
-      
+
+
       this.tempoDeRelacao = dTempo;
 
       this.formularioDatasTempoDeRelacao.reset();
-    }   
+    }
 
   }
 
@@ -170,7 +272,7 @@ export class CalculadoraTempoRelacaoComponent implements OnInit {
   limparTabela(){
     this.dataSource = [];
     this.exibir_tabela = false;
-    this.dados_adicionados = 0; 
+    this.dados_adicionados = 0;
     this.tempoDeRelacao = '';
     this.diasTotais = 0;
   }

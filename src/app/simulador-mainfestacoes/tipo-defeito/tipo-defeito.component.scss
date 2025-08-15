@@ -1,0 +1,129 @@
+.tab {
+  width: 90vw;
+}
+
+.codigoCn {
+  max-width: 35em;
+  width: 100%;
+  color:#D1020A;
+}
+
+.fab-button {
+margin-right: 0.3em;
+}
+
+.pesquisar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2em;
+  border: #D1020A 0.2em solid;
+  border-radius: 0.8em;
+  margin-bottom: 1em;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.6em;
+  padding-left: 1em;
+  padding: 0.3em;
+  border-radius: 0.8em;
+  margin-bottom: 1em;
+  max-width: 90vw;
+  width: 100%;
+}
+
+.options {
+  margin-right: 2em;
+}
+
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-width {
+  margin: 1em;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D1020A;
+    max-width: 90vw;
+    width: 100%;
+
+}
+
+h1 {
+
+    color: #fff;
+    margin: 1em;
+}
+
+h4 {
+
+    color: #fff;
+    display: flex;
+    padding: 0.5em;
+    margin-left: 0.2em;
+}
+
+.space {
+    margin: 1em;
+
+}
+
+.example-full-width {
+    width: 100%;
+    color:#D1020A;
+  }
+
+mat-card {
+  width: 100% !important;
+  cursor: pointer !important;
+}
+
+mat-card:hover {
+  background-color: #D1020A !important;
+  color: #fff !important;
+}
+
+
+.title-card {
+  color: #D1020A;
+  font-weight: bold;
+}
+
+.ajustar {
+  max-height: 85vh !important;
+  height: 100% !important;
+  overflow-y: auto !important;
+}
+
+mat-form-field {
+  width: 99% !important;
+  max-width: 90vw;
+  margin-bottom: 1em;
+}
+
+.titulo {
+  display: flex;
+  justify-content: flex-start;
+  color: #D1020A;
+}
+

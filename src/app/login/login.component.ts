@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'user', 'name', 'password'];
   dataSource = ELEMENT_DATA;
-  
+
   public formulario: FormGroup;
   public senha: string = '';
   public user: string;
@@ -68,65 +68,127 @@ export class LoginComponent implements OnInit {
 
   }
 
-  logon(senha : string, user: string) {
+  // logon(senha : string, user: string) {
 
+  //   this.carregando = true;
+  //   var encrypt = Md5.hashStr(senha);
+
+  //   if (user.length > 0) {
+  //     this.painelService.getUser(user).subscribe(
+  //       data => {
+  //         this.dataSource = data;
+  //         if(this.dataSource.length == 0){
+  //           this.openDialog();
+  //           this.carregando = false;
+  //         }
+  //         else if(this.dataSource[0].password == encrypt){
+  //           this.accountService.set('user', user);
+  //           this.accountService.set('id', this.dataSource[0].id.toString());
+  //           var logado = this.isLoggedIn();
+
+
+  //           var usuario = parseInt(this.accountService.get('user'));
+  //           var dataAcesso = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+
+  //           iAcessos = [{
+  //             user: usuario,
+  //             access_date: dataAcesso
+  //           }]
+
+  //           var jsonString = JSON.stringify(iAcessos);
+  //           jsonString = jsonString.replace('[','').replace(']','');
+  //           var json: JSON = JSON.parse(jsonString);
+  //           this.painelService.postAcessos(json);
+  //           this.carregando = false;
+
+  //           if (logado == true) {
+  //             this.carregando = false;
+  //             this.router.navigate(['../home'])
+  //           }
+  //         }
+  //         else {
+  //           this.openDialog();
+  //           this.carregando = false;
+  //         }
+
+  //       },
+  //       err => {
+  //         var message = 'Erro durante a pesquisa. Tente novamente';
+  //         var action = 'Fechar'
+  //         this._snackBar.open(message, action);
+  //         this.carregando = false;
+  //       }
+  //     )
+
+  //   }
+  //   else if (user.length == 0 || senha.length == 0) {
+  //     this.openDialog();
+  //     this.carregando = false;
+  //   }
+
+
+  // }
+
+  logon(senha: string, user: string) {
     this.carregando = true;
-    var encrypt = Md5.hashStr(senha);   
-    
-    if (user.length > 0) {  
-      this.painelService.getUser(user).subscribe(
-        data => {
-          this.dataSource = data;
-          if(this.dataSource.length == 0){
-            this.openDialog();
-            this.carregando = false;
-          }
-          else if(this.dataSource[0].password == encrypt){
-            this.accountService.set('user', user);
-            this.accountService.set('id', this.dataSource[0].id.toString());
-            var logado = this.isLoggedIn();
-            
+    const encrypt = Md5.hashStr(senha);
 
-            var usuario = parseInt(this.accountService.get('user'));
-            var dataAcesso = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+    if (user.length > 0 && senha.length > 0) {
+      this.painelService.login(user, encrypt).subscribe(
+        tokens => {
+          // Salva os tokens no LocalStorage
+          localStorage.setItem('accessToken', tokens.accessToken);
+          localStorage.setItem('refreshToken', tokens.refreshToken);
+          // Decodifica o id do usuário do accessToken
+          let usuarioId = user;
+          try {
+            const payload = tokens.accessToken.split('.')[1];
+            let base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+            while (base64.length % 4) base64 += '=';
+            const decoded = JSON.parse(atob(base64));
+            if (decoded && decoded.id) {
+              usuarioId = decoded.id;
+              let usuario: number = decoded.user || user;
+              localStorage.setItem('id', decoded.id.toString());
 
-            iAcessos = [{
-              user: usuario,
-              access_date: dataAcesso
-            }]
-
-            var jsonString = JSON.stringify(iAcessos);
-            jsonString = jsonString.replace('[','').replace(']','');
-            var json: JSON = JSON.parse(jsonString);
-            this.painelService.postAcessos(json);
-            this.carregando = false;
-
-            if (logado == true) {
-              this.carregando = false;
-              this.router.navigate(['../home'])
+              // Registra o acesso no backend (agora só envia o user)
+              this.painelService.postAcessos({
+                  user: usuario
+              }, tokens.accessToken);
             }
-          }
-          else {
-            this.openDialog();
-            this.carregando = false;
-          }
 
+          } catch {}
+          // Salva dados do usuário se necessário
+          this.accountService.set('user', user);
+
+          // Redireciona para home
+          this.carregando = false;
+          this.router.navigate(['../home']);
         },
         err => {
-          var message = 'Erro durante a pesquisa. Tente novamente';     
-          var action = 'Fechar'     
-          this._snackBar.open(message, action);
+          this.openDialog();
           this.carregando = false;
         }
-      )
-          
-    }
-    else if (user.length == 0 || senha.length == 0) {
+      );
+    } else {
       this.openDialog();
       this.carregando = false;
     }
+  }
 
-
+  public refreshUserToken() {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken) {
+      this.painelService.refreshToken(refreshToken).subscribe(
+        tokens => {
+          localStorage.setItem('accessToken', tokens.accessToken);
+          localStorage.setItem('refreshToken', tokens.refreshToken);
+        },
+        err => {
+          this.openDialog();
+        }
+      );
+    }
   }
 
   isLoggedIn() {

@@ -126,6 +126,12 @@ import { ReembolsoStopDialogComponent } from './reembolso-inclusao/reembolso-sto
 import { ReembolsoExportaDadosComponent } from './reembolso-inclusao/reembolso-exporta-dados/reembolso-exporta-dados.component';
 import { ReembolsoAutenticacaoComponent } from './reembolso-inclusao/reembolso-autenticacao/reembolso-autenticacao.component';
 import { ReparacaoComponent } from './reparacao/reparacao.component';
+import { CategoriaComponent } from './simulador-mainfestacoes/categoria/categoria.component';
+import { DescricaoComponent } from './simulador-mainfestacoes/descricao/descricao.component';
+import { LocalDefeitoComponent } from './simulador-mainfestacoes/local-defeito/local-defeito.component';
+import { ManifestacaoCorretaComponent } from './simulador-mainfestacoes/manifestacao-correta/manifestacao-correta.component';
+import { SondagemDirecionadoraComponent } from './simulador-mainfestacoes/sondagem-direcionadora/sondagem-direcionadora.component';
+import { TipoDefeitoComponent } from './simulador-mainfestacoes/tipo-defeito/tipo-defeito.component';
 
 
 @NgModule({
@@ -219,7 +225,13 @@ import { ReparacaoComponent } from './reparacao/reparacao.component';
     ReembolsoStopDialogComponent,
     ReembolsoExportaDadosComponent,
     ReembolsoAutenticacaoComponent,
-    ReparacaoComponent
+    ReparacaoComponent,
+    CategoriaComponent,
+    DescricaoComponent,
+    LocalDefeitoComponent,
+    ManifestacaoCorretaComponent,
+    SondagemDirecionadoraComponent,
+    TipoDefeitoComponent
   ],
   imports: [
     BrowserModule,
