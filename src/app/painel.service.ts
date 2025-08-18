@@ -9,8 +9,15 @@ import { Router } from '@angular/router';
 })
 export class PainelService {
 
-  SERVER_URL = 'http://localhost:51412';
+  // Api anterior - Desenvolvida em C# com o framework .NET 5.0
   // SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
+
+  // Api atual - Desenvolvida em JavaScript com o framework Node.Js
+  SERVER_URL = 'https://apinatpaineldeconsulta.csu.com.br:51412';
+
+  // Servidor local
+  // SERVER_URL = 'http://localhost:51412';
+
 
   /**
    * Busca atraso de entrega, apenas envia o token no header. Validação de token deve ser feita no componente.
