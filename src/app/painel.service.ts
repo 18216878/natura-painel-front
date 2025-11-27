@@ -12,11 +12,14 @@ export class PainelService {
   // Api anterior - Desenvolvida em C# com o framework .NET 5.0
   // SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
 
-  // Api atual - Desenvolvida em JavaScript com o framework Node.Js
-  SERVER_URL = 'https://apinatpaineldeconsulta.csu.com.br:51412';
+  // Api de testes
+  // SERVER_URL = 'https://apinatmeuprimeiroacesso.csu.com.br:7052';
+
+  // Api anterior - Desenvolvida em JavaScript com o framework Node.Js apontado para a porta e URL originais
+  SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
 
   // Servidor local
-  // SERVER_URL = 'http://localhost:51412';
+  // SERVER_URL = 'http://localhost:44366';
 
 
   /**
@@ -477,6 +480,24 @@ export class PainelService {
     const accessToken = localStorage.getItem('accessToken') || '';
     const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
     return this.httpClient.get(`${this.SERVER_URL}/api/riograndedosul/numero-pedido?pedido=${pedido}`, { headers });
+  }
+
+  public getNatConsultoraDistribuidoraCodigoConsultora(codigo_consultora: number): Observable<any>{
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    return this.httpClient.get(`${this.SERVER_URL}/api/consultora-distribuidora/codigo-consultora?codigo_consultora=${codigo_consultora}`, { headers });
+  }
+
+  public getNatConsultoraDistribuidoraNumeroPedido(numero_pedido: number): Observable<any>{
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    return this.httpClient.get(`${this.SERVER_URL}/api/consultora-distribuidora/numero-pedido?numero_pedido=${numero_pedido}`, { headers });
+  }
+
+  public getNatReconhecimentoCampanhas(codigo: number): Observable<any>{
+    const accessToken = localStorage.getItem('accessToken') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+    return this.httpClient.get(`${this.SERVER_URL}/api/reconhecimento-campanhas/codigo-consultora-cpf?codigo=${codigo}`, { headers });
   }
 
   public getNatEmanaPayCodigoCn(cod_cn: number): Observable<any>{

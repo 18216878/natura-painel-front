@@ -88,7 +88,7 @@ export class DynamicsHistoricoComponent implements OnInit {
   public carregando: Boolean = false;
 
   checked = false;
-  public title: string = "Dynamiics Histórico";
+  public title: string = "Dynamics Histórico";
   identificadores: string[] = ['Código', 'Pedido', 'CPF'];
   selecionado: string;
 

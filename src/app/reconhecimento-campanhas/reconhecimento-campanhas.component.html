@@ -1,0 +1,248 @@
+<div class="main">
+  <div class="title">
+      <div>
+          <div id="logoavon"></div>
+      </div>
+      <h1>Pesquisa - {{title}}</h1>
+      <div class="menu">
+          <h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+              {{user}}
+          </h4>
+          <button
+              routerLink="/natura"
+              class="logout"
+              color="accent"
+              mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+      </div>
+  </div>
+
+  <p class="space"> </p>
+
+  <form [formGroup]="formularioCalendarioCiclos" class="example-form">
+      <div class="pesquisar">
+          <div class="search">
+
+              <mat-form-field
+              class="codigoCn" appearance="fill" color="accent">
+                  <mat-label>Código CB ou CPF</mat-label>
+                  <input
+                      matInput
+                      placeholder="Digite o Código da Consultora ou CPF"
+                      ngDefaultControl
+                      formControlName="cod_cb_cpf"
+                      [(ngModel)]="cod_cb_cpf">
+                  <mat-icon matSuffix>account_circle</mat-icon>
+                  <mat-hint>Código da Consultora</mat-hint>
+              </mat-form-field>
+          <div class="botoes">
+              <button
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="(cod_cb_cpf === null || cod_cb_cpf ===
+                  undefined ||
+                  cod_cb_cpf === '')"
+                  (click)="limpar()"
+                  color="warn"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>clear</mat-icon> Limpar
+              </button>
+
+              <button
+                  class="validar"
+                  mat-raised-button
+                  [disabled]="cod_cb_cpf === null || cod_cb_cpf ===
+                  undefined ||
+                  cod_cb_cpf === ''"
+                  (click)="reconhecimentoCampanhasCodigo()"
+                  color="accent"
+                  aria-label="Example icon button with a home icon">
+                  <mat-icon>search</mat-icon> Pesquisar
+              </button>
+          </div>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="!clickedRows.size">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Código CB ou CPF</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Nome da Consultora</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Marco, Pontuação, Prêmio adquirido</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Qual é o reconhecimento ou Campanha?</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Prazo da entrega ou resgate do prêmio?</p>
+                  <p>Clique eu uma linha da tabela para exibir.</p>
+              </mat-card-content>
+          </mat-card>
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Orientação ao atendimento</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Onde está no Beedoo?</p>
+              <p>Clique eu uma linha da tabela para exibir.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+  </div>
+
+  <div *ngFor="let clickedRow of clickedRows">
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Código CB ou CPF</p>
+              <p>{{clickedRow.cod_cb_cpf}}</p>
+              <p *ngIf="clickedRow.cod_cb_cpf===null">---</p>
+          </mat-card-content>
+      </mat-card>
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Nome da Consultora</p>
+              <p>{{clickedRow.nome_consultora}}</p>
+              <p *ngIf="clickedRow.nome_consultora===null">---</p>
+          </mat-card-content>
+      </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Marco, Pontuação, Prêmio adquirido</p>
+                  <p>{{clickedRow.marco_pontuacao_premio}}</p>
+                  <p *ngIf="clickedRow.marco_pontuacao_premio===null">---</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Qual é o reconhecimento ou Campanha?</p>
+                  <p>{{clickedRow.qual_reconhecimento}}</p>
+                  <p *ngIf="clickedRow.qual_reconhecimento===null">---</p>
+              </mat-card-content>
+          </mat-card>
+          <mat-card class="card-width">
+              <mat-card-content>
+                  <p class="title-card">Prazo da entrega ou resgate do prêmio?</p>
+                  <p>{{clickedRow.prazo_entrega_resgate}}</p>
+                  <p *ngIf="clickedRow.prazo_entrega_resgate===null">---</p>
+              </mat-card-content>
+          </mat-card>
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Orientação ao atendimento</p>
+              <p>{{clickedRow.orientacao_atendimento}}</p>
+              <p *ngIf="clickedRow.orientacao_atendimento===null">---</p>
+          </mat-card-content>
+      </mat-card>
+      </div>
+      <div class="card">
+        <mat-card class="card-width">
+          <mat-card-content>
+              <p class="title-card">Onde está no Beedoo?</p>
+              <p>{{clickedRow.onde_esta_no_beedoo}}</p>
+              <p *ngIf="clickedRow.onde_esta_no_beedoo===null">---</p>
+          </mat-card-content>
+      </mat-card>
+      </div>
+  </div>
+
+  <p class="space"> </p>
+
+  <div class="container">
+      <div class="tabela">
+          <div class="spinner" *ngIf="carregando===true">
+              <mat-spinner
+                  [diameter]="40"
+                  color="accent"
+                  *ngIf="carregando===true"></mat-spinner>
+              <h3>Carregando...</h3>
+          </div>
+
+          <table mat-table *ngIf="pesquisa_efetuada===true"
+          [dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_cb_cpf">
+            <th mat-header-cell *matHeaderCellDef> Código CB ou CPF </th>
+            <td mat-cell *matCellDef="let element"> {{element.cod_cb_cpf}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome_consultora">
+            <th mat-header-cell *matHeaderCellDef> Nome da Consultora </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome_consultora}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="marco_pontuacao_premio">
+            <th mat-header-cell *matHeaderCellDef> Marco, Pontuação, Prêmio adquirido </th>
+            <td mat-cell *matCellDef="let element"> {{element.marco_pontuacao_premio}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="qual_reconhecimento">
+            <th mat-header-cell *matHeaderCellDef> Qual é o reconhecimento ou Campanha? </th>
+            <td mat-cell *matCellDef="let element"> {{element.qual_reconhecimento}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="prazo_entrega_resgate">
+            <th mat-header-cell *matHeaderCellDef> Prazo da entrega ou resgate do prêmio? </th>
+            <td mat-cell *matCellDef="let element"> {{element.prazo_entrega_resgate}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="orientacao_atendimento">
+            <th mat-header-cell *matHeaderCellDef> Orientação ao atendimento </th>
+            <td mat-cell  *matCellDef="let element"> {{element.orientacao_atendimento}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="onde_esta_no_beedoo">
+            <th mat-header-cell *matHeaderCellDef> Onde está no Beedoo? </th>
+            <td mat-cell *matCellDef="let element"> {{element.onde_esta_no_beedoo}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr
+              mat-row
+              (click)="clickedRows.clear()"
+              (click)="clickedRows.add(row)"
+              [class.demo-row-is-clicked]="clickedRows.has(row)"
+              *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+        <mat-paginator
+            [pageSizeOptions]="[10, 15, 20]"
+            showFirstLastButtons
+            aria-label="Select page of periodic elements"
+            color="accent">
+        </mat-paginator>
+      </div>
+  </div>
+
+</div>

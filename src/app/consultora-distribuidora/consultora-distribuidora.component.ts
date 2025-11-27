@@ -12,27 +12,39 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export interface PeriodicElement {
   id: number;
-  cpf: string;
-  cod_cn: number;
-  data_implantacao: string;
-  status_conta: string;
+  codigo_consultora: number;
+  numero_pedido: number;
+  data_pedido: string;
+  codigo_produto: string;
+  descricao_produto: string;
+  quantidade: number;
+  preco_venda: number;
+  valor_total: number;
+  endereco_cb_distribuidora: string;
+  endereco_cb_compradora: string;
 }
 
 var ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
-  selector: 'app-emana-pay',
-  templateUrl: './emana-pay.component.html',
-  styleUrls: ['./emana-pay.component.scss']
+  selector: 'app-consultora-distribuidora',
+  templateUrl: './consultora-distribuidora.component.html',
+  styleUrls: ['./consultora-distribuidora.component.scss']
 })
-export class EmanaPayComponent implements OnInit, AfterViewInit {
+export class ConsultoraDistribuidoraComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
-    'cpf',
-    'cod_cn',
-    'data_implantacao',
-    'status_conta'
+    'codigo_consultora',
+    'numero_pedido',
+    'data_pedido',
+    'codigo_produto',
+    'descricao_produto',
+    'quantidade',
+    'preco_venda',
+    'valor_total',
+    'endereco_cb_distribuidora',
+    'endereco_cb_compradora'
   ];
 
   dataSource: any = ELEMENT_DATA;
@@ -66,11 +78,11 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
   formularioCalendarioCiclos: FormGroup;
   user: string;
 
-  public title: string = "Emana Pay";
-  public cod_cn?: string = "";
-  public cpf?: string = "";
+  public title: string = "Consultora Distribuidora";
+  public codigo_consultora?: string = "";
+  public numero_pedido?: string = "";
 
-  identificadores: string[] = ['CPF', 'Código da Consultora'];
+  identificadores: string[] = ['Código da Consultora', 'Número do Pedido'];
   selecionado: string;
 
   public carregando: boolean;
@@ -126,15 +138,16 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
     }
     this.formularioCalendarioCiclos = this.formBuilder.group({
       selecionado:[''],
-      cpf:[''],
-      cod_cn:['']
+      codigo_consultora:[''],
+      numero_pedido:['']
     })
 
     this.pesquisa_efetuada = false;
     this.carregando = false;
   }
 
-  emanaPayCpf() {
+
+  consultoraDistribuidoraCodigo() {
 
     this.pesquisa_efetuada = false;
     // Validação do token antes de registrarWaveTracking
@@ -162,8 +175,8 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
         pagina: this.title,
         url: this.router.url,
         usuario: this.user,
-        campoPesquisa: 'cpf',
-        valorPesquisa: this.cpf,
+        campoPesquisa: 'codigo_consultora',
+        valorPesquisa: this.codigo_consultora,
         acao: 'Efetuou pesquisa'
       });
     };
@@ -188,8 +201,9 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
     }
     this.carregando = true;
 
+    var codigo = parseInt(this.codigo_consultora);
 
-    this.painelService.getNatEmanaPayCpf(this.cpf).subscribe(
+    this.painelService.getNatConsultoraDistribuidoraCodigoConsultora(codigo).subscribe(
       data => {
         this.dataSource = data;
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
@@ -217,7 +231,7 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
 
   }
 
-  emanaPayCodCn() {
+  consultoraDistribuidoraPedido() {
 
     this.pesquisa_efetuada = false;
     // Validação do token antes de registrarWaveTracking
@@ -245,8 +259,8 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
         pagina: this.title,
         url: this.router.url,
         usuario: this.user,
-        campoPesquisa: 'cod_cn',
-        valorPesquisa: this.cod_cn,
+        campoPesquisa: 'numero_pedido',
+        valorPesquisa: this.numero_pedido,
         acao: 'Efetuou pesquisa'
       });
     };
@@ -271,9 +285,9 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
     }
     this.carregando = true;
 
-    var codigo = parseInt(this.cod_cn);
+    var pedido = parseInt(this.numero_pedido);
 
-    this.painelService.getNatEmanaPayCodigoCn(codigo).subscribe(
+    this.painelService.getNatConsultoraDistribuidoraNumeroPedido(pedido).subscribe(
       data => {
         this.dataSource = data;
         this.tableDataSource = new MatTableDataSource<PeriodicElement>(data);
@@ -320,6 +334,5 @@ export class EmanaPayComponent implements OnInit, AfterViewInit {
     this.tableDataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     this.tableDataSource.paginator = this.paginator;
   }
-
 
 }

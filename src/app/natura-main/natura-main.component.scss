@@ -81,6 +81,22 @@ h4 {
   border-radius: 50%;
 }
 
+.consultora-distribuidora-avatar {
+  background-image: url('../../assets/img/consultora-distribuidora-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
+.reconhecimento-campanhas-avatar {
+  background-image: url('../../assets/img/consultora-distribuidora-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .dynamics-avatar {
   background-image: url('../../assets/img/dynamics-original.png');
   background-size: cover;
@@ -321,6 +337,16 @@ h4 {
 
 .imgCredito {
   background-image: url('../../assets/img/ajuste-limite.png');
+  background-size: cover;
+}
+
+.imgConsultoraDistribuidora {
+  background-image: url('../../assets/img/consultora-distribuidora.png');
+  background-size: cover;
+}
+
+.imgReconhecimentoCampanhas {
+  background-image: url('../../assets/img/reconhecimento-campanhas.png');
   background-size: cover;
 }
 

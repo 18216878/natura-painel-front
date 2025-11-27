@@ -132,6 +132,8 @@ import { LocalDefeitoComponent } from './simulador-mainfestacoes/local-defeito/l
 import { ManifestacaoCorretaComponent } from './simulador-mainfestacoes/manifestacao-correta/manifestacao-correta.component';
 import { SondagemDirecionadoraComponent } from './simulador-mainfestacoes/sondagem-direcionadora/sondagem-direcionadora.component';
 import { TipoDefeitoComponent } from './simulador-mainfestacoes/tipo-defeito/tipo-defeito.component';
+import { ConsultoraDistribuidoraComponent } from './consultora-distribuidora/consultora-distribuidora.component';
+import { ReconhecimentoCampanhasComponent } from './reconhecimento-campanhas/reconhecimento-campanhas.component';
 
 
 @NgModule({
@@ -231,7 +233,9 @@ import { TipoDefeitoComponent } from './simulador-mainfestacoes/tipo-defeito/tip
     LocalDefeitoComponent,
     ManifestacaoCorretaComponent,
     SondagemDirecionadoraComponent,
-    TipoDefeitoComponent
+    TipoDefeitoComponent,
+    ConsultoraDistribuidoraComponent,
+    ReconhecimentoCampanhasComponent
   ],
   imports: [
     BrowserModule,

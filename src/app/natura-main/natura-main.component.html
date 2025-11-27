@@ -42,7 +42,7 @@
                         </mat-card-content>
                     </mat-card>
 
-                    <mat-card class="example-card">
+                    <!-- <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="rs-avatar"></div>
                             <mat-card-title>Pedidos Rio Grande do Sul</mat-card-title>
@@ -58,9 +58,9 @@
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
                             </span>
                         </mat-card-content>
-                    </mat-card>
+                    </mat-card> -->
 
-                    <mat-card class="example-card">
+                    <!-- <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="atrao-entrega-avatar"></div>
                             <mat-card-title>Atraso na Entrega Pedidos Avon</mat-card-title>
@@ -79,13 +79,7 @@
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
                             </span>
                         </mat-card-content>
-                    </mat-card>
-
-                </div>
-
-                <p class="space"> </p>
-
-                <div class="home">
+                    </mat-card> -->
 
                     <mat-card class="example-card">
                         <mat-card-header>
@@ -129,6 +123,12 @@
                         </mat-card-content>
                     </mat-card>
 
+                </div>
+
+                <p class="space"> </p>
+
+                <div class="home">
+
                     <mat-card class="example-card">
                       <mat-card-header>
                           <div mat-card-avatar class="pagamento-avatar"></div>
@@ -149,6 +149,47 @@
                           </span>
                       </mat-card-content>
                   </mat-card>
+
+                  <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="calendario-ciclos-avatar"></div>
+                            <mat-card-title>Calendário de Ciclos</mat-card-title>
+                            <mat-card-subtitle>Calendário com as datas de abertura e fechamento de ciclo</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgCalendarioCiclos"
+                            routerLink="/natura/calendario-ciclos">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openCalendarioCiclos()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="emana-pay-avatar"></div>
+                            <mat-card-title>Emana Pay</mat-card-title>
+                            <mat-card-subtitle>Pesquisar as consultoras que estão habilitadas com ou sem conta</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgEmanaPay"
+                            routerLink="/natura/emana-pay"></div>
+                        <mat-card-content class="social">
+                            <span
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card>
+
                 </div>
 
                 <p class="space"> </p>
@@ -197,20 +238,20 @@
                         </mat-card-content>
                     </mat-card>
 
-                    <mat-card class="example-card">
+<mat-card class="example-card">
                         <mat-card-header>
-                            <div mat-card-avatar class="calendario-ciclos-avatar"></div>
-                            <mat-card-title>Calendário de Ciclos</mat-card-title>
-                            <mat-card-subtitle>Calendário com as datas de abertura e fechamento de ciclo</mat-card-subtitle>
+                            <div mat-card-avatar class="calendario-remuneracao-avatar"></div>
+                            <mat-card-title>Calendário de Remuneração Gerentes e Líderes</mat-card-title>
+                            <mat-card-subtitle>Calendário de Remuneração para Gerentes e Líderes</mat-card-subtitle>
                         </mat-card-header>
                         <div
                             mat-card-image
-                            class="imgHome imgCalendarioCiclos"
-                            routerLink="/natura/calendario-ciclos">
+                            class="imgHome imgCalendarioRemuneracao"
+                            routerLink="/natura/calendario-remuneracao">
                         </div>
                         <mat-card-content class="social">
                             <span
-                                (click)="openCalendarioCiclos()"
+                                (click)="openValePontosDialog()"
                                 #tooltip="matTooltip"
                                 matTooltip="Visualizar os procedimentos">
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
@@ -223,9 +264,9 @@
 
                 <p class="space"> </p>
 
-                <div class="home">
+                <!-- <div class="home"> -->
 
-                    <mat-card class="example-card">
+                    <!-- <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="recovery-avatar"></div>
                             <mat-card-title>Recovery</mat-card-title>
@@ -244,9 +285,9 @@
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
                             </span>
                         </mat-card-content>
-                    </mat-card>
+                    </mat-card> -->
 
-                    <mat-card class="example-card">
+                    <!-- <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="trofeu-avatar"></div>
                             <mat-card-title>Consultoras Destaques</mat-card-title>
@@ -265,8 +306,8 @@
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
                             </span>
                         </mat-card-content>
-                    </mat-card>
-
+                    </mat-card> -->
+<!--
                     <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="trofeu-avatar"></div>
@@ -286,11 +327,9 @@
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
                             </span>
                         </mat-card-content>
-                    </mat-card>
+                    </mat-card> -->
 
-
-
-                </div>
+                <!-- </div> -->
 
                 <p class="space"> </p>
 
@@ -315,26 +354,9 @@
                             </span>
                         </mat-card-content>
                     </mat-card> -->
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="emana-pay-avatar"></div>
-                            <mat-card-title>Emana Pay</mat-card-title>
-                            <mat-card-subtitle>Pesquisar as consultoras que estão habilitadas com ou sem conta</mat-card-subtitle>
-                        </mat-card-header>
-                        <div
-                            mat-card-image
-                            class="imgHome imgEmanaPay"
-                            routerLink="/natura/emana-pay"></div>
-                        <mat-card-content class="social">
-                            <span
-                                #tooltip="matTooltip"
-                                matTooltip="Visualizar os procedimentos">
-                                <fa-icon [icon]="faCircleInfo"></fa-icon>
-                            </span>
-                        </mat-card-content>
-                    </mat-card>
 
-                    <mat-card class="example-card">
+
+                    <!-- <mat-card class="example-card">
                         <mat-card-header>
                             <div mat-card-avatar class="pontos-avatar"></div>
                             <mat-card-title>Vale Pontos</mat-card-title>
@@ -353,28 +375,7 @@
                                 <fa-icon [icon]="faCircleInfo"></fa-icon>
                             </span>
                         </mat-card-content>
-                    </mat-card>
-
-                    <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="calendario-remuneracao-avatar"></div>
-                            <mat-card-title>Calendário de Remuneração Gerentes e Líderes</mat-card-title>
-                            <mat-card-subtitle>Calendário de Remuneração para Gerentes e Líderes</mat-card-subtitle>
-                        </mat-card-header>
-                        <div
-                            mat-card-image
-                            class="imgHome imgCalendarioRemuneracao"
-                            routerLink="/natura/calendario-remuneracao">
-                        </div>
-                        <mat-card-content class="social">
-                            <span
-                                (click)="openValePontosDialog()"
-                                #tooltip="matTooltip"
-                                matTooltip="Visualizar os procedimentos">
-                                <fa-icon [icon]="faCircleInfo"></fa-icon>
-                            </span>
-                        </mat-card-content>
-                    </mat-card>
+                    </mat-card> -->
 
                     <!-- <mat-card class="example-card">
                       <mat-card-header>
@@ -443,7 +444,7 @@
                     </mat-card> -->
                 </div>
                 <div class="home">
-                  <mat-card class="example-card">
+                  <!-- <mat-card class="example-card">
                     <mat-card-header>
                         <div mat-card-avatar class="febraban-avatar"></div>
                         <mat-card-title>Título com erro (FEBRABAN)</mat-card-title>
@@ -461,28 +462,9 @@
                             <fa-icon [icon]="faCircleInfo"></fa-icon>
                         </span>
                     </mat-card-content>
-                </mat-card>
-                  <mat-card class="example-card">
-                    <mat-card-header>
-                        <div mat-card-avatar class="seguranca-avatar"></div>
-                        <mat-card-title>Piloto de Segurança de Atualização de Dados Cadastrais</mat-card-title>
-                        <mat-card-subtitle>Piloto de Segurança de Atualização de Dados Cadastrais GV Alecrim</mat-card-subtitle>
-                    </mat-card-header>
-                    <div
-                        mat-card-image
-                        class="imgHome imgSeguranca"
-                        routerLink="/natura/seguranca-dados">
-                    </div>
-                    <mat-card-content class="social">
-                        <span
-                            #tooltip="matTooltip"
-                            matTooltip="Visualizar os procedimentos">
-                            <fa-icon [icon]="faCircleInfo"></fa-icon>
-                        </span>
-                    </mat-card-content>
-                </mat-card>
+                </mat-card> -->
 
-                <mat-card class="example-card">
+                <!-- <mat-card class="example-card">
                   <mat-card-header>
                       <div mat-card-avatar class="cadastro-avatar"></div>
                       <mat-card-title>Cadastros Irregulares</mat-card-title>
@@ -501,32 +483,13 @@
                           <fa-icon [icon]="faCircleInfo"></fa-icon>
                       </span>
                   </mat-card-content>
-              </mat-card>
+              </mat-card> -->
                 </div>
 
                 <div class="home">
-                  <mat-card class="example-card">
-                    <mat-card-header>
-                        <div mat-card-avatar class="cadastro-avatar"></div>
-                        <mat-card-title>Pós Compra</mat-card-title>
-                        <mat-card-subtitle>Pesquisa de Itens como Código de Venda</mat-card-subtitle>
-                    </mat-card-header>
-                    <div
-                        mat-card-image
-                        class="imgHome imgPosCompra"
-                        routerLink="/natura/pos-compra">
-                    </div>
-                    <mat-card-content class="social">
-                        <span
-                            (click)="openCadastrosIrregularesDialog()"
-                            #tooltip="matTooltip"
-                            matTooltip="Visualizar os procedimentos">
-                            <fa-icon [icon]="faCircleInfo"></fa-icon>
-                        </span>
-                    </mat-card-content>
-                </mat-card>
 
-                <mat-card class="example-card">
+
+                <!-- <mat-card class="example-card">
                   <mat-card-header>
                       <div mat-card-avatar class="simulador-avatar"></div>
                       <mat-card-title>Boletos com erro no registro (Outubro/24)</mat-card-title>
@@ -544,9 +507,9 @@
                           <fa-icon [icon]="faCircleInfo"></fa-icon>
                       </span>
                   </mat-card-content>
-              </mat-card>
+              </mat-card> -->
 
-              <mat-card class="example-card">
+              <!-- <mat-card class="example-card">
                 <mat-card-header>
                     <div mat-card-avatar class="dias-avatar"></div>
                     <mat-card-title>Transportadora Dias</mat-card-title>
@@ -564,7 +527,7 @@
                         <fa-icon [icon]="faCircleInfo"></fa-icon>
                     </span>
                 </mat-card-content>
-            </mat-card>
+            </mat-card> -->
                 </div>
 
                 <div class="home">
@@ -587,9 +550,90 @@
                         </span>
                     </mat-card-content>
                 </mat-card>
+
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="reconhecimento-campanhas-avatar"></div>
+                        <mat-card-title>Reconhecimento e Campanhas</mat-card-title>
+                        <mat-card-subtitle>Apuração de Reconhecimento e Campanhas para Consultoras</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgReconhecimentoCampanhas"
+                        routerLink="/natura/reconhecimento-campanhas">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="cadastro-avatar"></div>
+                        <mat-card-title>Pós Compra</mat-card-title>
+                        <mat-card-subtitle>Pesquisa de Itens como Código de Venda</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgPosCompra"
+                        routerLink="/natura/pos-compra">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            (click)="openCadastrosIrregularesDialog()"
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+
+                  <!-- <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="consultora-distribuidora-avatar"></div>
+                        <mat-card-title>Consultora Distribuidora</mat-card-title>
+                        <mat-card-subtitle>Piloto Pesquisa de Consultoras Distribuidoras</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgConsultoraDistribuidora"
+                        routerLink="/natura/consultora-distribuidora">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card> -->
                 </div>
 
-
+                <div class="home">
+                  <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="seguranca-avatar"></div>
+                        <mat-card-title>Piloto de Segurança de Atualização de Dados Cadastrais</mat-card-title>
+                        <mat-card-subtitle>Piloto de Segurança de Atualização de Dados Cadastrais GV Alecrim</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgSeguranca"
+                        routerLink="/natura/seguranca-dados">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
+                </div>
 
                 <!-- <div class="home">
                     <mat-card class="example-card">
@@ -666,29 +710,8 @@
                             </span>
                         </mat-card-content>
                     </mat-card>
+
                     <mat-card class="example-card">
-                        <mat-card-header>
-                            <div mat-card-avatar class="tempo-avatar"></div>
-                            <mat-card-title>Calculadora Tempo de Relação</mat-card-title>
-                            <mat-card-subtitle>Calcular tempo total ativo da consultora</mat-card-subtitle>
-                        </mat-card-header>
-                        <div
-                            mat-card-image
-                            class="imgHome imgTempo"
-                            routerLink="/natura/calculadora-tempo-de-relacao">
-                        </div>
-                        <mat-card-content class="social">
-                            <span
-                                (click)="openCalculadoraTempoDeRelacaoDialog()"
-                                #tooltip="matTooltip"
-                                matTooltip="Visualizar os procedimentos">
-                                <fa-icon [icon]="faCircleInfo"></fa-icon>
-                            </span>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-                <div class="home">
-                  <mat-card class="example-card">
                     <mat-card-header>
                         <div mat-card-avatar class="simulador-avatar"></div>
                         <mat-card-title>Simulador de Manifestações</mat-card-title>
@@ -707,6 +730,29 @@
                         </span>
                     </mat-card-content>
                 </mat-card>
+                    <!-- <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="tempo-avatar"></div>
+                            <mat-card-title>Calculadora Tempo de Relação</mat-card-title>
+                            <mat-card-subtitle>Calcular tempo total ativo da consultora</mat-card-subtitle>
+                        </mat-card-header>
+                        <div
+                            mat-card-image
+                            class="imgHome imgTempo"
+                            routerLink="/natura/calculadora-tempo-de-relacao">
+                        </div>
+                        <mat-card-content class="social">
+                            <span
+                                (click)="openCalculadoraTempoDeRelacaoDialog()"
+                                #tooltip="matTooltip"
+                                matTooltip="Visualizar os procedimentos">
+                                <fa-icon [icon]="faCircleInfo"></fa-icon>
+                            </span>
+                        </mat-card-content>
+                    </mat-card> -->
+                </div>
+                <div class="home">
+
 
 
 
