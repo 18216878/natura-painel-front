@@ -16,10 +16,10 @@ export class PainelService {
   // SERVER_URL = 'https://apinatmeuprimeiroacesso.csu.com.br:7052';
 
   // Api anterior - Desenvolvida em JavaScript com o framework Node.Js apontado para a porta e URL originais
-  SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
+  // SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
 
   // Servidor local
-  // SERVER_URL = 'http://localhost:44366';
+  SERVER_URL = 'http://localhost:44366';
 
 
   /**
@@ -191,6 +191,24 @@ export class PainelService {
   const accessToken = localStorage.getItem('accessToken') || '';
   const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
   return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/natdestaques/nome?nome=${nome}`, { headers })
+  }
+
+  public getVarejoEmpresaFranqueada(empresaFranqueada: string): Observable<any>{
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/varejo/empresa-franqueada?empresa_franqueada=${empresaFranqueada}`, { headers })
+  }
+
+  public getVarejoCodPjNatura(codPjNatura: number): Observable<any>{
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/varejo/cod-pj-natura?cod_pj_natura=${codPjNatura}`, { headers })
+  }
+
+  public getVarejoCodLoja(codLoja: number): Observable<any>{
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/varejo/cod-loja?cod_loja=${codLoja}`, { headers })
   }
 
 

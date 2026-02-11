@@ -97,6 +97,14 @@ h4 {
   border-radius: 50%;
 }
 
+.varejo-avatar {
+  background-image: url('../../assets/img/varejo-avatar.png');
+  background-size: cover;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+}
+
 .dynamics-avatar {
   background-image: url('../../assets/img/dynamics-original.png');
   background-size: cover;
@@ -337,6 +345,11 @@ h4 {
 
 .imgCredito {
   background-image: url('../../assets/img/ajuste-limite.png');
+  background-size: cover;
+}
+
+.imgVarejo {
+  background-image: url('../../assets/img/varejo.png');
   background-size: cover;
 }
 

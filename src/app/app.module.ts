@@ -134,6 +134,7 @@ import { SondagemDirecionadoraComponent } from './simulador-mainfestacoes/sondag
 import { TipoDefeitoComponent } from './simulador-mainfestacoes/tipo-defeito/tipo-defeito.component';
 import { ConsultoraDistribuidoraComponent } from './consultora-distribuidora/consultora-distribuidora.component';
 import { ReconhecimentoCampanhasComponent } from './reconhecimento-campanhas/reconhecimento-campanhas.component';
+import { VarejoComponent } from './varejo/varejo.component';
 
 
 @NgModule({
@@ -235,7 +236,8 @@ import { ReconhecimentoCampanhasComponent } from './reconhecimento-campanhas/rec
     SondagemDirecionadoraComponent,
     TipoDefeitoComponent,
     ConsultoraDistribuidoraComponent,
-    ReconhecimentoCampanhasComponent
+    ReconhecimentoCampanhasComponent,
+    VarejoComponent
   ],
   imports: [
     BrowserModule,

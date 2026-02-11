@@ -49,6 +49,7 @@ import { ReembolsoInclusaoComponent } from './reembolso-inclusao/reembolso-inclu
 import { ReparacaoComponent } from './reparacao/reparacao.component';
 import { ConsultoraDistribuidoraComponent } from './consultora-distribuidora/consultora-distribuidora.component';
 import { ReconhecimentoCampanhasComponent } from './reconhecimento-campanhas/reconhecimento-campanhas.component';
+import { VarejoComponent } from './varejo/varejo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -63,9 +64,9 @@ const routes: Routes = [
   { path: 'natura/pagamentos-rejeitados', component: PagamentosRejeitadosComponent, canActivate: [AccountGuard] },
   { path: 'natura/dynamics-historico', component: DynamicsHistoricoComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-cobranca', component: SimuladorCobrancaComponent, canActivate: [AccountGuard] },
-  { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/simulador-lucro-default', component: SimuladorLucroDefaultComponent, canActivate: [AccountGuard] },
   { path: 'natura/simulador-manifestacoes', component: SimuladorMainfestacoesComponent, canActivate: [AccountGuard] },
-  { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
+  // { path: 'natura/simulador-lucratividade-digital', component: SimuladorLucratividadeDigitalComponent, canActivate: [AccountGuard] },
   // { path: 'natura/destaques', component: DestaquesComponent, canActivate: [AccountGuard] },
   { path: 'natura/reembolso-inclusao', component: ReembolsoInclusaoComponent, canActivate: [AccountGuard] },
   // { path: 'natura/erros-boletos', component: ErrosBoletosComponent, canActivate: [AccountGuard] },
@@ -94,6 +95,7 @@ const routes: Routes = [
   // { path: 'natura/rio-grande-do-sul', component: RioGrandeDoSulComponent, canActivate: [AccountGuard] },
   // { path: 'natura/consultora-distribuidora', component: ConsultoraDistribuidoraComponent, canActivate: [AccountGuard] },
   { path: 'natura/reconhecimento-campanhas', component: ReconhecimentoCampanhasComponent, canActivate: [AccountGuard] },
+  { path: 'natura/varejo', component: VarejoComponent, canActivate: [AccountGuard] },
   // { path: 'legado/vtex', component: VtexComponent, canActivate: [AccountGuard] },
   // { path: 'legado/migradas-nivel', component: MigradasNivelComponent, canActivate: [AccountGuard] },
   // { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },

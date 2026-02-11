@@ -1,0 +1,475 @@
+<div class="main">
+	<div class="title">
+			<div>
+					<div id="logoavon"></div>
+			</div>
+			<h1>Pesquisa - {{title}}</h1>
+			<div class="menu">
+					<h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+							{{user}}
+					</h4>
+					<button
+							routerLink="/natura"
+							class="logout"
+							color="primary"
+							mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+			</div>
+	</div>
+
+	<p class="space"> </p>
+
+	<form [formGroup]="formularioVarejo" class="example-form">
+			<div class="pesquisar">
+					<div class="search">
+							<mat-form-field
+								appearance="fill"
+								class="mopMatricula"
+								color="primary">
+
+								<mat-label>Selecione o Item de Pesquisa</mat-label>
+								<mat-select disableRipple ngDefaultControl
+								formControlName="selecionado" [ngModel]="selecionado"
+								(valueChange)="onSelectId($event)">
+								<mat-option *ngFor="let id of identificadores" [value]="id">
+									{{id}}</mat-option>
+								</mat-select>
+								<mat-icon matPrefix>search</mat-icon>
+								<mat-hint>Selecione uma opção</mat-hint>
+
+							</mat-form-field>
+
+							<mat-form-field *ngIf="selecionado==='Código PJ Natura'"
+							class="codigoCn" appearance="fill" color="primary">
+									<mat-label>Código PJ Natura</mat-label>
+									<input
+											matInput
+											placeholder="Digite o Código PJ Natura"
+											ngDefaultControl
+											formControlName="cod_pj_natura"
+											[(ngModel)]="cod_pj_natura">
+									<mat-icon matSuffix>account_circle</mat-icon>
+									<mat-hint>Código PJ Natura</mat-hint>
+								</mat-form-field>
+
+
+							<mat-form-field *ngIf="selecionado==='Código Loja'"
+							class="codigoCn" appearance="fill" color="primary">
+									<mat-label>Código Loja</mat-label>
+									<input
+											matInput
+											placeholder="Digite o Código Loja"
+											ngDefaultControl
+											formControlName="cod_loja"
+											[(ngModel)]="cod_loja">
+									<mat-icon matSuffix>account_circle</mat-icon>
+									<mat-hint>Código Loja</mat-hint>
+								</mat-form-field>
+
+							<mat-form-field *ngIf="selecionado==='Empresa Franqueada'"
+							class="codigoCn" appearance="fill" color="primary">
+									<mat-label>Empresa Franqueada</mat-label>
+									<input
+											matInput
+											placeholder="Digite a Empresa Franqueada"
+											ngDefaultControl
+											formControlName="empresa_franqueada"
+											[(ngModel)]="empresa_franqueada">
+									<mat-icon matSuffix>account_circle</mat-icon>
+									<mat-hint>Empresa Franqueada</mat-hint>
+								</mat-form-field>
+					</div>
+
+					<div class="botoes">
+
+							<button
+									class="validar"
+									mat-raised-button
+									[disabled]="(cod_pj_natura === null || cod_pj_natura ===
+									undefined ||
+									cod_pj_natura === '')
+									&&
+									(cod_loja === null || cod_loja ===
+									undefined ||
+									cod_loja === '')
+									&&
+									(empresa_franqueada === null || empresa_franqueada ===
+									undefined ||
+									empresa_franqueada === '')"
+									(click)="limpar()"
+									color="warn"
+									aria-label="Example icon button with a home icon">
+									<mat-icon>clear</mat-icon> Limpar
+							</button>
+
+							<button
+									*ngIf="selecionado==='Código PJ Natura'"
+									class="validar"
+									mat-raised-button
+									[disabled]="cod_pj_natura=== null || cod_pj_natura==
+									undefined ||
+									cod_pj_natura=== ''"
+									(click)="pesquisarCodPjNatura()"
+									color="primary"
+									aria-label="Example icon button with a home icon">
+									<mat-icon>search</mat-icon> Pesquisar
+							</button>
+
+							<button
+									*ngIf="selecionado==='Código Loja'"
+									class="validar"
+									mat-raised-button
+									[disabled]="cod_loja=== null || cod_loja==
+									undefined ||
+									cod_loja=== ''"
+									(click)="pesquisarCodLoja()"
+									color="primary"
+									aria-label="Example icon button with a home icon">
+									<mat-icon>search</mat-icon> Pesquisar
+							</button>
+
+							<button
+									*ngIf="selecionado==='Empresa Franqueada'"
+									class="validar"
+									mat-raised-button
+									[disabled]="empresa_franqueada=== null || empresa_franqueada==
+									undefined ||
+									empresa_franqueada=== ''"
+									(click)="pesquisarEmpresaFranqueada()"
+									color="primary"
+									aria-label="Example icon button with a home icon">
+									<mat-icon>search</mat-icon> Pesquisar
+							</button>
+
+					</div>
+			</div>
+
+	</form>
+
+	<div *ngIf="!clickedRows.size">
+			<div class="card">
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Código PJ Natura</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Código Loja</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Código Setor</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Empresa Franqueada</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Projeto</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+			</div>
+
+			<div class="card">
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Cluster 2.0</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Conceito</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Nome Fantasia</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">CNPJ</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Perfil</p>
+							<p>Clique eu uma linha da tabela para exibir.</p>
+						</mat-card-content>
+					</mat-card>
+			</div>
+	</div>
+
+	<div *ngFor="let clickedRow of clickedRows">
+			<div class="card">
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Código PJ Natura</p>
+							<p>{{clickedRow.cod_pj_natura}}</p>
+							<p *ngIf="clickedRow.cod_pj_natura===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Código Loja</p>
+							<p>{{clickedRow.cod_loja}}</p>
+							<p *ngIf="clickedRow.cod_loja===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Código Setor</p>
+							<p>{{clickedRow.cod_setor}}</p>
+							<p *ngIf="clickedRow.cod_setor===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Empresa Franqueada</p>
+							<p>{{clickedRow.empresa_franqueada}}</p>
+							<p *ngIf="clickedRow.empresa_franqueada===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Projeto</p>
+							<p>{{clickedRow.projeto}}</p>
+							<p *ngIf="clickedRow.projeto===null">---</p>
+						</mat-card-content>
+					</mat-card>
+			</div>
+
+			<div class="card">
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Cluster 2.0</p>
+							<p>{{clickedRow.cluster_2_0}}</p>
+							<p *ngIf="clickedRow.cluster_2_0===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Conceito</p>
+							<p>{{clickedRow.conceito}}</p>
+							<p *ngIf="clickedRow.conceito===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Nome Fantasia</p>
+							<p>{{clickedRow.nome_fantasia}}</p>
+							<p *ngIf="clickedRow.nome_fantasia===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">CNPJ</p>
+							<p>{{clickedRow.cnpj}}</p>
+							<p *ngIf="clickedRow.cnpj===null">---</p>
+						</mat-card-content>
+					</mat-card>
+
+					<mat-card class="card-width">
+						<mat-card-content>
+							<p class="title-card">Perfil</p>
+							<p>{{clickedRow.perfil}}</p>
+							<p *ngIf="clickedRow.perfil===null">---</p>
+						</mat-card-content>
+					</mat-card>
+			</div>
+
+	</div>
+
+	<div class="container">
+			<div class="tabela">
+
+				<div class="spinner" *ngIf="carregando===true">
+					<mat-spinner
+							[diameter]="40"
+							color="primary"
+							*ngIf="carregando===true"></mat-spinner>
+					<h3>Carregando...</h3>
+			</div>
+			<div *ngIf="pesquisa_efetuada===true">
+				<table mat-table
+					[dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+					<ng-container matColumnDef="id">
+						<th mat-header-cell *matHeaderCellDef> Id </th>
+						<td mat-cell *matCellDef="let element"> {{element.id}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cod_pj_natura">
+						<th mat-header-cell *matHeaderCellDef> Código PJ Natura </th>
+						<td mat-cell *matCellDef="let element"> {{element.cod_pj_natura}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cod_loja">
+						<th mat-header-cell *matHeaderCellDef> Código Loja </th>
+						<td mat-cell *matCellDef="let element"> {{element.cod_loja}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cod_setor">
+						<th mat-header-cell *matHeaderCellDef> Código Setor </th>
+						<td mat-cell *matCellDef="let element"> {{element.cod_setor}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="empresa_franqueada">
+						<th mat-header-cell *matHeaderCellDef> Empresa Franqueada </th>
+						<td mat-cell *matCellDef="let element"> {{element.empresa_franqueada}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="projeto">
+						<th mat-header-cell *matHeaderCellDef> Projeto </th>
+						<td mat-cell *matCellDef="let element"> {{element.projeto}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="lucratividade">
+						<th mat-header-cell *matHeaderCellDef> Lucratividade </th>
+						<td mat-cell *matCellDef="let element"> {{element.lucratividade}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cluster_2_0">
+						<th mat-header-cell *matHeaderCellDef> Cluster 2.0 </th>
+						<td mat-cell *matCellDef="let element"> {{element.cluster_2_0}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cluster_anterior">
+						<th mat-header-cell *matHeaderCellDef> Cluster Anterior </th>
+						<td mat-cell *matCellDef="let element"> {{element.cluster_anterior}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="modelo">
+						<th mat-header-cell *matHeaderCellDef> Modelo </th>
+						<td mat-cell *matCellDef="let element"> {{element.modelo}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cartao_credito_pj_emana_pay">
+						<th mat-header-cell *matHeaderCellDef> Cartão Crédito PJ Emana Pay </th>
+						<td mat-cell *matCellDef="let element"> {{element.cartao_credito_pj_emana_pay}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="conceito">
+						<th mat-header-cell *matHeaderCellDef> Conceito </th>
+						<td mat-cell *matCellDef="let element"> {{element.conceito}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="nome_fantasia">
+						<th mat-header-cell *matHeaderCellDef> Nome Fantasia </th>
+						<td mat-cell *matCellDef="let element"> {{element.nome_fantasia}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="nome_loja_site">
+						<th mat-header-cell *matHeaderCellDef> Nome Loja Site </th>
+						<td mat-cell *matCellDef="let element"> {{element.nome_loja_site}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cnpj">
+						<th mat-header-cell *matHeaderCellDef> CNPJ </th>
+						<td mat-cell *matCellDef="let element"> {{element.cnpj}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="data_abertura_empresa">
+						<th mat-header-cell *matHeaderCellDef> Data Abertura Empresa </th>
+						<td mat-cell *matCellDef="let element"> {{element.data_abertura_empresa}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="tel_comercial">
+						<th mat-header-cell *matHeaderCellDef> Telefone Comercial </th>
+						<td mat-cell *matCellDef="let element"> {{element.tel_comercial}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="perfil">
+						<th mat-header-cell *matHeaderCellDef> Perfil </th>
+						<td mat-cell *matCellDef="let element"> {{element.perfil}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="ponto_equilibrio">
+						<th mat-header-cell *matHeaderCellDef> Ponto Equilíbrio </th>
+						<td mat-cell *matCellDef="let element"> {{element.ponto_equilibrio}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="lider_mercado">
+						<th mat-header-cell *matHeaderCellDef> Líder Mercado </th>
+						<td mat-cell *matCellDef="let element"> {{element.lider_mercado}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="supervisor_operacoes">
+						<th mat-header-cell *matHeaderCellDef> Supervisor Operações </th>
+						<td mat-cell *matCellDef="let element"> {{element.supervisor_operacoes}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="franquia_distribuidora">
+						<th mat-header-cell *matHeaderCellDef> Franquia Distribuidora </th>
+						<td mat-cell *matCellDef="let element"> {{element.franquia_distribuidora}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="tamanho_loja">
+						<th mat-header-cell *matHeaderCellDef> Tamanho Loja </th>
+						<td mat-cell *matCellDef="let element"> {{element.tamanho_loja}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cpf">
+						<th mat-header-cell *matHeaderCellDef> CPF </th>
+						<td mat-cell *matCellDef="let element"> {{element.cpf}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="status">
+						<th mat-header-cell *matHeaderCellDef> Status </th>
+						<td mat-cell *matCellDef="let element"> {{element.status}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="uf">
+						<th mat-header-cell *matHeaderCellDef> UF </th>
+						<td mat-cell *matCellDef="let element"> {{element.uf}}</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+					<tr
+							mat-row
+							(click)="clickedRows.clear()"
+							(click)="clickedRows.add(row)"
+							[class.demo-row-is-clicked]="clickedRows.has(row)"
+							*matRowDef="let row; columns: displayedColumns;">
+					</tr>
+				</table>
+				<mat-paginator
+						[pageSizeOptions]="[10, 15, 20]"
+						showFirstLastButtons
+						aria-label="Select page of periodic elements"
+						color="primary">
+				</mat-paginator>
+			</div>
+			</div>
+
+	</div>
+
+	</div>
