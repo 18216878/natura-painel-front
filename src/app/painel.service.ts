@@ -16,10 +16,10 @@ export class PainelService {
   // SERVER_URL = 'https://apinatmeuprimeiroacesso.csu.com.br:7052';
 
   // Api anterior - Desenvolvida em JavaScript com o framework Node.Js apontado para a porta e URL originais
-  // SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
+  SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
 
   // Servidor local
-  SERVER_URL = 'http://localhost:44366';
+  // SERVER_URL = 'http://localhost:44366';
 
 
   /**
