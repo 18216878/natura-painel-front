@@ -652,6 +652,25 @@
                         </span>
                     </mat-card-content>
                 </mat-card>
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="cnpjs-irregulares-avatar"></div>
+                        <mat-card-title>CNPJs Irregulares</mat-card-title>
+                        <mat-card-subtitle>Pesquisa de CNPJs com irregularidades por CNPJ, Código ou Nome da Líder</mat-card-subtitle>
+                    </mat-card-header>
+                    <div
+                        mat-card-image
+                        class="imgHome imgCnpjsIrregulares"
+                        routerLink="/natura/cnpjs-irregulares">
+                    </div>
+                    <mat-card-content class="social">
+                        <span
+                            #tooltip="matTooltip"
+                            matTooltip="Visualizar os procedimentos">
+                            <fa-icon [icon]="faCircleInfo"></fa-icon>
+                        </span>
+                    </mat-card-content>
+                </mat-card>
                 </div>
 
                 <!-- <div class="home">

@@ -135,6 +135,7 @@ import { TipoDefeitoComponent } from './simulador-mainfestacoes/tipo-defeito/tip
 import { ConsultoraDistribuidoraComponent } from './consultora-distribuidora/consultora-distribuidora.component';
 import { ReconhecimentoCampanhasComponent } from './reconhecimento-campanhas/reconhecimento-campanhas.component';
 import { VarejoComponent } from './varejo/varejo.component';
+import { CnpjsIrregularesComponent } from './cnpjs-irregulares/cnpjs-irregulares.component';
 
 
 @NgModule({
@@ -237,7 +238,8 @@ import { VarejoComponent } from './varejo/varejo.component';
     TipoDefeitoComponent,
     ConsultoraDistribuidoraComponent,
     ReconhecimentoCampanhasComponent,
-    VarejoComponent
+    VarejoComponent,
+    CnpjsIrregularesComponent
   ],
   imports: [
     BrowserModule,

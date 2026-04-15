@@ -1,0 +1,511 @@
+<div class="main">
+	<div class="title">
+		<div>
+			<div id="logoavon"></div>
+		</div>
+		<h1>Pesquisa - {{title}}</h1>
+		<div class="menu">
+			<h4><mat-icon class="color" matSuffix>account_circle</mat-icon>
+				{{user}}
+			</h4>
+			<button
+				routerLink="/natura"
+				class="logout"
+				color="primary"
+				mat-button><mat-icon>arrow_back</mat-icon>Voltar</button>
+		</div>
+	</div>
+
+	<p class="space"> </p>
+
+	<form [formGroup]="formularioCnpjsIrregulares" class="example-form">
+		<div class="pesquisar">
+			<div class="search">
+				<mat-form-field
+					appearance="fill"
+					class="mopMatricula"
+					color="primary">
+					<mat-label>Selecione o Item de Pesquisa</mat-label>
+					<mat-select disableRipple ngDefaultControl
+						formControlName="selecionado" [ngModel]="selecionado"
+						(valueChange)="onSelectId($event)">
+						<mat-option *ngFor="let id of identificadores" [value]="id">
+							{{id}}</mat-option>
+					</mat-select>
+					<mat-icon matPrefix>search</mat-icon>
+					<mat-hint>Selecione uma opção</mat-hint>
+				</mat-form-field>
+
+				<mat-form-field *ngIf="selecionado==='CNPJ'"
+					class="codigoCn" appearance="fill" color="primary">
+					<mat-label>CNPJ</mat-label>
+					<input
+						matInput
+						placeholder="Digite o CNPJ"
+						ngDefaultControl
+						formControlName="cnpj"
+						[(ngModel)]="cnpj">
+					<mat-icon matSuffix>account_circle</mat-icon>
+					<mat-hint>CNPJ</mat-hint>
+				</mat-form-field>
+
+				<mat-form-field *ngIf="selecionado==='Código da Líder'"
+					class="codigoCn" appearance="fill" color="primary">
+					<mat-label>Código da Líder</mat-label>
+					<input
+						matInput
+						placeholder="Digite o Código da Líder"
+						ngDefaultControl
+						formControlName="codigo_lider"
+						[(ngModel)]="codigo_lider">
+					<mat-icon matSuffix>account_circle</mat-icon>
+					<mat-hint>Código da Líder</mat-hint>
+				</mat-form-field>
+
+				<mat-form-field *ngIf="selecionado==='Nome da Líder'"
+					class="codigoCn" appearance="fill" color="primary">
+					<mat-label>Nome da Líder</mat-label>
+					<input
+						matInput
+						placeholder="Digite o Nome da Líder"
+						ngDefaultControl
+						formControlName="nome_lider"
+						[(ngModel)]="nome_lider">
+					<mat-icon matSuffix>account_circle</mat-icon>
+					<mat-hint>Nome da Líder</mat-hint>
+				</mat-form-field>
+			</div>
+
+			<div class="botoes">
+				<button
+					class="validar"
+					mat-raised-button
+					[disabled]="(cnpj === null || cnpj === undefined || cnpj === '')
+						&& (codigo_lider === null || codigo_lider === undefined || codigo_lider === '')
+						&& (nome_lider === null || nome_lider === undefined || nome_lider === '')"
+					(click)="limpar()"
+					color="warn"
+					aria-label="Example icon button with a home icon">
+					<mat-icon>clear</mat-icon> Limpar
+				</button>
+
+				<button
+					*ngIf="selecionado==='CNPJ'"
+					class="validar"
+					mat-raised-button
+					[disabled]="cnpj === null || cnpj === undefined || cnpj === ''"
+					(click)="pesquisarCnpj()"
+					color="primary"
+					aria-label="Example icon button with a home icon">
+					<mat-icon>search</mat-icon> Pesquisar
+				</button>
+
+				<button
+					*ngIf="selecionado==='Código da Líder'"
+					class="validar"
+					mat-raised-button
+					[disabled]="codigo_lider === null || codigo_lider === undefined || codigo_lider === ''"
+					(click)="pesquisarCodigoLider()"
+					color="primary"
+					aria-label="Example icon button with a home icon">
+					<mat-icon>search</mat-icon> Pesquisar
+				</button>
+
+				<button
+					*ngIf="selecionado==='Nome da Líder'"
+					class="validar"
+					mat-raised-button
+					[disabled]="nome_lider === null || nome_lider === undefined || nome_lider === ''"
+					(click)="pesquisarNomeLider()"
+					color="primary"
+					aria-label="Example icon button with a home icon">
+					<mat-icon>search</mat-icon> Pesquisar
+				</button>
+			</div>
+		</div>
+	</form>
+
+	<div *ngIf="!clickedRows.size">
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Código da Líder</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Nome da Líder</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">CNPJ</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Situação Cadastral CNPJ</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">UF Endereço</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Aderente Meidhop</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Número IE</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Tipo IE</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Situação IE</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Situação CNPJ</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Regime</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">CNAE</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Início Atividades</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Data Atualização CNPJ</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Telefone</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Endereço CNPJ</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Data Lista Opt Out</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Data Opt In</p>
+					<p>Clique em uma linha da tabela para exibir.</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
+
+	<div *ngFor="let clickedRow of clickedRows">
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Código da Líder</p>
+					<p>{{clickedRow.codigo_lider}}</p>
+					<p *ngIf="clickedRow.codigo_lider===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Nome da Líder</p>
+					<p>{{clickedRow.nome_lider}}</p>
+					<p *ngIf="clickedRow.nome_lider===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">CNPJ</p>
+					<p>{{clickedRow.cnpj}}</p>
+					<p *ngIf="clickedRow.cnpj===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Situação Cadastral CNPJ</p>
+					<p>{{clickedRow.situacao_cadastral_cnpj}}</p>
+					<p *ngIf="clickedRow.situacao_cadastral_cnpj===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">UF Endereço</p>
+					<p>{{clickedRow.uf_endereco}}</p>
+					<p *ngIf="clickedRow.uf_endereco===null">---</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Aderente Meidhop</p>
+					<p>{{clickedRow.aderente_meidhop}}</p>
+					<p *ngIf="clickedRow.aderente_meidhop===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Número IE</p>
+					<p>{{clickedRow.numero_ie}}</p>
+					<p *ngIf="clickedRow.numero_ie===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Tipo IE</p>
+					<p>{{clickedRow.tipo_ie}}</p>
+					<p *ngIf="clickedRow.tipo_ie===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Situação IE</p>
+					<p>{{clickedRow.situacao_ie}}</p>
+					<p *ngIf="clickedRow.situacao_ie===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Situação CNPJ</p>
+					<p>{{clickedRow.situacao_cnpj}}</p>
+					<p *ngIf="clickedRow.situacao_cnpj===null">---</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Regime</p>
+					<p>{{clickedRow.regime}}</p>
+					<p *ngIf="clickedRow.regime===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">CNAE</p>
+					<p>{{clickedRow.cnae}}</p>
+					<p *ngIf="clickedRow.cnae===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Início Atividades</p>
+					<p>{{clickedRow.inicio_atividades | date:'dd/MM/yyyy'}}</p>
+					<p *ngIf="clickedRow.inicio_atividades===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Data Atualização CNPJ</p>
+					<p>{{clickedRow.data_atualizacao_cnpj | date:'dd/MM/yyyy'}}</p>
+					<p *ngIf="clickedRow.data_atualizacao_cnpj===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Telefone</p>
+					<p>{{clickedRow.telefone}}</p>
+					<p *ngIf="clickedRow.telefone===null">---</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="card">
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Endereço CNPJ</p>
+					<p>{{clickedRow.endereco_cnpj}}</p>
+					<p *ngIf="clickedRow.endereco_cnpj===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Data Lista Opt Out</p>
+					<p>{{clickedRow.data_lista_opt_out | date:'dd/MM/yyyy'}}</p>
+					<p *ngIf="clickedRow.data_lista_opt_out===null">---</p>
+				</mat-card-content>
+			</mat-card>
+			<mat-card class="card-width">
+				<mat-card-content>
+					<p class="title-card">Data Opt In</p>
+					<p>{{clickedRow.data_opt_in}}</p>
+					<p *ngIf="clickedRow.data_opt_in===null">---</p>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="tabela">
+			<div class="spinner" *ngIf="carregando===true">
+				<mat-spinner
+					[diameter]="40"
+					color="primary"
+					*ngIf="carregando===true"></mat-spinner>
+				<h3>Carregando...</h3>
+			</div>
+			<div *ngIf="pesquisa_efetuada===true">
+				<table mat-table
+					[dataSource]="tableDataSource" class="mat-elevation-z8 demo-table" matPaginator #paginator>
+
+					<ng-container matColumnDef="id">
+						<th mat-header-cell *matHeaderCellDef> Id </th>
+						<td mat-cell *matCellDef="let element"> {{element.id}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="codigo_lider">
+						<th mat-header-cell *matHeaderCellDef> Código da Líder </th>
+						<td mat-cell *matCellDef="let element"> {{element.codigo_lider}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="nome_lider">
+						<th mat-header-cell *matHeaderCellDef> Nome da Líder </th>
+						<td mat-cell *matCellDef="let element"> {{element.nome_lider}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cnpj">
+						<th mat-header-cell *matHeaderCellDef> CNPJ </th>
+						<td mat-cell *matCellDef="let element"> {{element.cnpj}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="situacao_cadastral_cnpj">
+						<th mat-header-cell *matHeaderCellDef> Situação Cadastral CNPJ </th>
+						<td mat-cell *matCellDef="let element"> {{element.situacao_cadastral_cnpj}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="uf_endereco">
+						<th mat-header-cell *matHeaderCellDef> UF Endereço </th>
+						<td mat-cell *matCellDef="let element"> {{element.uf_endereco}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="aderente_meidhop">
+						<th mat-header-cell *matHeaderCellDef> Aderente Meidhop </th>
+						<td mat-cell *matCellDef="let element"> {{element.aderente_meidhop}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="numero_ie">
+						<th mat-header-cell *matHeaderCellDef> Número IE </th>
+						<td mat-cell *matCellDef="let element"> {{element.numero_ie}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="tipo_ie">
+						<th mat-header-cell *matHeaderCellDef> Tipo IE </th>
+						<td mat-cell *matCellDef="let element"> {{element.tipo_ie}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="situacao_ie">
+						<th mat-header-cell *matHeaderCellDef> Situação IE </th>
+						<td mat-cell *matCellDef="let element"> {{element.situacao_ie}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="situacao_cnpj">
+						<th mat-header-cell *matHeaderCellDef> Situação CNPJ </th>
+						<td mat-cell *matCellDef="let element"> {{element.situacao_cnpj}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="regime">
+						<th mat-header-cell *matHeaderCellDef> Regime </th>
+						<td mat-cell *matCellDef="let element"> {{element.regime}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="cnae">
+						<th mat-header-cell *matHeaderCellDef> CNAE </th>
+						<td mat-cell *matCellDef="let element"> {{element.cnae}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="inicio_atividades">
+						<th mat-header-cell *matHeaderCellDef> Início Atividades </th>
+						<td mat-cell *matCellDef="let element"> {{element.inicio_atividades | date:'dd/MM/yyyy'}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="data_atualizacao_cnpj">
+						<th mat-header-cell *matHeaderCellDef> Data Atualização CNPJ </th>
+						<td mat-cell *matCellDef="let element"> {{element.data_atualizacao_cnpj | date:'dd/MM/yyyy'}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="telefone">
+						<th mat-header-cell *matHeaderCellDef> Telefone </th>
+						<td mat-cell *matCellDef="let element"> {{element.telefone}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="endereco_cnpj">
+						<th mat-header-cell *matHeaderCellDef> Endereço CNPJ </th>
+						<td mat-cell *matCellDef="let element"> {{element.endereco_cnpj}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="data_lista_opt_out">
+						<th mat-header-cell *matHeaderCellDef> Data Lista Opt Out </th>
+						<td mat-cell *matCellDef="let element"> {{element.data_lista_opt_out | date:'dd/MM/yyyy'}}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="data_opt_in">
+						<th mat-header-cell *matHeaderCellDef> Data Opt In </th>
+						<td mat-cell *matCellDef="let element"> {{element.data_opt_in}}</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+					<tr
+						mat-row
+						(click)="clickedRows.clear()"
+						(click)="clickedRows.add(row)"
+						[class.demo-row-is-clicked]="clickedRows.has(row)"
+						*matRowDef="let row; columns: displayedColumns;">
+					</tr>
+				</table>
+				<mat-paginator
+					[pageSizeOptions]="[10, 15, 20]"
+					showFirstLastButtons
+					aria-label="Select page of periodic elements"
+					color="primary">
+				</mat-paginator>
+			</div>
+		</div>
+	</div>
+
+</div>

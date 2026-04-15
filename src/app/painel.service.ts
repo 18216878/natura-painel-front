@@ -16,10 +16,10 @@ export class PainelService {
   // SERVER_URL = 'https://apinatmeuprimeiroacesso.csu.com.br:7052';
 
   // Api anterior - Desenvolvida em JavaScript com o framework Node.Js apontado para a porta e URL originais
-  SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
+  // SERVER_URL = 'https://apinatpainel.csu.com.br:44366';
 
   // Servidor local
-  // SERVER_URL = 'http://localhost:44366';
+  SERVER_URL = 'http://localhost:44366';
 
 
   /**
@@ -209,6 +209,24 @@ export class PainelService {
   const accessToken = localStorage.getItem('accessToken') || '';
   const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
   return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/varejo/cod-loja?cod_loja=${codLoja}`, { headers })
+  }
+
+  public getCnpjsIrregularesPorCnpj(cnpj: string): Observable<any>{
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/cnpjs-irregulares/cnpj?cnpj=${cnpj}`, { headers })
+  }
+
+  public getCnpjsIrregularesPorCodigoLider(codigoLider: string): Observable<any>{
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/cnpjs-irregulares/codigo-lider?codigo_lider=${codigoLider}`, { headers })
+  }
+
+  public getCnpjsIrregularesPorNomeLider(nomeLider: string): Observable<any>{
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const headers = accessToken ? new HttpHeaders().set('Authorization', `Bearer ${accessToken}`) : undefined;
+  return this.httpClient.get(`${this.SERVER_URL}/api/pesquisas/cnpjs-irregulares/nome-lider?nome_lider=${nomeLider}`, { headers })
   }
 
 

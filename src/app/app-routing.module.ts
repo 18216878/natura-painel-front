@@ -50,6 +50,7 @@ import { ReparacaoComponent } from './reparacao/reparacao.component';
 import { ConsultoraDistribuidoraComponent } from './consultora-distribuidora/consultora-distribuidora.component';
 import { ReconhecimentoCampanhasComponent } from './reconhecimento-campanhas/reconhecimento-campanhas.component';
 import { VarejoComponent } from './varejo/varejo.component';
+import { CnpjsIrregularesComponent } from './cnpjs-irregulares/cnpjs-irregulares.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -96,6 +97,7 @@ const routes: Routes = [
   // { path: 'natura/consultora-distribuidora', component: ConsultoraDistribuidoraComponent, canActivate: [AccountGuard] },
   { path: 'natura/reconhecimento-campanhas', component: ReconhecimentoCampanhasComponent, canActivate: [AccountGuard] },
   { path: 'natura/varejo', component: VarejoComponent, canActivate: [AccountGuard] },
+  { path: 'natura/cnpjs-irregulares', component: CnpjsIrregularesComponent, canActivate: [AccountGuard] },
   // { path: 'legado/vtex', component: VtexComponent, canActivate: [AccountGuard] },
   // { path: 'legado/migradas-nivel', component: MigradasNivelComponent, canActivate: [AccountGuard] },
   // { path: 'avon/projeto-wave', component: ProjetoWaveAvonComponent, canActivate: [AccountGuard] },
