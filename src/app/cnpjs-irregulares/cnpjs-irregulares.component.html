@@ -222,26 +222,6 @@
 				</mat-card-content>
 			</mat-card>
 		</div>
-		<div class="card">
-			<mat-card class="card-width">
-				<mat-card-content>
-					<p class="title-card">Endereço CNPJ</p>
-					<p>Clique em uma linha da tabela para exibir.</p>
-				</mat-card-content>
-			</mat-card>
-			<mat-card class="card-width">
-				<mat-card-content>
-					<p class="title-card">Data Lista Opt Out</p>
-					<p>Clique em uma linha da tabela para exibir.</p>
-				</mat-card-content>
-			</mat-card>
-			<mat-card class="card-width">
-				<mat-card-content>
-					<p class="title-card">Data Opt In</p>
-					<p>Clique em uma linha da tabela para exibir.</p>
-				</mat-card-content>
-			</mat-card>
-		</div>
 	</div>
 
 	<div *ngFor="let clickedRow of clickedRows">
@@ -353,29 +333,6 @@
 					<p class="title-card">Telefone</p>
 					<p>{{clickedRow.telefone}}</p>
 					<p *ngIf="clickedRow.telefone===null">---</p>
-				</mat-card-content>
-			</mat-card>
-		</div>
-		<div class="card">
-			<mat-card class="card-width">
-				<mat-card-content>
-					<p class="title-card">Endereço CNPJ</p>
-					<p>{{clickedRow.endereco_cnpj}}</p>
-					<p *ngIf="clickedRow.endereco_cnpj===null">---</p>
-				</mat-card-content>
-			</mat-card>
-			<mat-card class="card-width">
-				<mat-card-content>
-					<p class="title-card">Data Lista Opt Out</p>
-					<p>{{clickedRow.data_lista_opt_out | date:'dd/MM/yyyy'}}</p>
-					<p *ngIf="clickedRow.data_lista_opt_out===null">---</p>
-				</mat-card-content>
-			</mat-card>
-			<mat-card class="card-width">
-				<mat-card-content>
-					<p class="title-card">Data Opt In</p>
-					<p>{{clickedRow.data_opt_in}}</p>
-					<p *ngIf="clickedRow.data_opt_in===null">---</p>
 				</mat-card-content>
 			</mat-card>
 		</div>
